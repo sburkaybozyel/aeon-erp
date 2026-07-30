@@ -3,7 +3,7 @@ import fs from 'fs';
 import { AsyncDb, D1Db } from './db/async-db.js';
 import { initSchema } from './db/schema.js';
 import { runMigrations } from './db/migrations.js';
-import { ensureDefaultRoomInventory, ensureDefaultDiningMasterData, ensureDefaultKitchenMasterData } from './db/master-data.js';
+import { ensureDefaultRoomInventory, ensureDefaultDiningMasterData, ensureDefaultKitchenMasterData, ensureDefaultMarinaMasterData } from './db/master-data.js';
 import { checkAndApplyPinMigration } from './db/pin-migration.js';
 import {
   hasFirebasePersistence,
@@ -69,6 +69,7 @@ async function initializeDb(tenantId) {
     await ensureDefaultRoomInventory(db);
     await ensureDefaultDiningMasterData(db);
     await ensureDefaultKitchenMasterData(db);
+    await ensureDefaultMarinaMasterData(db);
   }
   db.suspendSave = false;
 

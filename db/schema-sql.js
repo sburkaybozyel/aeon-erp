@@ -427,7 +427,39 @@ export const CORE_SCHEMA_SQL = `
       category TEXT NOT NULL,
       description TEXT,
       receipt_image_path TEXT,
+      vessel_visit_id TEXT,
       recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS berths (
+      id TEXT PRIMARY KEY,
+      berth_number TEXT NOT NULL UNIQUE,
+      status TEXT DEFAULT 'vacant',
+      max_loa_m REAL DEFAULT 15,
+      max_draft_m REAL DEFAULT 3,
+      power_amps INTEGER DEFAULT 32,
+      water INTEGER DEFAULT 1,
+      notes TEXT DEFAULT ''
+    );
+
+    CREATE TABLE IF NOT EXISTS vessel_visits (
+      id TEXT PRIMARY KEY,
+      berth_id TEXT,
+      vessel_name TEXT NOT NULL,
+      vessel_type TEXT DEFAULT 'sailing',
+      loa_m REAL,
+      flag TEXT,
+      captain_name TEXT,
+      contact_phone TEXT,
+      guest_count INTEGER DEFAULT 0,
+      arrival_date TEXT,
+      departure_date TEXT,
+      status TEXT DEFAULT 'expected',
+      daily_rate REAL DEFAULT 0,
+      notes TEXT DEFAULT '',
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP,
+      FOREIGN KEY (berth_id) REFERENCES berths(id)
     );
 
     CREATE TABLE IF NOT EXISTS campaigns (

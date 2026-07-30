@@ -115,3 +115,20 @@ export async function ensureDefaultKitchenMasterData(db) {
   const stations = [['kit_cold','Cold & Appetizers',10],['kit_hot','Hot Kitchen',20],['kit_grill','Grill',30],['kit_pastry','Pastry',40],['kit_expo','Expo',90]];
   for (const [id, name, sortOrder] of stations) await db.run('INSERT INTO kitchen_stations (id, name, sort_order, active) VALUES (?, ?, ?, 1)', [id, name, sortOrder]);
 }
+
+export async function ensureDefaultMarinaMasterData(db) {
+  const berthRow = await db.get('SELECT COUNT(*) AS cnt FROM berths');
+  if (Number(berthRow?.cnt || 0) > 0) return;
+  const berths = [
+    ['A1', 12, 2.5], ['A2', 12, 2.5], ['A3', 15, 3], ['A4', 15, 3],
+    ['B1', 20, 3.5], ['B2', 20, 3.5], ['B3', 25, 4],
+    ['C1', 35, 4.5], ['C2', 45, 5]
+  ];
+  for (const [berthNumber, maxLoaM, maxDraftM] of berths) {
+    const id = `berth_${berthNumber.toLowerCase()}`;
+    await db.run(
+      "INSERT OR IGNORE INTO berths (id, berth_number, status, max_loa_m, max_draft_m) VALUES (?, ?, 'vacant', ?, ?)",
+      [id, berthNumber, maxLoaM, maxDraftM]
+    );
+  }
+}

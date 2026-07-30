@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "aeon-erp-demo",
+    "production": "aeon-erp-demo"
+  }
+}

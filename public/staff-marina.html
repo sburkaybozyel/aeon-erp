@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marina Operasyon Merkezi</title>
+  <link rel="stylesheet" href="/css/aeon-tokens.css">
+  <link rel="stylesheet" href="/css/aeon-base.css">
+  <link rel="stylesheet" href="/css/aeon-components.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="/js/boot.js"></script>
+  <style>
+    .marina-shell { max-width: 1200px; margin: 0 auto; padding: 24px; display: flex; flex-direction: column; gap: 24px; }
+    .marina-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .marina-header h1 { margin: 0; font-size: 22px; }
+    .marina-header p { margin: 4px 0 0; color: var(--color-muted, #64748b); }
+    .berth-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+    .berth-tile { border-radius: 12px; padding: 14px; border: 1px solid #e2e8f0; text-align: center; }
+    .berth-tile.occupied { background: #fee2e2; border-color: #fca5a5; }
+    .berth-tile.vacant { background: #d1fae5; border-color: #6ee7b7; }
+    .berth-tile.maintenance { background: #fef3c7; border-color: #fcd34d; }
+    .berth-tile strong { display: block; font-size: 18px; }
+    .berth-tile span { font-size: 12px; color: #475569; }
+    .section-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .section-heading h2 { margin: 0; font-size: 17px; }
+    dialog { border: none; border-radius: 14px; padding: 0; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+    dialog::backdrop { background: rgba(15, 23, 42, 0.5); }
+    dialog label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #475569; }
+  </style>
+</head>
+<body>
+  <div class="marina-shell">
+    <header class="marina-header">
+      <div>
+        <p class="badge badge-primary">MARİNA</p>
+        <h1><i class="fa-solid fa-anchor"></i> Yanaşma Yeri ve Tekne Operasyonları</h1>
+        <p>Ziyaretçi teknelerin yanaşma yeri, giriş/çıkış ve tekne hesabı tek ekranda.</p>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn btn-primary" id="btn-new-checkin"><i class="fa-solid fa-plus"></i> Tekne Kabul Et</button>
+        <button class="icon-button" id="btn-staff-logout" aria-label="Çıkış"><i class="fa-solid fa-power-off"></i></button>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="card-header"><h3><i class="fa-solid fa-water"></i> Yanaşma Yerleri</h3></div>
+      <div class="card-body">
+        <div id="berth-grid" class="berth-grid"><p>Yükleniyor…</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading" style="padding: 16px 16px 0;">
+        <h2><i class="fa-solid fa-sailboat"></i> Limanda Bulunan Tekneler</h2>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table" id="visits-table">
+            <thead>
+              <tr>
+                <th>Tekne</th><th>Yanaşma Yeri</th><th>Kaptan</th><th>Boy (LOA)</th>
+                <th>Bayrak</th><th>Giriş</th><th>Çıkış (Plan)</th><th>Durum</th><th></th>
+              </tr>
+            </thead>
+            <tbody id="visits-tbody"><tr><td colspan="9">Yükleniyor…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-header"><h3><i class="fa-solid fa-file-invoice-dollar"></i> Tekne Hesabı (Yakıt / Bağlama / Su-Elektrik / İkmal)</h3></div>
+      <div class="card-body">
+        <form id="ledger-form" style="display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end; margin-bottom:16px;">
+          <label style="flex:1; min-width:180px;">Tekne
+            <select id="ledger-visit" class="form-control"></select>
+          </label>
+          <label style="width:120px;">Tutar
+            <input id="ledger-amount" type="number" min="0.01" step="0.01" class="form-control" required>
+          </label>
+          <label style="width:100px;">Para Birimi
+            <select id="ledger-currency" class="form-control">
+              <option value="EUR">EUR</option>
+              <option value="USD">USD</option>
+              <option value="TRY">TRY</option>
+            </select>
+          </label>
+          <label style="width:150px;">Kategori
+            <select id="ledger-category" class="form-control">
+              <option value="fuel">Yakıt</option>
+              <option value="mooring">Bağlama Ücreti</option>
+              <option value="water_power">Su / Elektrik</option>
+              <option value="provisioning">İkmal</option>
+              <option value="other">Diğer</option>
+            </select>
+          </label>
+          <label style="flex:1; min-width:180px;">Açıklama
+            <input id="ledger-description" class="form-control" maxlength="200">
+          </label>
+          <button class="btn btn-accent" type="submit"><i class="fa-solid fa-plus"></i> Hesaba İşle</button>
+        </form>
+        <div class="table-responsive">
+          <table class="table" id="ledger-table">
+            <thead><tr><th>Tekne</th><th>Kategori</th><th>Açıklama</th><th>Tutar</th><th>Tarih</th></tr></thead>
+            <tbody id="ledger-tbody"><tr><td colspan="5">Kayıt yok</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <dialog id="checkin-dialog">
+    <form id="checkin-form" method="dialog" style="display:flex; flex-direction:column; gap:10px; padding:20px; min-width:320px;">
+      <div class="dialog-head" style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="margin:0;">Tekne Kabul (Check-in)</h2>
+        <button type="button" class="icon-button" data-close="checkin-dialog"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <label>Tekne Adı<input id="checkin-vessel-name" class="form-control" required></label>
+      <label>Yanaşma Yeri<select id="checkin-berth" class="form-control" required></select></label>
+      <label>Tekne Tipi
+        <select id="checkin-vessel-type" class="form-control">
+          <option value="sailing">Yelkenli</option>
+          <option value="motor">Motoryat</option>
+          <option value="catamaran">Katamaran</option>
+          <option value="gulet">Gulet</option>
+        </select>
+      </label>
+      <label>Boy - LOA (m)<input id="checkin-loa" type="number" min="1" step="0.1" class="form-control"></label>
+      <label>Bayrak<input id="checkin-flag" class="form-control" placeholder="TR, GB, DE…"></label>
+      <label>Kaptan Adı<input id="checkin-captain" class="form-control"></label>
+      <label>Telefon<input id="checkin-phone" class="form-control"></label>
+      <label>Misafir Sayısı<input id="checkin-guests" type="number" min="0" class="form-control"></label>
+      <label>Giriş Tarihi<input id="checkin-arrival" type="date" class="form-control"></label>
+      <label>Planlanan Çıkış<input id="checkin-departure" type="date" class="form-control"></label>
+      <label>Günlük Ücret<input id="checkin-rate" type="number" min="0" step="0.01" class="form-control"></label>
+      <button class="btn btn-primary" type="submit">Kabul Et</button>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast"></div>
+
+  <script type="module">
+    const params = new URLSearchParams(window.location.search);
+    const tenantId = window.tenantId || params.get('tenant_id') || 'aeon';
+
+    function toast(msg) {
+      const el = document.getElementById('toast');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 2500);
+    }
+
+    async function api(path, options = {}) {
+      const sep = path.includes('?') ? '&' : '?';
+      const res = await fetch(`${path}${sep}tenant_id=${tenantId}`, {
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        ...options
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || 'İstek başarısız oldu.');
+      return data;
+    }
+
+    async function loadBerths() {
+      const berths = await api('/api/marina/berths');
+      const grid = document.getElementById('berth-grid');
+      const select = document.getElementById('checkin-berth');
+      grid.innerHTML = '';
+      select.innerHTML = '<option value="">Seçiniz</option>';
+      berths.forEach(b => {
+        const tile = document.createElement('div');
+        tile.className = `berth-tile ${b.status}`;
+        tile.innerHTML = `<strong>${b.berth_number}</strong><span>${b.max_loa_m}m &middot; ${b.status === 'vacant' ? 'Boş' : b.status === 'occupied' ? 'Dolu' : 'Bakımda'}</span>`;
+        grid.appendChild(tile);
+        if (b.status === 'vacant') {
+          const opt = document.createElement('option');
+          opt.value = b.id;
+          opt.textContent = `${b.berth_number} (${b.max_loa_m}m)`;
+          select.appendChild(opt);
+        }
+      });
+      if (!berths.length) grid.innerHTML = '<p>Henüz yanaşma yeri tanımlı değil.</p>';
+    }
+
+    async function loadVisits() {
+      const visits = await api('/api/marina/visits');
+      const tbody = document.getElementById('visits-tbody');
+      const ledgerSelect = document.getElementById('ledger-visit');
+      tbody.innerHTML = '';
+      ledgerSelect.innerHTML = '<option value="">Genel (tekneye bağlı değil)</option>';
+      const berths = await api('/api/marina/berths');
+      const berthMap = Object.fromEntries(berths.map(b => [b.id, b.berth_number]));
+      const active = visits.filter(v => v.status !== 'checked_out');
+      if (!active.length) tbody.innerHTML = '<tr><td colspan="9">Şu anda limanda kayıtlı tekne yok.</td></tr>';
+      active.forEach(v => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${v.vessel_name}</td><td>${berthMap[v.berth_id] || '-'}</td><td>${v.captain_name || '-'}</td><td>${v.loa_m || '-'} m</td><td>${v.flag || '-'}</td><td>${v.arrival_date || '-'}</td><td>${v.departure_date || '-'}</td><td><span class="badge badge-primary">${v.status === 'checked_in' ? 'Limanda' : v.status}</span></td><td><button class="btn btn-sm btn-outline-primary" data-checkout="${v.id}">Çıkış Yap</button></td>`;
+        tbody.appendChild(tr);
+        const opt = document.createElement('option');
+        opt.value = v.id;
+        opt.textContent = v.vessel_name;
+        ledgerSelect.appendChild(opt);
+      });
+      tbody.querySelectorAll('[data-checkout]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          try {
+            await api(`/api/marina/visits/${btn.dataset.checkout}/checkout`, { method: 'POST' });
+            toast('Tekne çıkışı yapıldı.');
+            await Promise.all([loadBerths(), loadVisits()]);
+          } catch (err) {
+            toast(err.message);
+          }
+        });
+      });
+    }
+
+    async function loadLedger() {
+      const ledger = await api('/api/marina/vessel-account');
+      const visits = await api('/api/marina/visits');
+      const visitMap = Object.fromEntries(visits.map(v => [v.id, v.vessel_name]));
+      const tbody = document.getElementById('ledger-tbody');
+      tbody.innerHTML = '';
+      if (!ledger.length) tbody.innerHTML = '<tr><td colspan="5">Henüz kayıt yok.</td></tr>';
+      ledger.forEach(l => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${visitMap[l.vessel_visit_id] || 'Genel'}</td><td>${l.category}</td><td>${l.description || '-'}</td><td>${l.amount} ${l.currency}</td><td>${new Date(l.recorded_at).toLocaleString('tr-TR')}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.getElementById('btn-staff-logout').addEventListener('click', () => window.aeonLogout());
+
+    document.getElementById('btn-new-checkin').addEventListener('click', () => {
+      document.getElementById('checkin-dialog').showModal();
+    });
+    document.querySelectorAll('[data-close]').forEach(btn => {
+      btn.addEventListener('click', () => document.getElementById(btn.dataset.close).close());
+    });
+
+    document.getElementById('checkin-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        await api('/api/marina/visits', {
+          method: 'POST',
+          body: JSON.stringify({
+            vesselName: document.getElementById('checkin-vessel-name').value,
+            berthId: document.getElementById('checkin-berth').value,
+            vesselType: document.getElementById('checkin-vessel-type').value,
+            loaM: document.getElementById('checkin-loa').value,
+            flag: document.getElementById('checkin-flag').value,
+            captainName: document.getElementById('checkin-captain').value,
+            contactPhone: document.getElementById('checkin-phone').value,
+            guestCount: document.getElementById('checkin-guests').value,
+            arrivalDate: document.getElementById('checkin-arrival').value,
+            departureDate: document.getElementById('checkin-departure').value,
+            dailyRate: document.getElementById('checkin-rate').value
+          })
+        });
+        document.getElementById('checkin-dialog').close();
+        document.getElementById('checkin-form').reset();
+        toast('Tekne kabul edildi.');
+        await Promise.all([loadBerths(), loadVisits()]);
+      } catch (err) {
+        toast(err.message);
+      }
+    });
+
+    document.getElementById('ledger-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        await api('/api/marina/vessel-account', {
+          method: 'POST',
+          body: JSON.stringify({
+            vesselVisitId: document.getElementById('ledger-visit').value || null,
+            amount: document.getElementById('ledger-amount').value,
+            currency: document.getElementById('ledger-currency').value,
+            category: document.getElementById('ledger-category').value,
+            description: document.getElementById('ledger-description').value
+          })
+        });
+        document.getElementById('ledger-form').reset();
+        toast('Tekne hesabına işlendi.');
+        await loadLedger();
+      } catch (err) {
+        toast(err.message);
+      }
+    });
+
+    (async () => {
+      try {
+        await Promise.all([loadBerths(), loadVisits()]);
+        await loadLedger();
+      } catch (err) {
+        toast(err.message);
+      }
+    })();
+  </script>
+</body>
+</html>

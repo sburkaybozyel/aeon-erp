@@ -10,3 +10,4 @@ db_alasql.json
 *.log
 .env*
 service-account.json
+.vercel

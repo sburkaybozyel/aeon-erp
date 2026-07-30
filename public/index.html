@@ -11,7 +11,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Hotel Staff">
   <meta name="theme-color" content="#078fd0">
-  <script>if (location.protocol === 'file:') location.replace('https://aeon-erp.aeon-global.workers.dev/login?tenant_id=aeon');</script>
+  <script>if (location.protocol === 'file:') location.replace('https://aeon-erp-one.vercel.app/login.html?tenant_id=aeon');</script>
 
   <!-- Design System CSS -->
   <link rel="stylesheet" href="/css/aeon-tokens.css">
@@ -54,6 +54,9 @@
         </a>
         <a href="#" class="nav-item" data-target="panel-bar" id="nav-bar">
           <i class="fa-solid fa-martini-glass-citrus"></i> Bar & Depo
+        </a>
+        <a href="/staff-marina.html?tenant_id=aeon" class="nav-item" id="nav-marina">
+          <i class="fa-solid fa-anchor"></i> Marina
         </a>
         <a href="#" class="nav-item" data-target="panel-maintenance" id="nav-maintenance">
           <i class="fa-solid fa-screwdriver-wrench"></i> Bakım
@@ -568,7 +571,7 @@
             <div class="card-body">
               <p class="text-muted text-sm" style="margin-top:0;">Fatura ve resepsiyon belgelerinde kullanılacak tesis ve şirket bilgilerini yalnızca yönetici günceller.</p>
               <form id="form-hotel-profile" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
-                <div><label class="form-label" for="hotel-profile-hotel-name">Tesis Adı</label><input id="hotel-profile-hotel-name" class="form-control" maxlength="120" placeholder="Aeon Boutique Hotel"></div>
+                <div><label class="form-label" for="hotel-profile-hotel-name">Tesis Adı</label><input id="hotel-profile-hotel-name" class="form-control" maxlength="120" placeholder="Bozburun Yacht Club"></div>
                 <div><label class="form-label" for="hotel-profile-legal-name">Ticari Ünvan</label><input id="hotel-profile-legal-name" class="form-control" maxlength="180" placeholder="Şirketin resmi ünvanı"></div>
                 <div><label class="form-label" for="hotel-profile-tax-number">Vergi No / T.C. No</label><input id="hotel-profile-tax-number" class="form-control" maxlength="20" placeholder="Vergi numarası"></div>
                 <div><label class="form-label" for="hotel-profile-tax-office">Vergi Dairesi</label><input id="hotel-profile-tax-office" class="form-control" maxlength="120" placeholder="Vergi dairesi"></div>

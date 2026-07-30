@@ -7,7 +7,7 @@ import webpush from 'web-push';
 // Import Pluggable Modules
 import { initDining } from './modules/dining.js';
 import { initStay } from './modules/stay.js';
-import { initCruise } from './modules/cruise.js';
+import { initMarina } from './modules/marina.js';
 import { initReception } from './modules/reception.js';
 import { initHotelRunner } from './modules/hotelrunner.js';
 import { initBar } from './modules/bar.js';
@@ -28,7 +28,7 @@ import { registerInventoryRoutes } from './routes/inventory.js';
 import { getQrTarget } from './lib/qr-targets.js';
 
 const app = express();
-const roomPortalPage = '<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><meta name="theme-color" content="#c29d5b"><title>Aeon Otel Oda Portalı</title><style>html,body,iframe{width:100%;height:100%;margin:0;border:0;background:#10213d}iframe{display:block}</style></head><body><iframe id="room-guest-portal" title="Aeon Otel Oda Portalı"></iframe><script>const params=new URLSearchParams(window.location.search);const tenant=params.get("tenant_id")||"aeon";const target=params.get("target")||"";const qr=params.get("qr")||"";if(!/^Room-[^&?#]+$/i.test(target))document.body.textContent="Geçersiz oda QR kodu.";else document.getElementById("room-guest-portal").src=`/guest.html?tenant_id=${encodeURIComponent(tenant)}&type=room&target=${encodeURIComponent(target)}&qr=${encodeURIComponent(qr)}&entry=room-qr`;</script></body></html>';
+const roomPortalPage = '<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><meta name="theme-color" content="#c29d5b"><title>Bozburun Yacht Club Portal</title><style>html,body,iframe{width:100%;height:100%;margin:0;border:0;background:#10213d}iframe{display:block}</style></head><body><iframe id="room-guest-portal" title="Bozburun Yacht Club Portal"></iframe><script>const params=new URLSearchParams(window.location.search);const tenant=params.get("tenant_id")||"aeon";const target=params.get("target")||"";const qr=params.get("qr")||"";if(!/^Room-[^&?#]+$/i.test(target))document.body.textContent="Geçersiz oda QR kodu.";else document.getElementById("room-guest-portal").src=`/guest.html?tenant_id=${encodeURIComponent(tenant)}&type=room&target=${encodeURIComponent(target)}&qr=${encodeURIComponent(qr)}&entry=room-qr`;</script></body></html>';
 
 // Trust the first hop reverse proxy (Cloudflare/Vercel/nginx) so req.ip and
 // req.secure reflect the real client instead of the proxy, which the login
@@ -129,7 +129,7 @@ if (!isCloudflareWorker) {
     'index.html', 'login.html', 'guest.html',
     'staff-reception.html', 'staff-housekeeping.html',
     'staff-restaurant.html', 'staff-kitchen.html', 'staff-bar.html',
-    'staff-maintenance.html', 'room.html', 'room-portal.html', 'restaurant.html', 'precheckin.html', 'channel-manager.html'
+    'staff-maintenance.html', 'staff-marina.html', 'room.html', 'room-portal.html', 'restaurant.html', 'precheckin.html', 'channel-manager.html'
   ];
   htmlFiles.forEach(file => {
     app.get(`/${file}`, (req, res) => {
@@ -158,7 +158,7 @@ initDining({ app, eventBus, hookRegistry, getDb, broadcastSSE });
 initBar({ app, eventBus, broadcastSSE });
 initPrinting({ app, eventBus, getDb, broadcastSSE });
 initStay({ app, eventBus, hookRegistry, getDb, broadcastSSE });
-initCruise({ app, eventBus, hookRegistry, getDb });
+initMarina({ app, eventBus, hookRegistry, getDb });
 initReception({ app, eventBus, hookRegistry, getDb });
 initHotelRunner({ app, eventBus, commitDb });
 

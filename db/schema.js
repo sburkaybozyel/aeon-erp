@@ -1,6 +1,6 @@
 import { CORE_SCHEMA_SQL } from './schema-sql.js';
 import { ensureReceptionSchema } from './migrations.js';
-import { seedDefaultStaff, hashUnhashedPins, ensureDefaultDiningMasterData, ensureDefaultKitchenMasterData } from './master-data.js';
+import { seedDefaultStaff, hashUnhashedPins, ensureDefaultDiningMasterData, ensureDefaultKitchenMasterData, ensureDefaultMarinaMasterData } from './master-data.js';
 import { seedTestSuiteData } from './seed-test-data.js';
 
 export async function initSchema(db, tenantId = 'default') {
@@ -107,7 +107,7 @@ export async function initSchema(db, tenantId = 'default') {
 
   const diningVal = 'true';
   const stayVal = 'true';
-  const cruiseVal = (isDefaultProfile || isBaseTenant) ? 'false' : 'true';
+  const cruiseVal = 'true'; // Marina/vessel-account module ships enabled by default on this demo base
 
   await db.run("DELETE FROM config WHERE key = 'MODULE_DINING'");
   await db.run("INSERT INTO config (key, value) VALUES ('MODULE_DINING', ?)", [diningVal]);
@@ -122,6 +122,7 @@ export async function initSchema(db, tenantId = 'default') {
 
   if (isBaseTenant) await ensureDefaultDiningMasterData(db);
   if (isBaseTenant) await ensureDefaultKitchenMasterData(db);
+  if (isBaseTenant) await ensureDefaultMarinaMasterData(db);
 
   const shouldSeedOperationalData = tenantId === 'test_suite_run';
   if (!shouldSeedOperationalData) return;
