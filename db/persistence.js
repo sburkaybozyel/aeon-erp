@@ -5,7 +5,7 @@ import { hasFirebasePersistence, getFirebaseRef } from './firebase.js';
 
 const isCloudflareWorker = process.env.CLOUDFLARE_WORKER === '1';
 const __dirname = isCloudflareWorker ? '/' : dirname(fileURLToPath(import.meta.url));
-const isEphemeralRuntime = isCloudflareWorker;
+const isEphemeralRuntime = isCloudflareWorker || Boolean(process.env.VERCEL);
 // This file lives in <repo>/db, so the repo root is one level up.
 const repoRoot = isCloudflareWorker ? __dirname : join(__dirname, '..');
 const dbDir = isEphemeralRuntime ? join('/tmp', 'db') : join(repoRoot, 'db');
