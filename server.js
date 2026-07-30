@@ -124,6 +124,7 @@ if (!isCloudflareWorker) {
     res.type('png').sendFile(asset);
   });
   app.use('/images', express.static(path.join(publicDir, 'images')));
+  app.use('/brands', express.static(path.join(publicDir, 'brands')));
 
   const htmlFiles = [
     'index.html', 'login.html', 'guest.html',
