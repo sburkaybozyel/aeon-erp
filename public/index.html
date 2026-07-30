@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Yönetici Paneli | Aeon ERP</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="/brands/aeon/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/brands/aeon/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Hotel Staff">
+  <meta name="theme-color" content="#078fd0">
+  <script>if (location.protocol === 'file:') location.replace('https://aeon-erp.aeon-global.workers.dev/login?tenant_id=aeon');</script>
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="/css/aeon-tokens.css">
+  <link rel="stylesheet" href="/css/aeon-base.css">
+  <link rel="stylesheet" href="/css/aeon-shell.css">
+  <link rel="stylesheet" href="/css/aeon-components.css">
+  <link rel="stylesheet" href="/css/aeon-responsive.css">
+  <link rel="stylesheet" href="/css/admin-dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script src="/js/boot.js"></script>
+</head>
+<body>
+
+  <!-- App Container -->
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <img id="sidebar-logo" class="logo-brand-path" src="/brands/aeon/logo.png" alt="Logo" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+        <div class="brand-text">
+          <h1 id="brand-title" class="brand-title">Aeon ERP</h1>
+          <span id="brand-subtitle">Modüler Yönetici Paneli</span>
+        </div>
+      </div>
+      
+      <nav class="nav-menu">
+        <a href="#" class="nav-item active" data-target="panel-admin" id="nav-admin">
+          <i class="fa-solid fa-gauge-high"></i> Genel Bakış
+        </a>
+        <a href="#" class="nav-item" data-target="panel-reception" id="nav-reception">
+          <i class="fa-solid fa-bed"></i> Resepsiyon & Odalar
+        </a>
+        <a href="#" class="nav-item" data-target="panel-housekeeping" id="nav-housekeeping">
+          <i class="fa-solid fa-broom"></i> Kat Hizmetleri
+        </a>
+        <a href="#" class="nav-item" data-target="panel-restaurant" id="nav-restaurant">
+          <i class="fa-solid fa-utensils"></i> Restoran & Mutfak
+        </a>
+        <a href="#" class="nav-item" data-target="panel-bar" id="nav-bar">
+          <i class="fa-solid fa-martini-glass-citrus"></i> Bar & Depo
+        </a>
+        <a href="#" class="nav-item" data-target="panel-maintenance" id="nav-maintenance">
+          <i class="fa-solid fa-screwdriver-wrench"></i> Bakım
+        </a>
+        <a href="#" class="nav-item" data-target="panel-staff" id="nav-staff">
+          <i class="fa-solid fa-user-shield"></i> Personel
+        </a>
+        <a href="#" class="nav-item" data-target="panel-analytics" id="nav-analytics" style="display:flex; align-items:center; justify-content:space-between;">
+          <span><i class="fa-solid fa-crown"></i> Patron Analiz</span>
+          <span style="font-size:9px; font-weight:800; letter-spacing:0.5px; background:var(--color-warning); color:#1a1200; padding:2px 6px; border-radius:999px;">YENİ</span>
+        </a>
+        <a href="#" class="nav-item" data-target="panel-system" id="nav-system">
+          <i class="fa-solid fa-sliders"></i> Ayarlar
+        </a>
+        <a href="#" class="nav-item" style="color: var(--color-danger); margin-top: auto;" onclick="window.aeonLogout(); return false;">
+          <i class="fa-solid fa-power-off"></i> Çıkış Yap
+        </a>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="tenant-badge">
+          <i class="fa-solid fa-wifi"></i>
+          <span id="current-tenant-label">Aeon ERP Base</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar-title">
+          <h2 id="page-title" style="margin:0; font-weight:700;">Genel Bakış</h2>
+        </div>
+        <div class="topbar-actions" style="display:flex; align-items:center; gap:20px;">
+          <div id="live-clock" style="font-weight:600; color:var(--color-text-muted);"></div>
+          <div class="sse-indicator" style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:600; color:var(--color-success);">
+            <div style="width:8px; height:8px; border-radius:50%; background:var(--color-success); box-shadow:0 0 8px var(--color-success);"></div> Canlı Veri
+          </div>
+          <a href="#" class="mobile-only-logout nav-item" onclick="window.aeonLogout(); return false;" style="color: var(--color-danger); font-weight:600; display:none; align-items:center; gap:6px;">
+            <i class="fa-solid fa-power-off"></i> Çıkış Yap
+          </a>
+        </div>
+      </header>
+      <script>
+        setInterval(() => {
+          const el = document.getElementById('live-clock');
+          if(el) el.textContent = new Date().toLocaleTimeString('tr-TR');
+        }, 1000);
+      </script>
+
+      <!-- PANELS CONTAINER -->
+      <div class="panels-container">
+        
+        <!-- PANEL: ADMIN (GENEL BAKIŞ - sade özet) -->
+        <section id="panel-admin" class="panel-section active">
+          <!-- Top KPI Row -->
+          <div class="admin-kpi-row">
+            <div class="admin-kpi-tile">
+              <div class="admin-kpi-icon revenue"><i class="fa-solid fa-turkish-lira-sign"></i></div>
+              <div class="admin-kpi-body"><span>Günlük Ciro</span><strong id="kpi-total-revenue">0.00 TL</strong></div>
+            </div>
+            <div class="admin-kpi-tile">
+              <div class="admin-kpi-icon occupancy"><i class="fa-solid fa-bed"></i></div>
+              <div class="admin-kpi-body"><span>Otel Doluluk</span><strong id="kpi-occupancy-rate">0%</strong></div>
+            </div>
+            <div class="admin-kpi-tile">
+              <div class="admin-kpi-icon tables"><i class="fa-solid fa-chair"></i></div>
+              <div class="admin-kpi-body"><span>Aktif Masalar</span><strong id="kpi-active-tables">0 / 0</strong></div>
+            </div>
+            <div class="admin-kpi-tile">
+              <div class="admin-kpi-icon tasks"><i class="fa-solid fa-bell-concierge"></i></div>
+              <div class="admin-kpi-body"><span>Bekleyen Görevler</span><strong id="kpi-pending-tasks">0</strong></div>
+            </div>
+          </div>
+
+          <section id="admin-control-summary" class="admin-operation-overview margin-top-md" aria-live="polite"></section>
+
+          <section class="admin-department-center margin-top-md">
+            <header class="admin-department-center-head"><div><p class="admin-overline">CANLI OPERASYON</p><h3><i class="fa-solid fa-diagram-project"></i> Departman Operasyon Merkezi</h3><p>Her kart, öncelik durumunu ve ilgili operasyon ekranına doğrudan geçişi gösterir.</p></div><span id="admin-department-updated" class="admin-live-stamp"><i class="fa-solid fa-circle"></i> Güncelleniyor</span></header>
+            <div id="admin-department-operations" class="admin-department-grid"></div>
+          </section>
+
+          <!-- Gelir Dagılımı -->
+          <div class="admin-operation-panel margin-top-lg">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-chart-pie"></i> Gelir Dağılımı</h3>
+            </div>
+            <div class="card-body">
+              <div class="d-flex justify-content-between margin-bottom-sm" style="padding: 10px 0; border-bottom: 1px solid var(--border-glass);">
+                <span>Restoran & Bar Cirosu:</span>
+                <strong id="admin-rev-dining" style="color: var(--color-accent);">0.00 TL</strong>
+              </div>
+              <div class="d-flex justify-content-between" style="padding: 10px 0;">
+                <span>Konaklama (Oda Folyoları):</span>
+                <strong id="admin-rev-stay" style="color: var(--color-success);">0.00 TL</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PANEL: RESEPSİYON & ODALAR -->
+        <section id="panel-reception" class="panel-section">
+          <section class="admin-rooms-hero">
+            <div><p class="admin-overline">ÖN BÜRO İLE CANLI EŞLEŞME</p><h3><i class="fa-solid fa-bed"></i> Oda Operasyonları</h3><p>Konaklayan bilgileri resepsiyondaki aktif konaklama kayıtlarından eşzamanlı alınır.</p></div>
+            <div id="admin-room-live-summary" class="admin-room-live-summary" aria-live="polite"></div>
+          </section>
+
+          <section class="admin-room-section margin-top-md">
+            <header class="admin-room-section-head"><div><h3><i class="fa-solid fa-users"></i> Dolu Odalar</h3><p>Ön büroda check-in yapılan misafirler burada görünür.</p></div><a class="admin-quick-link" href="/staff-reception.html?tenant_id=aeon"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ön büroyu aç</a></header>
+            <div id="admin-guests-body" class="admin-inhouse-grid"></div>
+          </section>
+
+          <section class="admin-room-section margin-top-lg">
+            <header class="admin-room-section-head"><div><h3><i class="fa-solid fa-hotel"></i> Canlı Oda Durumları</h3><p>Doluluk, temizlik, bakım ve oda notları tek görünümde.</p></div><div class="admin-room-legend"><span class="occupied">Dolu</span><span class="clean">Hazır</span><span class="dirty">Kirli</span><span class="maintenance">Bakım</span></div></header>
+            <div id="live-tracker-rooms" class="admin-room-status-grid"></div>
+          </section>
+
+          <section class="admin-room-section margin-top-lg">
+            <header class="admin-room-section-head"><div><h3><i class="fa-solid fa-right-to-bracket"></i> Devir Alınan Rezervasyonları Check-in Yap</h3><p>Eski sistemden dosya ile aktarılan ve şu an fiilen otelde olması gereken ama hiç check-in yapılmamış rezervasyonları tek seferde işler; kimlik bilgisi eksik olanları KBS kuyruğuna "manuel inceleme" olarak işaretler.</p></div><button id="admin-migrate-checkin" class="admin-quick-link" type="button"><i class="fa-solid fa-play"></i> Şimdi Çalıştır</button></header>
+            <div id="admin-migrate-checkin-result" class="pms-muted"></div>
+          </section>
+
+          <section class="admin-room-section margin-top-lg">
+            <header class="admin-room-section-head"><div><h3><i class="fa-solid fa-door-open"></i> Odaları Yönet</h3><p>Oda envanterini yönetin; aktif konaklamaların operasyonunu ön bürodan yürütün.</p></div><button id="admin-room-create-toggle" class="admin-quick-link" type="button"><i class="fa-solid fa-plus"></i> Oda ekle</button></header>
+            <div id="admin-room-create-panel" class="admin-room-create-panel" hidden>
+              <form id="form-add-room-live" class="admin-room-create-form">
+                <input type="text" id="add-room-num" class="form-control form-control-sm" placeholder="Oda No (101)" required>
+                <select id="add-room-type" class="form-control form-control-sm">
+                  <option value="standard">Standart</option>
+                  <option value="double">Double</option>
+                  <option value="family">Aile</option>
+                  <option value="suite">Suite</option>
+                </select>
+                <input type="number" id="add-room-floor" class="form-control form-control-sm" placeholder="Kat" value="1">
+                <select id="add-room-bed-type" class="form-control form-control-sm">
+                  <option value="double">Çift Kişilik</option>
+                  <option value="single">Tek Kişilik</option>
+                  <option value="twin">İki Ayrı</option>
+                  <option value="king">King</option>
+                </select>
+                <input type="number" id="add-room-capacity" class="form-control form-control-sm" placeholder="Kişi" value="2">
+                <input type="number" id="add-room-base-rate" class="form-control form-control-sm" placeholder="Fiyat (TL)" value="1500">
+                <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Ekle</button>
+              </form>
+            </div>
+            <div id="mgmt-rooms-tbody-live" class="admin-room-management-grid"></div>
+          </section>
+        </section>
+
+        <!-- PANEL: KAT HİZMETLERİ -->
+        <section id="panel-housekeeping" class="panel-section">
+          <section class="admin-operations-hero housekeeping"><div><p class="admin-overline">TEMİZLİK VE ODA HAZIRLIK</p><h3><i class="fa-solid fa-broom"></i> Kat Hizmetleri Operasyon Merkezi</h3><p>Açık görevler ve öncelik durumu, personel portalıyla eşzamanlı.</p><div class="admin-operations-links"><a class="admin-quick-link" href="/staff-housekeeping.html?tenant_id=aeon">Kat hizmetleri ekranını aç</a></div></div><div id="admin-housekeeping-summary" class="admin-operations-summary"></div></section>
+          <section class="admin-operation-panel margin-top-md">
+            <div class="card-header"><h3><i class="fa-solid fa-broom" style="color: var(--color-success);"></i> Açık Görevler</h3></div>
+            <div class="card-body scrollable-y" style="max-height: 420px;">
+              <div id="admin-hk-tasks" style="font-size: 12px; display:flex; flex-direction:column; gap:8px;"></div>
+            </div>
+          </section>
+        </section>
+
+        <!-- PANEL: RESTORAN & MUTFAK -->
+        <section id="panel-restaurant" class="panel-section">
+          <section class="admin-operations-hero restaurant"><div><p class="admin-overline">SERVİS VE ÜRETİM KONTROLÜ</p><h3><i class="fa-solid fa-utensils"></i> Restoran Operasyon Merkezi</h3><p>Açık masalar, servis çağrıları ve KDS siparişleri tek bir canlı akışta.</p><div class="admin-operations-links"><a class="admin-quick-link" href="/staff-restaurant.html?tenant_id=aeon">Restoran POS</a><a class="admin-quick-link" href="/staff-kitchen.html?tenant_id=aeon">Mutfak KDS</a></div></div><div id="admin-restaurant-summary" class="admin-operations-summary"></div></section>
+          <section class="admin-operation-panel margin-top-md"><header class="admin-room-section-head"><div><h3><i class="fa-solid fa-table-cells-large"></i> Canlı Masa ve Sipariş Akışı</h3><p>Yönetim görünümü; işlem için ilgili operasyon portalına geçin.</p></div><span class="admin-live-stamp"><i class="fa-solid fa-circle"></i> Canlı</span></header><div id="live-tracker-tables" class="admin-table-live-grid"></div></section>
+
+          <details class="admin-management-drawer margin-top-lg"><summary><span><i class="fa-solid fa-sliders"></i> Kurulum ve yönetim araçları</span><small>Masa, menü ve reçete tanımları</small></summary><div class="admin-management-workspace">
+            <div class="admin-operation-panel">
+              <div class="card-header"><h4><i class="fa-solid fa-chair"></i> Masaları Yönet</h4><small class="text-muted">Restoran ve bar aynı masa planını kullanır.</small></div>
+              <div class="card-body">
+                <form id="form-add-table-live" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+                  <input type="text" id="add-table-num" class="form-control form-control-sm" placeholder="Masa No (Masa 1)" required style="flex:1; min-width: 100px; padding: 6px;">
+                  <input type="text" id="add-table-sec" class="form-control form-control-sm" placeholder="Bölüm (Teras)" required style="flex:1; min-width: 100px; padding: 6px;">
+                  <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Ekle</button>
+                </form>
+                <div class="scrollable-y" style="max-height: 200px;">
+                  <table class="table small" style="font-size: 12px; width: 100%;">
+                    <thead>
+                      <tr><th>Masa No</th><th>Bölüm</th><th>Aksiyon</th></tr>
+                    </thead>
+                    <tbody id="mgmt-tables-tbody-live"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="admin-operation-panel">
+              <div class="card-header"><h4 style="font-size: 18px;"><i class="fa-solid fa-utensils"></i> Menü Kartını Yönet</h4></div>
+              <div class="card-body">
+                <form id="form-add-product-live" style="display: grid; grid-template-columns: 1fr 100px 120px auto; gap: 8px; margin-bottom: 16px;">
+                  <input type="text" id="add-prod-name" class="form-control form-control-sm" placeholder="Ürün Adı" required>
+                  <input type="number" id="add-prod-price" class="form-control form-control-sm" placeholder="Fiyat" required>
+                  <select id="add-prod-category" class="form-control form-control-sm">
+                    <option value="drink">İçecek</option>
+                    <option value="food">Yiyecek</option>
+                    <option value="minibar">Minibar</option>
+                    <option value="service">Hizmet</option>
+                  </select>
+                  <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Ekle</button>
+                </form>
+                <div class="scrollable-y" style="max-height: 200px;">
+                  <table class="table small" style="font-size: 14px; width: 100%;">
+                    <thead>
+                      <tr><th>Ürün Adı</th><th>Fiyat</th><th>Kategori</th><th>Aksiyon</th></tr>
+                    </thead>
+                    <tbody id="mgmt-products-tbody-live"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-operation-panel margin-top-md">
+            <div class="card-header"><h4><i class="fa-solid fa-receipt"></i> Ürün Reçeteleri (BOM Tanımlama)</h4></div>
+            <div class="card-body">
+              <div class="grid-2">
+                <form id="form-add-recipe-live" style="display: flex; flex-direction: column; gap: 10px;">
+                  <div class="form-group" style="display: flex; flex-direction: column; gap: 4px;">
+                    <label for="add-recipe-prod-select" class="small">Menü Ürünü</label>
+                    <select id="add-recipe-prod-select" class="form-control" required></select>
+                  </div>
+                  <div class="form-group" style="display: flex; flex-direction: column; gap: 4px;">
+                    <label for="add-recipe-inv-select" class="small">Hammadde (Depodan)</label>
+                    <select id="add-recipe-inv-select" class="form-control" required></select>
+                  </div>
+                  <div class="form-group" style="display: flex; flex-direction: column; gap: 4px;">
+                    <label for="add-recipe-amount" class="small">Kullanım Miktarı</label>
+                    <input type="number" id="add-recipe-amount" step="any" class="form-control" required placeholder="Miktar">
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Reçeteye Ekle</button>
+                </form>
+                <div>
+                  <h5 class="small" style="font-weight: bold; margin-bottom: 8px;">Reçete İçeriği (Seçili Ürünün Malzemeleri)</h5>
+                  <div class="scrollable-y" style="max-height: 200px;">
+                    <table class="table small" style="font-size: 12px; width: 100%;">
+                      <thead>
+                        <tr><th>Malzeme</th><th>Miktar</th><th>Birim</th><th>Aksiyon</th></tr>
+                      </thead>
+                      <tbody id="mgmt-recipes-tbody-live">
+                        <tr><td colspan="4" class="text-muted text-center text-xs" style="padding: 15px;">Lütfen sol taraftan bir menü ürünü seçin.</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div></details>
+        </section>
+
+        <!-- PANEL: BAR & DEPO -->
+        <section id="panel-bar" class="panel-section">
+          <section class="admin-operations-hero bar"><div><p class="admin-overline">BAR, STOK VE VARDİYA KONTROLÜ</p><h3><i class="fa-solid fa-martini-glass-citrus"></i> Bar ve Depo Merkezi</h3><p>Satışa açık ürünler, kritik stok ve kör sayım sapmaları yönetici görünümünde.</p><div class="admin-operations-links"><a class="admin-quick-link" href="/staff-bar.html?tenant_id=aeon">Bar operasyonunu aç</a></div></div><div id="admin-bar-summary" class="admin-operations-summary"></div></section>
+          <div class="admin-management-workspace margin-top-md">
+            <div class="admin-operation-panel">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-triangle-exclamation" style="color: var(--color-warning);"></i> Kritik Stok & Par Seviyesi Uyarıları</h3>
+              </div>
+              <div class="card-body scrollable-y" style="max-height: 250px;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Hammadde</th>
+                      <th>Kalan Stok</th>
+                      <th>Minimum (Par) Seviye</th>
+                      <th>Durum</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-stock-warnings-body">
+                    <!-- Low inventory warnings -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="admin-operation-panel">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-clipboard-check"></i> Barmen Kör Sayım Sapma Raporu</h3>
+              </div>
+              <div class="card-body scrollable-y" style="max-height: 250px;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Tarih</th>
+                      <th>Ürün</th>
+                      <th>Beklenen</th>
+                      <th>Fiziksel</th>
+                      <th>Sapma (Discrepancy)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-variances-body">
+                    <!-- Discrepancy logs -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <details class="admin-management-drawer margin-top-lg"><summary><span><i class="fa-solid fa-boxes-stacked"></i> Depo ve hammadde yönetimi</span><small>Stok kalemi ekleme ve düzenleme</small></summary><div class="admin-operation-panel margin-top-md">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-boxes-stacked" style="color: var(--color-primary);"></i> Son Stok Hareketleri</h3>
+            </div>
+            <div class="card-body">
+              <div id="live-tracker-stock" style="font-size: 12px; display:flex; flex-direction:column; gap:6px; max-height:220px; overflow-y:auto;">
+                <!-- loaded dynamically -->
+              </div>
+            </div>
+          </div></details>
+
+          <div class="admin-operation-panel margin-top-lg">
+            <div class="card-header"><h4><i class="fa-solid fa-boxes-stacked"></i> Depo / Hammaddeleri Yönet</h4><a href="/staff-bar.html?tenant_id=aeon" class="btn btn-sm btn-outline-primary">Bar Kurulumu</a></div>
+            <div class="card-body">
+              <form id="form-add-inventory-live" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+                <input type="text" id="add-inv-name" class="form-control form-control-sm" placeholder="Malzeme Adı" required style="flex:1; min-width: 100px; padding: 6px;">
+                <input type="text" id="add-inv-unit" class="form-control form-control-sm" placeholder="Birim" required style="width: 50px; padding: 6px;">
+                <input type="number" id="add-inv-stock" class="form-control form-control-sm" placeholder="Stok" required style="width: 60px; padding: 6px;">
+                <input type="number" id="add-inv-par" class="form-control form-control-sm" placeholder="Par" required style="width: 60px; padding: 6px;">
+                <input type="number" id="add-inv-cost" class="form-control form-control-sm" placeholder="Maliyet" required style="width: 60px; padding: 6px;">
+                <select id="add-inv-module" class="form-control form-control-sm" style="width: 70px; padding: 6px;">
+                  <option value="bar">Bar</option>
+                  <option value="kitchen">Mutfak</option>
+                  <option value="housekeeping">Kat Hizmetleri</option>
+                  <option value="minibar">Minibar</option>
+                </select>
+                <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Ekle</button>
+              </form>
+              <div class="scrollable-y" style="max-height: 220px;">
+                <table class="table small" style="font-size: 12px; width: 100%;">
+                  <thead>
+                    <tr><th>Hammadde</th><th>Miktar</th><th>Par</th><th>Birim</th><th>Maliyet</th><th>Aksiyon</th></tr>
+                  </thead>
+                  <tbody id="mgmt-inventory-tbody-live"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PANEL: BAKIM -->
+        <section id="panel-maintenance" class="panel-section">
+          <section class="admin-operations-hero maintenance"><div><p class="admin-overline">TEKNİK ARIZA VE İŞ EMİRLERİ</p><h3><i class="fa-solid fa-screwdriver-wrench"></i> Bakım Operasyon Merkezi</h3><p>Açık iş emirleri ve öncelik durumu, teknik servis portalıyla eşzamanlı.</p><div class="admin-operations-links"><a class="admin-quick-link" href="/staff-maintenance.html?tenant_id=aeon">Teknik servis ekranını aç</a></div></div><div id="admin-maintenance-summary" class="admin-operations-summary"></div></section>
+          <section class="admin-operation-panel margin-top-md">
+            <div class="card-header"><h3><i class="fa-solid fa-screwdriver-wrench" style="color: var(--color-warning);"></i> Açık İş Emirleri</h3></div>
+            <div class="card-body scrollable-y" style="max-height: 420px;">
+              <div id="admin-maintenance-orders" style="font-size: 12px; display:flex; flex-direction:column; gap:8px;"></div>
+            </div>
+          </section>
+        </section>
+
+        <!-- PANEL: PERSONEL -->
+        <section id="panel-staff" class="panel-section">
+          <div class="admin-operation-panel">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-user-shield"></i> Personel & Yetkilendirme Yönetimi</h3>
+            </div>
+            <div class="card-body">
+              <form id="form-add-staff" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+                <input type="text" id="add-staff-name" class="form-control" placeholder="Ad Soyad" required style="flex:1; min-width:160px;">
+                <select id="add-staff-role" class="form-control" required style="flex:1; min-width:180px;">
+                  <option value="" selected disabled>Departman / Portal Yetkisi</option>
+                  <option value="reception">Resepsiyon</option>
+                  <option value="housekeeping">Kat Hizmetleri</option>
+                  <option value="restaurant">Restoran Servis</option>
+                  <option value="bar">Bar / Barmen</option>
+                  <option value="kitchen">Mutfak</option>
+                  <option value="maintenance">Teknik Servis</option>
+                  <option value="manager">Yönetici</option>
+                </select>
+                <input type="text" id="add-staff-pin" class="form-control" placeholder="PIN" maxlength="8" required style="width:110px;">
+                <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Ekle</button>
+              </form>
+              <div class="scrollable-y" style="max-height: 260px;">
+                <table class="table">
+                  <thead>
+                    <tr><th>Personel</th><th>Departman / Yetki</th><th>PIN</th><th>Aksiyon</th></tr>
+                  </thead>
+                  <tbody id="staff-management-tbody">
+                    <tr><td colspan="4" class="text-muted text-center text-xs">Yükleniyor...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-operation-panel margin-top-lg">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-clock-rotate-left" style="color: var(--color-primary);"></i> Son Personel İşlemleri</h3>
+            </div>
+            <div class="card-body">
+              <div id="live-tracker-audit" style="font-size: 12px; display:flex; flex-direction:column; gap:6px; max-height:220px; overflow-y:auto;">
+                <!-- loaded dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-operation-panel margin-top-lg">
+            <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
+              <h3><i class="fa-solid fa-clock-rotate-left"></i> Personel İşlem Logları (Audit Logs)</h3>
+              <button class="btn btn-secondary btn-xs" id="btn-refresh-audit-logs"><i class="fa-solid fa-arrows-rotate"></i> Yenile</button>
+            </div>
+            <div class="card-body">
+              <div class="scrollable-y" style="max-height: 400px;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="width:150px;">Tarih/Saat</th>
+                      <th style="width:180px;">Personel</th>
+                      <th style="width:180px;">İşlem</th>
+                      <th>Detaylar</th>
+                    </tr>
+                  </thead>
+                  <tbody id="audit-logs-tbody">
+                    <tr><td colspan="4" class="text-muted text-center text-xs">Yükleniyor...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PANEL: PATRON ANALİZ (yeni - beta) -->
+        <section id="panel-analytics" class="panel-section">
+          <div class="admin-operation-panel">
+            <div class="card-header" style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+              <h3 style="margin:0;"><i class="fa-solid fa-crown" style="color: var(--color-warning);"></i> Patron Denetim & Akıllı Analiz Paneli</h3>
+              <span style="font-size:10px; font-weight:800; letter-spacing:0.5px; background:var(--color-warning); color:#1a1200; padding:3px 8px; border-radius:999px;">YENİ EKLENTİ</span>
+            </div>
+            <div class="card-body">
+              <p class="text-muted small margin-bottom-md">Bu ekran işletmenizin verimliliğini artırmak ve kaçakları azaltmak için canlı verileri otomatik analiz eden yeni bir modüldür. Diğer departman sekmelerinden bağımsız, sadece yönetici/patron gözüyle üst düzey özet ve öneriler sunar.</p>
+
+              <!-- Analytics KPIs -->
+              <div class="grid-3">
+                <div class="card" style="background: rgba(255,193,7,0.05); border: 1px solid rgba(255,193,7,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                  <span class="text-muted small"><i class="fa-solid fa-gauge-high"></i> Ortalama Görev Hızı</span>
+                  <h2 id="patron-kpi-speed" style="font-size:22px; margin-top:8px; color: var(--color-warning);">Hesaplanıyor...</h2>
+                  <p class="text-xs text-muted" style="margin-top: 5px;">Müşteri taleplerinin ortalama kapatılma süresi</p>
+                </div>
+                <div class="card" style="background: rgba(220,53,69,0.05); border: 1px solid rgba(220,53,69,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                  <span class="text-muted small"><i class="fa-solid fa-shield-halved"></i> Önlenen Kaçak & Zayiat</span>
+                  <h2 id="patron-kpi-leak" style="font-size:22px; margin-top:8px; color: var(--color-danger);">0.00 TL</h2>
+                  <p class="text-xs text-muted" style="margin-top: 5px;">Kör sayım denetimlerindeki toplam sapma değeri</p>
+                </div>
+                <div class="card" style="background: rgba(40,167,69,0.05); border: 1px solid rgba(40,167,69,0.2); padding: 15px; border-radius: 8px; text-align: center;">
+                  <span class="text-muted small"><i class="fa-solid fa-bolt"></i> Aktif Kampanya Sayısı</span>
+                  <h2 id="patron-kpi-active-campaigns" style="font-size:22px; margin-top:8px; color: var(--color-success);">0</h2>
+                  <p class="text-xs text-muted" style="margin-top: 5px;">Saatlik aktif indirimli kampanya sayısı</p>
+                </div>
+              </div>
+
+              <!-- AI Recommendations & Campaigns Manager -->
+              <div class="grid-2 margin-top-lg" style="margin-top: 20px;">
+                <!-- AI Smart Engine Propose -->
+                <div class="card" style="border: 1px solid var(--border-glass); padding: 15px; border-radius: 8px;">
+                  <div class="card-header" style="margin-bottom: 10px;">
+                    <h4 style="font-size:14px; color: var(--color-warning);"><i class="fa-solid fa-brain"></i> Algoritma Önerileri (Saatlik Kampanya Önerisi)</h4>
+                  </div>
+                  <div class="card-body" id="patron-ai-recommendations-list" style="display:flex; flex-direction:column; gap:10px;">
+                    <!-- AI suggestions will render dynamically here -->
+                    <p class="text-muted text-xs">Veriler analiz ediliyor...</p>
+                  </div>
+                </div>
+
+                <!-- Campaign List -->
+                <div class="card" style="border: 1px solid var(--border-glass); padding: 15px; border-radius: 8px;">
+                  <div class="card-header" style="margin-bottom: 10px;">
+                    <h4 style="font-size:14px;"><i class="fa-solid fa-list-check"></i> Kampanya Listesi</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="scrollable-y" style="max-height: 180px; overflow-y: auto;">
+                      <table class="table small" style="width: 100%; font-size:12px;">
+                        <thead>
+                          <tr><th>Kampanya</th><th>Ürün</th><th>İndirim</th><th>Durum</th><th>Aksiyon</th></tr>
+                        </thead>
+                        <tbody id="patron-campaigns-tbody">
+                          <tr><td colspan="5" class="text-muted text-center text-xs">Aktif tanımlı kampanya bulunmuyor.</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Real-time Task Speed Audit Logs -->
+              <div class="card margin-top-lg" style="background: rgba(0,0,0,0.02); border: 1px solid var(--border-glass); padding: 15px; border-radius: 8px; margin-top: 20px;">
+                <div class="card-header" style="margin-bottom: 10px;">
+                  <h4 style="font-size:14px;"><i class="fa-solid fa-clock-rotate-left"></i> Personel Görev Hızı Logları (Gerçek Zamanlı Denetim)</h4>
+                </div>
+                <div class="card-body">
+                  <div class="scrollable-y" style="max-height: 200px; overflow-y: auto;">
+                    <table class="table small" style="width: 100%; font-size:12px;">
+                      <thead>
+                        <tr><th>Tarih</th><th>Yer</th><th>Hizmet / Görev</th><th>Durum</th><th>Oluşturan</th><th>Tamamlayan</th><th>Oluşturulma</th><th>Kapatılma</th><th>Süre</th></tr>
+                      </thead>
+                      <tbody id="patron-audit-speed-tbody">
+                        <tr><td colspan="9" class="text-muted text-center text-xs">Kapatılmış hizmet talebi kaydı bulunmuyor.</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- PANEL: SYSTEM (AYARLAR) -->
+        <section id="panel-system" class="panel-section">
+          <div class="admin-operation-panel margin-top-lg">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-building"></i> Otel Profili ve Resmi Bilgiler</h3>
+            </div>
+            <div class="card-body">
+              <p class="text-muted text-sm" style="margin-top:0;">Fatura ve resepsiyon belgelerinde kullanılacak tesis ve şirket bilgilerini yalnızca yönetici günceller.</p>
+              <form id="form-hotel-profile" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
+                <div><label class="form-label" for="hotel-profile-hotel-name">Tesis Adı</label><input id="hotel-profile-hotel-name" class="form-control" maxlength="120" placeholder="Aeon Boutique Hotel"></div>
+                <div><label class="form-label" for="hotel-profile-legal-name">Ticari Ünvan</label><input id="hotel-profile-legal-name" class="form-control" maxlength="180" placeholder="Şirketin resmi ünvanı"></div>
+                <div><label class="form-label" for="hotel-profile-tax-number">Vergi No / T.C. No</label><input id="hotel-profile-tax-number" class="form-control" maxlength="20" placeholder="Vergi numarası"></div>
+                <div><label class="form-label" for="hotel-profile-tax-office">Vergi Dairesi</label><input id="hotel-profile-tax-office" class="form-control" maxlength="120" placeholder="Vergi dairesi"></div>
+                <div><label class="form-label" for="hotel-profile-mersis-number">MERSİS Numarası</label><input id="hotel-profile-mersis-number" class="form-control" maxlength="32" placeholder="Varsa MERSİS numarası"></div>
+                <div><label class="form-label" for="hotel-profile-kbs-property-code">KBS Tesis Kodu</label><input id="hotel-profile-kbs-property-code" class="form-control" maxlength="80" placeholder="Resmi KBS tesis kodu"></div>
+                <div><label class="form-label" for="hotel-profile-phone">Telefon</label><input id="hotel-profile-phone" class="form-control" maxlength="40" placeholder="0 5xx xxx xx xx"></div>
+                <div><label class="form-label" for="hotel-profile-email">E-posta</label><input id="hotel-profile-email" class="form-control" type="email" maxlength="160" placeholder="iletisim@oteliniz.com"></div>
+                <div><label class="form-label" for="hotel-profile-invoice-prefix">Fatura Ön Eki</label><input id="hotel-profile-invoice-prefix" class="form-control" maxlength="20" placeholder="Örn. DLF"></div>
+                <div style="grid-column:1/-1;"><label class="form-label" for="hotel-profile-address">Açık Adres</label><textarea id="hotel-profile-address" class="form-control" rows="3" maxlength="600" placeholder="Fatura ve resmi belgelerde kullanılacak açık adres"></textarea></div>
+                <div style="grid-column:1/-1; display:flex; gap:10px; align-items:center;"><button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Otel Bilgilerini Kaydet</button><span id="hotel-profile-status" class="text-muted text-sm"></span></div>
+              </form>
+            </div>
+          </div>
+          <section class="admin-settings-staff margin-top-lg"><header><div><p class="admin-overline">MOBİL AYARLARDAN ERİŞİM</p><h3><i class="fa-solid fa-user-shield"></i> Personel ve Yetkilendirme</h3><p>Mobil alt menüde görünmeyen personel yönetimine Ayarlar üzerinden erişin.</p></div><button type="button" class="admin-quick-link nav-item" data-target="panel-staff"><i class="fa-solid fa-users-gear"></i> Personeli yönet</button></header><div class="admin-settings-staff-body"><strong id="admin-settings-staff-count">Yükleniyor</strong><div id="admin-settings-staff-list" class="admin-settings-staff-list"></div></div></section>
+          <div class="admin-operation-panel margin-top-lg admin-printer-center">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-print"></i> Yazıcı Merkezi</h3>
+            </div>
+            <div class="card-body">
+              <p class="text-muted text-sm" style="margin-top:0;">Windows Bridge kurulumu ve yazıcı bağlantısı için teknik araçlar.</p>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><button id="print-bridge-command" type="button" class="btn btn-primary"><i class="fa-solid fa-terminal"></i> Kurulum Kodunu Yenile</button><button id="print-bridge-copy" type="button" class="btn btn-secondary" hidden>Komutu Kopyala</button></div>
+              <pre id="print-bridge-command-output" style="white-space:pre-wrap;word-break:break-all;margin:12px 0 0;padding:12px;background:#0f172a;color:#e2e8f0;border-radius:8px;font-size:12px">Kurulum kodu yükleniyor...</pre>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+    <nav class="mobile-bottom-nav" aria-label="Yönetici menüsü">
+      <a href="#" class="nav-item active" data-target="panel-admin"><i class="fa-solid fa-gauge-high"></i><span>Özet</span></a>
+      <a href="#" class="nav-item" data-target="panel-reception"><i class="fa-solid fa-bed"></i><span>Odalar</span></a>
+      <a href="#" class="nav-item" data-target="panel-restaurant"><i class="fa-solid fa-utensils"></i><span>Restoran</span></a>
+      <a href="#" class="nav-item" data-target="panel-bar"><i class="fa-solid fa-martini-glass-citrus"></i><span>Bar</span></a>
+      <a href="#" class="nav-item" data-target="panel-system"><i class="fa-solid fa-sliders"></i><span>Ayarlar</span></a>
+    </nav>
+
+  </div>
+
+  <!-- ROOM FOLIO MODAL -->
+  <div id="room-folio-modal" style="position:fixed; inset:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); z-index:99999; display:none; align-items:center; justify-content:center; padding:20px;">
+    <div style="background:var(--bg-surface); border:1px solid var(--border-glass); border-radius:12px; width:100%; max-width:600px; max-height:90vh; display:flex; flex-direction:column; box-shadow:var(--shadow-premium);">
+      <div style="padding:20px; border-bottom:1px solid var(--border-glass); display:flex; justify-content:space-between; align-items:center;">
+        <h3 id="folio-modal-title" style="margin:0; color:var(--color-primary);"><i class="fa-solid fa-receipt"></i> Oda Folyosu</h3>
+        <button class="modal-close" onclick="document.getElementById('room-folio-modal').style.display='none'"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div style="padding:20px; overflow-y:auto; flex:1;">
+        <div id="folio-guest-info" style="background:var(--bg-canvas); border:1px solid var(--border-glass); padding:12px; border-radius:8px; margin-bottom:20px; font-size:13px;">
+          Yükleniyor...
+        </div>
+        <div style="margin-bottom:20px; padding:12px; background:rgba(2, 132, 199, 0.05); border:1px dashed var(--color-primary); border-radius:8px;">
+          <h4 style="font-size:12px; color:var(--color-primary); margin-bottom:10px;"><i class="fa-solid fa-plus"></i> Ekstra / Manuel Harcama İşle</h4>
+          <div style="display:flex; gap:8px;">
+            <input type="text" id="folio-charge-desc" class="form-control form-control-sm" placeholder="Açıklama" style="flex:1;">
+            <select id="folio-charge-type" class="form-control form-control-sm" style="width:120px;">
+              <option value="manual_charge">Genel / Manuel</option>
+              <option value="minibar_charge">Minibar</option>
+              <option value="laundry_charge">Çamaşırhane</option>
+              <option value="spa_charge">Spa & Masaj</option>
+              <option value="extra_night">Ekstra Gece</option>
+            </select>
+            <input type="number" id="folio-charge-amount" class="form-control form-control-sm" placeholder="Tutar TL" style="width:90px;">
+            <button class="btn btn-primary btn-sm" onclick="window.submitFolioCharge()"><i class="fa-solid fa-check"></i> Ekle</button>
+          </div>
+        </div>
+        <h4 style="font-size:13px; margin-bottom:10px; border-bottom:1px solid var(--border-glass); padding-bottom:6px;">Folyo Hareketleri</h4>
+        <div id="folio-charges-list" style="display:flex; flex-direction:column;"></div>
+      </div>
+      <div style="padding:20px; border-top:1px solid var(--border-glass); background:var(--bg-canvas); display:flex; justify-content:space-between; align-items:center; border-radius:0 0 12px 12px;">
+        <div>
+          <div style="font-size:11px; color:var(--color-text-muted);">Toplam Bakiye</div>
+          <div id="folio-total-amount" style="font-size:24px; font-weight:800; color:var(--color-primary);">0.00 TL</div>
+        </div>
+        <div style="display:flex; gap:12px;">
+          <button class="btn btn-secondary" onclick="window.printFolio()"><i class="fa-solid fa-print"></i> Yazdır</button>
+          <button class="btn btn-danger" onclick="window.folioCheckout()"><i class="fa-solid fa-right-from-bracket"></i> Çıkış Yap</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Manager/Admin Nav Handler
+    var aeonPanelTitles = {
+      'panel-admin': 'Genel Bakış',
+      'panel-reception': 'Resepsiyon & Odalar',
+      'panel-housekeeping': 'Kat Hizmetleri',
+      'panel-restaurant': 'Restoran & Mutfak',
+      'panel-bar': 'Bar & Depo',
+      'panel-maintenance': 'Bakım',
+      'panel-staff': 'Personel',
+      'panel-analytics': 'Patron Analiz',
+      'panel-system': 'Ayarlar'
+    };
+    // Exposed globally so dynamically-rendered elements (e.g. department cards
+    // built by public/js/admin/kpi.js, after DOMContentLoaded already ran) can
+    // navigate between panels too, via onclick="window.aeonGoToPanel('...')".
+    window.aeonGoToPanel = function(target) {
+      if (!target) return;
+      document.querySelectorAll('.nav-item[data-target]').forEach(function(n) { n.classList.remove('active'); });
+      document.querySelectorAll('.nav-item[data-target="' + target + '"]').forEach(function(n) { n.classList.add('active'); });
+      document.querySelectorAll('.panel-section').forEach(function(p) { p.classList.remove('active'); });
+      var panel = document.getElementById(target);
+      if (panel) panel.classList.add('active');
+      var pageTitle = document.getElementById('page-title');
+      if (pageTitle && aeonPanelTitles[target]) pageTitle.textContent = aeonPanelTitles[target];
+      if (window.__aeonState) window.__aeonState.activePanel = target;
+      if (window.__aeonLoadAllData) window.__aeonLoadAllData();
+    };
+    document.addEventListener('DOMContentLoaded', function() {
+      var navLinks = document.querySelectorAll('.nav-item[data-target]');
+      navLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.aeonGoToPanel(this.getAttribute('data-target'));
+        });
+      });
+      var commandButton = document.getElementById('print-bridge-command');
+      var commandOutput = document.getElementById('print-bridge-command-output');
+      var copyButton = document.getElementById('print-bridge-copy');
+      async function loadPrintBridgeCommand() {
+        if (commandButton) commandButton.disabled = true;
+        try {
+          var response = await fetch('/api/print-bridge/install-command', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+          var payload = await response.json();
+          if (!response.ok) throw new Error(payload.error || 'Komut oluşturulamadı.');
+          commandOutput.textContent = payload.command;
+          copyButton.hidden = false;
+        } catch (error) {
+          commandOutput.textContent = error.message;
+          copyButton.hidden = true;
+        } finally {
+          if (commandButton) commandButton.disabled = false;
+        }
+      }
+      if (commandButton) commandButton.addEventListener('click', loadPrintBridgeCommand);
+      loadPrintBridgeCommand();
+      if (copyButton) copyButton.addEventListener('click', async function() {
+        await navigator.clipboard.writeText(commandOutput.textContent);
+        copyButton.textContent = 'Kopyalandı';
+        setTimeout(function() { copyButton.textContent = 'Komutu Kopyala'; }, 1500);
+      });
+    });
+  </script>
+  <script src="/js/manager-entry.js" type="module"></script>
+</body>
+</html>

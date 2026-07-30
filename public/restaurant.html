@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#c29d5b">
+  <title>Aeon Otel Restoran Menüsü</title>
+  <style>html,body,iframe{width:100%;height:100%;margin:0;border:0;background:#10213d}iframe{display:block}</style>
+</head>
+<body>
+  <iframe id="restaurant-guest-portal" title="Aeon Otel Restoran Menüsü"></iframe>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const tenant = params.get('tenant_id') || 'aeon';
+    const target = params.get('target') || '';
+    const qr = params.get('qr') || '';
+    if (!/^Table-[^&?#]+$/i.test(target)) document.body.textContent = 'Geçersiz restoran QR kodu.';
+    else document.getElementById('restaurant-guest-portal').src = `/guest.html?tenant_id=${encodeURIComponent(tenant)}&type=restaurant&target=${encodeURIComponent(target)}&qr=${encodeURIComponent(qr)}&entry=restaurant-qr`;
+  </script>
+</body>
+</html>

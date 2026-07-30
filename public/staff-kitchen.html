@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mutfak Operasyon Merkezi | Aeon Boutique Hotel</title>
+  <link rel="stylesheet" href="/css/aeon-tokens.css">
+  <link rel="stylesheet" href="/css/aeon-base.css">
+  <link rel="stylesheet" href="/css/aeon-shell.css">
+  <link rel="stylesheet" href="/css/aeon-components.css">
+  <link rel="stylesheet" href="/css/aeon-responsive.css">
+  <link rel="stylesheet" href="/css/kitchen-kds.css">
+  <link rel="stylesheet" href="/css/kitchen-controls.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="/js/boot.js"></script>
+</head>
+<body class="kitchen-kds">
+  <header class="kitchen-header">
+    <div class="kitchen-brand"><img src="/brands/aeon/logo.png" alt="Aeon Boutique Hotel"><div><strong>Aeon Boutique Hotel</strong><span>Mutfak KDS & Üretim Merkezi</span></div></div>
+    <div class="kitchen-header-actions"><span><i class="fa-solid fa-circle"></i> Canlı mutfak</span><button id="btn-staff-logout" type="button" class="btn-close-modal" title="Çıkış yap"><i class="fa-solid fa-power-off"></i></button></div>
+  </header>
+  <main class="kitchen-content">
+    <div class="kitchen-heading"><div><h1>Üretim ve Servis Kontrolü</h1><p>Restoran ve oda servisinden gelen aynı siparişleri gerçek zamanlı yönetin.</p></div><div class="kitchen-clock" id="kitchen-clock"></div></div>
+    <nav class="kitchen-desktop-nav" aria-label="Mutfak bölümleri"><button class="active" type="button" data-kitchen-view="kds"><i class="fa-solid fa-display"></i> Canlı KDS</button><button type="button" data-kitchen-view="tables"><i class="fa-solid fa-table-cells-large"></i> Masa & Oda Akışı</button><button type="button" data-kitchen-view="actions"><i class="fa-solid fa-boxes-stacked"></i> Stok, Güvenlik & Hazırlık</button><button type="button" data-kitchen-view="inventory"><i class="fa-solid fa-warehouse"></i> Envanter Yönetimi</button></nav>
+    <div class="kitchen-kpis" id="kitchen-kpis"></div>
+    <section id="kitchen-subview-kds" class="panel-section active">
+      <div class="kitchen-section-head"><h2><i class="fa-solid fa-display"></i> Canlı Sipariş Akışı</h2><span id="kitchen-order-summary">Yükleniyor</span></div>
+      <div class="kds-board" id="kds-board"></div>
+    </section>
+    <section id="kitchen-subview-tables" class="panel-section">
+      <div class="kitchen-section-head"><h2><i class="fa-solid fa-table-cells-large"></i> Masa ve Oda Üretim Takibi</h2><span>Aynı operasyon verisi</span></div>
+      <div class="kitchen-target-groups" id="kitchen-target-grid"></div>
+    </section>
+    <section id="kitchen-subview-actions" class="panel-section">
+      <div class="kitchen-operations">
+        <article class="kitchen-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-clipboard-check"></i> Hazırlık Görevleri</h2></div><form id="kitchen-task-form" class="kitchen-inline-form"><input id="kitchen-task-detail" required maxlength="240" placeholder="Hazırlık görevi yazın"><select id="kitchen-task-priority"><option value="normal">Normal</option><option value="high">Yüksek</option><option value="urgent">Acil</option></select><button class="btn btn-primary" type="submit">Ekle</button></form><div class="kitchen-list" id="kitchen-task-list"></div></article>
+        <article class="kitchen-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-boxes-stacked"></i> Kritik Stok</h2><span id="kitchen-stock-summary"></span></div><div class="kitchen-list" id="kitchen-stock-list"></div></article>
+        <article class="kitchen-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-truck-ramp-box"></i> Satın Alma Talebi</h2></div><form id="kitchen-purchase-form" class="kitchen-inline-form"><input id="kitchen-purchase-item" required maxlength="120" placeholder="Malzeme adı"><input id="kitchen-purchase-quantity" required min="0.01" step="0.01" type="number" placeholder="Miktar"><button class="btn btn-primary" type="submit">Talep Aç</button></form><div class="kitchen-list" id="kitchen-purchase-list"></div></article>
+        <article class="kitchen-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-triangle-exclamation"></i> Zayiat / Fire</h2></div><form id="kitchen-waste-form" class="kitchen-inline-form"><select id="kitchen-waste-item" required></select><input id="kitchen-waste-quantity" required min="0.01" step="0.01" type="number" placeholder="Miktar"><select id="kitchen-waste-reason" required><option value="Bozulma">Bozulma</option><option value="Fazla üretim">Fazla üretim</option><option value="Misafir iadesi">Misafir iadesi</option><option value="Personel hatası">Personel hatası</option><option value="Kırılma">Kırılma</option></select><input id="kitchen-waste-notes" maxlength="240" placeholder="Not / açıklama"><button class="btn btn-danger" type="submit">Stoğa İşle</button></form><div class="kitchen-form-note">Bu işlem aynı merkezi envanterden düşer ve yönetim paneline anında yansır.</div></article>
+        <article class="kitchen-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-temperature-half"></i> Gıda Güvenliği Sıcaklık Kaydı</h2></div><form id="kitchen-temperature-form" class="kitchen-inline-form"><select id="kitchen-temperature-area"><option value="Soğuk depo">Soğuk depo</option><option value="Derin dondurucu">Derin dondurucu</option><option value="Sıcak bekletme">Sıcak bekletme</option><option value="Teslim alma">Teslim alma</option></select><input id="kitchen-temperature-value" required step="0.1" type="number" placeholder="°C"><input id="kitchen-temperature-action" maxlength="240" placeholder="Düzeltici aksiyon"><button class="btn btn-primary" type="submit">Kaydet</button></form><div class="kitchen-list" id="kitchen-temperature-list"></div></article>
+        <article class="kitchen-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-ban"></i> Menü 86 / Ürün Kontrolü</h2><span>Mutfağın anlık kontrolü</span></div><div class="kitchen-list" id="kitchen-menu-control-list"></div></article>
+        <article class="kitchen-panel kitchen-recipe-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-book-open"></i> Reçete ve Ürün Kartları</h2></div><div class="kitchen-list" id="kitchen-recipe-list"></div></article>
+      </div>
+    </section>
+    <section id="kitchen-subview-inventory" class="panel-section">
+      <div class="kitchen-section-head"><h2><i class="fa-solid fa-warehouse"></i> Envanter Yönetimi</h2><span id="kitchen-inv-summary"></span><button id="btn-kitchen-stock-fill" class="btn btn-primary btn-sm" type="button">Tümünü 1000'e Tamamla</button></div>
+      <div class="kitchen-inv-toolbar">
+        <input type="search" id="kitchen-inv-search" placeholder="Malzeme ara..." class="kitchen-inv-search">
+        <select id="kitchen-inv-filter">
+          <option value="all">Tümü</option>
+          <option value="critical">Kritik Stok</option>
+          <option value="zero">Sıfır Stok</option>
+          <option value="dining">Mutfak</option>
+          <option value="bar">Bar</option>
+        </select>
+      </div>
+      <div class="kitchen-inv-table-wrap">
+        <table class="kitchen-inv-table">
+          <thead>
+            <tr>
+              <th>Malzeme</th>
+              <th>Mevcut Stok</th>
+              <th>Birim</th>
+              <th>Min. Stok</th>
+              <th>Ambalaj</th>
+              <th>Stok Ekle</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody id="kitchen-inv-tbody"></tbody>
+        </table>
+      </div>
+      <div class="kitchen-inv-affected" id="kitchen-inv-affected"></div>
+    </section>
+  </main>
+  <nav class="mobile-bottom-nav"><a href="#" class="nav-item active" id="nav-kitchen-tab-kds"><i class="fa-solid fa-display"></i><span>KDS</span></a><a href="#" class="nav-item" id="nav-kitchen-tab-tables"><i class="fa-solid fa-table-cells"></i><span>Akış</span></a><a href="#" class="nav-item" id="nav-kitchen-tab-actions"><i class="fa-solid fa-boxes-stacked"></i><span>Operasyon</span></a><a href="#" class="nav-item" id="nav-kitchen-tab-inventory"><i class="fa-solid fa-warehouse"></i><span>Envanter</span></a></nav>
+  <div id="kitchen-toast" aria-live="polite"></div>
+  <script src="/js/kitchen-entry.js" type="module"></script>
+</body>
+</html>

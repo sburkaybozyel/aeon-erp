@@ -1,0 +1,77 @@
+/* public/css/aeon-base.css */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  touch-action: manipulation;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--color-text-main);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .heading {
+  font-family: var(--font-heading);
+  color: var(--color-text-main);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(2, 132, 199, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(2, 132, 199, 0.4);
+}
+
+/* Flex & Layout Utilities */
+.d-flex { display: flex; }
+.flex-column { flex-direction: column; }
+.justify-content-between { justify-content: space-between; }
+.align-items-center { align-items: center; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-1 { flex: 1; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-muted { color: var(--color-text-muted); }
+.small { font-size: 0.875rem; }
+.bold { font-weight: 700; }
+
+/* Grid Utilities */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
+/* Margins & Paddings */
+.margin-top-sm { margin-top: 0.5rem; }
+.margin-top-md { margin-top: 1rem; }
+.margin-top-lg { margin-top: 1.5rem; }
+.margin-bottom-sm { margin-bottom: 0.5rem; }
+.margin-bottom-md { margin-bottom: 1rem; }
+.margin-bottom-lg { margin-bottom: 1.5rem; }

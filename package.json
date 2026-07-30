@@ -1,0 +1,25 @@
+{
+  "name": "aeon-erp",
+  "version": "1.0.0",
+  "description": "Modular ERP base for Boutique Hospitality, Dining and Yachting demos",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test.js && node --test integrations/hotelrunner.test.js && node test_hotelrunner.mjs && node --test integrations/bar-hotel-workflow.test.js",
+    "test:hotelrunner-client": "node --test integrations/hotelrunner.test.js",
+    "test:hotelrunner": "node test_hotelrunner.mjs",
+    "verify:runtime": "node verify_runtime.mjs"
+  },
+  "dependencies": {
+    "alasql": "^4.4.0",
+    "express": "^4.19.2",
+    "firebase-admin": "^12.0.0",
+    "firebase-functions": "^7.2.5",
+    "web-push": "^3.6.7"
+  },
+  "devDependencies": {
+    "firebase-tools": "^15.24.0",
+    "playwright": "^1.61.1"
+  }
+}

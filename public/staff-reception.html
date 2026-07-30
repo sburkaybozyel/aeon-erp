@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aeon PMS | Ön Büro</title>
+  <link rel="stylesheet" href="/css/aeon-tokens.css">
+  <link rel="stylesheet" href="/css/aeon-base.css">
+  <link rel="stylesheet" href="/css/aeon-shell.css">
+  <link rel="stylesheet" href="/css/aeon-components.css">
+  <link rel="stylesheet" href="/css/aeon-responsive.css">
+  <link rel="stylesheet" href="/css/reception-pms.css">
+  <link rel="stylesheet" href="/css/room-center.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="/js/boot.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+</head>
+<body class="pms-body">
+  <div class="pms-shell">
+    <aside class="pms-sidebar">
+      <div class="pms-brand"><img src="/brands/aeon/logo.png" alt="Aeon"><span>Aeon PMS</span></div>
+      <nav id="pms-nav" class="pms-nav">
+        <button data-view="dashboard" class="active"><i class="fa-solid fa-chart-line"></i> Günlük Durum</button>
+        <button data-view="rack"><i class="fa-solid fa-table-columns"></i> Oda Planı</button>
+        <button data-view="reservations"><i class="fa-solid fa-calendar-check"></i> Rezervasyonlar</button>
+        <button data-view="checkin"><i class="fa-solid fa-right-to-bracket"></i> Girişler</button>
+        <button data-view="stays"><i class="fa-solid fa-bed"></i> Konaklayanlar</button>
+        <button data-view="folios"><i class="fa-solid fa-file-invoice-dollar"></i> Folyo ve Tahsilat</button>
+        <button data-view="invoices"><i class="fa-solid fa-file-invoice"></i> Faturalar</button>
+        <button data-view="tasks"><i class="fa-solid fa-list-check"></i> Görevler</button>
+        <button data-view="kbs"><i class="fa-solid fa-shield-halved"></i> KBS Bildirimleri</button>
+        <button data-view="shifts"><i class="fa-solid fa-cash-register"></i> Vardiya ve Kasa</button>
+        <button data-view="reports"><i class="fa-solid fa-chart-pie"></i> Raporlar</button>
+        <div class="pms-nav-heading">KANALLAR VE DAĞITIM</div>
+        <button data-view="channels"><i class="fa-solid fa-satellite-dish"></i> HotelRunner</button>
+      </nav>
+      <button id="logout" class="pms-logout"><i class="fa-solid fa-power-off"></i> Güvenli Çıkış</button>
+    </aside>
+    <main class="pms-main">
+      <header class="pms-topbar">
+        <div><p id="pms-eyebrow">Aeon Boutique Hotel</p><h1 id="pms-title">Günlük Durum</h1></div>
+        <div class="pms-tools"><label class="pms-search"><i class="fa-solid fa-magnifying-glass"></i><input id="global-search" placeholder="Misafir, rezervasyon, oda ara"></label><button id="logout-topbar" type="button" class="pms-logout-topbar" title="Güvenli Çıkış"><i class="fa-solid fa-power-off"></i></button></div>
+      </header>
+      <div id="pms-banner" class="pms-banner" hidden></div>
+      <section id="pms-content" class="pms-content" aria-live="polite"></section>
+    </main>
+  </div>
+  <div id="pms-modal" class="pms-modal" hidden><div class="pms-modal-card"><header><h2 id="pms-modal-title"></h2><button id="pms-modal-close" aria-label="Kapat"><i class="fa-solid fa-xmark"></i></button></header><div id="pms-modal-body"></div></div></div>
+  <nav class="pms-mobile-nav" aria-label="Ön büro menüsü">
+    <button type="button" data-pms-view="dashboard"><i class="fa-solid fa-chart-line"></i><span>Özet</span></button>
+    <button type="button" data-pms-view="rack"><i class="fa-solid fa-table-columns"></i><span>Odalar</span></button>
+    <button type="button" data-pms-view="reservations"><i class="fa-solid fa-calendar-check"></i><span>Rezervasyon</span></button>
+    <button type="button" data-pms-view="checkin"><i class="fa-solid fa-right-to-bracket"></i><span>Giriş</span></button>
+    <button type="button" data-pms-view="stays"><i class="fa-solid fa-bed"></i><span>Konaklayan</span></button>
+  </nav>
+  <script type="module" src="/js/reception-entry.js"></script>
+</body>
+</html>

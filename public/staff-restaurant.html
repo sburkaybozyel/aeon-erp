@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Restoran Operasyon Merkezi | Aeon Boutique Hotel</title>
+  <link rel="stylesheet" href="/css/aeon-tokens.css">
+  <link rel="stylesheet" href="/css/aeon-base.css">
+  <link rel="stylesheet" href="/css/aeon-shell.css">
+  <link rel="stylesheet" href="/css/aeon-components.css">
+  <link rel="stylesheet" href="/css/aeon-responsive.css">
+  <link rel="stylesheet" href="/css/restaurant-pos.css">
+  <link rel="stylesheet" href="/css/restaurant-target-picker.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="/js/boot.js"></script>
+</head>
+<body class="restaurant-pos">
+  <header class="restaurant-header">
+    <div class="restaurant-brand">
+      <img src="/brands/aeon/logo.png" alt="Aeon Boutique Hotel">
+      <div><strong>Aeon Boutique Hotel</strong><span>Restoran & Oda Servisi POS</span></div>
+    </div>
+    <div class="restaurant-header-tools">
+      <div class="restaurant-shift"><i class="fa-solid fa-circle"></i><span>Canlı vardiya</span></div>
+      <button class="btn-close-modal" id="btn-staff-logout" type="button" title="Çıkış yap"><i class="fa-solid fa-power-off"></i></button>
+    </div>
+  </header>
+  <main class="restaurant-content">
+    <div class="restaurant-heading">
+      <div><h1>Restoran Operasyon Merkezi</h1><p>Masa, adisyon, servis akışı ve oda servisini tek ekrandan yönetin.</p></div>
+      <div class="restaurant-section-filter" role="tablist" aria-label="Restoran görünümü">
+        <button class="restaurant-filter active" type="button" data-restaurant-tab="tables">Masalar</button>
+        <button class="restaurant-filter" type="button" data-restaurant-tab="service">Sipariş Akışı</button>
+        <button class="restaurant-filter" type="button" data-restaurant-tab="order">Yeni Adisyon</button>
+        <button class="restaurant-filter" type="button" data-restaurant-tab="menu">Menü Yönetimi</button>
+      </div>
+    </div>
+    <div class="restaurant-kpis" id="restaurant-kpis"></div>
+    <section id="restaurant-subview-service" class="panel-section restaurant-ready-section">
+      <div class="restaurant-section-head"><h2><i class="fa-solid fa-list-check"></i> Sipariş Akışı</h2><span id="restaurant-service-summary">Masa ve oda siparişleri</span></div>
+      <div class="restaurant-service-grid" id="staff-restaurant-ready-grid"></div>
+    </section>
+    <section id="restaurant-subview-tables" class="panel-section active">
+      <div class="restaurant-section-head"><h2><i class="fa-solid fa-table-cells-large"></i> Masa Planı</h2><span id="restaurant-table-summary">Yükleniyor</span></div>
+      <div class="restaurant-table-groups" id="staff-restaurant-tables-grid"></div>
+    </section>
+    <section id="restaurant-subview-order" class="panel-section">
+      <div class="restaurant-section-head"><h2><i class="fa-solid fa-cart-plus"></i> Yeni Sipariş</h2><span>Ürünü seçin, hedefi belirleyin, siparişi gönderin.</span></div>
+      <div class="restaurant-order-layout">
+        <div class="restaurant-order-main">
+          <div class="restaurant-target-summary" id="restaurant-selected-target">Masa kartına basarak sipariş alın veya ürünleri seçip ödeme hedefini belirleyin.</div>
+          <div class="restaurant-section-filter" role="tablist">
+            <button class="restaurant-filter active" id="btn-cat-all" type="button">Tümü</button>
+            <button class="restaurant-filter" id="btn-cat-food" type="button">Yemek</button>
+            <button class="restaurant-filter" id="btn-cat-drink" type="button">İçecek</button>
+            <button class="restaurant-filter" id="btn-cat-minibar" type="button">Minibar</button>
+            <button class="restaurant-filter" id="btn-cat-service" type="button">Servis</button>
+          </div>
+          <div class="restaurant-products" id="menu-items-grid"></div>
+        </div>
+        <aside class="restaurant-cart" id="staff-restaurant-cart-card">
+          <div class="restaurant-cart-head"><h2>Adisyon</h2><span class="restaurant-cart-count" id="restaurant-cart-count">0 ürün</span></div>
+          <div class="restaurant-cart-list" id="staff-restaurant-cart-items-list"></div>
+          <div class="restaurant-cart-total"><span>Toplam</span><strong id="restaurant-cart-total">₺0,00</strong></div>
+          <div class="restaurant-cart-actions"><button class="btn btn-primary restaurant-submit" id="btn-send-table" type="button">Masaya Gönder</button><button class="btn btn-success restaurant-submit" id="btn-add-room-charge" type="button">Oda Hesabına Ekle</button></div>
+        </aside>
+      </div>
+    </section>
+    <section id="restaurant-subview-menu" class="panel-section">
+      <div class="restaurant-section-head"><h2><i class="fa-solid fa-utensils"></i> Menü Yönetimi</h2><span>Ürün, fiyat ve satış durumunu buradan güncelleyin.</span></div>
+      <div class="restaurant-menu-admin-layout">
+        <form class="restaurant-menu-form" id="restaurant-menu-form">
+          <h3>Yeni Ürün</h3>
+          <label>Ürün adı<input id="restaurant-menu-name" required maxlength="120" placeholder="Örn. Izgara levrek"></label>
+          <label>Fiyat (₺)<input id="restaurant-menu-price" required type="number" min="0" step="0.01" placeholder="0,00"></label>
+          <label>Kategori<select id="restaurant-menu-category"><option value="food">Yemek</option><option value="drink">İçecek</option><option value="minibar">Minibar</option><option value="service">Servis</option></select></label>
+          <label>İçindekiler / açıklama<textarea id="restaurant-menu-ingredients" rows="3" maxlength="500" placeholder="İsteğe bağlı"></textarea></label>
+          <button class="btn btn-primary" type="submit">Ürünü Ekle</button>
+        </form>
+        <div class="restaurant-menu-admin-list" id="restaurant-menu-admin-list"></div>
+      </div>
+    </section>
+  </main>
+  <nav class="mobile-bottom-nav">
+    <a href="#" class="nav-item active" id="nav-restaurant-tab-tables" data-restaurant-tab="tables"><i class="fa-solid fa-table-cells"></i><span>Masalar</span></a>
+    <a href="#" class="nav-item" id="nav-restaurant-tab-service" data-restaurant-tab="service"><i class="fa-solid fa-list-check"></i><span>Akış</span></a>
+    <a href="#" class="nav-item" id="nav-restaurant-tab-order" data-restaurant-tab="order"><i class="fa-solid fa-cart-plus"></i><span>Adisyon</span></a>
+    <a href="#" class="nav-item" id="nav-restaurant-tab-menu" data-restaurant-tab="menu"><i class="fa-solid fa-utensils"></i><span>Menü</span></a>
+  </nav>
+  <div class="modal-overlay" id="table-detail-modal" style="display:none">
+    <div class="modal-content">
+      <div class="modal-header"><h3 id="table-detail-title">Masa Adisyonu</h3><button class="btn-close-modal" id="btn-close-table-modal" type="button"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="modal-body">
+        <div id="table-detail-orders" class="d-flex flex-column" style="gap:8px"></div>
+        <div class="d-flex justify-content-between align-items-center" style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border-glass)"><strong>Toplam Tutar:</strong><strong id="table-detail-total" style="font-size:20px;color:var(--color-primary)">₺0,00</strong></div>
+        <div class="form-group" style="margin-top:16px"><label>Ödeme Yöntemi</label><select id="table-payment-method"><option value="cash">Nakit</option><option value="credit_card">Kredi Kartı</option></select></div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-secondary btn-sm" id="btn-cancel-table-modal" type="button">Kapat</button><button class="btn btn-primary btn-sm" id="btn-add-table-order" type="button">Yeni Tur Ekle</button><button class="btn btn-success btn-sm" id="btn-collect-table-payment" type="button">Ödemeyi Al</button></div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="order-target-modal" style="display:none">
+    <div class="modal-content restaurant-target-modal">
+      <div class="modal-header"><div><h3 id="order-target-title">Hedef Seçin</h3><p id="order-target-note">Kutucuğa basınca sipariş doğrudan kaydedilir.</p></div><button class="btn-close-modal" id="btn-close-order-target-modal" type="button"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="modal-body"><div class="restaurant-target-grid" id="restaurant-order-target-grid"></div></div>
+    </div>
+  </div>
+  <div id="restaurant-toast" aria-live="polite"></div>
+  <script src="/js/restaurant-entry.js" type="module"></script>
+</body>
+</html>

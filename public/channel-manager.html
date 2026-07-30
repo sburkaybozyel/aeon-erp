@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HotelRunner Kanal Yönetimi | Aeon PMS</title>
+  <link rel="stylesheet" href="/css/aeon-tokens.css">
+  <link rel="stylesheet" href="/css/aeon-base.css">
+  <link rel="stylesheet" href="/css/aeon-shell.css">
+  <link rel="stylesheet" href="/css/aeon-components.css">
+  <link rel="stylesheet" href="/css/aeon-responsive.css">
+  <link rel="stylesheet" href="/css/channel-manager.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>if (new URLSearchParams(window.location.search).has('embedded')) document.documentElement.classList.add('channel-embedded');</script>
+  <script src="/js/boot.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <img class="logo-brand-path" src="/brands/aeon/logo.png" alt="Aeon" width="40" height="40">
+        <div class="brand-text"><h1 class="brand-title">Aeon PMS</h1><span>Kanal Yönetimi</span></div>
+      </div>
+      <nav class="nav-menu" id="channel-nav">
+        <button class="nav-item channel-nav active" data-view="overview"><i class="fa-solid fa-satellite-dish"></i> Genel Durum</button>
+        <button class="nav-item channel-nav" data-view="reservations"><i class="fa-solid fa-inbox"></i> Rezervasyon Kutusu</button>
+        <button class="nav-item channel-nav" data-view="mappings"><i class="fa-solid fa-code-compare"></i> Oda ve Fiyat Eşleme</button>
+        <button class="nav-item channel-nav" data-view="failures"><i class="fa-solid fa-triangle-exclamation"></i> Senkron Hataları</button>
+        <button class="nav-item channel-nav" data-view="channels"><i class="fa-solid fa-building-circle-check"></i> Bağlı Kanallar</button>
+        <span class="nav-separator">Aeon PMS</span>
+        <a class="nav-item" href="/staff-reception.html?tenant_id=aeon"><i class="fa-solid fa-bell-concierge"></i> Ön Büroya Dön</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="channel-logout" class="nav-item channel-nav"><i class="fa-solid fa-power-off"></i> Güvenli Çıkış</button>
+        <div class="tenant-badge"><i class="fa-solid fa-wifi"></i><span>Aeon bağımsız üretim</span></div>
+      </div>
+    </aside>
+    <main class="main-content channel-main">
+      <header class="topbar channel-topbar">
+        <div class="channel-topbar-copy"><h2 id="channel-title">HotelRunner Genel Durum</h2><p>Rezervasyon, müsaitlik ve kanal senkronizasyon merkezi</p></div>
+        <div class="channel-topbar-actions">
+          <span id="channel-health" class="channel-health"><span class="channel-health-dot"></span><span>Bağlantı kontrol ediliyor</span></span>
+          <button id="channel-refresh" class="btn btn-secondary"><i class="fa-solid fa-rotate"></i> Yenile</button>
+          <button id="channel-test" class="btn btn-primary"><i class="fa-solid fa-plug-circle-check"></i> Bağlantıyı Test Et</button>
+        </div>
+      </header>
+      <div class="panels-container">
+        <div id="channel-banner" class="channel-banner" role="status" hidden></div>
+        <section class="channel-actions" aria-label="Manuel senkronizasyon işlemleri">
+          <button class="channel-action" data-sync="reservations"><i class="fa-solid fa-cloud-arrow-down"></i><span><strong>Rezervasyonları Al</strong><span>Yeni, değişen ve iptal kayıtlarını çek</span></span></button>
+          <button class="channel-action" data-sync="availability"><i class="fa-solid fa-cloud-arrow-up"></i><span><strong>Müsaitliği Gönder</strong><span>Oda envanterini HotelRunner'a aktar</span></span></button>
+          <button class="channel-action" data-sync="rates"><i class="fa-solid fa-tags"></i><span><strong>Fiyatları Eşitle</strong><span>Fiyat ve kısıtlama kuyruğunu çalıştır</span></span></button>
+          <button class="channel-action" data-sync="reconcile"><i class="fa-solid fa-arrows-rotate"></i><span><strong>Tam Mutabakat</strong><span>Rezervasyon, fiyat ve müsaitliği doğrula</span></span></button>
+        </section>
+        <section id="channel-content" aria-live="polite"></section>
+      </div>
+    </main>
+  </div>
+  <div id="channel-modal" class="channel-modal" hidden>
+    <div class="channel-modal-card">
+      <div class="channel-modal-head"><h2 id="channel-modal-title">Eşlemeyi Düzenle</h2><button id="channel-modal-close" class="channel-modal-close" aria-label="Kapat"><i class="fa-solid fa-xmark"></i></button></div>
+      <div id="channel-modal-body" class="channel-modal-body"></div>
+    </div>
+  </div>
+  <script type="module" src="/js/channel-manager-entry.js"></script>
+</body>
+</html>

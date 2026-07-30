@@ -1,0 +1,79 @@
+/* public/css/aeon-responsive.css */
+
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  /* App Containers */
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .sidebar {
+    display: none; /* Hide sidebar on mobile */
+  }
+
+  .topbar {
+    padding: 15px 20px;
+  }
+
+  .panels-container {
+    padding: 20px;
+    padding-bottom: 80px; /* Room for bottom nav */
+  }
+
+  /* Grid Adjustments */
+  .grid-4, .grid-3, .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* POS Re-layout */
+  .pos-container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .pos-sidebar {
+    margin-top: 1rem;
+  }
+
+  /* Modals */
+  .modal-content, .modal-content-mobile {
+    width: 95%;
+    margin: 5% auto;
+  }
+  
+  /* Tables */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+  
+  /* Responsive typography */
+  h2 { font-size: 20px; }
+  h3 { font-size: 15px; }
+
+  .mobile-only-logout {
+    display: inline-flex !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .modules-status {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

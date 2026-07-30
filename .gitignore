@@ -1,0 +1,12 @@
+node_modules/
+.vercel/
+db/*.sqlite
+db/*.sqlite-journal
+db/*.sqlite-shm
+db/*.sqlite-wal
+db/*.json
+db_alasql.json
+.DS_Store
+*.log
+.env*
+service-account.json

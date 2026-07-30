@@ -1,0 +1,35 @@
+{
+  "short_name": "Hotel Staff",
+  "name": "Hotel Personel Portalı",
+  "icons": [
+    {
+      "src": "/brands/aeon/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/brands/aeon/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/brands/aeon/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/brands/aeon/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/login.html?tenant_id=aeon",
+  "background_color": "#f4f9fc",
+  "theme_color": "#078fd0",
+  "display": "standalone",
+  "orientation": "portrait"
+}
