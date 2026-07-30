@@ -27,7 +27,7 @@ const forbidden = [
   'admin_mobile.html',
   'js_mobile',
   '/staff.html',
-  'DOLPHIN_USE_MOCK_FIREBASE',
+  'AEON_USE_MOCK_FIREBASE',
   'seedDemoData',
   '/api/system/reset',
   'setupGuestSimulator',
