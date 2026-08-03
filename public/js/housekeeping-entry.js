@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const user = await window.aeonBoot();
   if (!user || !['housekeeping', 'kat hizmetleri'].includes(String(user.role || '').toLocaleLowerCase('tr-TR'))) return;
   bind(); await load(); subscribe();
+  setInterval(load, 8000);
 });
 
 function bind() {

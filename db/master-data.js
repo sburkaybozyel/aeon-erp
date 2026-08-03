@@ -60,6 +60,31 @@ export async function ensureDefaultDiningMasterData(db) {
     }
   }
 
+  // Explicit kitchen-station routing for the demo catalog's food items. Order-creation falls
+  // back to matching Turkish dish-name keywords when no profile exists, which never matches
+  // this generic English demo menu — every food order would silently land on the same
+  // default station otherwise.
+  const stationByCatalogItem = {
+    menu_demo_garden_salad: 'kit_cold',
+    menu_demo_caesar_salad: 'kit_cold',
+    menu_demo_fruit_plate: 'kit_cold',
+    menu_demo_grilled_chicken: 'kit_grill',
+    menu_demo_grilled_seabass: 'kit_grill',
+    menu_demo_beef_burger: 'kit_hot',
+    menu_demo_margherita_pizza: 'kit_hot',
+    menu_demo_tiramisu: 'kit_pastry',
+    menu_demo_cheesecake: 'kit_pastry'
+  };
+  for (const [catalogItemId, stationId] of Object.entries(stationByCatalogItem)) {
+    const existing = await db.get('SELECT catalog_item_id FROM menu_kitchen_profiles WHERE catalog_item_id = ?', [catalogItemId]);
+    if (!existing) {
+      await db.run(
+        "INSERT INTO menu_kitchen_profiles (catalog_item_id, station_id, course, allergens, prep_minutes, active) VALUES (?, ?, 'main', '', 15, 1)",
+        [catalogItemId, stationId]
+      );
+    }
+  }
+
   for (const item of AEON_INGREDIENT_SEED) {
     const existing = await db.get('SELECT id FROM inventory WHERE id = ?', [item.id]);
     if (!existing) {

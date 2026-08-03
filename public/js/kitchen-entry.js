@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   setInterval(updateClock, 1000);
   await loadKitchenData();
   initKitchenSSE();
+  // SSE runs over a single serverless function instance; on Vercel a push can miss a KDS
+  // screen connected to a different instance, so poll as a safety net independent of SSE.
+  setInterval(loadKitchenData, 8000);
 });
 
 function initKitchenSSE() {

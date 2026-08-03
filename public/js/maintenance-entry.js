@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   bind();
   await load();
   subscribe();
+  setInterval(load, 8000);
 });
 
 function bind() {

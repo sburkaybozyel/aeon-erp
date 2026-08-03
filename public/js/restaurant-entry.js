@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (new URLSearchParams(window.location.search).get('inbox') === 'orders') setRestaurantSubview('service');
   await loadRestaurantData();
   initRestaurantSSE();
+  // SSE runs over a single serverless function instance; on Vercel a push can miss a
+  // screen connected to a different instance, so poll as a safety net independent of SSE.
+  setInterval(loadRestaurantData, 8000);
 });
 
 function initRestaurantSSE() {
