@@ -16,7 +16,7 @@ import {
   releaseTenantLock,
   renewTenantLock
 } from './db/firebase.js';
-import { hasD1Persistence, getSavePath, saveToDisk, loadFromDisk } from './db/persistence.js';
+import { hasD1Persistence, getSavePath, saveToDisk, loadFromDisk, hasRemoteChanged } from './db/persistence.js';
 import { hashPin } from './db/hash.js';
 import admin from 'firebase-admin';
 
@@ -104,6 +104,11 @@ export async function refreshDb(tenantId) {
   const db = await getDb(tenantId);
   if (hasD1Persistence()) return db;
   if (!hasFirebasePersistence() || tenantId === 'test_suite_run') return db;
+  // Cheap check first: read just the remote `updatedAt` stamp (a few bytes) instead of the
+  // whole tenant dataset. Only pay for the full reload when it actually moved — i.e. some
+  // other instance wrote since we last looked. Keeps every read-heavy/polling request from
+  // re-downloading the entire dataset on every call.
+  if (!(await hasRemoteChanged(tenantId))) return db;
   const previousSuspendSave = db.suspendSave;
   db.suspendSave = true;
   try {

@@ -3,6 +3,26 @@ import { fileURLToPath } from 'url';
 import fs from 'fs';
 import { hasFirebasePersistence, getFirebaseRef } from './firebase.js';
 
+// Per-instance cache of the last-seen Firebase `updatedAt` stamp per tenant, so refreshDb()
+// can skip pulling the *entire* dataset on every request and instead read just this one small
+// field first — only paying for a full reload when something actually changed since we last
+// looked (e.g. a write from a different serverless instance). Cuts Firebase RTDB download
+// bandwidth dramatically for read-heavy/polling traffic without weakening cross-instance
+// consistency: an unseen timestamp always triggers a real reload.
+const lastKnownUpdatedAt = new Map();
+
+export async function hasRemoteChanged(tenantId) {
+  if (!hasFirebasePersistence()) return true;
+  try {
+    const snapshot = await getFirebaseRef(tenantId, 'tenant').child('updatedAt').get();
+    const remoteUpdatedAt = snapshot.exists() ? snapshot.val() : null;
+    if (remoteUpdatedAt && remoteUpdatedAt === lastKnownUpdatedAt.get(tenantId)) return false;
+    return true;
+  } catch (e) {
+    return true; // Can't tell cheaply — fall back to a full reload rather than risk stale data.
+  }
+}
+
 const isCloudflareWorker = process.env.CLOUDFLARE_WORKER === '1';
 const __dirname = isCloudflareWorker ? '/' : dirname(fileURLToPath(import.meta.url));
 const isEphemeralRuntime = isCloudflareWorker || Boolean(process.env.VERCEL);
@@ -70,10 +90,15 @@ async function persistDump(tenantId, dbInstance) {
   if (hasFirebasePersistence() && !isTest) {
     try {
       const cleanDump = JSON.parse(JSON.stringify(dump));
+      const updatedAt = new Date().toISOString();
       await getFirebaseRef(tenantId, 'tenant').set({
-        updatedAt: new Date().toISOString(),
+        updatedAt,
         ...cleanDump
       });
+      // We just wrote this state ourselves, so our in-memory copy is already current —
+      // record the stamp now so the very next refreshDb() on this instance doesn't pay for
+      // a redundant full reload of the data we already hold.
+      lastKnownUpdatedAt.set(tenantId, updatedAt);
     } catch (err) {
       console.error("Failed to save to Firebase Realtime Database:", err);
       throw err;
@@ -98,6 +123,7 @@ export async function loadFromDisk(tenantId, dbInstance) {
       }
       const dump = snapshot.val();
       // Remove metadata keys
+      if (dump.updatedAt) lastKnownUpdatedAt.set(tenantId, dump.updatedAt);
       delete dump.updatedAt;
 
       for (const [table, rows] of Object.entries(dump)) {
