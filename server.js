@@ -12,6 +12,7 @@ import { initReception } from './modules/reception.js';
 import { initHotelRunner } from './modules/hotelrunner.js';
 import { initBar } from './modules/bar.js';
 import { initPrinting } from './modules/printing.js';
+import { initCrmBridge } from './modules/crm_bridge.js';
 
 import {
   isCloudflareWorker, __dirname, publicDir, PORT, isHostedRuntime,
@@ -59,6 +60,22 @@ app.get('/restaurant-qr/:code', (req, res) => {
 app.get('/room-portal', (req, res) => {
   res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   res.type('html').send(roomPortalPage);
+});
+app.get(['/restaurant', '/restaurant/', '/menu', '/menu/', '/restaurant-menu', '/restaurant-menu/'], (req, res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.sendFile(path.join(publicDir, 'restaurant.html'));
+});
+app.get(['/guest', '/guest/'], (req, res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.sendFile(path.join(publicDir, 'guest.html'));
+});
+app.get(['/room', '/room/'], (req, res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.sendFile(path.join(publicDir, 'room.html'));
+});
+app.get(['/precheckin', '/precheckin/'], (req, res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.sendFile(path.join(publicDir, 'precheckin.html'));
 });
 app.get('/q/:code', (req, res) => {
   const target = getQrTarget(req.params.code);
@@ -162,6 +179,7 @@ initStay({ app, eventBus, hookRegistry, getDb, broadcastSSE });
 initMarina({ app, eventBus, hookRegistry, getDb });
 initReception({ app, eventBus, hookRegistry, getDb });
 initHotelRunner({ app, eventBus, commitDb });
+initCrmBridge({ app });
 
 // --- CORE SYSTEM ROUTES ---
 registerOperationsRoutes(app);
@@ -178,15 +196,8 @@ app.use((err, req, res, next) => {
   res.status(500).send('İşlem şu anda tamamlanamadı.');
 });
 
-// Catch-all route to serve SPA
-app.get('*', (req, res) => {
-  const hasExtension = path.extname(req.path) !== '';
-  if (hasExtension) {
-    res.status(404).end();
-  } else {
-    res.sendFile(path.join(publicDir, 'index.html'));
-  }
-});
+app.get('/', (req, res) => res.sendFile(path.join(publicDir, 'index.html')));
+app.get('*', (req, res) => res.status(404).send('Sayfa bulunamadı.'));
 
 if (!isHostedRuntime && process.env.AEON_DISABLE_LISTEN !== 'true') {
   app.listen(PORT, () => {

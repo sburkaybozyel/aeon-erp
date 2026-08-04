@@ -1,9 +1,20 @@
 import { hashPin } from '../db.js';
 import { isManagementRole, encryptStaffPin, decryptStaffPin, knownStaffPin } from '../server-middleware.js';
+import { seedDemoData } from '../db/demo-data.js';
 
 // Staff CRUD, PIN management, and admin operational resets, extracted verbatim
 // from server.js — no behavior change.
 export function registerStaffRoutes(app) {
+  app.post('/api/admin/demo-seed', async (req, res) => {
+    if (!isManagementRole(req.actor)) return res.status(403).json({ error: 'Bu işlem yönetici yetkisi gerektirir.' });
+    try {
+      const summary = await seedDemoData(req.db, req.tenantId, req.actor?.name || 'Yönetici');
+      res.json({ success: true, summary });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
   app.get('/api/staff', async (req, res) => {
     try {
       const staff = await req.db.all("SELECT id, name, role, department, pin, pin_encrypted FROM staff ORDER BY name");

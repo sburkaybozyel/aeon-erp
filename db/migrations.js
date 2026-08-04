@@ -266,4 +266,7 @@ export async function ensureReceptionSchema(db) {
   try { await db.run('ALTER TABLE reservations ADD COLUMN channel_sync_status TEXT'); } catch (error) {}
   try { await db.run('ALTER TABLE reservations ADD COLUMN channel_last_update TEXT'); } catch (error) {}
   try { await db.run('ALTER TABLE guest_precheckin_submissions ADD COLUMN reservation_id TEXT'); } catch (error) {}
+  try { await db.run('ALTER TABLE reservations ADD COLUMN source_system TEXT'); } catch (error) {}
+  try { await db.run('ALTER TABLE reservations ADD COLUMN source_id TEXT'); } catch (error) {}
+  try { await db.run('ALTER TABLE reservations ADD COLUMN crm_idempotency_key TEXT'); } catch (error) {}
 }

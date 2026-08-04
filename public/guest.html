@@ -24,18 +24,10 @@
   <link rel="icon" href="/brands/aeon/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/brands/aeon/icon-180.png">
   <meta name="theme-color" content="#c29d5b">
-  <link class="pwa-manifest" rel="manifest" href="manifest_guest.json">
   <script>
     if (window.location.protocol === 'file:') window.location.replace(`https://aeon-erp-one.vercel.app/guest.html${window.location.search}${window.location.hash}`);
   </script>
   <script src="/js/boot.js?v=20260730-qr-isolation"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
-      });
-    }
-  </script>
 </head>
 <body class="mobile-app-container guest-luxury-theme">
   

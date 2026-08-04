@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "test": "node test.js && node --test integrations/hotelrunner.test.js && node test_hotelrunner.mjs && node --test integrations/bar-hotel-workflow.test.js",
+    "test": "node test.js && node --test integrations/hotelrunner.test.js && node test_hotelrunner.mjs && node --test integrations/bar-hotel-workflow.test.js && node --test integrations/public-portal-isolation.test.js",
     "test:hotelrunner-client": "node --test integrations/hotelrunner.test.js",
     "test:hotelrunner": "node test_hotelrunner.mjs",
     "verify:runtime": "node verify_runtime.mjs"

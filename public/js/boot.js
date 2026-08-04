@@ -8,6 +8,86 @@ window.addEventListener('pageshow', event => {
   if (window.__aeon_bootstrapped) return;
   window.__aeon_bootstrapped = true;
 
+  const functionLabels = {
+    'admin-control-summary': 'Yönetici operasyon özeti',
+    'admin-department-operations': 'Departman operasyon kartları',
+    'admin-room-live-summary': 'Oda doluluk özeti',
+    'admin-guests-body': 'Aktif konaklayan misafirler',
+    'live-tracker-rooms': 'Canlı oda durumları',
+    'mgmt-rooms-tbody-live': 'Oda envanteri yönetimi',
+    'admin-housekeeping-summary': 'Kat hizmetleri görev özeti',
+    'admin-hk-tasks': 'Açık kat hizmetleri görevleri',
+    'admin-restaurant-summary': 'Restoran servis özeti',
+    'live-tracker-tables': 'Canlı masa ve sipariş akışı',
+    'admin-bar-summary': 'Bar stok ve satış özeti',
+    'live-tracker-stock': 'Son stok hareketleri',
+    'admin-maintenance-summary': 'Teknik servis iş emri özeti',
+    'admin-maintenance-orders': 'Açık teknik iş emirleri',
+    'live-tracker-audit': 'Son personel işlemleri',
+    'admin-settings-staff-list': 'Personel yetki özeti',
+    'pms-content': 'Resepsiyon çalışma alanı',
+    'kitchen-kpis': 'Mutfak üretim göstergeleri',
+    'kds-board': 'Mutfak sipariş üretim panosu',
+    'kitchen-target-grid': 'Mutfak masa ve oda hedefleri',
+    'kitchen-task-list': 'Mutfak hazırlık görevleri',
+    'kitchen-stock-list': 'Mutfak kritik stokları',
+    'kitchen-purchase-list': 'Mutfak satın alma talepleri',
+    'kitchen-temperature-list': 'Gıda güvenliği sıcaklık kayıtları',
+    'kitchen-menu-control-list': 'Menü satış uygunluğu kontrolü',
+    'kitchen-recipe-list': 'Mutfak reçete ve ürün kartları',
+    'room-grid': 'Operasyonel oda kartları',
+    'task-list': 'Kat hizmetleri görev listesi',
+    'area-grid': 'Ortak alan temizlik kontrolü',
+    'linen-list': 'Linen ve kat hizmetleri stoğu',
+    'laundry-list': 'Açık çamaşır işlemleri',
+    'lost-list': 'Kayıp eşya teslim zinciri',
+    'orders-reported': 'Bildirilen teknik iş emirleri',
+    'orders-progress': 'İşlemdeki teknik iş emirleri',
+    'orders-waiting': 'Parça bekleyen teknik iş emirleri',
+    'orders-resolved': 'Çözülen teknik iş emirleri',
+    'plans-list': 'Yaklaşan bakım planları',
+    'assets-list': 'Teknik varlık envanteri',
+    'inventory-list': 'Teknik depo malzemeleri',
+    'purchases-list': 'Teknik satın alma talepleri',
+    'restaurant-kpis': 'Restoran operasyon göstergeleri',
+    'staff-restaurant-ready-grid': 'Sipariş hazırlık ve servis akışı',
+    'staff-restaurant-tables-grid': 'Restoran masa planı',
+    'menu-items-grid': 'Sipariş ürün kataloğu',
+    'staff-restaurant-cart-items-list': 'Açık adisyon ürünleri',
+    'restaurant-menu-admin-list': 'Restoran menü yönetimi',
+    'bar-kpis': 'Bar operasyon göstergeleri',
+    'bar-setup': 'Bar kurulum durumu',
+    'bar-table-plan': 'Bar masa planı',
+    'bar-room-plan': 'Bar oda hesapları',
+    'bar-products': 'Bar içecek menüsü',
+    'bar-cart-list': 'Bar adisyon ürünleri',
+    'bar-stock-list': 'Bar stok envanteri',
+    'bar-audit-list': 'Bar kör sayım kayıtları',
+    'bar-stock-activity': 'Bar stok hareketleri',
+    'bar-order-list': 'Bar sipariş akışı',
+    'bar-menu-management': 'Bar menü yönetimi',
+    'bar-inventory-management': 'Bar stok tanımları',
+    'guest-room-services-grid': 'Misafir oda hizmetleri',
+    'guest-menu-chips': 'Misafir menü kategorileri',
+    'guest-order-tracker-list': 'Misafir sipariş takibi',
+    'guest-folio-charges-list': 'Misafir folyo hareketleri',
+    'channel-content': 'Kanal yöneticisi çalışma alanı'
+  };
+  const applyFunctionLabels = () => {
+    for (const [id, label] of Object.entries(functionLabels)) {
+      const element = document.getElementById(id);
+      if (!element) continue;
+      element.dataset.function = label;
+      if (!element.hasAttribute('aria-label')) element.setAttribute('aria-label', label);
+      element.classList.add('aeon-function-placeholder');
+    }
+  };
+  const functionLabelStyle = document.createElement('style');
+  functionLabelStyle.textContent = '.aeon-function-placeholder:empty{min-height:42px}.aeon-function-placeholder:empty::before{content:attr(data-function) " yükleniyor…";display:flex;align-items:center;justify-content:center;min-height:42px;padding:10px 12px;border:1px dashed #cbddea;border-radius:10px;background:#f7fbfd;color:#6b8194;font:600 12px/1.35 system-ui;text-align:center}';
+  document.head.appendChild(functionLabelStyle);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyFunctionLabels, { once: true });
+  else applyFunctionLabels();
+
   // 1. Tenant Resolution & Validation
   const params = new URLSearchParams(window.location.search);
   let tenantId = params.get('tenant_id');
@@ -18,16 +98,18 @@ window.addEventListener('pageshow', event => {
     tenantId = 'aeon';
   }
   window.tenantId = tenantId;
-  window.aeonSessionToken = localStorage.getItem('aeon_session_token') || '';
-  const manifest = document.createElement('link');
-  manifest.rel = 'manifest';
-  manifest.href = '/manifest.json';
-  document.head.appendChild(manifest);
-  document.head.insertAdjacentHTML('beforeend', '<meta name="theme-color" content="#078fd0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Aeon ERP">');
-
   const initialPath = window.location.pathname;
   const isLoginPath = /\/login(?:\.html)?$/.test(initialPath);
-  const isPublicSurface = isLoginPath || /\/(?:guest|room|restaurant|precheckin)(?:\.html)?$/.test(initialPath);
+  const isGuestSurface = /\/(?:guest|room|room-portal|restaurant|menu|restaurant-menu|precheckin)(?:\.html)?\/?$/.test(initialPath);
+  const isPublicSurface = isLoginPath || isGuestSurface;
+  window.aeonSessionToken = isGuestSurface ? '' : (localStorage.getItem('aeon_session_token') || '');
+  if (!isGuestSurface && !document.querySelector('link[rel="manifest"]')) {
+    const manifest = document.createElement('link');
+    manifest.rel = 'manifest';
+    manifest.href = '/manifest.json';
+    document.head.appendChild(manifest);
+  }
+  if (!isGuestSurface) document.head.insertAdjacentHTML('beforeend', '<meta name="theme-color" content="#078fd0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Aeon ERP">');
   const revealPage = () => document.documentElement.classList.remove('aeon-auth-pending');
   const redirectTo = target => {
     if (window.__aeon_redirecting) return false;
@@ -215,7 +297,7 @@ window.addEventListener('pageshow', event => {
       request.credentials = 'same-origin'; // Shift to cookie-only
 
       const headers = new Headers(request.headers || {});
-      if (window.aeonSessionToken && !headers.has('Authorization')) {
+      if (!isGuestSurface && window.aeonSessionToken && !headers.has('Authorization')) {
         headers.set('Authorization', `Bearer ${window.aeonSessionToken}`);
       }
       const method = (request.method || 'GET').toUpperCase();
@@ -285,7 +367,9 @@ window.addEventListener('pageshow', event => {
           if (headerTitle) {
             headerTitle.innerHTML = `<img src="${branding.logo}" alt="logo" style="height:22px; width:22px; border-radius:50%; object-fit:cover; border:1px solid rgba(212,175,55,0.4); margin-right:8px;"> ${branding.name.toUpperCase()}`;
           }
-          document.title = `${branding.name} | ERP`;
+          document.title = isGuestSurface
+            ? `${branding.name} | ${/restaurant|menu/.test(initialPath) ? 'Restoran Menüsü' : /precheckin/.test(initialPath) ? 'Online Ön Giriş' : 'Misafir Portalı'}`
+            : `${branding.name} | ERP`;
         }
       } catch (e) {
         console.warn("Could not load branding", e);
@@ -294,6 +378,11 @@ window.addEventListener('pageshow', event => {
       // 2. Auth checks
       const isLoginPage = isLoginPath;
       const isPublicPage = isPublicSurface;
+
+      if (isGuestSurface) {
+        revealPage();
+        return null;
+      }
 
       try {
         const sessionHeaders = new Headers();

@@ -522,6 +522,11 @@ export function roleAllowed(actor, roles) {
 }
 
 function isPublicApiRequest(req) {
+  // /erp/* is the CRM↔ERP bridge (modules/crm_bridge.js) — it's server-to-server, not a staff
+  // session, so it can't carry a PIN/session cookie. It gates itself with a separate shared
+  // secret (CRM_BRIDGE_KEY, checked in the bridge module), so letting it past the staff-session
+  // check here does not make it open to the public.
+  if (req.path === '/erp/health' || req.path.startsWith('/erp/')) return true;
   if (req.path === '/auth/login' || req.path === '/auth/logout' || req.path === '/tenant/branding' || req.path === '/system/persistence' || req.path === '/system/build' || req.path === '/guest/precheckin' || req.path.startsWith('/guest/precheckin/') || req.path === '/integrations/hotelrunner/push') return true;
   if (req.method === 'GET' && ['/catalog/availability', '/guest/requests', '/guest/room-context', '/push/public-key', '/guest/targets'].includes(req.path)) return true;
   if (req.method === 'GET' && /^\/rooms\/[^/]+\/folio$/.test(req.path)) return true;

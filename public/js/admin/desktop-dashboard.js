@@ -50,6 +50,14 @@ export function setupDesktopAdminDashboard() {
 export async function loadDesktopAdminDashboardData() {
   try {
     const tenantParam = `?tenant_id=${state.currentTenant}`;
+    const readJson = async (response, fallback) => {
+      if (!response.ok || !String(response.headers.get('content-type') || '').includes('application/json')) return fallback;
+      try {
+        return await response.json();
+      } catch (error) {
+        return fallback;
+      }
+    };
     
     // FETCH REAL DATA FROM BACKEND API
     const businessDate = new Date().toISOString().slice(0, 10);
@@ -68,16 +76,21 @@ export async function loadDesktopAdminDashboardData() {
       fetch(`/api/maintenance/work-orders${tenantParam}`)
     ]);
 
-    const dashboard = dashboardRes.ok ? await dashboardRes.json() : null;
-    const rooms = mergeRoomsWithReception(roomsRes.ok ? await roomsRes.json() : [], staysRes.ok ? await staysRes.json() : [], rackRes.ok ? await rackRes.json() : null);
-    const tables = tablesRes.ok ? await tablesRes.json() : [];
-    const requests = reqsRes.ok ? await reqsRes.json() : [];
-    const inventory = invRes.ok ? await invRes.json() : [];
-    const audits = auditsRes.ok ? await auditsRes.json() : [];
-    const apaSummary = apaRes.ok ? await apaRes.json() : { cash: 0, credit: 0, room_charge: 0, total_expenses: 0, net: 0, totalSpentEur: 0 };
-    const auditLogs = logsRes.ok ? await logsRes.json() : [];
-    const hkTasks = hkTasksRes.ok ? await hkTasksRes.json() : [];
-    const workOrders = workOrdersRes.ok ? await workOrdersRes.json() : [];
+    const [dashboard, roomRows, stays, rack, tables, requests, inventory, audits, apaSummary, auditLogs, hkTasks, workOrders] = await Promise.all([
+      readJson(dashboardRes, null),
+      readJson(roomsRes, []),
+      readJson(staysRes, []),
+      readJson(rackRes, null),
+      readJson(tablesRes, []),
+      readJson(reqsRes, []),
+      readJson(invRes, []),
+      readJson(auditsRes, []),
+      readJson(apaRes, { cash: 0, credit: 0, room_charge: 0, total_expenses: 0, net: 0, totalSpentEur: 0 }),
+      readJson(logsRes, []),
+      readJson(hkTasksRes, []),
+      readJson(workOrdersRes, [])
+    ]);
+    const rooms = mergeRoomsWithReception(roomRows, stays, rack);
 
     // Check for new requests to trigger notifications
     if (!window.adminKnownRequestIds) {

@@ -19,7 +19,7 @@ const money = value => new Intl.NumberFormat('tr-TR', { style: 'currency', curre
 const tenantQuery = () => `?tenant_id=${encodeURIComponent(state.currentTenant || 'aeon')}`;
 const requestKey = () => globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-document.addEventListener('DOMContentLoaded', async () => {
+async function initRestaurantPortal() {
   activeUser = await window.aeonBoot();
   if (!activeUser || !['restaurant', 'waiter', 'admin', 'manager', 'yönetici'].includes(String(activeUser.role || '').toLocaleLowerCase('tr-TR'))) return;
   setupTabs();
@@ -33,7 +33,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   // SSE runs over a single serverless function instance; on Vercel a push can miss a
   // screen connected to a different instance, so poll as a safety net independent of SSE.
   setInterval(loadRestaurantData, 8000);
-});
+}
+
+initRestaurantPortal();
 
 function initRestaurantSSE() {
   const stream = new EventSource(`/api/events${tenantQuery()}`);
