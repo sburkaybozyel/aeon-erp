@@ -1,0 +1,35 @@
+{
+  "buildId": "396f204d-b29e-471a-a2a1-850a0d2e504a",
+  "trailingSlash": false,
+  "routes": [
+    {
+      "route": "/",
+      "status": "rendered",
+      "revalidate": false,
+      "router": "app",
+      "headers": {
+        "link": "</logo.jpg>; rel=preload; as=\"image\", </hero.jpg>; rel=preload; as=\"image\", </room.jpg>; rel=preload; as=\"image\""
+      }
+    },
+    {
+      "route": "/404",
+      "status": "rendered",
+      "revalidate": false,
+      "router": "app"
+    }
+  ],
+  "pregeneratedConcretePaths": [
+    [
+      "/",
+      [
+        "/"
+      ]
+    ],
+    [
+      "/404",
+      [
+        "/404"
+      ]
+    ]
+  ]
+}
