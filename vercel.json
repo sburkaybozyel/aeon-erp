@@ -6,19 +6,31 @@
       "use": "@vercel/node",
       "config": {
         "includeFiles": [
-          "public/**",
-          "crm/**",
           "db/**",
           "aeon/**",
-          "modules/**"
+          "modules/**",
+          "crm/**"
         ]
       }
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/api/(.*)",
       "dest": "server.js"
+    },
+    {
+      "src": "/crm/api/(.*)",
+      "dest": "server.js"
+    },
+    {
+      "src": "/crm/(.*)",
+      "dest": "crm/public/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "public/$1"
     }
   ]
 }
+
