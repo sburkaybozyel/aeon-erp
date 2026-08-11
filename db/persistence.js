@@ -25,14 +25,18 @@ export async function hasRemoteChanged(tenantId) {
 
 const isCloudflareWorker = process.env.CLOUDFLARE_WORKER === '1';
 const __dirname = isCloudflareWorker ? '/' : dirname(fileURLToPath(import.meta.url));
-const isEphemeralRuntime = isCloudflareWorker || Boolean(process.env.VERCEL);
+const isEphemeralRuntime = isCloudflareWorker || Boolean(process.env.VERCEL) || Boolean(process.env.VERCEL_ENV) || Boolean(process.env.NOW_REGION) || process.env.NODE_ENV === 'production';
 // This file lives in <repo>/db, so the repo root is one level up.
 const repoRoot = isCloudflareWorker ? __dirname : join(__dirname, '..');
 const dbDir = isEphemeralRuntime ? join('/tmp', 'db') : join(repoRoot, 'db');
 
 // Ensure db directory exists
-if (!fs.existsSync(dbDir)) {
-  fs.mkdirSync(dbDir, { recursive: true });
+try {
+  if (!fs.existsSync(dbDir)) {
+    fs.mkdirSync(dbDir, { recursive: true });
+  }
+} catch (e) {
+  // Ignore filesystem errors on read-only environments
 }
 
 export function hasD1Persistence() {
@@ -106,10 +110,18 @@ async function persistDump(tenantId, dbInstance) {
   } else {
     // Fallback local file — write to a temp file and rename into place so a crash/kill mid-write
     // can never leave a truncated/corrupt JSON file behind (rename is atomic on the same filesystem).
-    const savePath = getSavePath(tenantId);
-    const tmpPath = `${savePath}.${process.pid}.${Date.now()}.tmp`;
-    fs.writeFileSync(tmpPath, JSON.stringify(dump, null, 2), 'utf8');
-    fs.renameSync(tmpPath, savePath);
+    try {
+      const savePath = getSavePath(tenantId);
+      const parentDir = dirname(savePath);
+      if (!fs.existsSync(parentDir)) {
+        fs.mkdirSync(parentDir, { recursive: true });
+      }
+      const tmpPath = `${savePath}.${process.pid}.${Date.now()}.tmp`;
+      fs.writeFileSync(tmpPath, JSON.stringify(dump, null, 2), 'utf8');
+      fs.renameSync(tmpPath, savePath);
+    } catch (err) {
+      console.warn("Local persistence write skipped on ephemeral filesystem:", err.message);
+    }
   }
 }
 

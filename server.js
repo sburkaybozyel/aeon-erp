@@ -1,5 +1,5 @@
 import express from 'express';
-import { getDb, initSchema, hasFirebasePersistence, hashPin, savePersistentSession, getPersistentSession, revokePersistentSession, refreshDb, commitDb, acquireTenantLock, releaseTenantLock } from './db.js';
+import { getDb, initSchema, hasFirebasePersistence, hashPin, savePersistentSession, getPersistentSession, revokePersistentSession, refreshDb, commitDb, acquireTenantLock, releaseTenantLock, renewTenantLock } from './db.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import os from 'os';
@@ -10,7 +10,8 @@ import crypto from 'crypto';
 // Import Pluggable Modules
 import { initDining } from './modules/dining.js';
 import { initStay } from './modules/stay.js';
-import { initCruise } from './modules/cruise.js';
+import { initMarina } from './modules/marina.js';
+import { initBar } from './modules/bar.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -202,7 +203,9 @@ async function tenantDbResolver(req, res, next) {
   const forwardedHost = (Boolean(process.env.VERCEL) || process.env.AEON_TRUST_FORWARDED_HOST === 'true')
     ? req.headers['x-forwarded-host']
     : '';
-  const tenantId = configuredTenantForHost(forwardedHost || req.headers.host);
+  const requestedTenant = (req.query && req.query.tenant_id) || req.headers['x-tenant-id'];
+  const tenantId = requestedTenant || configuredTenantForHost(forwardedHost || req.headers.host);
+  req.tenantId = tenantId;
   
   const allowedTenants = (Boolean(process.env.VERCEL)) ? ['aeon'] : ['aeon', 'tenant_a', 'tenant_b'];
   if (!allowedTenants.includes(tenantId) && !tenantId.startsWith('acceptance_runs_')) {
@@ -339,13 +342,7 @@ async function tenantDbResolver(req, res, next) {
       // Start lock lease renewal interval
       renewInterval = setInterval(async () => {
         try {
-          const ref = admin.database().ref(`tenant_locks/${tenantId}`);
-          await ref.transaction(current => {
-            if (current && current.owner === lockOwner) {
-              return { owner: lockOwner, expires_at: Date.now() + 60000 };
-            }
-            return;
-          });
+          await renewTenantLock(tenantId, lockOwner);
         } catch (e) {
           console.error(`[Lock] Lease renewal failed for ${tenantId}:`, e);
         }
@@ -811,7 +808,8 @@ eventBus.on('request_updated', data => {
 // --- INITIALIZE PLUGGABLE MODULES ---
 initDining({ app, eventBus, hookRegistry, getDb, broadcastSSE });
 initStay({ app, eventBus, hookRegistry, getDb, broadcastSSE });
-initCruise({ app, eventBus, hookRegistry, getDb });
+initMarina({ app, eventBus, hookRegistry, getDb });
+initBar({ app, eventBus, broadcastSSE });
 
 // --- CORE SYSTEM ROUTES ---
 
