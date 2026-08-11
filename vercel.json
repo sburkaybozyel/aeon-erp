@@ -1,9 +1,8 @@
 {
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/index.js" },
-    { "source": "/crm/api/(.*)", "destination": "/api/index.js" },
-    { "source": "/crm/(.*)", "destination": "/crm/public/$1" },
-    { "source": "/crm", "destination": "/crm/public/index.html" }
+    { "source": "/crm/(.*)", "destination": "/api/index.js" },
+    { "source": "/crm", "destination": "/api/index.js" }
   ]
 }
 
