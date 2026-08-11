@@ -64,7 +64,7 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 0 }));
 app.use('/crm', express.static(path.join(__dirname, 'crm/public'), { maxAge: 0 }));
 
-const aeonDataDir = process.env.AEON_DATA_PATH || path.join(__dirname, 'aeon');
+const aeonDataDir = process.env.AEON_DATA_PATH || (process.env.VERCEL ? path.join('/tmp', 'aeon') : path.join(__dirname, 'aeon'));
 
 // Simple Event Bus
 class EventBus {
