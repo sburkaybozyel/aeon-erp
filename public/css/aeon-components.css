@@ -530,60 +530,6 @@
   justify-content: center;
 }
 
-.guest-notice-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 12000;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: rgba(15, 23, 42, 0.48);
-}
-
-.guest-notice-overlay.active {
-  display: flex;
-}
-
-.guest-notice-modal {
-  width: min(100%, 390px);
-  padding: 24px;
-  border: 1px solid var(--border-glass);
-  border-radius: 20px;
-  background: var(--bg-surface);
-  box-shadow: var(--shadow-premium);
-  text-align: center;
-}
-
-.guest-notice-icon {
-  display: inline-flex;
-  width: 48px;
-  height: 48px;
-  margin-bottom: 12px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: var(--color-primary-soft);
-  color: var(--color-primary);
-}
-
-.guest-notice-modal h3 {
-  margin: 0 0 8px;
-  color: var(--color-text-main);
-}
-
-.guest-notice-modal p {
-  margin: 0 0 18px;
-  color: var(--color-text-muted);
-  line-height: 1.5;
-}
-
-.guest-notice-actions {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
 .modal.show, .modal-overlay[style*="display: flex"], .modal-overlay[style*="display: block"] {
   display: flex !important;
 }
@@ -781,3 +727,138 @@
   from { transform: translateY(100%) opacity: 0; }
   to { transform: translateY(0) opacity: 1; }
 }
+
+/* Incoming order/request notifications */
+.request-notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100001;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 340px;
+}
+
+.request-notification-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-left: 5px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  box-shadow: var(--shadow-premium);
+  animation: slideIn 0.3s ease-out;
+}
+
+.request-notification-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.request-notification-title {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.request-notification-target {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+.request-notification-body {
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+
+.request-notification-amount {
+  margin-top: 6px;
+  font-weight: 700;
+}
+
+.request-notification-close {
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.7;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.request-notification-close:hover {
+  opacity: 1;
+}
+
+/* Bento Grid System (Magic UI Inspired) */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .bento-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .bento-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.bento-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--color-primary);
+  box-shadow: var(--glass-shadow), var(--glass-glow);
+  transform: translateY(-2px);
+}
+
+.bento-span-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .bento-span-2 {
+    grid-column: span 1;
+  }
+}
+
+/* Global Overrides for Liquid Glass & Bento Overhaul */
+.card, .aeon-card, .glass-card, .login-card {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border-subtle) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--glass-shadow) !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.card:hover, .aeon-card:hover, .glass-card:hover {
+  border-color: var(--color-primary) !important;
+  box-shadow: var(--glass-shadow), var(--glass-glow) !important;
+}
+
+.mobile-header, .mobile-bottom-nav, .topbar {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border-bottom: 1px solid var(--glass-border-subtle) !important;
+}
+
+

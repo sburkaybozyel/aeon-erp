@@ -3,19 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#c29d5b">
-  <title>Aeon Otel Oda Portalı</title>
-  <style>html,body,iframe{width:100%;height:100%;margin:0;border:0;background:#10213d}iframe{display:block}</style>
-</head>
-<body>
-  <iframe id="room-guest-portal" title="Aeon Otel Oda Portalı"></iframe>
+  <title>Oda QR</title>
   <script>
     const params = new URLSearchParams(window.location.search);
     const tenant = params.get('tenant_id') || 'aeon';
-    const target = params.get('target') || '';
-    const qr = params.get('qr') || '';
-    if (!/^Room-[^&?#]+$/i.test(target)) document.body.textContent = 'Geçersiz oda QR kodu.';
-    else document.getElementById('room-guest-portal').src = `/guest.html?tenant_id=${encodeURIComponent(tenant)}&type=room&target=${encodeURIComponent(target)}&qr=${encodeURIComponent(qr)}&entry=room-qr`;
+    const target = params.get('target') || 'Room-101 - Panoramik';
+    window.location.replace(`/guest.html?tenant_id=${encodeURIComponent(tenant)}&type=room&target=${encodeURIComponent(target)}`);
   </script>
-</body>
+</head>
+<body></body>
 </html>

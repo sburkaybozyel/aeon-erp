@@ -7,13 +7,10 @@
       "config": {
         "includeFiles": [
           "public/**",
+          "crm/**",
           "db/**",
-          "modules/**",
-          "routes/**",
-          "lib/**",
-          "seed/**",
-          "catalog-seed.js",
-          "ingredient-seed.js"
+          "aeon/**",
+          "modules/**"
         ]
       }
     }

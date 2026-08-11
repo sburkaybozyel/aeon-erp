@@ -2,57 +2,195 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aeon Boutique Hotel | Ön Büro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ön Büro | Personel Portalı</title>
+  
+  <!-- Design System CSS -->
   <link rel="stylesheet" href="/css/aeon-tokens.css">
   <link rel="stylesheet" href="/css/aeon-base.css">
   <link rel="stylesheet" href="/css/aeon-shell.css">
   <link rel="stylesheet" href="/css/aeon-components.css">
   <link rel="stylesheet" href="/css/aeon-responsive.css">
-  <link rel="stylesheet" href="/css/reception-pms.css">
-  <link rel="stylesheet" href="/css/room-center.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <script src="/js/boot.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
 </head>
-<body class="pms-body">
-  <div class="pms-shell">
-    <aside class="pms-sidebar">
-      <div class="pms-brand"><img src="/brands/aeon/logo.png" alt="Aeon"><span>Aeon Boutique Hotel</span></div>
-      <nav id="pms-nav" class="pms-nav">
-        <button data-view="dashboard" class="active"><i class="fa-solid fa-chart-line"></i> Günlük Durum</button>
-        <button data-view="rack"><i class="fa-solid fa-table-columns"></i> Oda Planı</button>
-        <button data-view="reservations"><i class="fa-solid fa-calendar-check"></i> Rezervasyonlar</button>
-        <button data-view="checkin"><i class="fa-solid fa-right-to-bracket"></i> Girişler</button>
-        <button data-view="stays"><i class="fa-solid fa-bed"></i> Konaklayanlar</button>
-        <button data-view="folios"><i class="fa-solid fa-file-invoice-dollar"></i> Folyo ve Tahsilat</button>
-        <button data-view="invoices"><i class="fa-solid fa-file-invoice"></i> Faturalar</button>
-        <button data-view="tasks"><i class="fa-solid fa-list-check"></i> Görevler</button>
-        <button data-view="kbs"><i class="fa-solid fa-shield-halved"></i> KBS Bildirimleri</button>
-        <button data-view="shifts"><i class="fa-solid fa-cash-register"></i> Vardiya ve Kasa</button>
-        <button data-view="reports"><i class="fa-solid fa-chart-pie"></i> Raporlar</button>
-        <div class="pms-nav-heading">KANALLAR VE DAĞITIM</div>
-        <button data-view="channels"><i class="fa-solid fa-satellite-dish"></i> HotelRunner</button>
-      </nav>
-      <button id="logout" class="pms-logout"><i class="fa-solid fa-power-off"></i> Güvenli Çıkış</button>
-    </aside>
-    <main class="pms-main">
-      <header class="pms-topbar">
-        <div><p id="pms-eyebrow">Aeon Boutique Hotel</p><h1 id="pms-title">Günlük Durum</h1></div>
-        <div class="pms-tools"><label class="pms-search"><i class="fa-solid fa-magnifying-glass"></i><input id="global-search" placeholder="Misafir, rezervasyon, oda ara"></label><button id="logout-topbar" type="button" class="pms-logout-topbar" title="Güvenli Çıkış"><i class="fa-solid fa-power-off"></i></button></div>
-      </header>
-      <div id="pms-banner" class="pms-banner" hidden></div>
-      <section id="pms-content" class="pms-content" aria-live="polite"></section>
-    </main>
-  </div>
-  <div id="pms-modal" class="pms-modal" hidden><div class="pms-modal-card"><header><h2 id="pms-modal-title"></h2><button id="pms-modal-close" aria-label="Kapat"><i class="fa-solid fa-xmark"></i></button></header><div id="pms-modal-body"></div></div></div>
-  <nav class="pms-mobile-nav" aria-label="Ön büro menüsü">
-    <button type="button" data-pms-view="dashboard"><i class="fa-solid fa-chart-line"></i><span>Özet</span></button>
-    <button type="button" data-pms-view="rack"><i class="fa-solid fa-table-columns"></i><span>Odalar</span></button>
-    <button type="button" data-pms-view="reservations"><i class="fa-solid fa-calendar-check"></i><span>Rezervasyon</span></button>
-    <button type="button" data-pms-view="checkin"><i class="fa-solid fa-right-to-bracket"></i><span>Giriş</span></button>
-    <button type="button" data-pms-view="stays"><i class="fa-solid fa-bed"></i><span>Konaklayan</span></button>
+<body class="mobile-app-container">
+
+  <header class="mobile-header liquid-glass-panel">
+    <div class="mobile-title" id="reception-title">Ön Büro (Resepsiyon)</div>
+    <button class="btn-close-modal" id="btn-staff-logout" onclick="window.aeonLogout(); return false;" style="color: var(--color-danger); background:none; border:none; font-size:18px; cursor:pointer;" title="Çıkış">
+      <i class="fa-solid fa-power-off"></i>
+    </button>
+  </header>
+
+  <main class="mobile-content">
+    <!-- Tab 1: Akış (Dashboard/Feed) -->
+    <div id="reception-subview-feed" class="panel-section active">
+      <div id="reception-dashboard-stats" style="display: flex; gap: 8px; margin-bottom: 20px;"></div>
+      
+      <!-- Shift Notes -->
+      <div class="card" style="padding: 16px;">
+        <div class="d-flex justify-content-between" style="margin-bottom: 12px; align-items: center;">
+          <h4 style="font-size: 13px; text-transform: uppercase; color: var(--color-primary); font-weight: 800; margin: 0;">
+            <i class="fa-solid fa-book-open" style="margin-right: 4px;"></i> Vardiya Notları
+          </h4>
+          <button class="btn btn-primary btn-sm" id="btn-save-shift-notes"><i class="fa-solid fa-save"></i> Kaydet</button>
+        </div>
+        <textarea id="reception-shift-notes" rows="3" placeholder="Sonraki vardiyaya not bırakın... (Oda 105 geç çıkış yapacak, vs.)" style="resize: none;"></textarea>
+      </div>
+
+      <!-- Feed of Active Tasks/Requests -->
+      <h4 style="font-size: 13px; text-transform: uppercase; color: var(--color-primary); font-weight: 800; margin-bottom: 12px;">Aktif İstekler & Talepler</h4>
+      <div id="staff-reception-grid" class="d-flex flex-column" style="gap: 12px;"></div>
+    </div>
+
+    <!-- Tab 2: Odalar & Misafirler -->
+    <div id="reception-subview-rooms" class="panel-section" style="padding-bottom: 80px;">
+      <button class="btn btn-primary btn-block" id="btn-reception-new-checkin" style="margin-bottom: 16px; font-weight: bold;">
+        <i class="fa-solid fa-user-plus"></i> Hızlı Giriş (Check-in)
+      </button>
+      <h4 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; color: var(--color-primary);">Oda Durumları & Misafirler</h4>
+      <div class="room-rack-grid" id="reception-rooms-grid"></div>
+    </div>
+
+    <!-- Tab 3: İşlemler (Actions) -->
+    <div id="reception-subview-actions" class="panel-section" style="padding-bottom: 80px;">
+      <h4 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; color: var(--color-primary);">Hızlı İşlemler</h4>
+      <div class="d-flex flex-column" style="gap: 12px;">
+        <button class="btn btn-secondary btn-block" style="text-align: left; padding: 16px; font-weight: bold; border-radius: 12px;" id="btn-action-hk">
+          <i class="fa-solid fa-broom" style="width: 24px; color: var(--color-success)"></i> Housekeeping Talebi
+        </button>
+        <button class="btn btn-secondary btn-block" style="text-align: left; padding: 16px; font-weight: bold; border-radius: 12px;" id="btn-action-tech">
+          <i class="fa-solid fa-wrench" style="width: 24px; color: var(--color-danger)"></i> Teknik Servis Kaydı
+        </button>
+        <button class="btn btn-secondary btn-block" style="text-align: left; padding: 16px; font-weight: bold; border-radius: 12px;" id="btn-action-service">
+          <i class="fa-solid fa-bell-concierge" style="width: 24px; color: var(--color-primary)"></i> Mutfak / Oda Servisi
+        </button>
+        <button class="btn btn-secondary btn-block" style="text-align: left; padding: 16px; font-weight: bold; border-radius: 12px;" id="btn-action-wakeup">
+          <i class="fa-solid fa-clock" style="width: 24px; color: var(--color-accent)"></i> Uyandırma Servisi
+        </button>
+        <button class="btn btn-secondary btn-block" style="text-align: left; padding: 16px; font-weight: bold; border-radius: 12px;" id="btn-action-porter">
+          <i class="fa-solid fa-suitcase" style="width: 24px; color: var(--color-text-muted)"></i> Bagaj Taşıma (Porter)
+        </button>
+        <button class="btn btn-secondary btn-block" style="text-align: left; padding: 16px; font-weight: bold; border-radius: 12px;" id="btn-action-taxi">
+          <i class="fa-solid fa-taxi" style="width: 24px; color: var(--color-warning)"></i> Taksi / Vale Talebi
+        </button>
+        <button class="btn btn-secondary btn-block" style="text-align: left; padding: 16px; font-weight: bold; border-radius: 12px;" id="btn-action-minibar">
+          <i class="fa-solid fa-martini-glass-citrus" style="width: 24px; color: var(--color-cyan)"></i> Minibar Talebi / Girişi
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="mobile-bottom-nav">
+    <a href="#" class="nav-item active" id="nav-reception-tab-feed">
+      <i class="fa-solid fa-bolt"></i>
+      <span>Akış</span>
+    </a>
+    <a href="#" class="nav-item" id="nav-reception-tab-rooms">
+      <i class="fa-solid fa-bed"></i>
+      <span>Odalar</span>
+    </a>
+    <a href="#" class="nav-item" id="nav-reception-tab-actions">
+      <i class="fa-solid fa-bolt-lightning"></i>
+      <span>İşlemler</span>
+    </a>
   </nav>
-  <script type="module" src="/js/reception-entry.js"></script>
+
+  <!-- ROOM DETAIL MODAL -->
+  <div class="modal-overlay" id="room-detail-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-room-title">Oda Detayı</h3>
+        <button class="btn-close-modal" id="btn-close-room-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Oda Durumu</label>
+          <select id="modal-room-status">
+            <option value="clean_vacant">Temiz (Boş)</option>
+            <option value="dirty_vacant">Kirli (Boş)</option>
+            <option value="occupied">Dolu (Misafir Girişli)</option>
+            <option value="maintenance">Bakımda / Teknik</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Klima Durumu</label>
+          <select id="modal-room-ac">
+            <option value="working">🟢 Klima Çalışıyor</option>
+            <option value="broken">🔴 Klima Arızalı</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Teknik Servis Notları / Arıza Detayı</label>
+          <input type="text" id="modal-room-notes" placeholder="Varsa arıza notu...">
+        </div>
+        <div class="form-group d-flex" style="gap: 16px;">
+          <label style="display: flex; align-items: center; gap: 8px;">
+            <input type="checkbox" id="modal-room-vip"> VIP
+          </label>
+          <label style="display: flex; align-items: center; gap: 8px;">
+            <input type="checkbox" id="modal-room-late-checkout"> Geç Çıkış
+          </label>
+        </div>
+        <div id="modal-guest-section" class="card" style="display:none; background: var(--bg-canvas); padding: 12px; margin-top: 10px;">
+          <h4 style="font-size:12px; color: var(--color-primary); margin-bottom: 8px;"><i class="fa-solid fa-user"></i> Misafir Bilgileri</h4>
+          <div style="font-size:11px; margin-bottom: 10px;">
+            <strong>Ad Soyad:</strong> <span id="modal-guest-name-disp">-</span>
+          </div>
+          <button class="btn btn-danger btn-xs btn-block" id="btn-modal-checkout">Checkout Yap</button>
+        </div>
+        <div id="modal-checkin-section" class="card" style="display:none; background: var(--bg-canvas); padding: 12px; margin-top: 10px;">
+          <h4 style="font-size:12px; color: var(--color-success); margin-bottom: 8px;"><i class="fa-solid fa-user-plus"></i> Giriş İşlemi</h4>
+          <button class="btn btn-success btn-xs btn-block" id="btn-modal-checkin">Giriş Yap (Dolu Yap)</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btn-cancel-room-modal">Kapat</button>
+        <button class="btn btn-primary btn-sm" id="btn-save-room-modal">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE TASK MODAL -->
+  <div class="modal-overlay" id="create-task-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-plus"></i> Yeni İşlem / Talep</h3>
+        <button class="btn-close-modal" id="btn-close-task-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>İşlem Türü</label>
+          <select id="modal-task-type">
+            <option value="housekeeping_request">Housekeeping Talebi</option>
+            <option value="maintenance_request">Teknik Servis Arıza Kaydı</option>
+            <option value="room_service">Oda Servisi Siparişi</option>
+            <option value="wakeup_call">Uyandırma Servisi / Not</option>
+            <option value="porter_request">Bagaj Taşıma (Porter)</option>
+            <option value="taxi_request">Taksi / Vale Talebi</option>
+            <option value="minibar_request">Minibar Talebi</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>İlgili Oda Seçimi</label>
+          <input type="hidden" id="modal-task-room" value="">
+          <div id="modal-task-room-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; max-height: 180px; overflow-y: auto; padding: 4px; border: 1px solid var(--border-glass); border-radius: 4px;"></div>
+        </div>
+        <div class="form-group">
+          <label>Talep Detayı / Notlar</label>
+          <textarea id="modal-task-details" rows="3" placeholder="Detayları giriniz..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btn-cancel-task-modal">İptal</button>
+        <button class="btn btn-primary btn-sm" id="btn-submit-task-modal">Talebi Oluştur</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/reception-entry.js" type="module"></script>
 </body>
 </html>

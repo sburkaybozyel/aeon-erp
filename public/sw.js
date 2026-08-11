@@ -1,15 +1,11 @@
-const CACHE_NAME = 'aeon-erp-static-20260729-v10';
+const CACHE_NAME = 'aeon-erp-static-20260719-v1';
 const ASSETS = [
   '/css/aeon-tokens.css',
   '/css/aeon-base.css',
   '/css/aeon-shell.css',
   '/css/aeon-components.css',
   '/css/aeon-responsive.css',
-  '/brands/aeon/logo.png',
-  '/brands/aeon/icon-180.png',
-  '/brands/aeon/icon-192.png',
-  '/brands/aeon/icon-512.png',
-  '/brands/aeon/favicon-32.png'
+  '/brands/aeon/logo.svg'
 ];
 
 self.addEventListener('install', (e) => {
@@ -36,12 +32,8 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   // Only intercept HTTP/HTTPS schemes, ignore chrome-extension or other protocols
   if (e.request.url.startsWith('http')) {
-    // Navigations (the standalone app's document itself) and the boot script must never
-    // be served from the HTTP cache — a stale login.html/boot.js is what silently
-    // reintroduces "already logged in but still asked for PIN" once fixed server-side.
-    const bypassCache = e.request.mode === 'navigate' || e.request.url.includes('/js/boot.js');
     e.respondWith(
-      fetch(bypassCache ? new Request(e.request, { cache: 'no-store' }) : e.request).catch(() => {
+      fetch(e.request).catch(() => {
         return caches.match(e.request);
       })
     );
@@ -56,14 +48,14 @@ self.addEventListener('push', (event) => {
     payload = { title: 'Yeni Bildirim', body: event.data ? event.data.text() : '' };
   }
 
-  const title = payload.title || 'Aeon ERP';
+  const title = payload.title || 'AEON ERP';
   const options = {
     body: payload.body || 'Yeni işlem var.',
-    icon: '/brands/aeon/icon-192.png',
-    badge: '/brands/aeon/icon-192.png',
+    icon: '/brands/aeon/logo.svg',
+    badge: '/brands/aeon/logo.svg',
     tag: payload.tag || 'aeon-erp',
     data: {
-      url: payload.url || '/login.html?tenant_id=aeon'
+      url: payload.url || '/staff.html?tenant_id=aeon'
     }
   };
 
@@ -72,7 +64,7 @@ self.addEventListener('push', (event) => {
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  const url = event.notification.data?.url || '/login.html?tenant_id=aeon';
+  const url = event.notification.data?.url || '/staff.html?tenant_id=aeon';
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clientList => {
       for (const client of clientList) {

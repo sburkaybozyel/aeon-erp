@@ -1,7 +1,7 @@
 {
   "tenant_id": "aeon",
-  "name": "Aeon Boutique Hotel",
-  "logo": "/brands/aeon/logo.png",
-  "primary_color": "#06b6d4",
-  "accent_color": "#eab308"
+  "name": "AEON ERP",
+  "logo": "/brands/aeon/logo.svg",
+  "primary_color": "#0891b2",
+  "accent_color": "#d4af37"
 }

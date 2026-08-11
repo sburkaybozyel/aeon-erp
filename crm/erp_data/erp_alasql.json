@@ -1,0 +1,75 @@
+{
+  "room_types": [
+    {
+      "id": "rt_std",
+      "name": "Standart Oda",
+      "base_rate": 90,
+      "capacity": 2,
+      "board_options": "BB,HB"
+    },
+    {
+      "id": "rt_dlx",
+      "name": "Deluxe Oda",
+      "base_rate": 150,
+      "capacity": 3,
+      "board_options": "BB,HB,FB,AI"
+    },
+    {
+      "id": "rt_suit",
+      "name": "Suit",
+      "base_rate": 240,
+      "capacity": 4,
+      "board_options": "BB,HB,FB,AI,UAI"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "res_msd4n7nb9u29hb",
+      "reservation_no": "AE-2026-37392",
+      "source_system": "crm",
+      "source_id": "opp_f129ee04msd4n7mf",
+      "idempotency_key": "crm-opp-opp_f129ee04msd4n7mf",
+      "guest_name": "Test Kontak",
+      "guest_email": "test@smoke.com",
+      "guest_phone": null,
+      "firm_name": "Smoke Travel",
+      "check_in": "2026-11-01",
+      "check_out": "2026-11-04",
+      "nights": 3,
+      "room_type": "rt_dlx",
+      "board_type": "HB",
+      "guests": 2,
+      "currency": "EUR",
+      "total_amount": 540,
+      "status": "inquiry",
+      "guarantee_deadline": null,
+      "notes": "CRM fırsatı: Faz3 Dönüşüm",
+      "created_at": "2026-08-03 14:09:37.272"
+    },
+    {
+      "id": "res_msd4n7q5o8aoux",
+      "reservation_no": "AE-2026-44416",
+      "source_system": "crm",
+      "source_id": "opp_4266f064msd4n7pj",
+      "idempotency_key": "crm-opp-opp_4266f064msd4n7pj",
+      "guest_name": "Takip Misafir",
+      "guest_email": "takip@test.com",
+      "guest_phone": null,
+      "firm_name": "Faz4 Acente",
+      "check_in": "2026-10-01",
+      "check_out": "2026-10-05",
+      "nights": 4,
+      "room_type": "rt_dlx",
+      "board_type": "HB",
+      "guests": 2,
+      "currency": "EUR",
+      "total_amount": 720,
+      "status": "checked_out",
+      "guarantee_deadline": null,
+      "notes": "CRM fırsatı: Faz4 Konaklama",
+      "created_at": "2026-08-03 14:09:37.373",
+      "updated_at": "2026-08-03 14:09:37.381"
+    }
+  ],
+  "stays": []
+}

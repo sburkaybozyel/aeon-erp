@@ -3,78 +3,231 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Mutfak Operasyon Merkezi | Aeon Boutique Hotel</title>
+  <title>Mutfak KDS | Personel Portalı</title>
+  
+  <!-- Design System CSS -->
   <link rel="stylesheet" href="/css/aeon-tokens.css">
   <link rel="stylesheet" href="/css/aeon-base.css">
   <link rel="stylesheet" href="/css/aeon-shell.css">
   <link rel="stylesheet" href="/css/aeon-components.css">
   <link rel="stylesheet" href="/css/aeon-responsive.css">
-  <link rel="stylesheet" href="/css/kitchen-kds.css">
-  <link rel="stylesheet" href="/css/kitchen-controls.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <script src="/js/boot.js"></script>
 </head>
-<body class="kitchen-kds">
-  <header class="kitchen-header">
-    <div class="kitchen-brand"><img src="/brands/aeon/logo.png" alt="Aeon Boutique Hotel"><div><strong>Aeon Boutique Hotel</strong><span>Mutfak KDS & Üretim Merkezi</span></div></div>
-    <div class="kitchen-header-actions"><span><i class="fa-solid fa-circle"></i> Canlı mutfak</span><button id="btn-staff-logout" type="button" class="btn-close-modal" title="Çıkış yap"><i class="fa-solid fa-power-off"></i></button></div>
+<body class="mobile-app-container">
+
+  <header class="mobile-header liquid-glass-panel">
+    <div class="mobile-title" id="kitchen-title">Mutfak / KDS Ekranı</div>
+    <button class="btn-close-modal" id="btn-staff-logout" onclick="window.aeonLogout(); return false;" style="color: var(--color-danger); background:none; border:none; font-size:18px; cursor:pointer;" title="Çıkış">
+      <i class="fa-solid fa-power-off"></i>
+    </button>
   </header>
-  <main class="kitchen-content">
-    <div class="kitchen-heading"><div><h1>Üretim ve Servis Kontrolü</h1><p>Restoran ve oda servisinden gelen aynı siparişleri gerçek zamanlı yönetin.</p></div><div class="kitchen-clock" id="kitchen-clock"></div></div>
-    <nav class="kitchen-desktop-nav" aria-label="Mutfak bölümleri"><button class="active" type="button" data-kitchen-view="kds"><i class="fa-solid fa-display"></i> Canlı KDS</button><button type="button" data-kitchen-view="tables"><i class="fa-solid fa-table-cells-large"></i> Masa & Oda Akışı</button><button type="button" data-kitchen-view="actions"><i class="fa-solid fa-boxes-stacked"></i> Stok, Güvenlik & Hazırlık</button><button type="button" data-kitchen-view="inventory"><i class="fa-solid fa-warehouse"></i> Envanter Yönetimi</button></nav>
-    <div class="kitchen-kpis" id="kitchen-kpis"></div>
-    <section id="kitchen-subview-kds" class="panel-section active">
-      <div class="kitchen-section-head"><h2><i class="fa-solid fa-display"></i> Canlı Sipariş Akışı</h2><span id="kitchen-order-summary">Yükleniyor</span></div>
-      <div class="kds-board" id="kds-board"></div>
-    </section>
-    <section id="kitchen-subview-tables" class="panel-section">
-      <div class="kitchen-section-head"><h2><i class="fa-solid fa-table-cells-large"></i> Masa ve Oda Üretim Takibi</h2><span>Aynı operasyon verisi</span></div>
-      <div class="kitchen-target-groups" id="kitchen-target-grid"></div>
-    </section>
-    <section id="kitchen-subview-actions" class="panel-section">
-      <div class="kitchen-operations">
-        <article class="kitchen-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-clipboard-check"></i> Hazırlık Görevleri</h2></div><form id="kitchen-task-form" class="kitchen-inline-form"><input id="kitchen-task-detail" required maxlength="240" placeholder="Hazırlık görevi yazın"><select id="kitchen-task-priority"><option value="normal">Normal</option><option value="high">Yüksek</option><option value="urgent">Acil</option></select><button class="btn btn-primary" type="submit">Ekle</button></form><div class="kitchen-list" id="kitchen-task-list"></div></article>
-        <article class="kitchen-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-boxes-stacked"></i> Kritik Stok</h2><span id="kitchen-stock-summary"></span></div><div class="kitchen-list" id="kitchen-stock-list"></div></article>
-        <article class="kitchen-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-truck-ramp-box"></i> Satın Alma Talebi</h2></div><form id="kitchen-purchase-form" class="kitchen-inline-form"><input id="kitchen-purchase-item" required maxlength="120" placeholder="Malzeme adı"><input id="kitchen-purchase-quantity" required min="0.01" step="0.01" type="number" placeholder="Miktar"><button class="btn btn-primary" type="submit">Talep Aç</button></form><div class="kitchen-list" id="kitchen-purchase-list"></div></article>
-        <article class="kitchen-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-triangle-exclamation"></i> Zayiat / Fire</h2></div><form id="kitchen-waste-form" class="kitchen-inline-form"><select id="kitchen-waste-item" required></select><input id="kitchen-waste-quantity" required min="0.01" step="0.01" type="number" placeholder="Miktar"><select id="kitchen-waste-reason" required><option value="Bozulma">Bozulma</option><option value="Fazla üretim">Fazla üretim</option><option value="Misafir iadesi">Misafir iadesi</option><option value="Personel hatası">Personel hatası</option><option value="Kırılma">Kırılma</option></select><input id="kitchen-waste-notes" maxlength="240" placeholder="Not / açıklama"><button class="btn btn-danger" type="submit">Stoğa İşle</button></form><div class="kitchen-form-note">Bu işlem aynı merkezi envanterden düşer ve yönetim paneline anında yansır.</div></article>
-        <article class="kitchen-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-temperature-half"></i> Gıda Güvenliği Sıcaklık Kaydı</h2></div><form id="kitchen-temperature-form" class="kitchen-inline-form"><select id="kitchen-temperature-area"><option value="Soğuk depo">Soğuk depo</option><option value="Derin dondurucu">Derin dondurucu</option><option value="Sıcak bekletme">Sıcak bekletme</option><option value="Teslim alma">Teslim alma</option></select><input id="kitchen-temperature-value" required step="0.1" type="number" placeholder="°C"><input id="kitchen-temperature-action" maxlength="240" placeholder="Düzeltici aksiyon"><button class="btn btn-primary" type="submit">Kaydet</button></form><div class="kitchen-list" id="kitchen-temperature-list"></div></article>
-        <article class="kitchen-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-ban"></i> Menü 86 / Ürün Kontrolü</h2><span>Mutfağın anlık kontrolü</span></div><div class="kitchen-list" id="kitchen-menu-control-list"></div></article>
-        <article class="kitchen-panel kitchen-recipe-panel"><div class="kitchen-section-head"><h2><i class="fa-solid fa-book-open"></i> Reçete ve Ürün Kartları</h2></div><div class="kitchen-list" id="kitchen-recipe-list"></div></article>
+
+  <main class="mobile-content">
+    
+    <!-- Tab 1: KDS (Siparişler) Queue -->
+    <div id="kitchen-subview-kds" class="panel-section active" style="padding-bottom: 80px;">
+      <!-- Tab selectors: Tables vs Rooms orders -->
+      <div class="rack-filter-bar" style="margin-bottom: 16px;">
+        <button class="active" id="btn-tab-order-tables">Masalar</button>
+        <button id="btn-tab-order-rooms">Odalar (Oda Servisi)</button>
       </div>
-    </section>
-    <section id="kitchen-subview-inventory" class="panel-section">
-      <div class="kitchen-section-head"><h2><i class="fa-solid fa-warehouse"></i> Envanter Yönetimi</h2><span id="kitchen-inv-summary"></span><button id="btn-kitchen-stock-fill" class="btn btn-primary btn-sm" type="button">Tümünü 1000'e Tamamla</button></div>
-      <div class="kitchen-inv-toolbar">
-        <input type="search" id="kitchen-inv-search" placeholder="Malzeme ara..." class="kitchen-inv-search">
-        <select id="kitchen-inv-filter">
-          <option value="all">Tümü</option>
-          <option value="critical">Kritik Stok</option>
-          <option value="zero">Sıfır Stok</option>
-          <option value="dining">Mutfak</option>
-          <option value="bar">Bar</option>
-        </select>
+
+      <!-- KDS Queue Streams -->
+      <div id="section-order-tables">
+        <h4 style="font-size: 13px; text-transform: uppercase; color: var(--color-primary); font-weight: 800; margin-bottom: 12px;">Masa Sipariş Akışı</h4>
+        <div class="d-flex flex-column" style="gap: 12px;" id="kds-tables-orders-list"></div>
       </div>
-      <div class="kitchen-inv-table-wrap">
-        <table class="kitchen-inv-table">
-          <thead>
-            <tr>
-              <th>Malzeme</th>
-              <th>Mevcut Stok</th>
-              <th>Birim</th>
-              <th>Min. Stok</th>
-              <th>Ambalaj</th>
-              <th>Stok Ekle</th>
-              <th>İşlem</th>
-            </tr>
-          </thead>
-          <tbody id="kitchen-inv-tbody"></tbody>
-        </table>
+
+      <div id="section-order-rooms" style="display: none;">
+        <h4 style="font-size: 13px; text-transform: uppercase; color: var(--color-primary); font-weight: 800; margin-bottom: 12px;">Oda Servisi Sipariş Akışı</h4>
+        <div class="d-flex flex-column" style="gap: 12px;" id="kds-rooms-orders-list"></div>
       </div>
-      <div class="kitchen-inv-affected" id="kitchen-inv-affected"></div>
-    </section>
+    </div>
+
+    <!-- Tab 2: Masalar -->
+    <div id="kitchen-subview-tables" class="panel-section" style="padding-bottom: 80px;">
+      <h4 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; color: var(--color-primary);">Restoran Masaları</h4>
+      <div class="room-rack-grid" id="kds-tables-grid"></div>
+    </div>
+
+    <!-- Tab 3: İşlemler -->
+    <div id="kitchen-subview-actions" class="panel-section" style="padding-bottom: 80px;">
+      <button class="btn btn-primary btn-block" style="margin-bottom: 16px; font-weight: bold;" id="btn-market-receipt-trigger">
+        <i class="fa-solid fa-file-invoice"></i> Yeni Fatura / Fiş Girişi
+      </button>
+
+      <h4 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; color: var(--color-primary);">Mutfak İşlemleri</h4>
+      <div class="d-flex flex-column" style="gap: 12px;">
+        <button class="btn btn-secondary btn-block" style="text-align: left; padding: 16px; font-weight: bold; border-radius: 12px;" id="btn-kit-prep">
+          <i class="fa-solid fa-clipboard-list" style="width: 24px; color: var(--color-primary)"></i> Hazırlık & Görevler
+        </button>
+        <button class="btn btn-secondary btn-block" style="text-align: left; padding: 16px; font-weight: bold; border-radius: 12px;" id="btn-kit-pr">
+          <i class="fa-solid fa-truck" style="width: 24px; color: var(--color-accent)"></i> Satın Alma Talepleri
+        </button>
+        <button class="btn btn-secondary btn-block" style="text-align: left; padding: 16px; font-weight: bold; border-radius: 12px;" id="btn-kit-wastage">
+          <i class="fa-solid fa-trash" style="width: 24px; color: var(--color-danger)"></i> Zayiat & Fire Kaydı
+        </button>
+        <button class="btn btn-secondary btn-block" style="text-align: left; padding: 16px; font-weight: bold; border-radius: 12px;" id="btn-kit-recipes">
+          <i class="fa-solid fa-receipt" style="width: 24px; color: var(--color-teal)"></i> Reçete Görüntüleyici
+        </button>
+      </div>
+    </div>
+
   </main>
-  <nav class="mobile-bottom-nav"><a href="#" class="nav-item active" id="nav-kitchen-tab-kds"><i class="fa-solid fa-display"></i><span>KDS</span></a><a href="#" class="nav-item" id="nav-kitchen-tab-tables"><i class="fa-solid fa-table-cells"></i><span>Akış</span></a><a href="#" class="nav-item" id="nav-kitchen-tab-actions"><i class="fa-solid fa-boxes-stacked"></i><span>Operasyon</span></a><a href="#" class="nav-item" id="nav-kitchen-tab-inventory"><i class="fa-solid fa-warehouse"></i><span>Envanter</span></a></nav>
-  <div id="kitchen-toast" aria-live="polite"></div>
+
+  <!-- Bottom Navigation -->
+  <nav class="mobile-bottom-nav">
+    <a href="#" class="nav-item active" id="nav-kitchen-tab-kds">
+      <i class="fa-solid fa-tv"></i>
+      <span>KDS</span>
+    </a>
+    <a href="#" class="nav-item" id="nav-kitchen-tab-tables">
+      <i class="fa-solid fa-chair"></i>
+      <span>Masalar</span>
+    </a>
+    <a href="#" class="nav-item" id="nav-kitchen-tab-actions">
+      <i class="fa-solid fa-briefcase"></i>
+      <span>İşlemler</span>
+    </a>
+  </nav>
+
+  <!-- MARKET RECEIPT MODAL -->
+  <div class="modal-overlay" id="market-receipt-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Fatura / Fiş Girişi</h3>
+        <button class="btn-close-modal" id="btn-close-mr-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" style="position: relative;">
+        <!-- Loading Overlay for OCR -->
+        <div id="receipt-loading-overlay" style="display: none; position: absolute; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.8); z-index:100; align-items:center; justify-content:center; flex-direction:column;">
+          <div class="spinner-border" style="width: 30px; height: 30px; border: 3px solid rgba(2, 132, 199, 0.1); border-top-color: var(--color-primary); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 8px;"></div>
+          <div style="font-size:11px; font-weight:bold; color:var(--color-primary)">Belge Okunuyor (AI)...</div>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+          <button class="btn btn-secondary btn-block" style="position: relative; overflow: hidden;" type="button">
+            <i class="fa-solid fa-camera"></i> Fotoğraf Çek / Belge Seç
+            <input type="file" id="ai-receipt-upload" accept="image/*" style="position: absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;">
+          </button>
+        </div>
+        <div class="form-group">
+          <label>Belge Numarası</label>
+          <input type="text" id="mr-number" placeholder="İsteğe bağlı fatura/fiş no">
+        </div>
+        <div class="form-group">
+          <label>Tedarikçi / Market</label>
+          <input type="text" id="mr-vendor" placeholder="Market veya toptancı adı">
+        </div>
+        <div class="form-group">
+          <label>Toplam Tutar (TL)</label>
+          <input type="number" id="mr-total" placeholder="0.00" step="0.01">
+        </div>
+
+        <h4 style="font-size: 12px; margin: 12px 0 6px 0; color: var(--color-primary); font-weight: bold;">Fatura Kalemleri</h4>
+        <div id="mr-items-list" class="d-flex flex-column" style="gap: 6px; margin-bottom: 12px;"></div>
+
+        <div class="card" style="padding: 10px; background: var(--bg-canvas);">
+          <div class="form-group">
+            <label>Stok Kalemi</label>
+            <select id="mr-item-select"></select>
+          </div>
+          <div class="d-flex" style="gap: 8px;">
+            <div class="form-group" style="flex:1;">
+              <label>Miktar</label>
+              <input type="number" id="mr-item-qty" placeholder="Miktar">
+            </div>
+            <div class="form-group" style="flex:1;">
+              <label>Birim Fiyat</label>
+              <input type="number" id="mr-item-price" placeholder="Birim Fiyat" step="0.01">
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-xs btn-block" id="btn-add-mr-item" type="button"><i class="fa-solid fa-plus"></i> Kalemi Ekle</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btn-cancel-mr-modal">Kapat</button>
+        <button class="btn btn-primary btn-sm" id="btn-save-mr-modal">Kaydet & Stoğa İşle</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREP TASKS MODAL -->
+  <div class="modal-overlay" id="staff-prep-tasks-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Günlük Hazırlık Listesi</h3>
+        <button class="btn-close-modal" id="btn-close-prep-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div id="staff-prep-tasks-list" class="d-flex flex-column" style="gap: 8px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PURCHASE REQUESTS MODAL -->
+  <div class="modal-overlay" id="staff-purchase-requests-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Satın Alma Talepleri</h3>
+        <button class="btn-close-modal" id="btn-close-pr-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <form id="staff-form-purchase-request" style="padding: 10px; background: var(--bg-canvas); border-radius: 8px; margin-bottom: 16px;">
+          <div class="form-group">
+            <label>Malzeme Adı</label>
+            <input type="text" id="staff-pr-item" placeholder="Örn: Zeytinyağı, Un, Domates..." required>
+          </div>
+          <div class="form-group">
+            <label>Miktar</label>
+            <input type="number" id="staff-pr-qty" placeholder="Adet / kg / lt" required step="0.1">
+          </div>
+          <button class="btn btn-primary btn-xs btn-block" type="submit">Talep Oluştur</button>
+        </form>
+        <h4 style="font-size: 12px; margin-bottom: 8px; font-weight: bold;">Önceki Satın Alma Talepleri</h4>
+        <div id="staff-purchase-requests-list" class="d-flex flex-column" style="gap: 8px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WASTAGE / FIRE MODAL -->
+  <div class="modal-overlay" id="staff-wastage-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Zayiat & Fire Bildir</h3>
+        <button class="btn-close-modal" id="btn-close-wastage-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <form id="staff-form-wastage">
+          <div class="form-group">
+            <label>Hammadde</label>
+            <select id="staff-wastage-item" required></select>
+          </div>
+          <div class="form-group">
+            <label>Zayiat Miktarı</label>
+            <input type="number" id="staff-wastage-qty" step="0.1" placeholder="Miktar" required>
+          </div>
+          <button class="btn btn-danger btn-block" type="submit">Stoktan Düş & Kaydet</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECIPES MODAL -->
+  <div class="modal-overlay" id="staff-recipe-manager-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Ürün Reçete Kartları</h3>
+        <button class="btn-close-modal" id="btn-close-recipe-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div id="staff-recipes-list" class="d-flex flex-column" style="gap: 8px;"></div>
+      </div>
+    </div>
+  </div>
+
   <script src="/js/kitchen-entry.js" type="module"></script>
 </body>
 </html>

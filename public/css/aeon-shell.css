@@ -248,17 +248,11 @@ body.mobile-app-container {
   height: 70px;
   background: var(--bg-surface);
   border-top: 1px solid var(--border-glass);
-  display: none;
+  display: flex;
   justify-content: space-around;
   align-items: center;
   z-index: 1000;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03);
-}
-
-@media (max-width: 900px) {
-  .mobile-bottom-nav {
-    display: flex;
-  }
 }
 
 .mobile-bottom-nav .nav-item {

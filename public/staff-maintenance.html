@@ -2,35 +2,183 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teknik Operasyon | Aeon Boutique Hotel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Teknik Servis | Personel Portalı</title>
+  
+  <!-- Design System CSS -->
   <link rel="stylesheet" href="/css/aeon-tokens.css">
   <link rel="stylesheet" href="/css/aeon-base.css">
+  <link rel="stylesheet" href="/css/aeon-shell.css">
   <link rel="stylesheet" href="/css/aeon-components.css">
-  <link rel="stylesheet" href="/css/maintenance-operations.css">
+  <link rel="stylesheet" href="/css/aeon-responsive.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <script src="/js/boot.js"></script>
 </head>
-<body class="maintenance-body">
-  <header class="maintenance-header">
-    <div class="maintenance-brand"><img src="/brands/aeon/logo.png" alt="Aeon"><div><strong>Aeon Boutique Hotel</strong><span>Teknik Operasyon Merkezi</span></div></div>
-    <div class="maintenance-header-actions"><span class="live-pill"><i class="fa-solid fa-circle"></i> Canlı operasyon</span><button class="icon-button" id="btn-staff-logout" aria-label="Çıkış"><i class="fa-solid fa-power-off"></i></button></div>
+<body class="mobile-app-container">
+
+  <header class="mobile-header liquid-glass-panel">
+    <div class="mobile-title" id="maintenance-title">Teknik Servis / Bakım</div>
+    <button class="btn-close-modal" id="btn-staff-logout" onclick="window.aeonLogout(); return false;" style="color: var(--color-danger); background:none; border:none; font-size:18px; cursor:pointer;" title="Çıkış">
+      <i class="fa-solid fa-power-off"></i>
+    </button>
   </header>
-  <main class="maintenance-shell">
-    <section class="maintenance-hero"><div><p class="eyebrow">TEKNİK SERVİS</p><h1>İş emri ve varlık yönetimi</h1><p>Odalar, teknik varlıklar, malzemeler ve planlı bakımlar aynı operasyon kaydında yönetilir.</p></div><div class="hero-actions"><button class="primary-button" id="btn-new-work-order"><i class="fa-solid fa-plus"></i> Yeni iş emri</button><button class="secondary-button" id="btn-new-asset"><i class="fa-solid fa-cubes"></i> Varlık tanımla</button></div></section>
-    <section class="kpi-grid"><article><span>Açık iş emri</span><strong id="kpi-open">0</strong></article><article><span>Kritik</span><strong id="kpi-critical">0</strong></article><article><span>Parça bekleyen</span><strong id="kpi-waiting">0</strong></article><article><span>Bakımda oda</span><strong id="kpi-rooms">0</strong></article></section>
-    <nav class="maintenance-nav"><button class="active" data-view="orders"><i class="fa-solid fa-screwdriver-wrench"></i> İş emirleri</button><button data-view="rooms"><i class="fa-solid fa-bed"></i> Oda ekipmanları</button><button data-view="plans"><i class="fa-solid fa-calendar-check"></i> Planlı bakım</button><button data-view="inventory"><i class="fa-solid fa-boxes-stacked"></i> Teknik depo</button></nav>
-    <section class="maintenance-view active" id="view-orders"><div class="view-heading"><div><h2>Canlı iş emri akışı</h2><p>Her arıza resepsiyon ve yönetim tarafından izlenebilen merkezi kayda bağlıdır.</p></div></div><div class="work-order-board"><div class="board-column"><div class="column-title">Bildirildi <span id="count-reported">0</span></div><div id="orders-reported" class="order-list"></div></div><div class="board-column"><div class="column-title">İşlemde <span id="count-progress">0</span></div><div id="orders-progress" class="order-list"></div></div><div class="board-column"><div class="column-title">Parça bekliyor <span id="count-waiting">0</span></div><div id="orders-waiting" class="order-list"></div></div><div class="board-column"><div class="column-title">Çözüldü <span id="count-resolved">0</span></div><div id="orders-resolved" class="order-list"></div></div></div></section>
-    <section class="maintenance-view" id="view-rooms"><div class="view-heading"><div><h2>Oda ekipmanları</h2><p>Bu ekran PMS içindeki aynı oda kayıtlarını kullanır; misafir verisi gösterilmez.</p></div><button class="secondary-button" id="btn-room-work-order"><i class="fa-solid fa-plus"></i> Oda arızası aç</button></div><div id="room-grid" class="room-grid"></div></section>
-    <section class="maintenance-view" id="view-plans"><div class="view-heading"><div><h2>Planlı bakım ve varlıklar</h2><p>Planlar ve teknik varlıklar işletmenin kendi kayıtlarından oluşturulur.</p></div><button class="primary-button" id="btn-new-plan"><i class="fa-solid fa-plus"></i> Bakım planı oluştur</button></div><div class="split-grid"><div class="data-panel"><h3>Yaklaşan bakım planları</h3><div id="plans-list" class="stack-list"></div></div><div class="data-panel"><h3>Teknik varlıklar</h3><div id="assets-list" class="stack-list"></div></div></div></section>
-    <section class="maintenance-view" id="view-inventory"><div class="view-heading"><div><h2>Teknik depo ve satın alma</h2><p>Malzeme kullanımında stok aynı merkezi envanterden düşer.</p></div><button class="primary-button" id="btn-new-purchase"><i class="fa-solid fa-cart-plus"></i> Satın alma talebi</button></div><div class="split-grid"><div class="data-panel"><h3>Teknik malzemeler</h3><div id="inventory-list" class="stack-list"></div></div><div class="data-panel"><h3>Açık satın alma talepleri</h3><div id="purchases-list" class="stack-list"></div></div></div></section>
+
+  <main class="mobile-content">
+    
+    <!-- Tab 1: Arızalar (Görevler) -->
+    <div id="tech-subview-tasks" class="panel-section active" style="padding-bottom: 80px;">
+      <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 12px;">
+        <h4 style="font-size: 13px; text-transform: uppercase; color: var(--color-primary); font-weight: 800; margin: 0;">Teknik İş Talepleri</h4>
+        <button class="btn btn-primary btn-sm" id="btn-create-tech-task"><i class="fa-solid fa-plus"></i> Arıza Bildir</button>
+      </div>
+      <div class="d-flex flex-column" style="gap: 12px;" id="staff-tech-tasks-list"></div>
+    </div>
+
+    <!-- Tab 2: Odalar (AC & Tadilat durumları) -->
+    <div id="tech-subview-rooms" class="panel-section" style="padding-bottom: 80px;">
+      <h4 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; color: var(--color-primary);">Oda Donanım & Klima Takibi</h4>
+      <div class="room-rack-grid" id="staff-tech-rooms-grid"></div>
+    </div>
+
+    <!-- Tab 3: Rutin Rutinler -->
+    <div id="tech-subview-routine" class="panel-section" style="padding-bottom: 80px;">
+      <h4 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; color: var(--color-primary);">Periyodik Rutin Kontroller</h4>
+      <div class="d-flex flex-column" style="gap: 12px;" id="staff-tech-routine-list"></div>
+    </div>
+
+    <!-- Tab 4: Depo & Talepler -->
+    <div id="tech-subview-inventory" class="panel-section" style="padding-bottom: 80px;">
+      <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 12px;">
+        <h4 style="font-size: 13px; text-transform: uppercase; color: var(--color-primary); font-weight: 800; margin: 0;">Teknik Malzeme Deposu</h4>
+        <button class="btn btn-primary btn-sm" id="btn-trigger-tech-pr"><i class="fa-solid fa-plus"></i> Malzeme İste</button>
+      </div>
+      <div class="card" style="padding: 12px; margin-bottom: 16px;">
+        <div class="table-responsive">
+          <table class="table small">
+            <thead>
+              <tr><th>Malzeme</th><th>Stok</th><th>Birim</th></tr>
+            </thead>
+            <tbody id="staff-tech-inventory-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <h4 style="font-size: 13px; text-transform: uppercase; color: var(--color-primary); font-weight: 800; margin-bottom: 8px;">Malzeme Taleplerim</h4>
+      <div id="tech-purchase-requests-list" class="d-flex flex-column" style="gap: 8px;"></div>
+    </div>
+
   </main>
-  <dialog id="work-order-dialog" class="maintenance-dialog"><form id="work-order-form" method="dialog"><div class="dialog-head"><h2>Yeni teknik iş emri</h2><button type="button" class="icon-button" data-close="work-order-dialog"><i class="fa-solid fa-xmark"></i></button></div><label>Hedef<select id="work-order-target"><option value="">Seçiniz</option></select></label><label>Kategori<select id="work-order-category"><option value="hvac">HVAC / Klima</option><option value="electrical">Elektrik</option><option value="plumbing">Sıhhi tesisat</option><option value="room_equipment">Oda ekipmanı</option><option value="safety">Yangın / güvenlik</option><option value="pool_public">Havuz / genel alan</option><option value="general">Genel teknik</option></select></label><label>Öncelik<select id="work-order-priority"><option value="normal">Normal</option><option value="high">Yüksek</option><option value="critical">Kritik</option></select></label><label>Planlanan bitiş<input id="work-order-due" type="datetime-local"></label><label>Arıza açıklaması<textarea id="work-order-summary" required maxlength="1000"></textarea></label><label class="check-row"><input id="work-order-room-out" type="checkbox"> Odayı bakımda olarak işaretle</label><button class="primary-button" type="submit">İş emrini aç</button></form></dialog>
-  <dialog id="asset-dialog" class="maintenance-dialog"><form id="asset-form" method="dialog"><div class="dialog-head"><h2>Teknik varlık tanımı</h2><button type="button" class="icon-button" data-close="asset-dialog"><i class="fa-solid fa-xmark"></i></button></div><label>Varlık adı<input id="asset-name" required></label><label>Kategori<input id="asset-category" required placeholder="Jeneratör, klima, havuz ekipmanı"></label><label>Konum<input id="asset-location" required></label><label>Etiket / seri no<input id="asset-tag"></label><label>Kritiklik<select id="asset-criticality"><option value="normal">Normal</option><option value="high">Yüksek</option><option value="critical">Kritik</option></select></label><label>Not<textarea id="asset-notes"></textarea></label><button class="primary-button" type="submit">Varlığı kaydet</button></form></dialog>
-  <dialog id="plan-dialog" class="maintenance-dialog"><form id="plan-form" method="dialog"><div class="dialog-head"><h2>Planlı bakım oluştur</h2><button type="button" class="icon-button" data-close="plan-dialog"><i class="fa-solid fa-xmark"></i></button></div><label>Teknik varlık<select id="plan-asset" required></select></label><label>Bakım başlığı<input id="plan-title" required></label><label>Periyot (gün)<input id="plan-frequency" type="number" min="1" required></label><label>İlk planlanan tarih<input id="plan-due" type="date" required></label><button class="primary-button" type="submit">Planı kaydet</button></form></dialog>
-  <dialog id="purchase-dialog" class="maintenance-dialog"><form id="purchase-form" method="dialog"><div class="dialog-head"><h2>Teknik satın alma talebi</h2><button type="button" class="icon-button" data-close="purchase-dialog"><i class="fa-solid fa-xmark"></i></button></div><label>Malzeme adı<input id="purchase-name" required></label><label>Miktar<input id="purchase-quantity" type="number" min="0.01" step="0.01" required></label><label>Öncelik<select id="purchase-priority"><option value="normal">Normal</option><option value="high">Yüksek</option><option value="critical">Kritik</option></select></label><label>Gerekçe / not<textarea id="purchase-notes"></textarea></label><button class="primary-button" type="submit">Talebi gönder</button></form></dialog>
-  <dialog id="update-dialog" class="maintenance-dialog"><form id="update-form" method="dialog"><div class="dialog-head"><h2>İş emrini güncelle</h2><button type="button" class="icon-button" data-close="update-dialog"><i class="fa-solid fa-xmark"></i></button></div><input id="update-id" type="hidden"><label>Durum<select id="update-status"><option value="in_progress">İşlemde</option><option value="waiting_part">Parça bekliyor</option><option value="resolved">Çözüldü</option></select></label><label>Çözüm / işlem notu<textarea id="update-resolution"></textarea></label><label>İşçilik (dakika)<input id="update-minutes" type="number" min="0" max="1440"></label><label>Malzeme kullanımı<select id="update-part"><option value="">Malzeme kullanılmadı</option></select></label><label>Miktar<input id="update-part-quantity" type="number" min="0.01" step="0.01"></label><label class="check-row"><input id="update-release-room" type="checkbox"> Bakımdaki odayı kirli-boş duruma al</label><button class="primary-button" type="submit">Güncellemeyi kaydet</button></form></dialog>
-  <div id="toast" class="toast"></div>
+
+  <!-- Bottom Navigation -->
+  <nav class="mobile-bottom-nav">
+    <a href="#" class="nav-item active" id="nav-tech-tab-tasks">
+      <i class="fa-solid fa-screwdriver-wrench"></i>
+      <span>Arızalar</span>
+    </a>
+    <a href="#" class="nav-item" id="nav-tech-tab-rooms">
+      <i class="fa-solid fa-bed"></i>
+      <span>Odalar</span>
+    </a>
+    <a href="#" class="nav-item" id="nav-tech-tab-routine">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+      <span>Rutinler</span>
+    </a>
+    <a href="#" class="nav-item" id="nav-tech-tab-inventory">
+      <i class="fa-solid fa-boxes-stacked"></i>
+      <span>Depo</span>
+    </a>
+  </nav>
+
+  <!-- ROOM DETAIL MODAL -->
+  <div class="modal-overlay" id="room-detail-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-room-title">Oda Bakımı</h3>
+        <button class="btn-close-modal" id="btn-close-room-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Oda Durumu</label>
+          <select id="modal-room-status">
+            <option value="clean_vacant">Temiz (Boş)</option>
+            <option value="dirty_vacant">Kirli (Boş)</option>
+            <option value="occupied">Dolu</option>
+            <option value="maintenance">Bakımda / Tadilat</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Klima Durumu</label>
+          <select id="modal-room-ac">
+            <option value="working">🟢 Klima Çalışıyor</option>
+            <option value="broken">🔴 Klima Arızalı</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Arıza Notu / Tamirat Detayı</label>
+          <input type="text" id="modal-room-notes" placeholder="Tadilat veya arıza açıklaması...">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btn-cancel-room-modal">Kapat</button>
+        <button class="btn btn-primary btn-sm" id="btn-save-room-modal">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECH PURCHASE REQUEST MODAL -->
+  <div class="modal-overlay" id="tech-pr-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Yeni Malzeme Talebi</h3>
+        <button class="btn-close-modal" id="btn-close-pr-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <form id="tech-form-pr">
+          <div class="form-group">
+            <label>Malzeme Seç</label>
+            <select id="tech-pr-item" required></select>
+          </div>
+          <div class="form-group">
+            <label>Miktar</label>
+            <input type="number" id="tech-pr-qty" placeholder="Adet / Paket" required>
+          </div>
+          <div class="form-group">
+            <label>Açıklama / Not</label>
+            <input type="text" id="tech-pr-notes" placeholder="Hangi arıza için?">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Talep Gönder</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE TASK MODAL (To report fault from inside the portal) -->
+  <div class="modal-overlay" id="create-task-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Yeni Arıza Bildir</h3>
+        <button class="btn-close-modal" id="btn-close-task-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="modal-task-type" value="maintenance_request">
+        <div class="form-group">
+          <label>Oda / Konum Seçimi</label>
+          <input type="hidden" id="modal-task-room" value="">
+          <div id="modal-task-room-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; max-height: 180px; overflow-y: auto; padding: 4px; border: 1px solid var(--border-glass); border-radius: 4px;"></div>
+        </div>
+        <div class="form-group">
+          <label>Arıza Detayı</label>
+          <textarea id="modal-task-details" rows="3" placeholder="Arıza detayını buraya yazın..." required></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btn-cancel-task-modal">İptal</button>
+        <button class="btn btn-primary btn-sm" id="btn-submit-task-modal">Talebi Kaydet</button>
+      </div>
+    </div>
+  </div>
+
   <script src="/js/maintenance-entry.js" type="module"></script>
 </body>
 </html>

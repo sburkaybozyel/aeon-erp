@@ -1,22 +1,194 @@
 <!DOCTYPE html>
-<html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Kat Hizmetleri | Aeon Boutique Hotel</title><link rel="stylesheet" href="/css/aeon-tokens.css"><link rel="stylesheet" href="/css/aeon-base.css"><link rel="stylesheet" href="/css/housekeeping-operations.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="/js/boot.js"></script></head>
-<body class="hk-body"><header class="hk-header"><div class="hk-brand"><img src="/brands/aeon/logo.png" alt="Aeon"><div><strong>Aeon Boutique Hotel</strong><span>Kat Hizmetleri Operasyon Merkezi</span></div></div><div class="hk-actions"><span class="live-pill"><i class="fa-solid fa-circle"></i> Canlı operasyon</span><button id="logout" class="icon-button" aria-label="Çıkış"><i class="fa-solid fa-power-off"></i></button></div></header>
-<main class="hk-shell"><section class="hk-hero"><div><p class="eyebrow">KAT HİZMETLERİ</p><h1>Oda dönüşü ve kalite kontrolü</h1><p>Resepsiyon, teknik servis ve misafir talepleriyle aynı oda kayıtları üzerinden çalışır.</p></div><div class="hero-actions"><button class="primary-button" id="new-task"><i class="fa-solid fa-plus"></i> Görev oluştur</button><button class="secondary-button" id="new-laundry"><i class="fa-solid fa-shirt"></i> Çamaşır kaydı</button></div></section>
-<section class="kpi-grid"><article><span>Kirli / dönüş bekleyen</span><strong id="metric-dirty">0</strong></article><article><span>Temizlikte</span><strong id="metric-cleaning">0</strong></article><article><span>Açık görev</span><strong id="metric-tasks">0</strong></article><article><span>DND odalar</span><strong id="metric-dnd">0</strong></article></section>
-<nav class="hk-nav"><button class="active" data-view="rooms"><i class="fa-solid fa-bed"></i> Oda dönüşü</button><button data-view="tasks"><i class="fa-solid fa-clipboard-list"></i> Görevler</button><button data-view="areas"><i class="fa-solid fa-building"></i> Ortak alan</button><button data-view="linen"><i class="fa-solid fa-boxes-stacked"></i> Linen & çamaşır</button><button data-view="lost"><i class="fa-solid fa-box-archive"></i> Kayıp eşya</button></nav>
-<section class="hk-view active" id="view-rooms"><div class="view-head"><div><h2>Oda dönüş panosu</h2><p>Durum geçişi: kirli boş → temizlikte → kalite onayı → temiz boş.</p></div><div class="filter-group"><button class="filter active" data-filter="all">Tümü</button><button class="filter" data-filter="dirty">Kirli</button><button class="filter" data-filter="cleaning">Temizlikte</button><button class="filter" data-filter="dnd">DND</button></div></div><div id="room-grid" class="room-grid"></div></section>
-<section class="hk-view" id="view-tasks"><div class="view-head"><div><h2>Kat hizmetleri görevleri</h2><p>Ön büro aktarımları ve kat hizmetleri görevleri tek iş akışında.</p></div><button class="primary-button" id="new-task-top"><i class="fa-solid fa-plus"></i> Görev oluştur</button></div><div id="task-list" class="task-list"></div></section>
-<section class="hk-view" id="view-areas"><div class="view-head"><div><h2>Ortak alan kontrolü</h2><p>Tanımlı alanların son temizlik bilgisi gerçek zamanlı kaydedilir.</p></div><button class="primary-button" id="new-area"><i class="fa-solid fa-plus"></i> Alan Ekle</button></div><div id="area-grid" class="area-grid"></div></section>
-<section class="hk-view" id="view-linen"><div class="view-head"><div><h2>Çarşaf, çamaşır ve sayım</h2><p>Çamaşır teslimatları, stok ve çarşaf sayımları denetim kaydı ile tutulur.</p></div><button class="primary-button" id="new-laundry-top"><i class="fa-solid fa-plus"></i> Çamaşır kaydı</button></div><div class="split-grid"><div class="data-panel"><div class="view-head" style="margin:0 0 8px 0;"><h3 style="margin:0;">Kat hizmetleri stoğu (havlu, tuvalet kağıdı, amenity vb.)</h3><button class="small-button" id="new-stock-item"><i class="fa-solid fa-plus"></i> Malzeme Ekle</button></div><div id="linen-list" class="stack-list"></div></div><div class="data-panel"><h3>Açık çamaşır işlemleri</h3><div id="laundry-list" class="stack-list"></div></div></div></section>
-<section class="hk-view" id="view-lost"><div class="view-head"><div><h2>Kayıp eşya zinciri</h2><p>Bulunan eşya, konumu ve teslim işlemi kalıcı olarak kayıt altındadır.</p></div><button class="primary-button" id="new-lost"><i class="fa-solid fa-plus"></i> Buluntu kaydı</button></div><div id="lost-list" class="stack-list lost-list"></div></section>
-</main>
-<dialog class="hk-dialog" id="task-dialog"><form id="task-form" method="dialog"><div class="dialog-head"><h2>Kat hizmetleri görevi</h2><button type="button" class="icon-button" data-close="task-dialog"><i class="fa-solid fa-xmark"></i></button></div><label>Görev türü<select id="task-type"><option value="room_turn">Oda dönüşü</option><option value="cleaning_request">Temizlik talebi</option><option value="linen">Çarşaf / havlu</option><option value="amenity">Oda ikramı</option><option value="minibar">Minibar kontrolü</option><option value="public_area">Ortak alan</option></select></label><label>Oda<select id="task-room"><option value="">Oda bağlı değil</option></select></label><label>Öncelik<select id="task-priority"><option value="normal">Normal</option><option value="high">Yüksek</option><option value="urgent">Acil</option><option value="low">Düşük</option></select></label><label>Bitiş hedefi<input id="task-due" type="datetime-local"></label><label>Açıklama<textarea id="task-details" required></textarea></label><button class="primary-button" type="submit">Görevi kaydet</button></form></dialog>
-<dialog class="hk-dialog" id="inspect-dialog"><form id="inspect-form" method="dialog"><div class="dialog-head"><h2 id="inspect-title">Oda kalite onayı</h2><button type="button" class="icon-button" data-close="inspect-dialog"><i class="fa-solid fa-xmark"></i></button></div><input id="inspect-room" type="hidden"><label class="check"><input type="checkbox" value="Yatak ve linen yenilendi"> Yatak ve linen yenilendi</label><label class="check"><input type="checkbox" value="Banyo ve zemin hijyeni kontrol edildi"> Banyo ve zemin hijyeni kontrol edildi</label><label class="check"><input type="checkbox" value="Amenity ve minibar kontrol edildi"> Amenity ve minibar kontrol edildi</label><label class="check"><input type="checkbox" value="Elektrik ve klima görünür kontrolü yapıldı"> Elektrik ve klima görünür kontrolü yapıldı</label><label>Kontrol notu<textarea id="inspect-notes"></textarea></label><button class="primary-button" type="submit">Kalite onayını tamamla</button></form></dialog>
-<dialog class="hk-dialog" id="laundry-dialog"><form id="laundry-form" method="dialog"><div class="dialog-head"><h2>Çamaşır / linen işlemi</h2><button type="button" class="icon-button" data-close="laundry-dialog"><i class="fa-solid fa-xmark"></i></button></div><label>Oda<select id="laundry-room" required></select></label><label>İçerik / adetler<textarea id="laundry-items" required placeholder="Örn: 2 nevresim, 4 banyo havlusu"></textarea></label><button class="primary-button" type="submit">Kaydı oluştur</button></form></dialog>
-<dialog class="hk-dialog" id="count-dialog"><form id="count-form" method="dialog"><div class="dialog-head"><h2>Linen sayımı</h2><button type="button" class="icon-button" data-close="count-dialog"><i class="fa-solid fa-xmark"></i></button></div><input id="count-inventory" type="hidden"><label id="count-label">Sayım</label><input id="count-quantity" type="number" min="0" step="0.01" required><label>Not<textarea id="count-notes"></textarea></label><button class="primary-button" type="submit">Sayımı kaydet</button></form></dialog>
-<dialog class="hk-dialog" id="stock-item-dialog"><form id="stock-item-form" method="dialog"><div class="dialog-head"><h2>Yeni kat hizmetleri malzemesi</h2><button type="button" class="icon-button" data-close="stock-item-dialog"><i class="fa-solid fa-xmark"></i></button></div><label>Malzeme adı<input id="stock-item-name" required placeholder="Örn: Tuvalet Kağıdı"></label><label>Birim<input id="stock-item-unit" required placeholder="Örn: adet, paket"></label><label>Başlangıç stoğu<input id="stock-item-stock" type="number" min="0" step="0.01" required></label><label>Kritik seviye (par)<input id="stock-item-par" type="number" min="0" step="0.01" required></label><button class="primary-button" type="submit">Malzemeyi ekle</button></form></dialog>
-<dialog class="hk-dialog" id="stock-movement-dialog"><form id="stock-movement-form" method="dialog"><div class="dialog-head"><h2 id="stock-movement-title">Stok hareketi</h2><button type="button" class="icon-button" data-close="stock-movement-dialog"><i class="fa-solid fa-xmark"></i></button></div><input id="stock-movement-inventory" type="hidden"><label>Hareket türü<select id="stock-movement-type"><option value="out">Kullanım (Çıkış)</option><option value="in">Stok Girişi</option><option value="waste">Zayiat / Kayıp</option></select></label><label>Miktar<input id="stock-movement-quantity" type="number" min="0.01" step="0.01" required></label><label>Açıklama<input id="stock-movement-reason" placeholder="Örn: Oda 305 kullanımı"></label><button class="primary-button" type="submit">Hareketi kaydet</button></form></dialog>
-<dialog class="hk-dialog" id="area-dialog"><form id="area-form" method="dialog"><div class="dialog-head"><h2>Yeni ortak alan tanımla</h2><button type="button" class="icon-button" data-close="area-dialog"><i class="fa-solid fa-xmark"></i></button></div><label>Alan adı<input id="area-name" required placeholder="Örn: Spa & Wellness"></label><button class="primary-button" type="submit">Alanı tanımla</button></form></dialog>
-<dialog class="hk-dialog" id="minibar-dialog"><form id="minibar-form" method="dialog"><div class="dialog-head"><h2 id="minibar-title">Minibar tüketimi</h2><button type="button" class="icon-button" data-close="minibar-dialog"><i class="fa-solid fa-xmark"></i></button></div><input id="minibar-room" type="hidden"><p class="hk-muted">Oda dolu ise misafir hesabına yazılır; boş ise sadece stoktan düşülür.</p><div id="minibar-items" class="minibar-item-list"></div><button class="primary-button" type="submit">Kaydet</button></form></dialog>
-<dialog class="hk-dialog" id="lost-dialog"><form id="lost-form" method="dialog"><div class="dialog-head"><h2>Buluntu eşya kaydı</h2><button type="button" class="icon-button" data-close="lost-dialog"><i class="fa-solid fa-xmark"></i></button></div><label>Eşya tanımı<input id="lost-name" required></label><label>Bulunan yer<input id="lost-location" required></label><label>Açıklama<textarea id="lost-description"></textarea></label><button class="primary-button" type="submit">Kaydı oluştur</button></form></dialog>
-<div id="toast" class="toast"></div><script src="/js/housekeeping-entry.js" type="module"></script></body></html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kat Hizmetleri | Personel Portalı</title>
+  
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="/css/aeon-tokens.css">
+  <link rel="stylesheet" href="/css/aeon-base.css">
+  <link rel="stylesheet" href="/css/aeon-shell.css">
+  <link rel="stylesheet" href="/css/aeon-components.css">
+  <link rel="stylesheet" href="/css/aeon-responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script src="/js/boot.js"></script>
+</head>
+<body class="mobile-app-container">
+
+  <header class="mobile-header liquid-glass-panel">
+    <div class="mobile-title" id="hk-title">Kat Hizmetleri (Housekeeping)</div>
+    <button class="btn-close-modal" id="btn-staff-logout" onclick="window.aeonLogout(); return false;" style="color: var(--color-danger); background:none; border:none; font-size:18px; cursor:pointer;" title="Çıkış">
+      <i class="fa-solid fa-power-off"></i>
+    </button>
+  </header>
+
+  <main class="mobile-content">
+    
+    <!-- Tab 1: Odalar (Default) -->
+    <div id="hk-subview-rooms" class="panel-section active" style="padding-bottom: 80px;">
+      <!-- Filter buttons bar -->
+      <div class="rack-filter-bar" id="hk-rooms-filter-bar">
+        <button class="hk-filter-btn active" data-filter="all">Tümü</button>
+        <button class="hk-filter-btn" data-filter="dirty">Kirli</button>
+        <button class="hk-filter-btn" data-filter="clean">Temiz</button>
+        <button class="hk-filter-btn" data-filter="dnd">DND</button>
+      </div>
+
+      <div class="room-rack-grid" id="hk-rooms-grid"></div>
+    </div>
+
+    <!-- Tab 2: Ortak Alanlar -->
+    <div id="hk-subview-public" class="panel-section" style="padding-bottom: 80px;">
+      <h4 style="font-size: 13px; text-transform: uppercase; color: var(--color-primary); font-weight: 800; margin-bottom: 12px;">Ortak Alan Temizlik Görevleri</h4>
+      <div id="hk-public-areas-list" class="d-flex flex-column" style="gap: 12px;"></div>
+    </div>
+
+    <!-- Tab 3: Çamaşır (Laundry) -->
+    <div id="hk-subview-laundry" class="panel-section" style="padding-bottom: 80px;">
+      <h4 style="font-size: 13px; text-transform: uppercase; color: var(--color-primary); font-weight: 800; margin-bottom: 12px;">Çamaşır Talepleri & Teslimatlar</h4>
+      <div id="hk-laundry-list" class="d-flex flex-column" style="gap: 12px;"></div>
+    </div>
+
+    <!-- Tab 4: Kayıp Eşya (Lost & Found) -->
+    <div id="hk-subview-lostfound" class="panel-section" style="padding-bottom: 80px;">
+      <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 16px;">
+        <h4 style="font-size: 13px; text-transform: uppercase; color: var(--color-primary); font-weight: 800; margin: 0;">Kayıp Eşya Listesi</h4>
+        <button class="btn btn-primary btn-sm" id="btn-add-lostfound"><i class="fa-solid fa-plus"></i> Ekle</button>
+      </div>
+      <div id="hk-lostfound-list" class="d-flex flex-column" style="gap: 12px;"></div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="mobile-bottom-nav">
+    <a href="#" class="nav-item active" id="nav-hk-tab-rooms">
+      <i class="fa-solid fa-bed"></i>
+      <span>Odalar</span>
+    </a>
+    <a href="#" class="nav-item" id="nav-hk-tab-public">
+      <i class="fa-solid fa-shield-halved"></i>
+      <span>Ortak Alan</span>
+    </a>
+    <a href="#" class="nav-item" id="nav-hk-tab-laundry">
+      <i class="fa-solid fa-shirt"></i>
+      <span>Çamaşır</span>
+    </a>
+    <a href="#" class="nav-item" id="nav-hk-tab-lostfound">
+      <i class="fa-solid fa-box-archive"></i>
+      <span>Kayıp Eşya</span>
+    </a>
+  </nav>
+
+  <!-- ROOM DETAIL MODAL (Minibar & DND & Checklist access) -->
+  <div class="modal-overlay" id="room-detail-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-room-title">Oda Kontrolü</h3>
+        <button class="btn-close-modal" id="btn-close-room-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Oda Durumu</label>
+          <select id="modal-room-status">
+            <option value="clean_vacant">Temiz (Boş)</option>
+            <option value="dirty_vacant">Kirli (Boş)</option>
+            <option value="occupied">Dolu</option>
+          </select>
+        </div>
+        <div class="form-group d-flex justify-content-between align-items-center" style="background: var(--bg-canvas); padding: 10px; border-radius: 8px;">
+          <span style="font-size: 13px; font-weight: 600; color: var(--color-danger);"><i class="fa-solid fa-door-closed"></i> DND (Rahatsız Etmeyin)</span>
+          <label style="cursor: pointer; display: flex; align-items: center;">
+            <input type="checkbox" id="modal-room-dnd" style="width: 20px; height: 20px;">
+          </label>
+        </div>
+        
+        <!-- Minibar quick post form -->
+        <div id="modal-minibar-section" class="card" style="margin-top:16px; padding: 12px; background: var(--bg-canvas);">
+          <h4 style="font-size:12px; color: var(--color-primary); margin-bottom: 8px;"><i class="fa-solid fa-martini-glass-citrus"></i> Minibar Tüketimi Ekle</h4>
+          <div style="display:grid; grid-template-columns: 1fr 60px; gap:8px;">
+            <select id="modal-minibar-item"></select>
+            <input type="number" id="modal-minibar-qty" value="1" min="1" style="text-align: center;">
+          </div>
+          <button class="btn btn-primary btn-xs btn-block" id="btn-modal-add-minibar" style="margin-top: 8px;">Oda Hesabına Yaz</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btn-cancel-room-modal">Kapat</button>
+        <button class="btn btn-primary btn-sm" id="btn-save-room-modal">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HK CHECKLIST MODAL -->
+  <div class="modal-overlay" id="hk-checklist-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-clipboard-check"></i> Şef Onay Listesi</h3>
+        <button class="btn-close-modal" id="btn-close-checklist-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" style="text-align: left;">
+        <p class="text-muted small" style="margin-bottom: 12px;">Lütfen odayı onaylamadan önce aşağıdaki kriterleri kontrol edin.</p>
+        <div class="d-flex flex-column" style="gap: 12px;">
+          <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+            <input type="checkbox" class="hk-check-item" value="Klima ve Elektronikler Çalışıyor" style="width:18px; height:18px;">
+            <span>Klima ve Elektronikler Çalışıyor</span>
+          </label>
+          <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+            <input type="checkbox" class="hk-check-item" value="Çarşaf ve Havlular Temiz" style="width:18px; height:18px;">
+            <span>Çarşaf ve Havlular Temiz/Yeni</span>
+          </label>
+          <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+            <input type="checkbox" class="hk-check-item" value="Minibar ve İkramlar Tam" style="width:18px; height:18px;">
+            <span>Minibar ve İkramlar Eksiksiz</span>
+          </label>
+          <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+            <input type="checkbox" class="hk-check-item" value="Banyo ve Zeminler Temiz" style="width:18px; height:18px;">
+            <span>Banyo ve Zeminler Hijyenik</span>
+          </label>
+        </div>
+        <div class="form-group" style="margin-top: 16px;">
+          <label>Ek Notlar</label>
+          <input type="text" id="hk-checklist-notes" placeholder="Varsa eksiklik veya not...">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btn-cancel-checklist-modal">İptal</button>
+        <button class="btn btn-primary btn-sm" id="btn-submit-inspection">Odayı Onayla</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOST FOUND REPORT MODAL -->
+  <div class="modal-overlay" id="lost-found-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Kayıp Eşya Bildir</h3>
+        <button class="btn-close-modal" id="btn-close-lf-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Eşya Tanımı</label>
+          <input type="text" id="lf-item-name" placeholder="Örn: Siyah Kol Saati" required>
+        </div>
+        <div class="form-group">
+          <label>Bulunan Yer / Oda</label>
+          <input type="text" id="lf-location" placeholder="Örn: Oda 104" required>
+        </div>
+        <div class="form-group">
+          <label>Açıklama</label>
+          <textarea id="lf-description" rows="2" placeholder="Detaylar..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btn-cancel-lf-modal">İptal</button>
+        <button class="btn btn-primary btn-sm" id="btn-submit-lostfound">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/housekeeping-entry.js" type="module"></script>
+</body>
+</html>

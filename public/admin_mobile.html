@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Yönlendiriliyor...</title>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const tenantId = params.get('tenant_id') || 'aeon';
+    window.location.replace(`/index.html?tenant_id=${tenantId}`);
+  </script>
+</head>
+<body>
+  Yönlendiriliyor...
+</body>
+</html>

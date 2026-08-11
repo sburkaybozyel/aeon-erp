@@ -1,0 +1,16 @@
+{
+  "name": "aeon-tourism-crm",
+  "version": "0.1.0",
+  "description": "Ayrı Turizm CRM uygulaması (AEON ERP'den bağımsız)",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test.js",
+    "e2e": "node e2e.test.mjs"
+  },
+  "dependencies": {
+    "alasql": "^4.4.0",
+    "express": "^4.19.2"
+  }
+}
