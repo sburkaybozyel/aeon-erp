@@ -9,15 +9,19 @@
   overflow: hidden;
 }
 
-/* Sidebar Styling (Light Theme) */
+/* Sidebar Styling (Liquid Glass) */
 .sidebar {
-  background-color: var(--bg-surface);
-  border-right: 1px solid var(--border-glass);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-right: 1px solid var(--glass-border-subtle);
+  box-shadow: var(--glass-shadow);
   display: flex;
   flex-direction: column;
   height: 100%;
   padding: 24px 20px;
   overflow: hidden;
+  transition: var(--transition-smooth);
 }
 
 .brand {

@@ -1,23 +1,23 @@
 :root {
   --bg: var(--bg-canvas, #F4F9FC);
   --bg-2: var(--bg-surface-secondary, #EAF7FB);
-  --surface: var(--bg-surface, #ffffff);
+  --surface: var(--glass-bg, rgba(255, 255, 255, 0.75));
   --ink: var(--color-text-main, #0f172a);
   --muted: var(--color-text-muted, #64748b);
-  --line: var(--border-glass, #e2e8f0);
+  --line: var(--glass-border-subtle, rgba(226, 232, 240, 0.7));
   --brand: var(--color-primary, #0284c7);
   --accent: var(--color-accent, #f2b84b);
   --ok: var(--color-success, #10b981);
   --warn: var(--color-warning, #f59e0b);
   --danger: var(--color-danger, #ef4444);
   --radius: var(--radius-md, 14px);
-  --shadow: var(--shadow-premium, 0 10px 30px rgba(2, 6, 23, .08));
+  --shadow: var(--glass-shadow, 0 12px 32px rgba(15, 23, 42, 0.08));
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: var(--font-body, 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
-  background: var(--bg-canvas, #F4F9FC);
+  background: radial-gradient(circle at 50% 0%, rgba(30, 41, 59, 0.04) 0%, transparent 70%), var(--bg-canvas);
   color: var(--ink);
   min-height: 100vh;
 }
@@ -332,4 +332,28 @@ textarea { min-height: 80px; resize: vertical; }
   .main { background: #fff; padding: 0; }
   .offer-doc { box-shadow: none; padding: 0; border: none; }
   .offer-doc h2 { font-size: 22px; }
+}
+
+/* Liquid Glass & Bento Grid System for AEON CRM */
+.card, .panel, .bento-card, .crm-card, .stat-card {
+  background: var(--glass-bg, rgba(255, 255, 255, 0.75)) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid var(--glass-border-subtle, rgba(226, 232, 240, 0.7)) !important;
+  border-radius: var(--radius-lg, 18px) !important;
+  box-shadow: var(--glass-shadow, 0 12px 32px rgba(15, 23, 42, 0.08)) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.card:hover, .panel:hover, .bento-card:hover, .crm-card:hover {
+  border-color: var(--color-primary, #0284c7) !important;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12), var(--glass-glow) !important;
+  transform: translateY(-2px) !important;
+}
+
+header, nav, .topbar, .navbar {
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid var(--glass-border-subtle, rgba(226, 232, 240, 0.7)) !important;
 }
