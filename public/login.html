@@ -243,7 +243,7 @@
           
           const data = await res.json();
           
-          if (res.ok) {
+          if (res.ok && data && data.success && data.user) {
             // Session is saved in HttpOnly cookie automatically by server
             window.aeonUser = data.user;
             
@@ -265,7 +265,7 @@
             const portal = portalByRole[role] || '/login.html';
             window.location.href = `${portal}?tenant_id=${window.tenantId}`;
           } else {
-            errorMsg.textContent = data.error || 'Hatalı PIN!';
+            errorMsg.textContent = (data && data.error) ? data.error : 'Hatalı PIN!';
             currentPin = '';
             updateDots();
             // Shake animation
@@ -277,7 +277,8 @@
             setTimeout(() => display.style.transform = 'translateX(0)', 200);
           }
         } catch (err) {
-          errorMsg.textContent = 'Bağlantı hatası!';
+          console.error('Login error:', err);
+          errorMsg.textContent = err.message || 'Bağlantı hatası!';
           currentPin = '';
           updateDots();
         }
