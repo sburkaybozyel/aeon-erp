@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { resolvePortalEntry } from '../public/js/guest-entry-routing.js';
 
 process.env.AEON_DISABLE_LISTEN = 'true';
 const { default: app } = await import('../server.js?public-portal-isolation');
@@ -13,21 +14,55 @@ const origin = `http://127.0.0.1:${address.port}`;
 test.after(() => new Promise(resolve => server.close(resolve)));
 
 test('customer restaurant aliases always serve the public menu shell', async () => {
-  for (const pathname of ['/restaurant', '/menu', '/restaurant-menu']) {
+  for (const pathname of ['/restaurant', '/restaurant.html', '/menu', '/menu.html', '/restaurant-menu', '/restaurant-menu/']) {
     const response = await fetch(`${origin}${pathname}?tenant_id=aeon&target=Table-Garden%201&qr=test`);
     const html = await response.text();
     assert.equal(response.status, 200);
-    assert.match(html, /restaurant-guest-portal/);
+    assert.match(html, /id="guest-target-select"/);
+    assert.doesNotMatch(html, /window\.location\.(?:replace|assign)|<iframe/i);
     assert.doesNotMatch(html, /panel-admin|Modüler Yönetici Paneli/);
   }
 });
 
-test('customer guest aliases never fall through to the ERP shell', async () => {
-  const response = await fetch(`${origin}/guest?tenant_id=aeon&type=restaurant&target=Table-Garden%201`);
-  const html = await response.text();
-  assert.equal(response.status, 200);
-  assert.match(html, /Misafir Portalı/);
-  assert.doesNotMatch(html, /panel-admin|Modüler Yönetici Paneli/);
+test('room aliases use the same single public shell without a redirect engine', async () => {
+  for (const pathname of ['/room', '/room.html', '/room-portal', '/room-portal.html', '/guest', '/guest.html']) {
+    const response = await fetch(`${origin}${pathname}?tenant_id=aeon&target=Room-1`);
+    const html = await response.text();
+    assert.equal(response.status, 200);
+    assert.match(html, /id="guest-target-select"/);
+    assert.doesNotMatch(html, /window\.location\.(?:replace|assign)|<iframe/i);
+    assert.doesNotMatch(html, /panel-admin|Modüler Yönetici Paneli/);
+  }
+});
+
+test('portal entry mode is isolated by canonical path and rejects mixed targets', () => {
+  assert.deepEqual(resolvePortalEntry('/room', '?target=Room-1'), { mode: 'room', target: 'Room-1' });
+  assert.deepEqual(resolvePortalEntry('/restaurant', '?target=Table-Garden%201'), { mode: 'restaurant', target: 'Table-Garden 1' });
+  assert.deepEqual(resolvePortalEntry('/room', '?target=Table-Garden%201'), { mode: 'room', target: '' });
+  assert.deepEqual(resolvePortalEntry('/restaurant', '?target=Room-1'), { mode: 'restaurant', target: '' });
+  assert.deepEqual(resolvePortalEntry('/guest.html', '?type=restaurant&target=Table-Bar%201'), { mode: 'restaurant', target: 'Table-Bar 1' });
+});
+
+test('QR routes redirect once to the canonical isolated portal', async () => {
+  const cases = [
+    ['/q/oda-01', '/room?', 'type=room', 'target=Room-1'],
+    ['/room-qr/oda-12', '/room?', 'type=room', 'target=Room-12'],
+    ['/q/garden-01', '/restaurant?', 'type=restaurant', 'target=Table-Garden+1'],
+    ['/restaurant-qr/bar-qr-01', '/restaurant?', 'type=restaurant', 'target=Table-Bar+QR+1']
+  ];
+  for (const [pathname, prefix, type, target] of cases) {
+    const response = await fetch(`${origin}${pathname}`, { redirect: 'manual' });
+    assert.equal(response.status, 303);
+    const location = response.headers.get('location');
+    assert.ok(location.startsWith(prefix));
+    assert.ok(location.includes(type));
+    assert.ok(location.includes(target));
+    assert.doesNotMatch(location, /guest\.html|room-portal|restaurant-qr|room-qr/);
+  }
+  assert.equal((await fetch(`${origin}/restaurant-qr/oda-01`, { redirect: 'manual' })).status, 404);
+  assert.equal((await fetch(`${origin}/room-qr/garden-01`, { redirect: 'manual' })).status, 404);
+  const health = await (await fetch(`${origin}/qr-health`)).json();
+  assert.deepEqual(health, { ok: true, total: 25, rooms: 12, restaurants: 13 });
 });
 
 test('unknown public paths return 404 instead of opening ERP', async () => {
@@ -45,4 +80,5 @@ test('guest shell has no staff PWA manifest or staff service worker enrollment',
   assert.match(boot, /const isGuestSurface/);
   assert.match(boot, /window\.aeonSessionToken = isGuestSurface \? ''/);
   assert.match(boot, /if \(isGuestSurface\) \{\s*revealPage\(\);\s*return null;/);
+  assert.match(boot, /const isPublicPage = isLoginPage \|\| isPublicPortalPath\(\)/);
 });

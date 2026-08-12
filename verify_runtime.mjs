@@ -18,7 +18,7 @@ const requiredPaths = [
   'public/index.html',
   'public/login.html',
   'public/guest.html',
-  'public/restaurant.html',
+  'public/js/guest-entry-routing.js',
   'public/crm.html',
   'public/crm-assets/style.css',
   'public/crm-assets/app.js'
@@ -38,6 +38,8 @@ if (!middleware.includes('AEON_ALLOWED_TENANTS')) failures.push('tenant allowlis
 if (!middleware.includes('authorizeOperation')) failures.push('authorization middleware is missing');
 if (/manifest_guest\.json|navigator\.serviceWorker\.register/.test(guest)) failures.push('guest portal enrolls into staff PWA');
 if (!boot.includes('const isGuestSurface') || !boot.includes("window.aeonSessionToken = isGuestSurface ? ''")) failures.push('guest authentication isolation is missing');
+if (!server.includes("app.get('/q/:code'") || !server.includes("app.get('/room-qr/:code'") || !server.includes("app.get('/restaurant-qr/:code'")) failures.push('canonical QR routes are missing');
+if (!server.includes('app.get(portalAliases')) failures.push('single portal shell routing is missing');
 if (!server.includes("app.get(['/crm', '/crm/']")) failures.push('CRM static surface is not registered');
 if (server.includes('crmPublicDir')) failures.push('CRM still depends on a runtime filesystem path');
 if (failures.length) {

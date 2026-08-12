@@ -18,12 +18,21 @@
   ],
   "assets": {
     "directory": "./public",
-    "html_handling": "auto-trailing-slash"
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": [
+      "/restaurant*",
+      "/menu*",
+      "/guest*",
+      "/room*",
+      "/q/*",
+      "/qr-health"
+    ]
   },
   "vars": {
     "CLOUDFLARE_WORKER": "1",
     "AEON_D1_BOOTSTRAP": "true",
-    "AEON_BUILD_ID": "cloudflare-2026-08-12-full-system-refactor",
+    "AEON_BUILD_ID": "cloudflare-2026-08-12-menu-routing-refactor",
     "AEON_DEFAULT_TENANT": "aeon",
     "AEON_ALLOWED_TENANTS": "aeon",
     "AEON_TENANT_HOSTS": "{\"aeon-erp.aeon-global.workers.dev\":\"aeon\"}",

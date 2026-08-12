@@ -12,17 +12,14 @@
     tenantId = 'aeon';
   }
   window.tenantId = tenantId;
-  const isGuestSurface = ['/guest', '/guest.html', '/room', '/room.html', '/room-portal', '/restaurant', '/restaurant.html', '/menu', '/restaurant-menu'].includes(window.location.pathname);
+  const publicPortalPaths = new Set(['/guest', '/guest/', '/guest.html', '/room', '/room/', '/room.html', '/room-portal', '/room-portal/', '/room-portal.html', '/restaurant', '/restaurant/', '/restaurant.html', '/menu', '/menu/', '/menu.html', '/restaurant-menu', '/restaurant-menu/']);
+  const isPublicPortalPath = (path = window.location.pathname) => publicPortalPaths.has(path);
+  const isGuestSurface = isPublicPortalPath();
   window.aeonSessionToken = isGuestSurface ? '' : (window.aeonSessionToken || '');
 
   function revealPage() {
     document.documentElement.removeAttribute('data-auth-pending');
     document.body?.removeAttribute('data-auth-pending');
-  }
-
-  function isPublicPortalPath() {
-    const path = window.location.pathname;
-    return path.includes('guest.html') || path.includes('room.html') || path.includes('restaurant.html');
   }
 
   // Cross-tab logout listener
@@ -118,7 +115,7 @@
 
       // 2. Auth checks
       const isLoginPage = window.location.pathname.includes('login.html');
-      const isPublicPage = isLoginPage || window.location.pathname.includes('guest.html') || window.location.pathname.includes('room.html') || window.location.pathname.includes('restaurant.html');
+      const isPublicPage = isLoginPage || isPublicPortalPath();
 
       try {
         const res = await originalFetch(`/api/auth/session?tenant_id=${window.tenantId}`, {

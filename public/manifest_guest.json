@@ -8,7 +8,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/guest.html?target=Room-101&tenant_id=aeon",
+  "start_url": "/room?tenant_id=aeon",
   "background_color": "#0a0b23",
   "theme_color": "#c29d5b",
   "display": "standalone",

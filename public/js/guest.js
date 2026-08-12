@@ -14,8 +14,8 @@ let orderStatusCache = {};
 let guestOrderPollTimer = null;
 
 export async function setupGuestPortal(target, mode = '') {
-  portalMode = mode;
-  const resolvedTarget = await setupTargetSelector(target, mode);
+  portalMode = mode === 'restaurant' ? 'restaurant' : 'room';
+  const resolvedTarget = await setupTargetSelector(target, portalMode);
   target = resolvedTarget;
   activeTarget = target;
   trackedOrderIds = loadTrackedGuestOrders();
@@ -34,6 +34,7 @@ export async function setupGuestPortal(target, mode = '') {
   if (welcomeTitle) {
     welcomeTitle.textContent = target.startsWith('Room-') ? `Oda ${target.replace('Room-', '')}` : `${target.replace('Table-', '')} Restoran Menüsü`;
   }
+  document.title = target.startsWith('Room-') ? `Oda ${target.replace('Room-', '')} | Misafir Menüsü` : `${target.replace('Table-', '')} | Restoran Menüsü`;
 
   // Hide/Show sections based on Room vs Table
   const folioSec = document.getElementById('guest-folio-section');
@@ -97,87 +98,38 @@ export async function setupGuestPortal(target, mode = '') {
 
 async function setupTargetSelector(initialTarget, mode = '') {
   const select = document.getElementById('guest-target-select');
-  const locked = mode === 'restaurant' || mode === 'room';
-  const lockedTarget = locked ? await resolveLockedTarget(initialTarget, mode) : initialTarget;
-  if (!select) {
-    if (lockedTarget) return lockedTarget;
-    return mode === 'room' ? 'Room-101 - Panoramik' : 'Table-Bahçe 1';
-  }
-
-  if (select.options.length === 0) {
-    let rooms = [];
-    let tables = [];
-    if (!locked) {
-      const targetsRes = await fetch('/api/guest/targets');
-      const targets = targetsRes.ok ? await targetsRes.json() : { rooms: [], tables: [] };
-      rooms = (targets.rooms || []).map(room_number => ({ room_number }));
-      tables = targets.tables || [];
-    }
-
-    select.innerHTML = '';
-
-    if (locked) {
-      const opt = document.createElement('option');
-      opt.value = lockedTarget || (mode === 'room' ? 'Room-101 - Panoramik' : 'Table-Bahçe 1');
-      opt.textContent = opt.value.replace('Room-', 'Oda ').replace('Table-', '');
-      select.appendChild(opt);
-    }
-
-    if (rooms.length > 0 && mode !== 'restaurant') {
-      const roomGroup = document.createElement('optgroup');
-      roomGroup.label = 'Odalar';
-      rooms.forEach(room => {
-        const opt = document.createElement('option');
-        opt.value = `Room-${room.room_number}`;
-        opt.textContent = `Oda ${room.room_number}`;
-        roomGroup.appendChild(opt);
-      });
-      select.appendChild(roomGroup);
-    }
-
-    if (tables.length > 0 && mode !== 'room') {
-      const tableGroup = document.createElement('optgroup');
-      tableGroup.label = 'Restoran';
-      tables.forEach(table => {
-        const opt = document.createElement('option');
-        opt.value = `Table-${table.table_number}`;
-        opt.textContent = `${table.table_number} (${table.section})`;
-        tableGroup.appendChild(opt);
-      });
-      select.appendChild(tableGroup);
-    }
-
-    select.onchange = () => {
-      cart = [];
-      updateCartFooter();
-      setupGuestPortal(select.value, portalMode);
-    };
-  }
-
-  const values = Array.from(select.options).map(opt => opt.value);
-  let fallback = 'Table-Bahçe 1';
-  if (mode === 'room') fallback = values.find(v => v === 'Room-101 - Panoramik') || values.find(v => v.startsWith('Room-')) || 'Room-101 - Panoramik';
-  if (mode === 'restaurant') fallback = values.find(v => v === 'Table-Bahçe 1') || values.find(v => v.startsWith('Table-')) || 'Table-Bahçe 1';
-  if (!mode) fallback = values.find(v => v.startsWith('Table-')) || values.find(v => v.startsWith('Room-')) || 'Table-Bahçe 1';
-  const resolved = values.includes(lockedTarget) ? lockedTarget : fallback;
-  select.value = resolved;
-  select.style.display = locked ? 'none' : 'block';
-  return resolved;
-}
-
-async function resolveLockedTarget(initialTarget, mode) {
-  if (!initialTarget || mode !== 'room') return initialTarget;
-  const raw = initialTarget.replace(/^room_id:/, '').trim();
+  const lockedMode = mode === 'restaurant' ? 'restaurant' : 'room';
+  let rooms = [];
+  let tables = [];
   try {
-    const plain = raw.replace(/^r/i, '');
-    const res = await fetch(`/api/guest/room-context?target=${encodeURIComponent(plain)}`);
-    if (!res.ok) return initialTarget.startsWith('Room-') ? initialTarget : `Room-${raw.replace(/^r/i, '')}`;
-    const context = await res.json();
-    const room = context.room;
-    return room ? `Room-${room.room_number}` : (initialTarget.startsWith('Room-') ? initialTarget : `Room-${plain}`);
+    const targetsRes = await fetch('/api/guest/targets');
+    const targets = targetsRes.ok ? await targetsRes.json() : { rooms: [], tables: [] };
+    rooms = Array.isArray(targets.rooms) ? targets.rooms.map(value => String(value)) : [];
+    tables = Array.isArray(targets.tables) ? targets.tables : [];
   } catch (err) {
-    return initialTarget.startsWith('Room-') ? initialTarget : `Room-${raw.replace(/^r/i, '')}`;
+    rooms = [];
+    tables = [];
   }
+  const roomTargets = rooms.map(roomNumber => `Room-${roomNumber}`);
+  const tableTargets = tables.map(table => `Table-${table.table_number}`);
+  const requestedTarget = String(initialTarget || '').trim();
+  const prefixValid = lockedMode === 'room' ? requestedTarget.startsWith('Room-') : requestedTarget.startsWith('Table-');
+  const knownTargets = lockedMode === 'room' ? roomTargets : tableTargets;
+  const defaultTarget = knownTargets[0] || (lockedMode === 'room' ? 'Room-1' : 'Table-Garden 1');
+  const lockedTarget = prefixValid && (knownTargets.length === 0 || knownTargets.includes(requestedTarget)) ? requestedTarget : defaultTarget;
+  if (!select) {
+    return lockedTarget;
+  }
+
+  select.innerHTML = '';
+  const option = document.createElement('option');
+  option.value = lockedTarget;
+  option.textContent = lockedTarget.replace('Room-', 'Oda ').replace('Table-', '');
+  select.appendChild(option);
+  select.value = lockedTarget;
+  select.hidden = true;
+  select.setAttribute('aria-hidden', 'true');
+  return lockedTarget;
 }
 
 async function sendQuickRequest(type, details) {

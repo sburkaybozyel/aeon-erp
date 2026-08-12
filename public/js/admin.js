@@ -1173,8 +1173,8 @@ async function loadMobileConnectionCard() {
     const origin = window.location.origin;
     
     // Core 3 Entry Points
-    const roomUrl = `${origin}/room.html?tenant_id=${state.currentTenant}`;
-    const restaurantUrl = `${origin}/restaurant.html?tenant_id=${state.currentTenant}`;
+    const roomUrl = `${origin}/room?tenant_id=${state.currentTenant}`;
+    const restaurantUrl = `${origin}/restaurant?tenant_id=${state.currentTenant}`;
     const staffUrl = `${origin}/staff.html?tenant_id=${state.currentTenant}`;
 
     const elRoom = document.getElementById('mobile-room-url');

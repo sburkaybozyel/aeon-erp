@@ -19,6 +19,7 @@ import { initPrinting } from './modules/printing.js';
 import { initHotelRunner } from './modules/hotelrunner.js';
 import { initCrmBridge } from './modules/crm_bridge.js';
 import { initCrmModule } from './modules/crm.js';
+import { getQrTarget, qrTargets } from './lib/qr-targets.js';
 
 const app = express();
 
@@ -45,8 +46,41 @@ app.use((req, res, next) => {
   if (/\.(?:css|html|js)$/.test(req.path)) res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
   next();
 });
-app.get(['/restaurant', '/menu', '/restaurant-menu'], (req, res) => res.sendFile(`${publicDir}/restaurant.html`));
-app.get(['/guest', '/room-portal'], (req, res) => res.sendFile(`${publicDir}/guest.html`));
+const portalAliases = ['/restaurant', '/restaurant/', '/restaurant.html', '/menu', '/menu/', '/menu.html', '/restaurant-menu', '/restaurant-menu/', '/room', '/room/', '/room.html', '/room-portal', '/room-portal/', '/room-portal.html', '/guest', '/guest/', '/guest.html'];
+app.get('/qr-health', (req, res) => {
+  res.set('Cache-Control', 'no-store');
+  res.json({
+    ok: true,
+    total: qrTargets.length,
+    rooms: qrTargets.filter(target => target.type === 'room').length,
+    restaurants: qrTargets.filter(target => target.type === 'restaurant').length
+  });
+});
+app.get('/q/:code', (req, res) => {
+  const target = getQrTarget(req.params.code);
+  if (!target) return res.status(404).send('QR hedefi bulunamadı.');
+  const params = new URLSearchParams({ tenant_id: 'aeon', type: target.type, target: target.target, qr: target.code });
+  res.set('Cache-Control', 'no-store');
+  return res.redirect(303, `/${target.type === 'room' ? 'room' : 'restaurant'}?${params.toString()}`);
+});
+app.get('/room-qr/:code', (req, res) => {
+  const target = getQrTarget(req.params.code);
+  if (!target || target.type !== 'room') return res.status(404).send('Oda QR hedefi bulunamadı.');
+  const params = new URLSearchParams({ tenant_id: 'aeon', type: 'room', target: target.target, qr: target.code });
+  res.set('Cache-Control', 'no-store');
+  return res.redirect(303, `/room?${params.toString()}`);
+});
+app.get('/restaurant-qr/:code', (req, res) => {
+  const target = getQrTarget(req.params.code);
+  if (!target || target.type !== 'restaurant') return res.status(404).send('Restoran QR hedefi bulunamadı.');
+  const params = new URLSearchParams({ tenant_id: 'aeon', type: 'restaurant', target: target.target, qr: target.code });
+  res.set('Cache-Control', 'no-store');
+  return res.redirect(303, `/restaurant?${params.toString()}`);
+});
+app.get(portalAliases, (req, res) => {
+  res.set('Cache-Control', 'no-store');
+  return res.sendFile(`${publicDir}/guest.html`);
+});
 app.get(['/crm', '/crm/'], (req, res) => res.sendFile(`${publicDir}/crm.html`));
 app.use(express.static(publicDir, { maxAge: 0 }));
 
