@@ -12,6 +12,7 @@ import { startErpServer } from './erp_server.js';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.CRM_PORT || 3100;
+const secureCookies = process.env.NODE_ENV === 'production' || process.env.CRM_SECURE_COOKIES === 'true';
 
 app.use(express.json());
 
@@ -102,7 +103,7 @@ app.post('/api/auth/login', async (req, res) => {
     const token = crypto.randomBytes(32).toString('base64url');
     await db.run("DELETE FROM sessions WHERE revoked_at IS NOT NULL OR expires_at <= ?", [new Date().toISOString()]);
     await db.run("INSERT INTO sessions (id, user_id, expires_at) VALUES (?, ?, ?)", [sessionTokenHash(token), user.id, expiresAt]);
-    res.cookie('crm_session', token, { httpOnly: true, sameSite: 'strict', secure: Boolean(process.env.VERCEL), maxAge: 8 * 60 * 60 * 1000, path: '/' });
+    res.cookie('crm_session', token, { httpOnly: true, sameSite: 'strict', secure: secureCookies, maxAge: 8 * 60 * 60 * 1000, path: '/' });
     res.json({ success: true, token, expires_at: expiresAt, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -121,7 +122,7 @@ app.post('/api/auth/logout', async (req, res) => {
       await db.run("UPDATE sessions SET revoked_at = CURRENT_TIMESTAMP WHERE id = ?", [sessionTokenHash(token)]);
     }
   } catch (e) {}
-  res.clearCookie('crm_session', { httpOnly: true, sameSite: 'strict', secure: Boolean(process.env.VERCEL), path: '/' });
+  res.clearCookie('crm_session', { httpOnly: true, sameSite: 'strict', secure: secureCookies, path: '/' });
   res.status(204).end();
 });
 
@@ -166,7 +167,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'İşlem şu anda tamamlanamadı.' });
 });
 
-if (!process.env.VERCEL && process.env.CRM_DISABLE_LISTEN !== 'true') {
+if (process.env.CRM_DISABLE_LISTEN !== 'true') {
   app.listen(PORT, () => {
     console.log(`AEON Tourism CRM running on http://localhost:${PORT}`);
   });

@@ -9,13 +9,14 @@ export const today = () => new Date().toISOString().slice(0, 10);
 export const actor = req => ({ id: req.actor?.id || 'system', name: req.actor?.name || 'Sistem' });
 export const parse = value => { try { return value ? JSON.parse(value) : null; } catch { return null; } };
 export const json = value => JSON.stringify(value ?? null);
-export const allowed = req => true;
+export const allowed = req => ['yönetici', 'manager', 'admin', 'reception', 'resepsiyon'].includes(normalize(req.actor?.role)) || ['reception', 'resepsiyon', 'management'].includes(normalize(req.actor?.department));
 export const normalize = value => String(value || '').trim().toLocaleLowerCase('tr-TR').replace(/\s+/g, ' ');
 export const mask = value => { const text = String(value || ''); return text.length < 5 ? '••••' : `${text.slice(0, 2)}••••${text.slice(-2)}`; };
 export const paymentLabels = { cash: 'Nakit', credit_card: 'Kredi Kartı', bank_transfer: 'Banka Havalesi', online_link: 'Ödeme Linki', agency: 'Acenta', company_receivable: 'Şirket Cari Hesabı' };
 
 export function requireReception(req, res, next) {
-  next();
+  if (allowed(req)) return next();
+  return res.status(req.actor ? 403 : 401).json({ error: req.actor ? 'Bu işlem ön büro yetkisi gerektirir.' : 'Oturum gerekli veya oturum süresi dolmuş.' });
 }
 
 // `db` is either `req.db` (outside a transaction) or a `tx` handle from `req.db.transaction(...)`

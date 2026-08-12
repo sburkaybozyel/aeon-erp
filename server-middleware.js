@@ -13,11 +13,6 @@ export function hasDurablePersistence() {
   return hasFirebasePersistence() || hasD1Persistence();
 }
 
-// Cookie must be Secure whenever the connection is actually HTTPS, not only
-// when running on the hosted (Cloudflare) runtime — otherwise a TLS-terminating
-// deployment (Vercel/nginx/Firebase Hosting) would ship the session cookie
-// without the Secure flag. `req.secure` is only trustworthy once `trust proxy`
-// is set above.
 export function isSecureRequest(req) {
   return isHostedRuntime || req.secure === true;
 }
@@ -72,6 +67,21 @@ export function configuredTenantForHost(host) {
   return process.env.AEON_DEFAULT_TENANT || 'aeon';
 }
 
+function requestedTenant(req) {
+  if (isHostedRuntime || process.env.AEON_ALLOW_TENANT_OVERRIDE !== 'true') return null;
+  const value = req.query?.tenant_id || req.headers['x-tenant-id'];
+  if (Array.isArray(value)) return value[0];
+  return value ? String(value) : null;
+}
+
+function allowedTenants() {
+  const configured = String(process.env.AEON_ALLOWED_TENANTS || 'aeon')
+    .split(',')
+    .map(value => value.trim())
+    .filter(value => /^[a-z0-9_-]+$/i.test(value));
+  return new Set(configured.length ? configured : ['aeon']);
+}
+
 const activeMutations = new Map();
 
 function captureDatabaseSnapshot(db) {
@@ -109,10 +119,11 @@ export async function tenantDbResolver(req, res, next) {
   const forwardedHost = (isHostedRuntime || process.env.AEON_TRUST_FORWARDED_HOST === 'true')
     ? req.headers['x-forwarded-host']
     : '';
-  const tenantId = configuredTenantForHost(forwardedHost || req.headers.host);
+  const tenantId = requestedTenant(req) || configuredTenantForHost(forwardedHost || req.headers.host);
 
-  const allowedTenants = isHostedRuntime ? ['aeon'] : ['aeon'];
-  if (!allowedTenants.includes(tenantId) && !tenantId.startsWith('acceptance_runs_')) {
+  const permittedTenants = allowedTenants();
+  const acceptanceTenant = !isHostedRuntime && process.env.NODE_ENV === 'test' && tenantId.startsWith('acceptance_runs_');
+  if (!permittedTenants.has(tenantId) && !acceptanceTenant) {
     return res.status(403).json({ error: 'tenant_not_allowed' });
   }
 
@@ -514,7 +525,7 @@ export async function resolveSession(req, res, next) {
 }
 
 export function isManagementRole(actor) {
-  return ['yönetici', 'manager', 'admin'].includes(String(actor?.role || '').toLowerCase());
+  return ['yönetici', 'manager', 'admin', 'restoran müdürü'].includes(String(actor?.role || '').toLocaleLowerCase('tr-TR'));
 }
 
 export function roleAllowed(actor, roles) {
@@ -529,7 +540,6 @@ function isPublicApiRequest(req) {
   if (req.path === '/erp/health' || req.path.startsWith('/erp/')) return true;
   if (req.path === '/auth/login' || req.path === '/auth/logout' || req.path === '/tenant/branding' || req.path === '/system/persistence' || req.path === '/system/build' || req.path === '/guest/precheckin' || req.path.startsWith('/guest/precheckin/') || req.path === '/integrations/hotelrunner/push') return true;
   if (req.method === 'GET' && ['/catalog/availability', '/guest/requests', '/guest/room-context', '/push/public-key', '/guest/targets'].includes(req.path)) return true;
-  if (req.method === 'GET' && /^\/rooms\/[^/]+\/folio$/.test(req.path)) return true;
   if (req.method === 'POST' && req.path === '/requests') return true;
   if (req.path.startsWith('/print-bridge/')) return true;
   return false;
@@ -538,8 +548,35 @@ function isPublicApiRequest(req) {
 export function authorizeOperation(req, res, next) {
   if (isPublicApiRequest(req)) return next();
   if (!req.actor) return res.status(401).json({ error: 'Oturum gerekli veya oturum süresi dolmuş.' });
-  // All authenticated staff members have full access
-  return next();
+  if (['/auth/session', '/auth/logout', '/events', '/operations/context', '/payment-methods', '/push/subscribe', '/push/unsubscribe'].includes(req.path)) return next();
+  if (isManagementRole(req.actor)) return next();
+  const normalize = value => String(value || '').toLocaleLowerCase('tr-TR');
+  const department = normalize(req.actor.department);
+  const role = normalize(req.actor.role);
+  const hasAny = values => values.includes(department) || values.includes(role);
+  const path = req.path;
+  const mutation = ['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method);
+  const reception = ['reception', 'resepsiyon'];
+  const housekeeping = ['housekeeping', 'kat hizmetleri'];
+  const dining = ['restaurant', 'waiter', 'servis', 'kitchen', 'chef', 'mutfak', 'bar'];
+  const technical = ['maintenance', 'teknik'];
+  if (path.startsWith('/system/') || path.startsWith('/tenant/') || path.startsWith('/admin/') || path === '/staff' || path.startsWith('/staff/') || path === '/audit-logs') {
+    return res.status(403).json({ error: 'Bu işlem yönetici yetkisi gerektirir.' });
+  }
+  if (path.startsWith('/reception') || path.startsWith('/guests/search') || path.startsWith('/folios/')) {
+    return hasAny(reception) ? next() : res.status(403).json({ error: 'Bu işlem ön büro yetkisi gerektirir.' });
+  }
+  if (path.startsWith('/hk/') || path.startsWith('/public_areas') || path.startsWith('/rooms')) {
+    const allowed = mutation ? [...reception, ...housekeeping, ...technical] : [...reception, ...housekeeping, ...technical];
+    return hasAny(allowed) ? next() : res.status(403).json({ error: 'Bu işlem için departman yetkiniz yok.' });
+  }
+  if (path.startsWith('/maintenance')) return hasAny([...reception, ...housekeeping, ...technical]) ? next() : res.status(403).json({ error: 'Bu işlem için teknik servis yetkisi gereklidir.' });
+  if (path.startsWith('/bar/')) return hasAny(dining) ? next() : res.status(403).json({ error: 'Bu işlem için yeme-içme yetkisi gereklidir.' });
+  if (path.startsWith('/kitchen/') || path.startsWith('/tables') || path.startsWith('/requests') || path.startsWith('/inventory') || path.startsWith('/catalog') || path.startsWith('/recipes') || path.startsWith('/purchase_requests') || path.startsWith('/campaigns')) {
+    return hasAny(dining) ? next() : res.status(403).json({ error: 'Bu işlem için yeme-içme yetkisi gereklidir.' });
+  }
+  if (path.startsWith('/marina/')) return hasAny(['marina', 'reception', 'resepsiyon']) ? next() : res.status(403).json({ error: 'Bu işlem için marina yetkisi gereklidir.' });
+  return res.status(403).json({ error: 'Bu işlem için yetkiniz yok.' });
 }
 
 export function requireDurableStorage(req, res, next) {

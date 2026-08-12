@@ -18,7 +18,6 @@ import {
 } from './db/firebase.js';
 import { hasD1Persistence, getSavePath, saveToDisk, loadFromDisk, hasRemoteChanged } from './db/persistence.js';
 import { hashPin } from './db/hash.js';
-import admin from 'firebase-admin';
 
 // Re-export the public db.js API — every other file in the app imports these names from
 // './db.js' (or '../db.js'), so the export surface must stay exactly as it was before this
@@ -44,7 +43,22 @@ const initializationPromises = new Map();
 
 async function initializeD1Db(tenantId) {
   const db = new D1Db(globalThis.__AEON_D1, tenantId);
-  const imported = await db.get("SELECT value FROM config WHERE key = 'cloudflare_d1_imported'");
+  let imported = null;
+  try {
+    imported = await db.get("SELECT value FROM config WHERE key = 'cloudflare_d1_imported'");
+  } catch (error) {
+    if (process.env.AEON_D1_BOOTSTRAP !== 'true') throw error;
+  }
+  if (!imported && process.env.AEON_D1_BOOTSTRAP === 'true') {
+    await initSchema(db, tenantId);
+    await runMigrations(db, tenantId);
+    await ensureDefaultRoomInventory(db);
+    await ensureDefaultDiningMasterData(db);
+    await ensureDefaultKitchenMasterData(db);
+    await ensureDefaultMarinaMasterData(db);
+    await db.run("INSERT OR REPLACE INTO config (key, value) VALUES ('cloudflare_d1_imported', 'true')");
+    imported = { value: 'true' };
+  }
   if (!imported) throw new Error('Cloudflare D1 migration is not complete.');
   connections.set(tenantId, db);
   return db;
@@ -54,7 +68,7 @@ async function initializeDb(tenantId) {
   const dbInstance = new alasql.Database();
   const db = new AsyncDb(dbInstance, tenantId);
 
-  const shouldLoadRemote = admin.apps.length && tenantId !== 'test_suite_run';
+  const shouldLoadRemote = hasFirebasePersistence() && tenantId !== 'test_suite_run';
   const savePath = getSavePath(tenantId);
   const isNew = shouldLoadRemote ? false : !fs.existsSync(savePath);
 

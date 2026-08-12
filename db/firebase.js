@@ -1,12 +1,13 @@
-import admin from 'firebase-admin';
+import { cert, getApps, initializeApp } from 'firebase-admin/app';
+import { getDatabase } from 'firebase-admin/database';
 
 const firebaseRoot = String(process.env.AEON_FIREBASE_ROOT || 'aeon_erp').replace(/^\/+|\/+$/g, '');
 
 // Firebase persistence is optional and must be supplied through private environment variables.
 if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PRIVATE_KEY) {
   try {
-    admin.initializeApp({
-      credential: admin.credential.cert({
+    initializeApp({
+      credential: cert({
         projectId: process.env.FIREBASE_PROJECT_ID,
         clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
         privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
@@ -20,7 +21,7 @@ if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && proc
 }
 
 export function hasFirebasePersistence() {
-  return admin.apps.length > 0 && Boolean(process.env.FIREBASE_DATABASE_URL);
+  return getApps().length > 0 && Boolean(process.env.FIREBASE_DATABASE_URL);
 }
 
 let simulateFirebaseFailure = false;
@@ -44,17 +45,17 @@ export function getFirebaseRef(tenantId, pathSegment) {
 
   if (tenantId.startsWith('acceptance_runs_')) {
     const runId = tenantId.replace('acceptance_runs_', '');
-    return admin.database().ref(`${firebaseRoot}/acceptance_runs/${runId}/${pathSegment}`);
+    return getDatabase().ref(`${firebaseRoot}/acceptance_runs/${runId}/${pathSegment}`);
   }
 
   if (pathSegment.startsWith('lock')) {
-    return admin.database().ref(`${firebaseRoot}/tenant_locks/${tenantId}`);
+    return getDatabase().ref(`${firebaseRoot}/tenant_locks/${tenantId}`);
   }
   if (pathSegment.startsWith('session/')) {
     const tokenHash = pathSegment.split('/')[1];
-    return admin.database().ref(`${firebaseRoot}/auth_sessions/${tenantId}/${tokenHash}`);
+    return getDatabase().ref(`${firebaseRoot}/auth_sessions/${tenantId}/${tokenHash}`);
   }
-  return admin.database().ref(`${firebaseRoot}/tenants/${tenantId}`);
+  return getDatabase().ref(`${firebaseRoot}/tenants/${tenantId}`);
 }
 
 export async function savePersistentSession(tenantId, tokenHash, session) {

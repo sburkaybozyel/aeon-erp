@@ -1,49 +1,37 @@
 import { existsSync, readFileSync } from 'node:fs';
 
-const removedPaths = [
-  'public/staff.html',
-  'public/admin_mobile.html',
-  'public/js/staff.js',
-  'public/js/dining.js',
-  'public/js/stay.js',
-  'public/js/cruise.js',
-  'public/js/request-notifications.js',
-  'public/js_mobile'
-];
-const sourceFiles = [
+const requiredPaths = [
   'server.js',
-  'db.js',
+  'server-config.js',
+  'server-middleware.js',
+  'cloudflare-worker.js',
+  'wrangler.jsonc',
+  'routes/auth.js',
+  'routes/tenant.js',
+  'routes/operations.js',
+  'routes/staff.js',
+  'routes/inventory.js',
+  'routes/audit.js',
   'public/index.html',
   'public/login.html',
-  'public/sw.js',
-  'public/manifest.json',
-  'public/js/boot.js',
-  'public/js/state.js',
-  'public/js/manager-entry.js',
-  'public/js/admin.js',
-  'public/js/guest.js'
+  'public/guest.html',
+  'public/restaurant.html'
 ];
-const forbidden = [
-  'admin_mobile.html',
-  'js_mobile',
-  '/staff.html',
-  'AEON_USE_MOCK_FIREBASE',
-  'seedDemoData',
-  '/api/system/reset',
-  'setupGuestSimulator',
-  'loadGuestSimulatorData'
-];
-const failures = [];
 
-for (const file of removedPaths) {
-  if (existsSync(file)) failures.push(`removed path exists: ${file}`);
+const failures = requiredPaths.filter(path => !existsSync(path)).map(path => `required path missing: ${path}`);
+const server = readFileSync('server.js', 'utf8');
+const middleware = readFileSync('server-middleware.js', 'utf8');
+const guest = readFileSync('public/guest.html', 'utf8');
+const boot = readFileSync('public/js/boot.js', 'utf8');
+
+for (const registration of ['registerAuthRoutes', 'registerTenantRoutes', 'registerOperationsRoutes', 'initDining', 'initStay', 'initReception', 'initHotelRunner', 'initCrmBridge']) {
+  if (!server.includes(`${registration}(`)) failures.push(`backend registration missing: ${registration}`);
 }
-for (const file of sourceFiles) {
-  const contents = readFileSync(file, 'utf8');
-  for (const token of forbidden) {
-    if (contents.includes(token)) failures.push(`legacy token ${token} in ${file}`);
-  }
-}
+if (server.includes("app.post('/api/system/reset'")) failures.push('legacy destructive reset route is still registered');
+if (!middleware.includes('AEON_ALLOWED_TENANTS')) failures.push('tenant allowlist is not configured');
+if (!middleware.includes('authorizeOperation')) failures.push('authorization middleware is missing');
+if (/manifest_guest\.json|navigator\.serviceWorker\.register/.test(guest)) failures.push('guest portal enrolls into staff PWA');
+if (!boot.includes('const isGuestSurface') || !boot.includes("window.aeonSessionToken = isGuestSurface ? ''")) failures.push('guest authentication isolation is missing');
 if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);

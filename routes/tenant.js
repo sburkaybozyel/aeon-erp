@@ -21,11 +21,21 @@ function getLocalIpAddress() {
 
 export function registerTenantRoutes(app) {
   app.get('/api/tenant/branding', (req, res) => {
-    let tenantId = req.query.tenant_id || 'aeon';
+    let tenantId = req.tenantId || req.query.tenant_id || 'aeon';
     if (Array.isArray(tenantId)) {
       tenantId = tenantId[0];
     }
     if (tenantId === 'default') tenantId = 'aeon';
+
+    if (tenantId === 'aeon') {
+      return res.json({
+        tenant_id: 'aeon',
+        name: 'AEON ERP',
+        logo: '/brands/aeon/logo.svg',
+        primary_color: '#0891b2',
+        accent_color: '#d4af37'
+      });
+    }
 
     // 1. Validate tenant ID to prevent path traversal
     if (!/^[a-z0-9_-]+$/i.test(tenantId)) {

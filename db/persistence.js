@@ -25,7 +25,7 @@ export async function hasRemoteChanged(tenantId) {
 
 const isCloudflareWorker = process.env.CLOUDFLARE_WORKER === '1';
 const __dirname = isCloudflareWorker ? '/' : dirname(fileURLToPath(import.meta.url));
-const isEphemeralRuntime = isCloudflareWorker || Boolean(process.env.VERCEL) || Boolean(process.env.VERCEL_ENV) || Boolean(process.env.NOW_REGION) || process.env.NODE_ENV === 'production';
+const isEphemeralRuntime = isCloudflareWorker || process.env.NODE_ENV === 'production';
 // This file lives in <repo>/db, so the repo root is one level up.
 const repoRoot = isCloudflareWorker ? __dirname : join(__dirname, '..');
 const dbDir = isEphemeralRuntime ? join('/tmp', 'db') : join(repoRoot, 'db');
@@ -45,7 +45,7 @@ export function hasD1Persistence() {
 
 export function getSavePath(tenantId) {
   if (tenantId === 'aeon') {
-    let aeonDir = process.env.AEON_DATA_PATH || join(repoRoot, 'aeon');
+    let aeonDir = process.env.AEON_DATA_PATH || join(repoRoot, '.data', 'aeon');
     if (isEphemeralRuntime) aeonDir = join('/tmp', 'aeon');
     if (!fs.existsSync(aeonDir)) {
       fs.mkdirSync(aeonDir, { recursive: true });

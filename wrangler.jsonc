@@ -1,0 +1,29 @@
+{
+  "name": "aeon-erp",
+  "main": "cloudflare-worker.js",
+  "workers_dev": true,
+  "compatibility_date": "2026-08-12",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "d1_databases": [
+    {
+      "binding": "AEON_DB",
+      "database_name": "aeon-erp-db",
+      "database_id": "9f96091a-c456-4115-9646-6ecb39673b11"
+    }
+  ],
+  "assets": {
+    "directory": "./public",
+    "html_handling": "auto-trailing-slash"
+  },
+  "vars": {
+    "CLOUDFLARE_WORKER": "1",
+    "AEON_D1_BOOTSTRAP": "true",
+    "AEON_BUILD_ID": "cloudflare-2026-08-12-backend-refactor",
+    "AEON_DEFAULT_TENANT": "aeon",
+    "AEON_ALLOWED_TENANTS": "aeon",
+    "AEON_TENANT_HOSTS": "{\"aeon-erp.aeon-global.workers.dev\":\"aeon\"}"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

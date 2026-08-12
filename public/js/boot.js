@@ -12,6 +12,13 @@
     tenantId = 'aeon';
   }
   window.tenantId = tenantId;
+  const isGuestSurface = ['/guest', '/guest.html', '/room', '/room.html', '/room-portal', '/restaurant', '/restaurant.html', '/menu', '/restaurant-menu'].includes(window.location.pathname);
+  window.aeonSessionToken = isGuestSurface ? '' : (window.aeonSessionToken || '');
+
+  function revealPage() {
+    document.documentElement.removeAttribute('data-auth-pending');
+    document.body?.removeAttribute('data-auth-pending');
+  }
 
   function isPublicPortalPath() {
     const path = window.location.pathname;
@@ -38,7 +45,7 @@
       }
       
       const request = init ? { ...init } : {};
-      request.credentials = 'same-origin'; // Shift to cookie-only
+      request.credentials = isGuestSurface ? 'omit' : 'same-origin';
       
       const headers = new Headers(request.headers || {});
       const method = (request.method || 'GET').toUpperCase();
@@ -84,6 +91,10 @@
   window.aeonBoot = function() {
     if (bootPromise) return bootPromise;
     bootPromise = (async () => {
+      if (isGuestSurface) {
+        revealPage();
+        return null;
+      }
       // 1. Branding Resolution
       try {
         const brandRes = await originalFetch(`/api/tenant/branding?tenant_id=${window.tenantId}`);
