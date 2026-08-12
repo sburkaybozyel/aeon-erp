@@ -1,8 +1,9 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
-const [input, output] = process.argv.slice(2);
+const [input, output, excluded = ''] = process.argv.slice(2);
 if (!input || !output) throw new Error('Input and output paths are required.');
 const dump = JSON.parse(await readFile(input, 'utf8'));
+const excludedTables = new Set(excluded.split(',').map(value => value.trim()).filter(Boolean));
 const quote = value => {
   if (value === null || value === undefined) return 'NULL';
   if (typeof value === 'number' && Number.isFinite(value)) return String(value);
@@ -14,6 +15,7 @@ const lines = ['PRAGMA foreign_keys=OFF;'];
 let rowCount = 0;
 let tableCount = 0;
 for (const [table, rows] of Object.entries(dump)) {
+  if (excludedTables.has(table)) continue;
   if (!Array.isArray(rows) || rows.length === 0 || !/^[a-z0-9_]+$/i.test(table)) continue;
   tableCount += 1;
   lines.push(`DELETE FROM [${table}];`);

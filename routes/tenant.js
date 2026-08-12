@@ -4,6 +4,7 @@ import os from 'os';
 import { hasD1Persistence } from '../db.js';
 import { isManagementRole, hasDurablePersistence } from '../server-middleware.js';
 import { __dirname, PORT, isCloudflareWorker } from '../server-config.js';
+import { getCrmDbForRequest } from '../crm/runtime-db.js';
 
 // Tenant config/branding/system-info routes, extracted verbatim from server.js — no behavior change.
 
@@ -101,7 +102,7 @@ export function registerTenantRoutes(app) {
   app.get('/api/system/persistence', (req, res) => {
     res.json({
       customer: req.tenantId,
-      mode: hasD1Persistence() ? 'cloudflare-d1' : (hasDurablePersistence() ? 'firebase-rtdb' : (isCloudflareWorker ? 'filesystem-ephemeral' : 'local-file')),
+      mode: hasD1Persistence() ? 'cloudflare-d1' : (isCloudflareWorker ? 'filesystem-ephemeral' : 'local-file'),
       durable: hasDurablePersistence() || !isCloudflareWorker,
       warning: hasDurablePersistence() || !isCloudflareWorker
         ? null
@@ -115,6 +116,46 @@ export function registerTenantRoutes(app) {
       deployed_at: null,
       environment: isCloudflareWorker ? 'cloudflare-workers' : 'local'
     });
+  });
+
+  app.get('/api/system/health', async (req, res) => {
+    try {
+      const [roomCount, crmDb] = await Promise.all([
+        req.db.get('SELECT COUNT(*) AS cnt FROM rooms'),
+        getCrmDbForRequest(req)
+      ]);
+      const crmMarker = await crmDb.get("SELECT value FROM config WHERE key = 'crm_schema_version'");
+      const erpBridge = Boolean(process.env.CRM_BRIDGE_KEY && process.env.ERP_API_KEY && process.env.ERP_API_URL);
+      let erpBridgeReachable = null;
+      if (req.query.deep === '1' && erpBridge) {
+        try {
+          const response = await fetch(`${String(process.env.ERP_API_URL).replace(/\/$/, '')}/health`, {
+            headers: { 'x-erp-api-key': process.env.ERP_API_KEY },
+            signal: AbortSignal.timeout(4000)
+          });
+          erpBridgeReachable = response.ok;
+        } catch {
+          erpBridgeReachable = false;
+        }
+      }
+      res.json({
+        ok: true,
+        runtime: isCloudflareWorker ? 'cloudflare-workers' : 'local',
+        tenant: req.tenantId,
+        databases: {
+          erp: { durable: hasD1Persistence() || hasDurablePersistence(), rooms: Number(roomCount?.cnt || 0) },
+          crm: { durable: Boolean(globalThis.__AEON_CRM_D1) || !isCloudflareWorker, schema_version: crmMarker?.value || null }
+        },
+        bridges: {
+          crm_erp: { configured: erpBridge, reachable: erpBridgeReachable },
+          printing: { configured: Boolean(process.env.AEON_PRINT_BRIDGE_KEY) },
+          hotelrunner: { configured: Boolean(process.env.HOTELRUNNER_TOKEN && process.env.HOTELRUNNER_HR_ID) }
+        },
+        build: process.env.AEON_BUILD_ID || 'local'
+      });
+    } catch (error) {
+      res.status(503).json({ error: error.message, ok: false });
+    }
   });
 
   app.post('/api/tenant/config', async (req, res) => {

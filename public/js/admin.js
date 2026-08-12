@@ -1448,24 +1448,6 @@ function setupLiveManagementForms() {
     prodSelect.addEventListener('change', loadRecipeForSelectedCatalogItemLive);
   }
 
-  // Reset database live
-  const btnReset = document.getElementById('btn-reset-db-live');
-  if (btnReset) {
-    btnReset.addEventListener('click', async () => {
-      if (confirm("DİKKAT: Bu işletmeye ait tüm odaları, masaları, ürünleri, stokları ve harcama geçmişini silmek istediğinize emin misiniz?")) {
-        const res = await fetch(`/api/system/reset?tenant_id=${state.currentTenant}`, {
-          method: 'POST'
-        });
-        if (res.ok) {
-          logEvent('system', `Veritabanı tamamen sıfırlandı (Clean Setup).`);
-          alert("Veritabanı sıfırlandı. Artık kendi gerçek oda, masa ve ürünlerinizi tanımlayabilirsiniz!");
-          const configRes = await fetch(`/api/catalog/availability?tenant_id=${state.currentTenant}`);
-          if (configRes.ok) state.availableCatalog = await configRes.json();
-          loadAdminDashboardData();
-        }
-      }
-    });
-  }
 }
 
 async function loadRecipeForSelectedCatalogItemLive() {

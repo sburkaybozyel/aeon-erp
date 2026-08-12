@@ -61,7 +61,7 @@ export function initIntegration({ app, getCrmDb, broadcastSSE, isManagement, req
   // Entegrasyon yapılandırması ve bağlantı sağlığı (admin)
   app.get('/api/crm/integration/config', requireManagement, async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       let reachable = false, health = null;
       try {
         const r = await erpFetch(db, { operation: 'health', path: '/health', method: 'GET' });
@@ -78,7 +78,7 @@ export function initIntegration({ app, getCrmDb, broadcastSSE, isManagement, req
     const { check_in, check_out, room_type, board, guests, currency } = req.body;
     if (!check_in || !check_out) return badRequest(res, 'check_in ve check_out zorunludur.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const result = await erpFetch(db, { operation: 'availability', path: '/availability', method: 'POST', body: { check_in, check_out, room_type, board, guests, currency } });
       ok(res, result);
     } catch (err) { res.status(502).json({ error: err.message }); }
@@ -87,7 +87,7 @@ export function initIntegration({ app, getCrmDb, broadcastSSE, isManagement, req
   // Kazanılmış fırsatı ERP rezervasyonuna dönüştürme (idempotent)
   app.post('/api/crm/integration/opportunities/:id/convert', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const opp = await db.get("SELECT * FROM opportunities WHERE id = ?", [req.params.id]);
       if (!opp) return notFound(res, 'Fırsat bulunamadı.');
       if (opp.pipeline_stage !== 'won') return badRequest(res, 'Yalnızca kazanılmış (won) fırsatlar ERP rezervasyonuna dönüştürülebilir.');
@@ -163,7 +163,7 @@ export function initIntegration({ app, getCrmDb, broadcastSSE, isManagement, req
   // ERP rezervasyon/konaklama durumunu CRM fırsatına geri çekme
   app.post('/api/crm/integration/opportunities/:id/refresh-status', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const opp = await db.get("SELECT * FROM opportunities WHERE id = ?", [req.params.id]);
       if (!opp) return notFound(res, 'Fırsat bulunamadı.');
       if (!opp.erp_reservation_id) return badRequest(res, 'Bu fırsatın ERP rezervasyonu yok. Önce dönüştürün.');
@@ -183,7 +183,7 @@ export function initIntegration({ app, getCrmDb, broadcastSSE, isManagement, req
   // Hatalı senkronizasyon kaydını tekrar deneme (güvenli retry)
   app.post('/api/crm/integration/logs/:id/retry', requireManagement, async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const log = await db.get("SELECT * FROM integration_logs WHERE id = ?", [req.params.id]);
       if (!log) return notFound(res, 'Kayıt bulunamadı.');
       if (!log.opportunity_id) return badRequest(res, 'Bu kayıt fırsat bazlı olmadığı için yeniden denenemez.');
@@ -223,7 +223,7 @@ export function initIntegration({ app, getCrmDb, broadcastSSE, isManagement, req
   // Entegrasyon günlükleri (tarihçe)
   app.get('/api/crm/integration/logs', requireManagement, async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const rows = await db.all("SELECT l.*, o.title AS opportunity_title FROM integration_logs l LEFT JOIN opportunities o ON o.id = l.opportunity_id ORDER BY l.created_at DESC LIMIT 100");
       ok(res, rows);
     } catch (err) { res.status(500).json({ error: err.message }); }
@@ -232,7 +232,7 @@ export function initIntegration({ app, getCrmDb, broadcastSSE, isManagement, req
   // fırsat listesi görünümünde ERP durumu
   app.get('/api/crm/integration/opportunities', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const rows = await db.all("SELECT id, title, erp_reservation_id, erp_reservation_no, erp_status, integration_status, erp_total_amount, erp_currency FROM opportunities WHERE erp_reservation_id IS NOT NULL ORDER BY updated_at DESC LIMIT 100");
       ok(res, rows);
     } catch (err) { res.status(500).json({ error: err.message }); }

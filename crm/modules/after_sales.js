@@ -4,13 +4,14 @@
 import crypto from 'crypto';
 
 const ERP_API_URL = (process.env.ERP_API_URL || 'http://localhost:3200/api/erp').replace(/\/$/, '');
+const ERP_API_KEY = process.env.ERP_API_KEY || null;
 
 function uid(prefix = 'id') {
   return `${prefix}_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
 }
 
 async function erpGet(db, path) {
-  const res = await fetch(`${ERP_API_URL}${path}`, { headers: { 'Content-Type': 'application/json' } });
+  const res = await fetch(`${ERP_API_URL}${path}`, { headers: { 'Content-Type': 'application/json', ...(ERP_API_KEY ? { 'x-erp-api-key': ERP_API_KEY } : {}) } });
   if (res.status >= 400) throw new Error(`ERP hatası (${res.status})`);
   return res.json();
 }
@@ -29,7 +30,7 @@ export function initAfterSales({ app, getCrmDb, broadcastSSE, isManagement, requ
   // satış sonrası memnuniyet takibi oluşturur. Ayrıca yaklaşan check-in için ön takip.
   app.post('/api/crm/followups/generate', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       let erpReservations = [];
       try {
         erpReservations = await erpGet(db, '/reservations');
@@ -78,7 +79,7 @@ export function initAfterSales({ app, getCrmDb, broadcastSSE, isManagement, requ
 
   app.get('/api/crm/followups', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const stage = req.query.stage;
       let sql = "SELECT f.*, o.title AS opportunity_title, c.first_name || ' ' || c.last_name AS contact_name, c.marketing_consent, u.name AS owner_name FROM followups f LEFT JOIN opportunities o ON o.id = f.opportunity_id LEFT JOIN contacts c ON c.id = f.contact_id LEFT JOIN users u ON u.id = f.owner_id";
       const params = [];
@@ -93,7 +94,7 @@ export function initAfterSales({ app, getCrmDb, broadcastSSE, isManagement, requ
     const { action } = req.body;
     if (!['done', 'skip', 'snooze'].includes(action)) return badRequest(res, 'Geçersiz işlem (done, skip, snooze).');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const fup = await db.get("SELECT * FROM followups WHERE id = ?", [req.params.id]);
       if (!fup) return notFound(res, 'Takip bulunamadı.');
       if (action === 'done') {
@@ -111,7 +112,7 @@ export function initAfterSales({ app, getCrmDb, broadcastSSE, isManagement, requ
   // Satış sonrası takipten tekrar konaklama fırsatı oluştur
   app.post('/api/crm/followups/:id/create-opportunity', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const fup = await db.get("SELECT * FROM followups WHERE id = ?", [req.params.id]);
       if (!fup) return notFound(res, 'Takip bulunamadı.');
       if (fup.stage !== 'pending') return badRequest(res, 'Yalnızca bekleyen takiplerden tekrar fırsat oluşturulabilir.');
@@ -129,7 +130,7 @@ export function initAfterSales({ app, getCrmDb, broadcastSSE, isManagement, requ
   // ── KAMPANYALAR (izin kontrollü) ─────────────────────────────────────
   app.get('/api/crm/campaigns', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const rows = await db.all("SELECT c.*, (SELECT COUNT(*) FROM campaign_contacts cc WHERE cc.campaign_id = c.id AND cc.status = 'sent') AS sent_count, (SELECT COUNT(*) FROM campaign_contacts cc WHERE cc.campaign_id = c.id AND cc.status = 'skipped') AS skipped_count FROM campaigns c ORDER BY c.created_at DESC LIMIT 100");
       ok(res, rows);
     } catch (err) { res.status(500).json({ error: err.message }); }
@@ -139,7 +140,7 @@ export function initAfterSales({ app, getCrmDb, broadcastSSE, isManagement, requ
     const { name, segment, scheduled_at } = req.body;
     if (!name || !segment) return badRequest(res, 'Kampanya adı ve segment zorunludur.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const id = uid('cmp');
       await db.run("INSERT INTO campaigns (id, name, segment, status, scheduled_at) VALUES (?, ?, ?, 'draft', ?)",
         [id, name.trim(), segment, scheduled_at || null]);
@@ -150,7 +151,7 @@ export function initAfterSales({ app, getCrmDb, broadcastSSE, isManagement, requ
 
   app.delete('/api/crm/campaigns/:id', requireManagement, async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       await db.run("DELETE FROM campaign_contacts WHERE campaign_id = ?", [req.params.id]);
       await db.run("DELETE FROM campaigns WHERE id = ?", [req.params.id]);
       ok(res, { success: true });
@@ -161,7 +162,7 @@ export function initAfterSales({ app, getCrmDb, broadcastSSE, isManagement, requ
   // marketing_consent=0 olanlar asla gönderilmez; kampanya_contacts'a skipped+neden yazılır.
   app.post('/api/crm/campaigns/:id/run', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const camp = await db.get("SELECT * FROM campaigns WHERE id = ?", [req.params.id]);
       if (!camp) return notFound(res, 'Kampanya bulunamadı.');
 
@@ -204,7 +205,7 @@ export function initAfterSales({ app, getCrmDb, broadcastSSE, isManagement, requ
 
   app.get('/api/crm/campaigns/:id/contacts', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const rows = await db.all("SELECT cc.contact_id, cc.status, cc.reason, c.first_name || ' ' || c.last_name AS contact_name, c.email, c.marketing_consent FROM campaign_contacts cc LEFT JOIN contacts c ON c.id = cc.contact_id WHERE cc.campaign_id = ? ORDER BY cc.created_at DESC", [req.params.id]);
       ok(res, rows);
     } catch (err) { res.status(500).json({ error: err.message }); }
@@ -213,7 +214,7 @@ export function initAfterSales({ app, getCrmDb, broadcastSSE, isManagement, requ
   // Dashboard için takip özeti
   app.get('/api/crm/followups/summary', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const pending = await db.get("SELECT COUNT(*) AS cnt FROM followups WHERE stage = 'pending'");
       const dueSoon = await db.get("SELECT COUNT(*) AS cnt FROM followups WHERE stage = 'pending' AND due_date IS NOT NULL AND date(due_date) <= date('now', '+3 day')");
       ok(res, { pending: Number(pending?.cnt || 0), due_soon: Number(dueSoon?.cnt || 0) });

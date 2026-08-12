@@ -8,7 +8,7 @@ export function initReports({ app, getCrmDb, broadcastSSE, isManagement, require
   // Pipeline toplamı ve aşama bazlı dağılım
   app.get('/api/crm/reports/pipeline', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const rows = await db.all("SELECT pipeline_stage, COUNT(*) AS cnt, COALESCE(SUM(amount),0) AS total_amt FROM opportunities GROUP BY pipeline_stage ORDER BY total_amt DESC");
       const grand = await db.get("SELECT COUNT(*) AS cnt, COALESCE(SUM(amount),0) AS total_amt FROM opportunities");
       ok(res, { breakdown: rows, total_opportunities: Number(grand.cnt), total_amount: Number(grand.total_amt) });
@@ -18,7 +18,7 @@ export function initReports({ app, getCrmDb, broadcastSSE, isManagement, require
   // Lead → fırsat → teklif → kazanılan dönüşüm hunisi
   app.get('/api/crm/reports/conversion', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const leads = await db.get("SELECT COUNT(*) AS cnt FROM leads");
       const leadsToOpp = await db.get("SELECT COUNT(DISTINCT lead_id) AS cnt FROM opportunities WHERE lead_id IS NOT NULL");
       const oppsWithOffers = await db.get("SELECT COUNT(DISTINCT opportunity_id) AS cnt FROM offers");
@@ -44,7 +44,7 @@ export function initReports({ app, getCrmDb, broadcastSSE, isManagement, require
   // Kaynak / acente / temsilci performansı
   app.get('/api/crm/reports/performance', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const bySource = await db.all("SELECT o.source, COUNT(*) AS cnt, COALESCE(SUM(o.amount),0) AS total_amt, SUM(CASE WHEN o.pipeline_stage = 'won' THEN 1 ELSE 0 END) AS won FROM opportunities o GROUP BY o.source ORDER BY total_amt DESC");
       const byFirm = await db.all("SELECT f.name AS firm_name, f.type AS firm_type, COUNT(o.id) AS cnt, COALESCE(SUM(o.amount),0) AS total_amt, SUM(CASE WHEN o.pipeline_stage = 'won' THEN 1 ELSE 0 END) AS won FROM opportunities o LEFT JOIN firms f ON f.id = o.firm_id GROUP BY o.firm_id ORDER BY total_amt DESC LIMIT 20");
       const byOwner = await db.all("SELECT u.name AS owner_name, COUNT(o.id) AS cnt, COALESCE(SUM(o.amount),0) AS total_amt, SUM(CASE WHEN o.pipeline_stage = 'won' THEN 1 ELSE 0 END) AS won FROM opportunities o LEFT JOIN users u ON u.id = o.owner_id GROUP BY o.owner_id ORDER BY total_amt DESC");
@@ -55,7 +55,7 @@ export function initReports({ app, getCrmDb, broadcastSSE, isManagement, require
   // Ortalama yanıt / satışa dönüşme süresi (gün)
   app.get('/api/crm/reports/timing', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const leadToOpp = await db.all("SELECT o.created_at AS opp_created, l.created_at AS lead_created FROM opportunities o JOIN leads l ON l.id = o.lead_id WHERE l.created_at IS NOT NULL AND o.created_at IS NOT NULL");
       const wonTiming = await db.all("SELECT created_at, updated_at FROM opportunities WHERE pipeline_stage = 'won'");
       const avgDays = (rows, a, b) => {
@@ -75,7 +75,7 @@ export function initReports({ app, getCrmDb, broadcastSSE, isManagement, require
   // Kaybedilen fırsat analizi
   app.get('/api/crm/reports/lost-analysis', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const byReason = await db.all("SELECT COALESCE(lost_reason, 'belirsiz') AS reason, COUNT(*) AS cnt, COALESCE(SUM(amount),0) AS total_amt FROM opportunities WHERE pipeline_stage = 'lost' GROUP BY reason ORDER BY total_amt DESC");
       const grand = await db.get("SELECT COUNT(*) AS cnt, COALESCE(SUM(amount),0) AS total_amt FROM opportunities WHERE pipeline_stage = 'lost'");
       ok(res, { by_reason: byReason, total_lost: Number(grand.cnt), total_lost_amount: Number(grand.total_amt) });
@@ -85,7 +85,7 @@ export function initReports({ app, getCrmDb, broadcastSSE, isManagement, require
   // CRM ↔ ERP gelir mutabakatı: fırsat tutarı vs ERP rezervasyon tutarı
   app.get('/api/crm/reports/reconciliation', requireManagement, async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const rows = await db.all("SELECT id, title, amount, currency, erp_reservation_no, erp_status, erp_total_amount, erp_currency FROM opportunities WHERE erp_reservation_id IS NOT NULL ORDER BY updated_at DESC LIMIT 200");
       const rowsWithDiff = rows.map(r => {
         const crmAmount = Number(r.amount) || 0;

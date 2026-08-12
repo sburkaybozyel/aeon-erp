@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node --env-file-if-exists=.env.local server.js",
     "deploy:cloudflare": "wrangler deploy",
-    "test": "NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/hotelrunner.test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node test_hotelrunner.mjs && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/bar-hotel-workflow.test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/public-portal-isolation.test.js",
+    "schema:crm": "node scripts/export-crm-schema.mjs crm/schema.sql",
+    "test": "NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/hotelrunner.test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node test_hotelrunner.mjs && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/bar-hotel-workflow.test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/public-portal-isolation.test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/crm-runtime.test.js",
     "check": "npm test && npm run verify:runtime",
     "test:hotelrunner-client": "node --test integrations/hotelrunner.test.js",
     "test:hotelrunner": "node test_hotelrunner.mjs",
@@ -19,12 +20,13 @@
   "dependencies": {
     "alasql": "^4.4.0",
     "express": "^4.19.2",
-    "firebase-admin": "^14.2.0",
     "web-push": "^3.6.7"
   },
   "devDependencies": {
-    "firebase-tools": "^15.24.0",
     "playwright": "^1.61.1",
     "wrangler": "^4.122.0"
+  },
+  "overrides": {
+    "body-parser": "1.20.6"
   }
 }

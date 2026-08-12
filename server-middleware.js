@@ -538,8 +538,8 @@ function isPublicApiRequest(req) {
   // secret (CRM_BRIDGE_KEY, checked in the bridge module), so letting it past the staff-session
   // check here does not make it open to the public.
   if (req.path === '/erp/health' || req.path.startsWith('/erp/')) return true;
-  if (req.path === '/auth/login' || req.path === '/auth/logout' || req.path === '/tenant/branding' || req.path === '/system/persistence' || req.path === '/system/build' || req.path === '/guest/precheckin' || req.path.startsWith('/guest/precheckin/') || req.path === '/integrations/hotelrunner/push') return true;
-  if (req.method === 'GET' && ['/catalog/availability', '/guest/requests', '/guest/room-context', '/push/public-key', '/guest/targets'].includes(req.path)) return true;
+  if (req.path === '/auth/login' || req.path === '/auth/logout' || req.path === '/tenant/branding' || req.path === '/system/persistence' || req.path === '/system/build' || req.path === '/system/health' || req.path === '/guest/precheckin' || req.path.startsWith('/guest/precheckin/') || req.path === '/integrations/hotelrunner/push') return true;
+  if (req.method === 'GET' && ['/catalog/availability', '/guest/requests', '/guest/room-context', '/guest/folio', '/push/public-key', '/guest/targets'].includes(req.path)) return true;
   if (req.method === 'POST' && req.path === '/requests') return true;
   if (req.path.startsWith('/print-bridge/')) return true;
   return false;
@@ -560,6 +560,9 @@ export function authorizeOperation(req, res, next) {
   const housekeeping = ['housekeeping', 'kat hizmetleri'];
   const dining = ['restaurant', 'waiter', 'servis', 'kitchen', 'chef', 'mutfak', 'bar'];
   const technical = ['maintenance', 'teknik'];
+  if (path.startsWith('/crm/')) return hasAny(['management', 'reception', 'resepsiyon', 'sales', 'satış'])
+    ? next()
+    : res.status(403).json({ error: 'Bu işlem için CRM yetkisi gereklidir.' });
   if (path.startsWith('/system/') || path.startsWith('/tenant/') || path.startsWith('/admin/') || path === '/staff' || path.startsWith('/staff/') || path === '/audit-logs') {
     return res.status(403).json({ error: 'Bu işlem yönetici yetkisi gerektirir.' });
   }

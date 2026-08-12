@@ -9,6 +9,11 @@
       "binding": "AEON_DB",
       "database_name": "aeon-erp-db",
       "database_id": "9f96091a-c456-4115-9646-6ecb39673b11"
+    },
+    {
+      "binding": "AEON_CRM_DB",
+      "database_name": "aeon-crm-db",
+      "database_id": "79145182-31a1-477f-9cf6-72e35a42d894"
     }
   ],
   "assets": {
@@ -18,10 +23,11 @@
   "vars": {
     "CLOUDFLARE_WORKER": "1",
     "AEON_D1_BOOTSTRAP": "true",
-    "AEON_BUILD_ID": "cloudflare-2026-08-12-backend-refactor",
+    "AEON_BUILD_ID": "cloudflare-2026-08-12-full-system-refactor",
     "AEON_DEFAULT_TENANT": "aeon",
     "AEON_ALLOWED_TENANTS": "aeon",
-    "AEON_TENANT_HOSTS": "{\"aeon-erp.aeon-global.workers.dev\":\"aeon\"}"
+    "AEON_TENANT_HOSTS": "{\"aeon-erp.aeon-global.workers.dev\":\"aeon\"}",
+    "ERP_API_URL": "https://aeon-erp.aeon-global.workers.dev/api/erp"
   },
   "observability": {
     "enabled": true

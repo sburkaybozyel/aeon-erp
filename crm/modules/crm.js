@@ -11,7 +11,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
   // ─── CONFIG / METADATA ────────────────────────────────────────────────
   app.get('/api/crm/config', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const rows = await db.all("SELECT * FROM config");
       const config = {};
       rows.forEach(r => {
@@ -25,7 +25,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
   // ─── DASHBOARD ────────────────────────────────────────────────────────
   app.get('/api/crm/dashboard', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const [openOpps, totalOpps, wonOpps, overdueTasks, openTasks, recentLeads, recentActivities, stageCounts] = await Promise.all([
         db.get("SELECT COUNT(*) AS cnt, COALESCE(SUM(amount),0) AS total_pipeline FROM opportunities WHERE pipeline_stage NOT IN ('won','lost')"),
         db.get("SELECT COUNT(*) AS cnt FROM opportunities"),
@@ -54,7 +54,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
   // ─── USERS (yönetici) ─────────────────────────────────────────────────
   app.get('/api/crm/users', requireManagement, async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const users = await db.all("SELECT id, name, email, role, active, created_at FROM users ORDER BY name");
       res.json(users);
     } catch (err) { json(res, 500, { error: err.message }); }
@@ -64,7 +64,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     const { name, email, password, role } = req.body;
     if (!name || !email || !password) return badRequest(res, 'name, email ve password zorunludur.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const existing = await db.get("SELECT id FROM users WHERE email = ?", [String(email).toLowerCase().trim()]);
       if (existing) return json(res, 409, { error: 'Bu e-posta zaten kayıtlı.' });
       const id = uid('usr');
@@ -78,7 +78,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
   app.patch('/api/crm/users/:id', requireManagement, async (req, res) => {
     const { name, role, active, password } = req.body;
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const fields = []; const values = [];
       if (typeof name === 'string' && name.trim()) { fields.push('name = ?'); values.push(name.trim()); }
       if (role) { fields.push('role = ?'); values.push(role); }
@@ -94,7 +94,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
   // ─── FIRMS ────────────────────────────────────────────────────────────
   app.get('/api/crm/firms', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const q = (req.query.q || '').trim();
       let rows;
       if (q) {
@@ -114,7 +114,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     const { name, type, tax_number, phone, email, country, city, website, commission_rate, notes } = req.body;
     if (!name || !String(name).trim()) return badRequest(res, 'Firma adı zorunludur.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const id = uid('frm');
       await db.run(
         "INSERT INTO firms (id, name, type, tax_number, phone, email, country, city, website, commission_rate, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -126,7 +126,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
 
   app.get('/api/crm/firms/:id', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const firm = await db.get("SELECT * FROM firms WHERE id = ?", [req.params.id]);
       if (!firm) return json(res, 404, { error: 'Firma bulunamadı.' });
       const contacts = await db.all("SELECT * FROM contacts WHERE firm_id = ? ORDER BY is_primary DESC, last_name", [firm.id]);
@@ -144,7 +144,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     }
     if (!fields.length) return badRequest(res, 'Güncellenecek alan yok.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       values.push(req.params.id);
       await db.run(`UPDATE firms SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = ?`, values);
       res.json({ success: true });
@@ -153,7 +153,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
 
   app.delete('/api/crm/firms/:id', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       await db.run("DELETE FROM contacts WHERE firm_id = ?", [req.params.id]);
       await db.run("DELETE FROM firms WHERE id = ?", [req.params.id]);
       res.json({ success: true });
@@ -163,7 +163,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
   // ─── CONTACTS ─────────────────────────────────────────────────────────
   app.get('/api/crm/contacts', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const q = (req.query.q || '').trim();
       const firmId = req.query.firm_id;
       let sql = "SELECT c.*, f.name AS firm_name FROM contacts c LEFT JOIN firms f ON f.id = c.firm_id";
@@ -180,7 +180,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     const { firm_id, first_name, last_name, title, phone, email, is_primary, kvkk_consent, marketing_consent, vip, segment, preferences, allergies, birthday, notes } = req.body;
     if (!first_name || !last_name) return badRequest(res, 'Ad ve soyad zorunludur.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       if (is_primary) await db.run("UPDATE contacts SET is_primary = 0 WHERE firm_id = ?", [firm_id || null]);
       const id = uid('cnt');
       await db.run(
@@ -199,7 +199,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     }
     if (!fields.length) return badRequest(res, 'Güncellenecek alan yok.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       if (req.body.is_primary) await db.run("UPDATE contacts SET is_primary = 0 WHERE firm_id = ? AND id != ?", [req.body.firm_id || null, req.params.id]);
       values.push(req.params.id);
       await db.run(`UPDATE contacts SET ${fields.join(', ')} WHERE id = ?`, values);
@@ -209,7 +209,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
 
   app.delete('/api/crm/contacts/:id', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       await db.run("DELETE FROM contacts WHERE id = ?", [req.params.id]);
       res.json({ success: true });
     } catch (err) { json(res, 500, { error: err.message }); }
@@ -218,7 +218,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
   // ─── LEADS ────────────────────────────────────────────────────────────
   app.get('/api/crm/leads', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const status = req.query.status;
       const q = (req.query.q || '').trim();
       let sql = "SELECT l.*, u.name AS owner_name, f.name AS firm_name FROM leads l LEFT JOIN users u ON u.id = l.owner_id LEFT JOIN firms f ON f.id = l.firm_id";
@@ -235,7 +235,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     const { firm_id, contact_id, source, owner_id, notes } = req.body;
     if (!source) return badRequest(res, 'Lead kaynağı zorunludur.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const id = uid('lead');
       await db.run("INSERT INTO leads (id, firm_id, contact_id, source, owner_id, status, notes) VALUES (?, ?, ?, ?, ?, 'new', ?)",
         [id, firm_id || null, contact_id || null, source, owner_id || req.crmUser.id, notes || null]);
@@ -252,7 +252,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     }
     if (!fields.length) return badRequest(res, 'Güncellenecek alan yok.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       fields.push('updated_at = CURRENT_TIMESTAMP');
       values.push(req.params.id);
       await db.run(`UPDATE leads SET ${fields.join(', ')} WHERE id = ?`, values);
@@ -262,7 +262,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
 
   app.delete('/api/crm/leads/:id', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       await db.run("DELETE FROM leads WHERE id = ?", [req.params.id]);
       res.json({ success: true });
     } catch (err) { json(res, 500, { error: err.message }); }
@@ -271,7 +271,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
   // ─── OPPORTUNITIES (pipeline) ─────────────────────────────────────────
   app.get('/api/crm/opportunities', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const stage = req.query.stage;
       const ownerId = req.query.owner_id;
       let sql = "SELECT o.*, u.name AS owner_name, f.name AS firm_name, c.first_name || ' ' || c.last_name AS contact_name FROM opportunities o LEFT JOIN users u ON u.id = o.owner_id LEFT JOIN firms f ON f.id = o.firm_id LEFT JOIN contacts c ON c.id = o.contact_id";
@@ -288,7 +288,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     const { lead_id, firm_id, contact_id, title, pipeline_stage, amount, currency, owner_id, source, close_date, notes } = req.body;
     if (!title || !String(title).trim()) return badRequest(res, 'Fırsat başlığı zorunludur.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const id = uid('opp');
       await db.run(
         "INSERT INTO opportunities (id, lead_id, firm_id, contact_id, title, pipeline_stage, amount, currency, owner_id, source, close_date, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -301,7 +301,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
 
   app.get('/api/crm/opportunities/:id', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const opp = await db.get("SELECT o.*, u.name AS owner_name, f.name AS firm_name, c.first_name || ' ' || c.last_name AS contact_name FROM opportunities o LEFT JOIN users u ON u.id = o.owner_id LEFT JOIN firms f ON f.id = o.firm_id LEFT JOIN contacts c ON c.id = o.contact_id WHERE o.id = ?", [req.params.id]);
       if (!opp) return json(res, 404, { error: 'Fırsat bulunamadı.' });
       const activities = await db.all("SELECT a.*, u.name AS owner_name FROM activities a LEFT JOIN users u ON u.id = a.owner_id WHERE a.opportunity_id = ? ORDER BY a.activity_at DESC", [opp.id]);
@@ -319,7 +319,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     }
     if (!fields.length) return badRequest(res, 'Güncellenecek alan yok.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       if (req.body.pipeline_stage === 'lost' && !req.body.lost_reason) return badRequest(res, 'Kaybedilen fırsat için kayıp nedeni gereklidir.');
       fields.push('updated_at = CURRENT_TIMESTAMP');
       values.push(req.params.id);
@@ -335,7 +335,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     const { pipeline_stage, lost_reason } = req.body;
     if (!pipeline_stage) return badRequest(res, 'pipeline_stage gereklidir.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       if (pipeline_stage === 'lost' && !lost_reason) return badRequest(res, 'Kaybedilen fırsat için kayıp nedeni gereklidir.');
       await db.run("UPDATE opportunities SET pipeline_stage = ?, lost_reason = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?", [pipeline_stage, lost_reason || null, req.params.id]);
       const opp = await db.get("SELECT lead_id FROM opportunities WHERE id = ?", [req.params.id]);
@@ -347,7 +347,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
 
   app.delete('/api/crm/opportunities/:id', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       await db.run("DELETE FROM activities WHERE opportunity_id = ?", [req.params.id]);
       await db.run("DELETE FROM offers WHERE opportunity_id = ?", [req.params.id]);
       await db.run("DELETE FROM tasks WHERE related_type = 'opportunity' AND related_id = ?", [req.params.id]);
@@ -359,7 +359,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
   // ─── ACTIVITIES ───────────────────────────────────────────────────────
   app.get('/api/crm/activities', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const rows = await db.all("SELECT a.*, u.name AS owner_name, o.title AS opportunity_title FROM activities a LEFT JOIN users u ON u.id = a.owner_id LEFT JOIN opportunities o ON o.id = a.opportunity_id ORDER BY a.activity_at DESC LIMIT 200");
       res.json(rows);
     } catch (err) { json(res, 500, { error: err.message }); }
@@ -369,7 +369,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     const { opportunity_id, contact_id, type, subject, notes, activity_at } = req.body;
     if (!subject || !String(subject).trim()) return badRequest(res, 'Aktivite konusu zorunludur.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const id = uid('act');
       await db.run("INSERT INTO activities (id, opportunity_id, contact_id, type, subject, notes, owner_id, activity_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         [id, opportunity_id || null, contact_id || null, type || 'note', subject.trim(), notes || null, req.crmUser.id, activity_at || new Date().toISOString()]);
@@ -380,7 +380,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
 
   app.delete('/api/crm/activities/:id', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       await db.run("DELETE FROM activities WHERE id = ?", [req.params.id]);
       res.json({ success: true });
     } catch (err) { json(res, 500, { error: err.message }); }
@@ -389,7 +389,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
   // ─── TASKS ────────────────────────────────────────────────────────────
   app.get('/api/crm/tasks', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const status = req.query.status;
       const ownerId = req.query.owner_id;
       let sql = "SELECT t.*, u.name AS owner_name, o.title AS opportunity_title FROM tasks t LEFT JOIN users u ON u.id = t.owner_id LEFT JOIN opportunities o ON o.id = t.related_id AND t.related_type = 'opportunity'";
@@ -406,7 +406,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     const { title, priority, due_date, owner_id, related_type, related_id, notes } = req.body;
     if (!title || !String(title).trim()) return badRequest(res, 'Görev başlığı zorunludur.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const id = uid('tsk');
       await db.run("INSERT INTO tasks (id, title, priority, due_date, owner_id, related_type, related_id, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         [id, title.trim(), priority || 'normal', due_date || null, owner_id || req.crmUser.id, related_type || null, related_id || null, notes || null]);
@@ -423,7 +423,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     }
     if (!fields.length) return badRequest(res, 'Güncellenecek alan yok.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       if (req.body.status === 'done') fields.push('completed_at = CURRENT_TIMESTAMP');
       if (req.body.status === 'pending') fields.push('completed_at = NULL');
       values.push(req.params.id);
@@ -434,7 +434,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
 
   app.delete('/api/crm/tasks/:id', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       await db.run("DELETE FROM tasks WHERE id = ?", [req.params.id]);
       res.json({ success: true });
     } catch (err) { json(res, 500, { error: err.message }); }
@@ -487,7 +487,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
 
   app.get('/api/crm/offers', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const rows = await db.all("SELECT o.*, op.title AS opportunity_title, (SELECT COUNT(*) FROM offer_items i WHERE i.offer_id = o.id) AS item_count FROM offers o LEFT JOIN opportunities op ON op.id = o.opportunity_id ORDER BY o.created_at DESC LIMIT 200");
       const withTotals = await Promise.all(rows.map(async o => {
         const detail = await getOfferDetail(db, o.id);
@@ -501,7 +501,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     const { opportunity_id, title, currency, discount_rate, tax_rate, valid_until, check_in, check_out, guests, room_type, board_type, commission_rate, notes } = req.body;
     if (!opportunity_id || !title) return badRequest(res, 'Fırsat ve teklif başlığı zorunludur.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const opp = await db.get("SELECT id FROM opportunities WHERE id = ?", [opportunity_id]);
       if (!opp) return json(res, 404, { error: 'Fırsat bulunamadı.' });
       const existing = await db.get("SELECT COUNT(*) AS cnt FROM offers WHERE opportunity_id = ?", [opportunity_id]);
@@ -519,7 +519,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
 
   app.get('/api/crm/offers/:id', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const offer = await getOfferDetail(db, req.params.id);
       if (!offer) return json(res, 404, { error: 'Teklif bulunamadı.' });
       const versions = await db.all("SELECT id, version, title, status, created_at FROM offers WHERE opportunity_id = ? ORDER BY version DESC", [offer.opportunity_id]);
@@ -534,7 +534,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
       if (req.body[key] !== undefined) { fields.push(`${key} = ?`); values.push(req.body[key]); }
     }
     if (req.body.check_in !== undefined || req.body.check_out !== undefined) {
-      const current = await (await getCrmDb()).get("SELECT check_in, check_out FROM offers WHERE id = ?", [req.params.id]);
+      const current = await (await getCrmDb(req)).get("SELECT check_in, check_out FROM offers WHERE id = ?", [req.params.id]);
       const checkIn = req.body.check_in ?? current.check_in;
       const checkOut = req.body.check_out ?? current.check_out;
       const nights = req.body.nights ?? computeNights(checkIn, checkOut);
@@ -542,7 +542,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     }
     if (!fields.length) return badRequest(res, 'Güncellenecek alan yok.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       fields.push('updated_at = CURRENT_TIMESTAMP');
       values.push(req.params.id);
       await db.run(`UPDATE offers SET ${fields.join(', ')} WHERE id = ?`, values);
@@ -555,7 +555,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     if (!OFFER_STATUSES.includes(status)) return badRequest(res, 'Geçersiz teklif durumu.');
     if (status === 'lost' && !req.body.lost_reason) return badRequest(res, 'Kaybedilen teklif için kayıp nedeni zorunludur (fiyat, tarih, müsaitlik, rakip, cevap_yok).');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const offer = await db.get("SELECT * FROM offers WHERE id = ?", [req.params.id]);
       if (!offer) return json(res, 404, { error: 'Teklif bulunamadı.' });
       if (offer.status !== status && !OFFER_TRANSITIONS[offer.status]?.includes(status)) {
@@ -577,7 +577,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
 
   app.post('/api/crm/offers/:id/revision', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const source = await db.get("SELECT * FROM offers WHERE id = ?", [req.params.id]);
       if (!source) return json(res, 404, { error: 'Teklif bulunamadı.' });
       const maxVer = await db.get("SELECT MAX(version) AS m FROM offers WHERE opportunity_id = ?", [source.opportunity_id]);
@@ -599,7 +599,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
 
   app.delete('/api/crm/offers/:id', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       await db.run("DELETE FROM offer_items WHERE offer_id = ?", [req.params.id]);
       await db.run("DELETE FROM offers WHERE id = ?", [req.params.id]);
       res.json({ success: true });
@@ -611,7 +611,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     const { category, description, qty, unit_price } = req.body;
     if (!description || !String(description).trim()) return badRequest(res, 'Kalem açıklaması zorunludur.');
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const offer = await db.get("SELECT id FROM offers WHERE id = ?", [req.params.id]);
       if (!offer) return json(res, 404, { error: 'Teklif bulunamadı.' });
       const quantity = Number(qty) || 1;
@@ -628,7 +628,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
   app.patch('/api/crm/offer-items/:id', async (req, res) => {
     const { category, description, qty, unit_price } = req.body;
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const item = await db.get("SELECT * FROM offer_items WHERE id = ?", [req.params.id]);
       if (!item) return json(res, 404, { error: 'Kalem bulunamadı.' });
       const quantity = req.body.qty !== undefined ? Number(req.body.qty) : Number(item.qty);
@@ -643,7 +643,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
 
   app.delete('/api/crm/offer-items/:id', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       await db.run("DELETE FROM offer_items WHERE id = ?", [req.params.id]);
       res.json({ success: true });
     } catch (err) { json(res, 500, { error: err.message }); }
@@ -652,7 +652,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
   // ─── INTEGRATION LOGS (Faz 3 hazırlık) ────────────────────────────────
   app.get('/api/crm/integration-logs', async (req, res) => {
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const rows = await db.all("SELECT * FROM integration_logs ORDER BY created_at DESC LIMIT 100");
       res.json(rows);
     } catch (err) { json(res, 500, { error: err.message }); }
@@ -663,7 +663,7 @@ export function initCrm({ app, getCrmDb, broadcastSSE, isManagement, requireMana
     const q = (req.query.q || '').trim();
     if (q.length < 2) return res.json({ firms: [], contacts: [], leads: [], opportunities: [] });
     try {
-      const db = await getCrmDb();
+      const db = await getCrmDb(req);
       const like = `%${q}%`;
       const [firms, contacts, leads, opportunities] = await Promise.all([
         db.all("SELECT id, name, city, type FROM firms WHERE name LIKE ? OR city LIKE ? LIMIT 10", [like, like]),

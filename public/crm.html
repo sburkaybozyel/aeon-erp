@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/aeon-tokens.css">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/crm-assets/style.css">
 </head>
 <body>
   <!-- LOGIN VIEW -->
@@ -17,10 +17,9 @@
       <div class="brand-mark">AEON<span>CRM</span></div>
       <h1>Turizm CRM</h1>
       <p class="muted">Satış, acente, lead, teklif ve fırsat takibi</p>
-      <label>E-posta</label>
-      <input type="email" id="login-email" autocomplete="username" placeholder="ornek@isletme.com" required>
-      <label>Parola</label>
-      <input type="password" id="login-password" autocomplete="current-password" placeholder="••••••••" required>
+      <input type="hidden" id="login-email" value="staff@aeon.local">
+      <label>Personel PIN</label>
+      <input type="password" id="login-password" inputmode="numeric" autocomplete="current-password" placeholder="••••" required>
       <div id="login-error" class="alert error hidden"></div>
       <button type="submit" class="btn primary block">Giriş Yap</button>
     </form>
@@ -80,6 +79,6 @@
 
   <div id="toast" class="toast hidden"></div>
 
-  <script src="/js/app.js"></script>
+  <script src="/crm-assets/app.js"></script>
 </body>
 </html>

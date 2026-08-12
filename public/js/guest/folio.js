@@ -8,12 +8,7 @@ export async function loadFolioData() {
     // Resolve the room via the public room-context lookup (works for anonymous guests) instead
     // of /api/rooms, which requires a staff session and previously 401'd here, leaving the bill
     // panel permanently empty with no visible error.
-    const contextRes = await fetch(`/api/guest/room-context?target=${encodeURIComponent(roomNumber)}`);
-    if (!contextRes.ok) { renderFolio(null, 'Oda bilgisi alınamadı.'); return; }
-    const context = await contextRes.json();
-    if (!context?.room?.id) { renderFolio(null, 'Oda bulunamadı.'); return; }
-
-    const folioRes = await fetch(`/api/rooms/${context.room.id}/folio`);
+    const folioRes = await fetch(`/api/guest/folio?target=${encodeURIComponent(roomNumber)}`);
     if (!folioRes.ok) { renderFolio(null, 'Hesap bilgisi alınamadı.'); return; }
     const data = await folioRes.json();
     renderFolio(data);

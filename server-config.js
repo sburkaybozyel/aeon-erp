@@ -8,7 +8,6 @@ import { fileURLToPath } from 'url';
 export const isCloudflareWorker = process.env.CLOUDFLARE_WORKER === '1';
 export const __dirname = isCloudflareWorker ? '/' : path.dirname(fileURLToPath(import.meta.url));
 export const publicDir = path.join(__dirname, 'public');
-export const crmPublicDir = path.join(__dirname, 'crm', 'public');
 export const PORT = Number(process.env.PORT || 3000);
 export const isHostedRuntime = isCloudflareWorker;
 export const shouldListen = !isHostedRuntime && process.env.AEON_DISABLE_LISTEN !== 'true';

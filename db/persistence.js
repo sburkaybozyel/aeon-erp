@@ -1,26 +1,8 @@
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
-import { hasFirebasePersistence, getFirebaseRef } from './firebase.js';
-
-// Per-instance cache of the last-seen Firebase `updatedAt` stamp per tenant, so refreshDb()
-// can skip pulling the *entire* dataset on every request and instead read just this one small
-// field first — only paying for a full reload when something actually changed since we last
-// looked (e.g. a write from a different serverless instance). Cuts Firebase RTDB download
-// bandwidth dramatically for read-heavy/polling traffic without weakening cross-instance
-// consistency: an unseen timestamp always triggers a real reload.
-const lastKnownUpdatedAt = new Map();
-
-export async function hasRemoteChanged(tenantId) {
-  if (!hasFirebasePersistence()) return true;
-  try {
-    const snapshot = await getFirebaseRef(tenantId, 'tenant').child('updatedAt').get();
-    const remoteUpdatedAt = snapshot.exists() ? snapshot.val() : null;
-    if (remoteUpdatedAt && remoteUpdatedAt === lastKnownUpdatedAt.get(tenantId)) return false;
-    return true;
-  } catch (e) {
-    return true; // Can't tell cheaply — fall back to a full reload rather than risk stale data.
-  }
+export async function hasRemoteChanged() {
+  return false;
 }
 
 const isCloudflareWorker = process.env.CLOUDFLARE_WORKER === '1';
@@ -90,124 +72,45 @@ async function persistDump(tenantId, dbInstance) {
     }
   }
 
-  const isTest = tenantId === 'test_suite_run';
-  if (hasFirebasePersistence() && !isTest) {
-    try {
-      const cleanDump = JSON.parse(JSON.stringify(dump));
-      const updatedAt = new Date().toISOString();
-      await getFirebaseRef(tenantId, 'tenant').set({
-        updatedAt,
-        ...cleanDump
-      });
-      // We just wrote this state ourselves, so our in-memory copy is already current —
-      // record the stamp now so the very next refreshDb() on this instance doesn't pay for
-      // a redundant full reload of the data we already hold.
-      lastKnownUpdatedAt.set(tenantId, updatedAt);
-    } catch (err) {
-      console.error("Failed to save to Firebase Realtime Database:", err);
-      throw err;
+  try {
+    const savePath = getSavePath(tenantId);
+    const parentDir = dirname(savePath);
+    if (!fs.existsSync(parentDir)) {
+      fs.mkdirSync(parentDir, { recursive: true });
     }
-  } else {
-    // Fallback local file — write to a temp file and rename into place so a crash/kill mid-write
-    // can never leave a truncated/corrupt JSON file behind (rename is atomic on the same filesystem).
-    try {
-      const savePath = getSavePath(tenantId);
-      const parentDir = dirname(savePath);
-      if (!fs.existsSync(parentDir)) {
-        fs.mkdirSync(parentDir, { recursive: true });
-      }
-      const tmpPath = `${savePath}.${process.pid}.${Date.now()}.tmp`;
-      fs.writeFileSync(tmpPath, JSON.stringify(dump, null, 2), 'utf8');
-      fs.renameSync(tmpPath, savePath);
-    } catch (err) {
-      console.warn("Local persistence write skipped on ephemeral filesystem:", err.message);
-    }
+    const tmpPath = `${savePath}.${process.pid}.${Date.now()}.tmp`;
+    fs.writeFileSync(tmpPath, JSON.stringify(dump, null, 2), 'utf8');
+    fs.renameSync(tmpPath, savePath);
+  } catch (err) {
+    console.warn("Local persistence write skipped on ephemeral filesystem:", err.message);
   }
 }
 
 export async function loadFromDisk(tenantId, dbInstance) {
-  const isTest = tenantId === 'test_suite_run';
-  if (hasFirebasePersistence() && !isTest) {
-    try {
-      const snapshot = await getFirebaseRef(tenantId, 'tenant').get();
-      if (!snapshot.exists()) {
-        return false;
-      }
-      const dump = snapshot.val();
-      // Remove metadata keys
-      if (dump.updatedAt) lastKnownUpdatedAt.set(tenantId, dump.updatedAt);
-      delete dump.updatedAt;
-
-      for (const [table, rows] of Object.entries(dump)) {
-        try {
-          dbInstance.exec(`DELETE FROM [${table}]`);
-        } catch (e) {
-          continue;
-        }
-        if (Array.isArray(rows)) {
-          for (const row of rows) {
-            const keys = Object.keys(row);
-            const placeholders = keys.map(() => '?').join(', ');
-            const values = Object.values(row);
-            const sql = `INSERT INTO [${table}] (${keys.map(k => `[${k}]`).join(', ')}) VALUES (${placeholders})`;
-            dbInstance.exec(sql, values);
-          }
-        }
-      }
-      return true;
-    } catch (err) {
-      console.error("Failed to load from Firebase Realtime Database:", err);
-      throw err;
-    }
-  } else {
-    // Fallback local file
-    const savePath = getSavePath(tenantId);
-    if (!fs.existsSync(savePath)) {
-      return false;
-    }
-    try {
-      const raw = fs.readFileSync(savePath, 'utf8');
-      const dump = JSON.parse(raw);
-      for (const [table, rows] of Object.entries(dump)) {
-        try {
-          dbInstance.exec(`DELETE FROM [${table}]`);
-        } catch (e) {
-          continue;
-        }
-        for (const row of rows) {
-          const keys = Object.keys(row);
-          const placeholders = keys.map(() => '?').join(', ');
-          const values = Object.values(row);
-          const sql = `INSERT INTO [${table}] (${keys.map(k => `[${k}]`).join(', ')}) VALUES (${placeholders})`;
-          dbInstance.exec(sql, values);
-        }
-      }
-      return true;
-    } catch (e) {
-      console.error("Error loading AlaSQL from disk:", e);
-      throw e;
-    }
+  const savePath = getSavePath(tenantId);
+  if (!fs.existsSync(savePath)) {
+    return false;
   }
-}
-
-export async function loadFirebaseDumpToD1(tenantId, db) {
-  if (!hasFirebasePersistence()) throw new Error('Firebase source persistence is unavailable.');
-  const snapshot = await getFirebaseRef(tenantId, 'tenant').get();
-  if (!snapshot.exists()) throw new Error(`Firebase source data is unavailable for ${tenantId}.`);
-  const dump = snapshot.val() || {};
-  delete dump.updatedAt;
-  for (const [table, rows] of Object.entries(dump)) {
-    try {
-      await db.exec(`DELETE FROM [${table}]`);
-    } catch {
-      continue;
+  try {
+    const raw = fs.readFileSync(savePath, 'utf8');
+    const dump = JSON.parse(raw);
+    for (const [table, rows] of Object.entries(dump)) {
+      try {
+        dbInstance.exec(`DELETE FROM [${table}]`);
+      } catch {
+        continue;
+      }
+      for (const row of rows) {
+        const keys = Object.keys(row);
+        const placeholders = keys.map(() => '?').join(', ');
+        const values = Object.values(row);
+        const sql = `INSERT INTO [${table}] (${keys.map(k => `[${k}]`).join(', ')}) VALUES (${placeholders})`;
+        dbInstance.exec(sql, values);
+      }
     }
-    if (!Array.isArray(rows)) continue;
-    for (const row of rows) {
-      const keys = Object.keys(row);
-      if (!keys.length) continue;
-      const placeholders = keys.map(() => '?').join(', ');
-      await db.run(`INSERT OR IGNORE INTO [${table}] (${keys.map(key => `[${key}]`).join(', ')}) VALUES (${placeholders})`, Object.values(row));
-    }
+    return true;
+  } catch (error) {
+    console.error("Error loading AlaSQL from disk:", error);
+    throw error;
   }
 }

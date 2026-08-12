@@ -1,7 +1,7 @@
 import express from 'express';
 import webpush from 'web-push';
 import { getDb, commitDb } from './db.js';
-import { PORT, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT, publicDir, crmPublicDir, shouldListen, trustProxy } from './server-config.js';
+import { PORT, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT, publicDir, shouldListen, trustProxy } from './server-config.js';
 import { eventBus, hookRegistry } from './lib/event-bus.js';
 import { tenantDbResolver, resolveSession, authorizeOperation, requireDurableStorage, broadcastSSE } from './server-middleware.js';
 import { registerOperationsRoutes } from './routes/operations.js';
@@ -18,6 +18,7 @@ import { initReception } from './modules/reception.js';
 import { initPrinting } from './modules/printing.js';
 import { initHotelRunner } from './modules/hotelrunner.js';
 import { initCrmBridge } from './modules/crm_bridge.js';
+import { initCrmModule } from './modules/crm.js';
 
 const app = express();
 
@@ -46,8 +47,8 @@ app.use((req, res, next) => {
 });
 app.get(['/restaurant', '/menu', '/restaurant-menu'], (req, res) => res.sendFile(`${publicDir}/restaurant.html`));
 app.get(['/guest', '/room-portal'], (req, res) => res.sendFile(`${publicDir}/guest.html`));
+app.get(['/crm', '/crm/'], (req, res) => res.sendFile(`${publicDir}/crm.html`));
 app.use(express.static(publicDir, { maxAge: 0 }));
-app.use('/crm', express.static(crmPublicDir, { maxAge: 0 }));
 
 app.use('/api', tenantDbResolver, resolveSession, authorizeOperation, requireDurableStorage);
 
@@ -67,6 +68,7 @@ initReception(moduleContext);
 initPrinting(moduleContext);
 initHotelRunner(moduleContext);
 initCrmBridge(moduleContext);
+initCrmModule(moduleContext);
 
 app.use((err, req, res, next) => {
   console.error('Unhandled request error:', err);

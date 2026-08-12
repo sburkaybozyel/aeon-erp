@@ -30,6 +30,27 @@ export function registerRoomRoutes({ app, broadcastSSE }) {
     }
   });
 
+  app.get('/api/guest/folio', async (req, res) => {
+    const roomNumber = String(req.query.target || '').replace(/^Room-/, '').trim();
+    if (!roomNumber) return res.status(400).json({ error: 'Oda hedefi zorunludur.' });
+    try {
+      const room = await req.db.get('SELECT id, room_number, status FROM rooms WHERE room_number = ?', [roomNumber]);
+      if (!room) return res.status(404).json({ error: 'Oda QR hedefi bulunamadı.' });
+      const activeStay = await req.db.get("SELECT folio_id, checkin_at FROM stays WHERE room_id = ? AND status = 'checked_in' ORDER BY checkin_at DESC LIMIT 1", [room.id]);
+      const charges = activeStay
+        ? await req.db.all('SELECT id, type, details, total_amount, status, created_at FROM requests WHERE target_identifier = ? AND created_at >= ? ORDER BY created_at DESC', [`Room-${room.room_number}`, activeStay.checkin_at])
+        : [];
+      let stayFolio = null;
+      if (activeStay?.folio_id) {
+        const totals = await req.db.get('SELECT SUM(debit) AS debit, SUM(credit) AS credit FROM folio_transactions WHERE folio_id = ?', [activeStay.folio_id]);
+        stayFolio = { balance: Number(totals?.debit || 0) - Number(totals?.credit || 0) };
+      }
+      res.json({ room, charges, stay_folio: stayFolio });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
   app.get('/api/rooms', async (req, res) => {
     try {
       const rooms = await req.db.all(`

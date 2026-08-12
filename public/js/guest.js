@@ -108,10 +108,10 @@ async function setupTargetSelector(initialTarget, mode = '') {
     let rooms = [];
     let tables = [];
     if (!locked) {
-      const roomsRes = await fetch('/api/rooms');
-      const tablesRes = await fetch('/api/tables');
-      rooms = roomsRes.ok ? await roomsRes.json() : [];
-      tables = tablesRes.ok ? await tablesRes.json() : [];
+      const targetsRes = await fetch('/api/guest/targets');
+      const targets = targetsRes.ok ? await targetsRes.json() : { rooms: [], tables: [] };
+      rooms = (targets.rooms || []).map(room_number => ({ room_number }));
+      tables = targets.tables || [];
     }
 
     select.innerHTML = '';
@@ -169,11 +169,11 @@ async function resolveLockedTarget(initialTarget, mode) {
   if (!initialTarget || mode !== 'room') return initialTarget;
   const raw = initialTarget.replace(/^room_id:/, '').trim();
   try {
-    const res = await fetch('/api/rooms');
-    if (!res.ok) return initialTarget.startsWith('Room-') ? initialTarget : `Room-${raw.replace(/^r/i, '')}`;
-    const rooms = await res.json();
     const plain = raw.replace(/^r/i, '');
-    const room = rooms.find(r => r.id === raw || r.id === `r${plain}` || r.room_number === raw || r.room_number === plain || r.room_number.endsWith(` ${plain}`) || r.room_number.includes(plain));
+    const res = await fetch(`/api/guest/room-context?target=${encodeURIComponent(plain)}`);
+    if (!res.ok) return initialTarget.startsWith('Room-') ? initialTarget : `Room-${raw.replace(/^r/i, '')}`;
+    const context = await res.json();
+    const room = context.room;
     return room ? `Room-${room.room_number}` : (initialTarget.startsWith('Room-') ? initialTarget : `Room-${plain}`);
   } catch (err) {
     return initialTarget.startsWith('Room-') ? initialTarget : `Room-${raw.replace(/^r/i, '')}`;
@@ -680,15 +680,7 @@ async function loadFolioData() {
   const roomNumber = activeTarget.replace('Room-', '').trim();
   
   try {
-    // 1. Fetch rooms to get roomId
-    const roomsRes = await fetch('/api/rooms');
-    if (!roomsRes.ok) return;
-    const rooms = await roomsRes.json();
-    const roomObj = rooms.find(r => r.room_number === roomNumber);
-    if (!roomObj) return;
-
-    // 2. Fetch Folio
-    const folioRes = await fetch(`/api/rooms/${roomObj.id}/folio`);
+    const folioRes = await fetch(`/api/guest/folio?target=${encodeURIComponent(roomNumber)}`);
     if (folioRes.ok) {
       const data = await folioRes.json();
       renderFolio(data);

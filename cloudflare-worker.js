@@ -6,6 +6,7 @@ for (const [key, value] of Object.entries(env)) {
   if (typeof value === 'string') process.env[key] = value;
 }
 globalThis.__AEON_D1 = env.AEON_DB;
+globalThis.__AEON_CRM_D1 = env.AEON_CRM_DB;
 const nodeVersion = process.versions?.node;
 if (process.versions) delete process.versions.node;
 const { default: app } = await import('./server.js');

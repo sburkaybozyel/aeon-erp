@@ -4,14 +4,11 @@ import { fileURLToPath } from 'url';
 import fs from 'fs';
 import crypto from 'crypto';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = process.env.CLOUDFLARE_WORKER === '1' ? '/tmp/crm' : dirname(fileURLToPath(import.meta.url));
 const dataDir = process.env.CRM_DATA_PATH || join(__dirname, 'crm_data');
 
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
-}
-
 function getSavePath() {
+  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
   return join(dataDir, 'crm_alasql.json');
 }
 
@@ -19,7 +16,7 @@ export function hashPassword(password) {
   return `sha256:${crypto.createHash('sha256').update(String(password)).digest('hex')}`;
 }
 
-const SCHEMA = `
+export const SCHEMA = `
   CREATE TABLE IF NOT EXISTS config (
     key TEXT PRIMARY KEY,
     value TEXT NOT NULL
@@ -338,7 +335,7 @@ class CrmDb {
   }
 }
 
-async function seedDefaults(db) {
+export async function seedDefaults(db, { seedAdmin = true } = {}) {
   const cfg = await db.get("SELECT COUNT(*) AS cnt FROM config");
   if (Number(cfg?.cnt || 0) === 0) {
     const stages = ['inquiry', 'option', 'offer', 'negotiation', 'won', 'lost'];
@@ -349,16 +346,17 @@ async function seedDefaults(db) {
     await db.run("INSERT INTO config (key, value) VALUES ('activity_types', ?)", [JSON.stringify(['call', 'email', 'meeting', 'note', 'whatsapp'])]);
     await db.run("INSERT INTO config (key, value) VALUES ('lost_reasons', ?)", [JSON.stringify(['fiyat', 'tarih', 'musaitlik', 'rakip', 'cevap_yok', 'diget'])]);
   }
+  const schemaVersion = await db.get("SELECT value FROM config WHERE key = 'crm_schema_version'");
+  if (!schemaVersion) await db.run("INSERT INTO config (key, value) VALUES ('crm_schema_version', '1')");
 
   const admin = await db.get("SELECT COUNT(*) AS cnt FROM users");
-  if (Number(admin?.cnt || 0) === 0) {
+  if (seedAdmin && Number(admin?.cnt || 0) === 0) {
     const email = process.env.CRM_ADMIN_EMAIL || 'admin@aeon.local';
     const password = process.env.CRM_ADMIN_PASSWORD || 'admin123';
     await db.run(
       "INSERT INTO users (id, name, email, password_hash, role) VALUES (?, ?, ?, ?, ?)",
       ['usr_admin', 'Sistem Yöneticisi', email, hashPassword(password), 'yönetici']
     );
-    console.log(`CRM varsayılan yönetici: ${email} / ${password}`);
   }
 }
 
