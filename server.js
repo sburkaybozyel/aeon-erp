@@ -86,7 +86,7 @@ app.get(['/crm', '/crm/'], (req, res) => res.sendFile(`${publicDir}/crm.html`));
 app.get('/products/:product', (req, res) => {
   const product = getProductModule(req.params.product);
   if (!product) return res.status(404).send('Ürün modülü bulunamadı.');
-  return res.sendFile(`${publicDir}/products/${product.id}.html`);
+  return res.sendFile(`${publicDir}/products/${product.id}/index.html`);
 });
 app.use(express.static(publicDir, { maxAge: 0 }));
 
