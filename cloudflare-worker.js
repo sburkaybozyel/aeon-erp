@@ -16,6 +16,10 @@ app.listen(3000);
 
 const appHandler = httpServerHandler({ port: 3000 });
 const portalPaths = new Set(['/restaurant', '/restaurant/', '/restaurant.html', '/menu', '/menu/', '/menu.html', '/restaurant-menu', '/restaurant-menu/', '/room', '/room/', '/room.html', '/room-portal', '/room-portal/', '/room-portal.html', '/guest', '/guest/', '/guest.html']);
+const productPaths = new Map([
+  ['/products/restaurant-kitchen', '/products/restaurant-kitchen.html'],
+  ['/products/reception', '/products/reception.html']
+]);
 
 function redirectForTarget(target) {
   const params = new URLSearchParams({ tenant_id: 'aeon', type: target.type, target: target.target, qr: target.code });
@@ -50,6 +54,11 @@ export default {
       if (portalPaths.has(url.pathname)) {
         const assetUrl = new URL(request.url);
         assetUrl.pathname = '/guest.html';
+        return runtimeEnv.ASSETS.fetch(new Request(assetUrl, request));
+      }
+      if (productPaths.has(url.pathname)) {
+        const assetUrl = new URL(request.url);
+        assetUrl.pathname = productPaths.get(url.pathname);
         return runtimeEnv.ASSETS.fetch(new Request(assetUrl, request));
       }
     }
