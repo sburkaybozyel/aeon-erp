@@ -20,6 +20,7 @@ import { initHotelRunner } from './modules/hotelrunner.js';
 import { initCrmBridge } from './modules/crm_bridge.js';
 import { initCrmModule } from './modules/crm.js';
 import { getQrTarget, qrTargets } from './lib/qr-targets.js';
+import { getProductModule, listProductModules } from './lib/product-modules.js';
 
 const app = express();
 
@@ -82,6 +83,11 @@ app.get(portalAliases, (req, res) => {
   return res.sendFile(`${publicDir}/guest.html`);
 });
 app.get(['/crm', '/crm/'], (req, res) => res.sendFile(`${publicDir}/crm.html`));
+app.get('/products/:product', (req, res) => {
+  const product = getProductModule(req.params.product);
+  if (!product) return res.status(404).send('Ürün modülü bulunamadı.');
+  return res.sendFile(`${publicDir}/products/${product.id}.html`);
+});
 app.use(express.static(publicDir, { maxAge: 0 }));
 
 app.use('/api', tenantDbResolver, resolveSession, authorizeOperation, requireDurableStorage);
@@ -92,6 +98,7 @@ registerAuditRoutes(app);
 registerAuthRoutes(app);
 registerStaffRoutes(app);
 registerInventoryRoutes(app);
+app.get('/api/products/modules', (req, res) => res.json({ modules: listProductModules() }));
 
 const moduleContext = { app, eventBus, hookRegistry, getDb, commitDb, broadcastSSE };
 initDining(moduleContext);
