@@ -1,0 +1,5 @@
+.next/
+.vinext/
+.wrangler/
+.vercel/
+node_modules/
