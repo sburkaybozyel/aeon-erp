@@ -1,8 +1,1 @@
-<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="24" r="7" stroke="currentColor" stroke-width="2.5"/>
-      <path d="M50 31 V80" stroke="currentColor" stroke-width="2.5"/>
-      <path d="M36 44 H64" stroke="currentColor" stroke-width="2.5"/>
-      <path d="M22 62 C26 78 50 82 50 82 C50 82 74 78 78 62" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M18 64 L26 62" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M82 64 L74 62" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-    </svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none"><title>Dinç Otel logo</title><rect x="8" y="8" width="112" height="112" rx="28" fill="#12333A"/><path d="M38 29v70h21c20 0 32-13 32-35S79 29 59 29H38Z" stroke="#F1C16D" stroke-width="8" stroke-linejoin="round"/><path d="M22 82c12-9 24-9 36 0s24 9 36 0 24-9 36 0" stroke="#9ED0CB" stroke-width="5" stroke-linecap="round"/></svg>
