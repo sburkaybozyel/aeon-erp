@@ -40,10 +40,15 @@ export async function ensureDefaultDiningMasterData(db) {
   }
   const barQrTable = await db.get("SELECT id FROM tables WHERE id = ? OR table_number = ?", ['tbl_bar_qr_1', 'Bar QR 1']);
   if (!barQrTable) await db.run("INSERT INTO tables (id, table_number, status, section) VALUES (?, ?, 'empty', ?)", ['tbl_bar_qr_1', 'Bar QR 1', 'Bar']);
-  const minibarItems = [['menu_minibar_cola', 'Minibar Cola', 90], ['menu_minibar_water', 'Minibar Water', 30], ['menu_minibar_beer', 'Minibar Beer', 130]];
-  for (const [id, name, price] of minibarItems) {
+  const minibarItems = [
+    ['menu_minibar_cola', 'Minibar Cola', 90, '/images/menu/minibar-cola.svg'],
+    ['menu_minibar_water', 'Minibar Water', 30, '/images/menu/minibar-water.svg'],
+    ['menu_minibar_beer', 'Minibar Beer', 130, '/images/menu/minibar-beer.svg']
+  ];
+  for (const [id, name, price, imageUrl] of minibarItems) {
     const existing = await db.get('SELECT id FROM catalog_items WHERE category = ? AND LOWER(name) = LOWER(?)', ['minibar', name]);
-    if (!existing) await db.run('INSERT INTO catalog_items (id, name, price, category, module_type) VALUES (?, ?, ?, ?, ?)', [id, name, price, 'minibar', 'hotel']);
+    if (!existing) await db.run('INSERT INTO catalog_items (id, name, price, category, module_type, image_url) VALUES (?, ?, ?, ?, ?, ?)', [id, name, price, 'minibar', 'hotel', imageUrl]);
+    else await db.run("UPDATE catalog_items SET image_url = COALESCE(NULLIF(image_url, ''), ?) WHERE id = ?", [imageUrl, existing.id]);
   }
   for (const item of AEON_CATALOG_SEED) {
     const existing = await db.get('SELECT id FROM catalog_items WHERE id = ?', [item.id]);

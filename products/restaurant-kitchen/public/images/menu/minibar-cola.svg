@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 384">
+  <rect width="512" height="384" rx="28" fill="#4a1823"/>
+  <rect x="195" y="52" width="122" height="250" rx="28" fill="#d9283f"/>
+  <path d="M195 118h122v36H195z" fill="#f4eee3"/>
+  <path d="M212 136h88" stroke="#d9283f" stroke-width="8" stroke-linecap="round"/>
+  <text x="256" y="246" text-anchor="middle" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#fff">COLA</text>
+  <text x="256" y="346" text-anchor="middle" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#fff">Minibar Cola</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 384">
+  <rect width="512" height="384" rx="28" fill="#5b351c"/>
+  <path d="M219 68h76v28h18v72h-18v112c0 18-15 33-33 33h-10c-18 0-33-15-33-33V168h-18V96h18z" fill="#d99a37"/>
+  <path d="M219 98h76v54h-76z" fill="#f4eee3"/>
+  <path d="M235 125h44" stroke="#5b351c" stroke-width="8" stroke-linecap="round"/>
+  <text x="256" y="346" text-anchor="middle" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#fff">Minibar Beer</text>
+</svg>

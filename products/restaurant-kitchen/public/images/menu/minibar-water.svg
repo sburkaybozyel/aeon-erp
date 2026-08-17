@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 384">
+  <rect width="512" height="384" rx="28" fill="#16465c"/>
+  <path d="M218 58h76l12 44v165c0 22-18 40-40 40h-20c-22 0-40-18-40-40V102z" fill="#7ad0e2"/>
+  <path d="M218 98h76" stroke="#eaf8ee" stroke-width="10"/>
+  <rect x="208" y="156" width="96" height="54" rx="8" fill="#eaf8ee"/>
+  <path d="M224 182h64" stroke="#16465c" stroke-width="8" stroke-linecap="round"/>
+  <text x="256" y="346" text-anchor="middle" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#fff">Minibar Water</text>
+</svg>
