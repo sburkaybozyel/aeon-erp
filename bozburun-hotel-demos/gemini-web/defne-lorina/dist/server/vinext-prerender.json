@@ -1,0 +1,35 @@
+{
+  "buildId": "59bc2736-d465-475a-8d59-7fee082b845d",
+  "trailingSlash": false,
+  "routes": [
+    {
+      "route": "/",
+      "status": "rendered",
+      "revalidate": false,
+      "router": "app",
+      "headers": {
+        "link": "</defne-lorina-mark.svg>; rel=preload; as=\"image\", </defne-concept-room.png>; rel=preload; as=\"image\", </defne-concept-dining.png>; rel=preload; as=\"image\", </Users/macbookairm1/Desktop/ERP/bozburun-hotel-demos/defne-lorina/.vinext/fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-fe99e303.woff2>; rel=preload; as=font; type=font/woff2; crossorigin, </Users/macbookairm1/Desktop/ERP/bozburun-hotel-demos/defne-lorina/.vinext/fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-e99b45a2.woff2>; rel=preload; as=font; type=font/woff2; crossorigin, </Users/macbookairm1/Desktop/ERP/bozburun-hotel-demos/defne-lorina/.vinext/fonts/dm-sans-fe76be7f7f35/dm-sans-151a53ae.woff2>; rel=preload; as=font; type=font/woff2; crossorigin, </Users/macbookairm1/Desktop/ERP/bozburun-hotel-demos/defne-lorina/.vinext/fonts/manrope-83122f2ba36d/manrope-81401990.woff2>; rel=preload; as=font; type=font/woff2; crossorigin"
+      }
+    },
+    {
+      "route": "/404",
+      "status": "rendered",
+      "revalidate": false,
+      "router": "app"
+    }
+  ],
+  "pregeneratedConcretePaths": [
+    [
+      "/",
+      [
+        "/"
+      ]
+    ],
+    [
+      "/404",
+      [
+        "/404"
+      ]
+    ]
+  ]
+}

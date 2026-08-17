@@ -1,0 +1,9 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Defne Lorina amblemi</title>
+  <desc id="desc">Defne dalı ve DL monogramı</desc>
+  <path d="M45 116C62 95 72 75 80 43" stroke="#D8B36A" stroke-width="3" stroke-linecap="round"/>
+  <path d="M53 99C43 89 35 86 25 87C29 100 38 106 53 107M65 78C56 68 49 65 39 66C43 78 52 84 65 85M74 58C67 49 60 45 50 46C54 58 61 64 74 65" fill="#D8B36A" fill-opacity=".2" stroke="#D8B36A" stroke-width="2"/>
+  <text x="58" y="108" fill="#F4F0E7" font-family="Georgia, serif" font-size="54" font-weight="600" letter-spacing="-9">DL</text>
+  <path d="M100 116H133" stroke="#D8B36A" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="138" cy="116" r="3" fill="#D8B36A"/>
+</svg>

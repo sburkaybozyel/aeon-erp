@@ -1,0 +1,35 @@
+{
+  "buildId": "2a3d03f1-8292-4604-b0d5-f63997a839c0",
+  "trailingSlash": false,
+  "routes": [
+    {
+      "route": "/",
+      "status": "rendered",
+      "revalidate": false,
+      "router": "app",
+      "headers": {
+        "link": "</Users/macbookairm1/Desktop/ERP/bozburun-hotel-demos/buena-vista-hotel/.vinext/fonts/syne-663ab9fbb171/syne-c37e2fa5.woff2>; rel=preload; as=font; type=font/woff2; crossorigin, </Users/macbookairm1/Desktop/ERP/bozburun-hotel-demos/buena-vista-hotel/.vinext/fonts/dm-sans-fe76be7f7f35/dm-sans-151a53ae.woff2>; rel=preload; as=font; type=font/woff2; crossorigin"
+      }
+    },
+    {
+      "route": "/404",
+      "status": "rendered",
+      "revalidate": false,
+      "router": "app"
+    }
+  ],
+  "pregeneratedConcretePaths": [
+    [
+      "/",
+      [
+        "/"
+      ]
+    ],
+    [
+      "/404",
+      [
+        "/404"
+      ]
+    ]
+  ]
+}

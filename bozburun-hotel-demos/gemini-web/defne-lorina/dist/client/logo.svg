@@ -1,0 +1,8 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 82 V20" stroke="currentColor" stroke-width="2"/>
+      <path d="M50 35 C38 25 32 35 32 45 C32 55 50 62 50 62" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M50 35 C62 25 68 35 68 45 C68 55 50 62 50 62" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M50 55 C40 48 36 56 36 64 C36 72 50 78 50 78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M50 55 C60 48 64 56 64 64 C64 72 50 78 50 78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="50" cy="18" r="3" fill="currentColor"/>
+    </svg>

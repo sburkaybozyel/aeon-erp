@@ -1,0 +1,35 @@
+{
+  "buildId": "f70e789f-f0d0-41ae-bc4e-424632560cda",
+  "trailingSlash": false,
+  "routes": [
+    {
+      "route": "/",
+      "status": "rendered",
+      "revalidate": false,
+      "router": "app",
+      "headers": {
+        "link": "</Users/macbookairm1/Desktop/ERP/bozburun-hotel-demos/trakheia-bozburun/.vinext/fonts/space-grotesk-5f62d382f7c0/space-grotesk-a57c9413.woff2>; rel=preload; as=font; type=font/woff2; crossorigin, </Users/macbookairm1/Desktop/ERP/bozburun-hotel-demos/trakheia-bozburun/.vinext/fonts/dm-mono-7a6ddda5d82d/dm-mono-4ba9f72d.woff2>; rel=preload; as=font; type=font/woff2; crossorigin, </Users/macbookairm1/Desktop/ERP/bozburun-hotel-demos/trakheia-bozburun/.vinext/fonts/dm-mono-7a6ddda5d82d/dm-mono-42078d9d.woff2>; rel=preload; as=font; type=font/woff2; crossorigin, </Users/macbookairm1/Desktop/ERP/bozburun-hotel-demos/trakheia-bozburun/.vinext/fonts/dm-mono-7a6ddda5d82d/dm-mono-9bb7177f.woff2>; rel=preload; as=font; type=font/woff2; crossorigin"
+      }
+    },
+    {
+      "route": "/404",
+      "status": "rendered",
+      "revalidate": false,
+      "router": "app"
+    }
+  ],
+  "pregeneratedConcretePaths": [
+    [
+      "/",
+      [
+        "/"
+      ]
+    ],
+    [
+      "/404",
+      [
+        "/404"
+      ]
+    ]
+  ]
+}

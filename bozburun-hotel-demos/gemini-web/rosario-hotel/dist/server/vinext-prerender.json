@@ -1,0 +1,35 @@
+{
+  "buildId": "97b7506a-669a-4fda-ba94-7d500b6ff361",
+  "trailingSlash": false,
+  "routes": [
+    {
+      "route": "/",
+      "status": "rendered",
+      "revalidate": false,
+      "router": "app",
+      "headers": {
+        "link": "</Users/macbookairm1/Desktop/ERP/bozburun-hotel-demos/rosario-hotel/.vinext/fonts/cormorant-garamond-e7eb2e70beb6/cormorant-garamond-fe99e303.woff2>; rel=preload; as=font; type=font/woff2; crossorigin, </Users/macbookairm1/Desktop/ERP/bozburun-hotel-demos/rosario-hotel/.vinext/fonts/cormorant-garamond-e7eb2e70beb6/cormorant-garamond-e99b45a2.woff2>; rel=preload; as=font; type=font/woff2; crossorigin, </Users/macbookairm1/Desktop/ERP/bozburun-hotel-demos/rosario-hotel/.vinext/fonts/manrope-35218281b57f/manrope-81401990.woff2>; rel=preload; as=font; type=font/woff2; crossorigin"
+      }
+    },
+    {
+      "route": "/404",
+      "status": "rendered",
+      "revalidate": false,
+      "router": "app"
+    }
+  ],
+  "pregeneratedConcretePaths": [
+    [
+      "/",
+      [
+        "/"
+      ]
+    ],
+    [
+      "/404",
+      [
+        "/404"
+      ]
+    ]
+  ]
+}
