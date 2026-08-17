@@ -350,6 +350,7 @@ export function initRequestCreate({ app, eventBus, broadcastSSE, normalizeTarget
       );
 
       broadcastSSE && broadcastSSE(req.tenantId, 'request_created', { requestId, type, target_identifier, status: initialStatus, departments: routedDepartments });
+      await eventBus.emit('request_created', { tenantId: req.tenantId, requestId, type, target_identifier, status: initialStatus, details, totalAmount, payment_method: effectivePaymentMethod, departments: routedDepartments, source: 'reception-dining' });
       const response = { success: true, requestId, totalAmount, payment_method: effectivePaymentMethod };
       if (idempotencyId) {
         await req.db.run("UPDATE idempotency_records SET response_json = ? WHERE id = ?", [JSON.stringify(response), idempotencyId]);

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEON Turizm CRM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/aeon-tokens.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- LOGIN VIEW -->
+  <div id="login-view" class="login-wrap hidden">
+    <form id="login-form" class="login-card">
+      <div class="brand-mark">AEON<span>CRM</span></div>
+      <h1>Turizm CRM</h1>
+      <p class="muted">Satış, acente, lead, teklif ve fırsat takibi</p>
+      <label>E-posta</label>
+      <input type="email" id="login-email" autocomplete="username" placeholder="ornek@isletme.com" required>
+      <label>Parola</label>
+      <input type="password" id="login-password" autocomplete="current-password" placeholder="••••••••" required>
+      <div id="login-error" class="alert error hidden"></div>
+      <button type="submit" class="btn primary block">Giriş Yap</button>
+    </form>
+  </div>
+
+  <!-- APP VIEW -->
+  <div id="app-view" class="app hidden">
+    <aside class="sidebar">
+      <div class="brand-mark small">AEON<span>CRM</span></div>
+      <nav id="nav">
+        <a data-view="dashboard" class="active"><span>📊</span> Dashboard</a>
+        <a data-view="pipeline"><span>📈</span> Pipeline</a>
+        <a data-view="leads"><span>🎯</span> Lead'ler</a>
+        <a data-view="firms"><span>🏢</span> Firmalar</a>
+        <a data-view="contacts"><span>👤</span> Kişiler</a>
+        <a data-view="tasks"><span>✅</span> Görevler</a>
+        <a data-view="activities"><span>📞</span> Aktiviteler</a>
+        <a data-view="offers"><span>📄</span> Teklifler</a>
+        <a data-view="followups"><span>📞</span> Takip</a>
+        <a data-view="campaigns"><span>📣</span> Kampanyalar</a>
+        <a data-view="reports"><span>📊</span> Raporlar</a>
+        <a data-view="integration"><span>🔗</span> Entegrasyon</a>
+        <a data-view="reception-reservations"><span>🛎️</span> Resepsiyon</a>
+        <a data-view="users" class="admin-only"><span>👥</span> Kullanıcılar</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div id="current-user" class="user-chip"></div>
+        <button id="logout-btn" class="btn ghost small block">Çıkış Yap</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h2 id="view-title">Dashboard</h2>
+          <p id="view-subtitle" class="muted small"></p>
+        </div>
+        <div class="topbar-actions">
+          <input id="global-search" type="search" placeholder="Ara... (firma, kişi, fırsat)">
+          <button id="quick-new-btn" class="btn primary">+ Yeni</button>
+        </div>
+      </header>
+      <div id="search-results" class="search-results hidden"></div>
+      <div id="view-container"></div>
+    </main>
+  </div>
+
+  <!-- MODAL -->
+  <div id="modal-backdrop" class="modal-backdrop hidden">
+    <div id="modal" class="modal">
+      <div class="modal-header">
+        <h3 id="modal-title"></h3>
+        <button id="modal-close" class="btn ghost small">✕</button>
+      </div>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

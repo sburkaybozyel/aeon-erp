@@ -1,0 +1,6 @@
+node_modules/
+crm_data/
+crm_alasql.json
+.DS_Store
+*.log
+.env*

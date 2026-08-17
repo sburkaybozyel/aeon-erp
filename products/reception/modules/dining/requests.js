@@ -180,6 +180,7 @@ export function initRequests({ app, eventBus, broadcastSSE }) {
       } else {
         await req.db.run("UPDATE requests SET status = ?, details = ?, completed_by = ? WHERE id = ?", [effectiveStatus, updatedDetails, actorName, requestId]);
       }
+      await eventBus.emit('request_updated', { tenantId: req.tenantId, requestId, type: request.type, target_identifier: request.target_identifier, status: effectiveStatus, details: updatedDetails, totalAmount: Number(request.total_amount || 0), source: 'reception-dining' });
 
       const logId = 'log_' + Math.random().toString(36).substr(2, 9);
       const staffName = actorName;

@@ -11,6 +11,9 @@
       "database_id": "45186a6f-70b8-4160-a4ba-ad10e8bb8cd9"
     }
   ],
+  "services": [
+    { "binding": "CRM_SERVICE", "service": "aeon-crm" }
+  ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
@@ -23,7 +26,8 @@
     "MODULE_DEFAULT_TENANT": "reception",
     "MODULE_ALLOWED_TENANTS": "reception",
     "MODULE_D1_BOOTSTRAP": "true",
-    "MODULE_BUILD_ID": "reception-copy-2026-08-17-guest-inbox",
+    "MODULE_BUILD_ID": "reception-copy-2026-08-17-crm-bridge",
+    "CRM_MODULE_URL": "https://aeon-crm.aeon-global.workers.dev",
     "INITIAL_RECEPTION_PIN": "1234"
   }
 }

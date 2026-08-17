@@ -1,0 +1,29 @@
+{
+  "name": "aeon-crm",
+  "main": "cloudflare-worker.js",
+  "workers_dev": true,
+  "compatibility_date": "2026-08-17",
+  "compatibility_flags": ["nodejs_compat"],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "aeon-crm-module-db",
+      "database_id": "f55bc91c-5968-4bb7-8bd8-0f4c813b7e82"
+    }
+  ],
+  "services": [
+    { "binding": "RECEPTION_SERVICE", "service": "aeon-reception" }
+  ],
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "none",
+    "not_found_handling": "404-page"
+  },
+  "vars": {
+    "CRM_TENANT_ID": "reception",
+    "RECEPTION_MODULE_URL": "https://aeon-reception.aeon-global.workers.dev/api/module/crm",
+    "CRM_ERP_DISABLE": "true",
+    "CRM_BUILD_ID": "reception-crm-copy-2026-08-17"
+  }
+}

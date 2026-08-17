@@ -7,8 +7,9 @@ import { registerStayRoutes } from './reception/stays.js';
 import { registerFolioRoutes } from './reception/folios.js';
 import { registerOperationsRoutes } from './reception/operations.js';
 import { registerGuestRequestRoutes } from './reception/guest-requests.js';
+import { registerCrmSync } from './reception/crm-sync.js';
 
-export function initReception({ app, eventBus }) {
+export function initReception({ app, eventBus, getDb }) {
   // Public guest-facing precheckin endpoints must be registered before the
   // `/api/reception` auth gate below.
   registerGuestPortalRoutes({ app, eventBus });
@@ -18,8 +19,9 @@ export function initReception({ app, eventBus }) {
 
   registerPrecheckinAdminRoutes({ app });
   registerDashboardRoutes({ app });
-  registerReservationRoutes({ app });
+  registerReservationRoutes({ app, eventBus });
   registerStayRoutes({ app, eventBus });
-  registerFolioRoutes({ app });
+  registerFolioRoutes({ app, eventBus });
   registerOperationsRoutes({ app });
+  registerCrmSync({ eventBus, getDb });
 }

@@ -4,7 +4,7 @@ import { id, actor, audit, today, json, parse, paymentLabels, folioBalance } fro
 // The authoritative billing system: folio transactions, payments, reversals, and invoicing.
 // SQL and transaction logic here must stay byte-identical to the pre-split version — this
 // is what the night audit, checkout balance, and printed invoices all read from.
-export function registerFolioRoutes({ app }) {
+export function registerFolioRoutes({ app, eventBus }) {
   app.get('/api/reception/folios/:id', async (req, res) => {
     const folio = await req.db.get('SELECT * FROM folios WHERE id = ?', [req.params.id]); if (!folio) return res.status(404).json({ error: 'Folyo bulunamadı.' });
     const transactions = await req.db.all('SELECT * FROM folio_transactions WHERE folio_id = ? ORDER BY occurred_at DESC', [folio.id]);
@@ -35,6 +35,7 @@ export function registerFolioRoutes({ app }) {
         }
         await audit(tx, req, 'folio_transaction', transactionId, 'posted', null, { folio_id: folio.id, amount });
       });
+      await eventBus?.emit('folio_transaction_created', { tenantId: req.tenantId, folioId: folio.id, transactionId, amount, currency: data.currency || 'TRY', description: data.description, reservationId: (await req.db.get('SELECT r.id FROM stays s JOIN reservations r ON r.id = s.reservation_id WHERE s.folio_id = ? LIMIT 1', [folio.id]))?.id });
       res.status(201).json({ id: transactionId, balance: await folioBalance(req.db, folio.id) });
     } catch (error) { res.status(500).json({ error: error.message || 'İşlem kaydedilemedi.' }); }
   });
@@ -56,6 +57,7 @@ export function registerFolioRoutes({ app }) {
         });
         await audit(tx, req, 'payment', paymentId, 'received', null, { folio_id: folio.id, amount, payment_method: data.payment_method });
       });
+      await eventBus?.emit('payment_recorded', { tenantId: req.tenantId, folioId: folio.id, paymentId, amount, currency: data.currency || 'TRY', payment_method: data.payment_method, reservationId: (await req.db.get('SELECT r.id FROM stays s JOIN reservations r ON r.id = s.reservation_id WHERE s.folio_id = ? LIMIT 1', [folio.id]))?.id });
       res.status(201).json({ id: paymentId, balance: await folioBalance(req.db, folio.id) });
     } catch (error) { res.status(500).json({ error: error.message || 'Tahsilat kaydedilemedi.' }); }
   });
@@ -73,6 +75,7 @@ export function registerFolioRoutes({ app }) {
         });
         await audit(tx, req, 'folio_transaction', transactionId, 'reversed', original, { folio_id: folio.id, original_transaction_id: original.id });
       });
+      await eventBus?.emit('folio_transaction_reversed', { tenantId: req.tenantId, folioId: folio.id, transactionId, originalTransactionId: original.id, amount: Number(original.debit || original.credit || 0), currency: original.currency || 'TRY', reservationId: (await req.db.get('SELECT r.id FROM stays s JOIN reservations r ON r.id = s.reservation_id WHERE s.folio_id = ? LIMIT 1', [folio.id]))?.id });
       res.status(201).json({ id: transactionId, balance: await folioBalance(req.db, folio.id) });
     } catch (error) { res.status(500).json({ error: error.message || 'İptal işlemi tamamlanamadı.' }); }
   });
@@ -138,6 +141,7 @@ export function registerFolioRoutes({ app }) {
         }
         await audit(tx, req, 'invoice', invoiceId, 'issued', null, { invoice_number: invoiceNumber, folio_id: folio.id, total_amount: totalAmount });
       });
+      await eventBus?.emit('invoice_issued', { tenantId: req.tenantId, folioId: folio.id, invoiceId, invoiceNumber, amount: totalAmount, currency: data.currency || 'TRY', reservationId: reservation?.id || null });
       res.status(201).json({ id: invoiceId, invoice_number: invoiceNumber, total_amount: totalAmount });
     } catch (error) { res.status(500).json({ error: error.message || 'Fatura kesilemedi.' }); }
   });
@@ -155,6 +159,7 @@ export function registerFolioRoutes({ app }) {
         });
         await audit(tx, req, 'invoice', invoice.id, 'cancelled', invoice, { reason });
       });
+      await eventBus?.emit('invoice_cancelled', { tenantId: req.tenantId, folioId: invoice.folio_id, invoiceId: invoice.id, reservationId: invoice.reservation_id || null });
       res.json({ success: true });
     } catch (error) { res.status(500).json({ error: error.message || 'Fatura iptal edilemedi.' }); }
   });

@@ -99,6 +99,7 @@ async function createReceptionRequest(req, eventBus, { bridged = false } = {}) {
     type,
     target_identifier: target,
     status: 'pending',
+    details,
     departments: ['Reception'],
     source: bridged ? 'restaurant-kitchen-module' : 'reception-module'
   });

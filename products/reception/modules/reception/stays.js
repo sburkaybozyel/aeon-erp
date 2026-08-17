@@ -73,6 +73,7 @@ export function registerStayRoutes({ app, eventBus }) {
         await audit(tx, req, 'stay', stayId, 'checked_in', null, { reservation_id: reservation.id, room_id: room.id });
       });
       eventBus.emit('room_updated', { tenantId: req.tenantId, roomId: room.id });
+      await eventBus?.emit('checkin_completed', { tenantId: req.tenantId, reservationId: reservation.id, stayId });
       res.status(201).json({ stay_id: stayId, folio_id: folioId });
     } catch (error) { res.status(error.message?.includes('başka bir işlemle') ? 409 : 500).json({ error: error.message || 'Check-in tamamlanamadı.' }); }
   });
@@ -212,6 +213,7 @@ export function registerStayRoutes({ app, eventBus }) {
         await audit(tx, req, 'stay', stay.id, 'room_moved', { room_id: oldRoom.id }, { room_id: target.id }, req.body.reason || null);
       });
       eventBus.emit('room_updated', { tenantId: req.tenantId, roomId: oldRoom.id }); eventBus.emit('room_updated', { tenantId: req.tenantId, roomId: target.id });
+      await eventBus?.emit('stay_moved', { tenantId: req.tenantId, stayId: stay.id, reservationId: reservation.id, fromRoom: oldRoom.room_number, toRoom: target.room_number });
       res.json({ success: true });
     } catch (error) { res.status(500).json({ error: error.message || 'Oda değişimi tamamlanamadı.' }); }
   });
@@ -267,6 +269,7 @@ export function registerStayRoutes({ app, eventBus }) {
         await audit(tx, req, 'stay', stay.id, 'checked_out', { balance }, { room_id: stay.room_id }, req.body.receivable_reason || null);
       });
       eventBus.emit('room_updated', { tenantId: req.tenantId, roomId: stay.room_id });
+      await eventBus?.emit('checkout_completed', { tenantId: req.tenantId, stayId: stay.id, reservationId: reservation.id, folioId: stay.folio_id, balance });
       res.json({ success: true, balance, receipt: await checkoutReceipt(req.db, stay.id) });
     } catch (error) { res.status(500).json({ error: error.message || 'Check-out tamamlanamadı.' }); }
   });

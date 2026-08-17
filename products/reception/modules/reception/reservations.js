@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import { id, actor, audit, normalize, mask, allowed, json, roomAvailable, validateDates, validateReservationPartySize, validateReservationMoney, validateContactInfo, validateRoomCapacity, profileFor } from './helpers.js';
 
 // Physical room definitions, reservation CRUD, and guest-profile search.
-export function registerReservationRoutes({ app }) {
+export function registerReservationRoutes({ app, eventBus }) {
   app.post('/api/reception/rooms', async (req, res) => {
     if (!['admin', 'manager', 'yönetici'].includes(String(req.actor?.role || '').toLowerCase())) return res.status(403).json({ error: 'Fiziksel oda tanımı yönetici yetkisi gerektirir.' });
     const data = req.body || {};
@@ -78,6 +78,7 @@ export function registerReservationRoutes({ app }) {
         }
         await audit(tx, req, 'reservation', reservationId, 'created', null, { reservation_number: reservationNumber, status: data.status || 'inquiry' });
       });
+      await eventBus?.emit('reservation_created', { tenantId: req.tenantId, reservationId, reservationNumber });
       res.status(201).json({ id: reservationId, reservation_number: reservationNumber, precheckin_url: '/precheckin.html' });
     } catch (error) { res.status(400).json({ error: error.message }); }
   });
@@ -145,6 +146,7 @@ export function registerReservationRoutes({ app }) {
         }
         await audit(tx, req, 'reservation', existing.id, 'updated', existing, { ...data, arrival_date: arrival, departure_date: departure });
       });
+      await eventBus?.emit('reservation_updated', { tenantId: req.tenantId, reservationId: existing.id });
       res.json({ success: true });
     } catch (error) { res.status(400).json({ error: error.message }); }
   });
