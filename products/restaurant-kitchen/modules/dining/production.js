@@ -375,6 +375,17 @@ export function initProduction({ app, eventBus, getDb, broadcastSSE }) {
       if (tableUpdate) broadcastSSE && broadcastSSE(req.tenantId, 'table_updated', tableUpdate);
       await req.db.run("INSERT INTO audit_logs (id, staff_name, action, details) VALUES (?, ?, 'Mutfak Bileti Güncellendi', ?)", ['log_' + Math.random().toString(36).slice(2, 11), staffName, `${ticket.item_name}: ${ticket.status} -> ${nextStatus}`]);
       broadcastSSE && broadcastSSE(req.tenantId, 'request_updated', { requestId: ticket.request_id, status: requestStatus });
+      await eventBus.emit('dining_request_updated', {
+        tenantId: req.tenantId,
+        requestId: ticket.request_id,
+        type: request?.type || 'order',
+        targetIdentifier: request?.target_identifier,
+        status: requestStatus,
+        amount: Number(request?.total_amount || 0),
+        payment_method: request?.payment_method || null,
+        details: request?.details || null,
+        createdBy: staffName
+      });
       res.json({ success: true, requestId: ticket.request_id, status: requestStatus });
     } catch (err) {
       res.status(500).json({ error: err.message });

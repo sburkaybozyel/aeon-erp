@@ -32,6 +32,31 @@ function authorized(request, runtimeEnv) {
   return Boolean(expected && received && expected === received);
 }
 
+function adminAuthorized(request, runtimeEnv) {
+  const expected = String(runtimeEnv.CRM_ADMIN_TOKEN || '').trim();
+  const received = String(request.headers.get('x-aeon-crm-admin-token') || '').trim();
+  return Boolean(expected && received && expected === received);
+}
+
+async function handleAdminOverview(request, runtimeEnv) {
+  if (!adminAuthorized(request, runtimeEnv)) return json({ error: 'Modül bağlantı yetkisi geçersiz.' }, 401);
+  try {
+    const db = await getCrmDbForRequest({ tenantId: process.env.CRM_TENANT_ID || 'reception' });
+    const [contacts, opportunities, openOpportunities, reservations, events, recentEvents] = await Promise.all([
+      db.get('SELECT COUNT(*) AS count FROM contacts'),
+      db.get('SELECT COUNT(*) AS count FROM opportunities'),
+      db.get("SELECT COUNT(*) AS count FROM opportunities WHERE pipeline_stage NOT IN ('won', 'lost', 'closed')"),
+      db.get('SELECT COUNT(*) AS count FROM reception_reservations'),
+      db.get('SELECT COUNT(*) AS count FROM reception_event_log'),
+      db.all('SELECT event_type, request_id, reception_reservation_id, amount, occurred_at FROM reception_event_log ORDER BY occurred_at DESC LIMIT 12')
+    ]);
+    return json({ success: true, generated_at: new Date().toISOString(), contacts: Number(contacts?.count || 0), opportunities: Number(opportunities?.count || 0), open_opportunities: Number(openOpportunities?.count || 0), reception_reservations: Number(reservations?.count || 0), reception_events: Number(events?.count || 0), recent_events: recentEvents });
+  } catch (error) {
+    console.error('[crm admin overview]', error);
+    return json({ error: 'CRM özeti oluşturulamadı.' }, 500);
+  }
+}
+
 function splitName(value) {
   const parts = String(value || '').trim().split(/\s+/).filter(Boolean);
   return { firstName: parts.shift() || 'Misafir', lastName: parts.join(' ') || '-' };
@@ -110,7 +135,7 @@ async function handleReceptionEvent(request, runtimeEnv) {
   let body;
   try { body = await request.json(); } catch { return json({ error: 'Geçerli bir JSON gövdesi zorunludur.' }, 400); }
   const eventType = String(body?.event_type || '').trim();
-  if (!['reservation_created', 'reservation_updated', 'precheckin_submitted', 'checkin_completed', 'checkout_completed', 'stay_moved', 'folio_transaction_created', 'payment_recorded', 'folio_transaction_reversed', 'invoice_issued', 'invoice_cancelled', 'request_created', 'request_updated', 'order_delivered_to_room'].includes(eventType)) {
+  if (!['reservation_created', 'reservation_updated', 'precheckin_submitted', 'precheckin_reviewed', 'guest_profile_updated', 'checkin_completed', 'checkout_completed', 'stay_moved', 'folio_transaction_created', 'payment_recorded', 'folio_transaction_reversed', 'invoice_issued', 'invoice_cancelled', 'request_created', 'request_updated', 'order_delivered_to_room'].includes(eventType)) {
     return json({ error: 'Desteklenmeyen resepsiyon olayı.' }, 400);
   }
   try {
@@ -120,8 +145,10 @@ async function handleReceptionEvent(request, runtimeEnv) {
     const eventId = String(body.event_id || `${eventType}:${reservation.id || body.reservation_id || body.stay_id || body.folio_id || body.request_id || body.invoice_id || crypto.randomUUID()}:${body.status || event.status || ''}`);
     const priorEvent = await db.get('SELECT event_id FROM reception_event_log WHERE event_id = ?', [eventId]);
     if (priorEvent) return json({ success: true, idempotent: true, event_id: eventId });
-    const contactId = await upsertContact(db, body.guest || {});
     const receptionReservationId = reservation.id || body.reservation_id || null;
+    const guest = body.guest || {};
+    const hasGuestIdentity = Boolean(guest.email || guest.phone || guest.identity_number || guest.passport_number || (guest.first_name && guest.last_name));
+    const contactId = hasGuestIdentity ? await upsertContact(db, guest) : null;
     if (receptionReservationId) {
       const existing = await db.get('SELECT * FROM reception_reservations WHERE reception_reservation_id = ?', [receptionReservationId]);
       const payload = JSON.stringify(body);
@@ -166,6 +193,9 @@ export default {
     const url = new URL(request.url);
     if (request.method === 'POST' && url.pathname === '/api/module/reception-events') {
       return handleReceptionEvent(request, runtimeEnv);
+    }
+    if (request.method === 'GET' && url.pathname === '/api/module/admin/overview') {
+      return handleAdminOverview(request, runtimeEnv);
     }
     if (request.method === 'GET' || request.method === 'HEAD') {
       if (url.pathname === '/') return assetRequest(request, runtimeEnv, '/index.html');

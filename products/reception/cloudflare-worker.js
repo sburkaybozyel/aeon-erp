@@ -1,5 +1,8 @@
 import { env } from 'cloudflare:workers';
 import { httpServerHandler } from 'cloudflare:node';
+import { eventBus } from './lib/event-bus.js';
+import { handleDiningModuleEvent, handleDiningModulePreflight, handleDiningModuleRoomContext, handleDiningModuleFolio } from './modules/reception/dining-bridge.js';
+import { flushCrmOutboxForTenant } from './modules/reception/crm-sync.js';
 
 process.env.CLOUDFLARE_WORKER = '1';
 for (const [key, value] of Object.entries(env)) {
@@ -7,7 +10,9 @@ for (const [key, value] of Object.entries(env)) {
 }
 globalThis.__MODULE_D1 = env.DB;
 globalThis.__CRM_SERVICE = env.CRM_SERVICE;
+globalThis.__RESTAURANT_SERVICE = env.RESTAURANT_SERVICE;
 
+const { getDb } = await import('./db.js');
 const nodeVersion = process.versions?.node;
 if (process.versions) delete process.versions.node;
 const { default: app } = await import('./server.js');
@@ -19,6 +24,8 @@ const pageAliases = new Map([
   ['/', '/login.html'],
   ['/reception', '/staff-reception.html'],
   ['/reception/', '/staff-reception.html'],
+  ['/admin', '/admin.html'],
+  ['/admin/', '/admin.html'],
   ['/precheckin', '/precheckin.html'],
   ['/precheckin/', '/precheckin.html']
 ]);
@@ -276,10 +283,29 @@ function assetRequest(request, runtimeEnv, pathname) {
 }
 
 export default {
+  async scheduled(controller, runtimeEnv, context) {
+    try {
+      await flushCrmOutboxForTenant(getDb, process.env.MODULE_DEFAULT_TENANT || 'reception');
+    } catch (error) {
+      console.error('[reception→crm] scheduled retry:', error.message);
+    }
+  },
   async fetch(request, runtimeEnv, context) {
     const url = new URL(request.url);
     if (request.method === 'POST' && url.pathname === '/api/module/guest-requests') {
       return handleModuleGuestRequest(request, runtimeEnv);
+    }
+    if (request.method === 'POST' && url.pathname === '/api/module/dining/preflight') {
+      return handleDiningModulePreflight(request, runtimeEnv, { getDb });
+    }
+    if (request.method === 'GET' && url.pathname === '/api/module/dining/room-context') {
+      return handleDiningModuleRoomContext(request, runtimeEnv, { getDb });
+    }
+    if (request.method === 'GET' && url.pathname === '/api/module/dining/folio') {
+      return handleDiningModuleFolio(request, runtimeEnv, { getDb });
+    }
+    if (request.method === 'POST' && url.pathname === '/api/module/dining/events') {
+      return handleDiningModuleEvent(request, runtimeEnv, { getDb, eventBus });
     }
     if (url.pathname === '/api/module/crm/health' && request.method === 'GET') {
       if (!crmAuthorized(request, runtimeEnv)) return bridgeJson({ error: 'Modül bağlantı yetkisi geçersiz.' }, 401);

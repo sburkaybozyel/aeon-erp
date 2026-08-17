@@ -13,6 +13,7 @@ import { registerInventoryRoutes } from './routes/inventory.js';
 import { initDining } from './modules/dining.js';
 import { initStay } from './modules/stay.js';
 import { initPrinting } from './modules/printing.js';
+import { registerReceptionBridge } from './modules/reception-bridge.js';
 
 const app = express();
 
@@ -54,6 +55,7 @@ const moduleContext = { app, eventBus, hookRegistry, getDb, commitDb, broadcastS
 initDining(moduleContext);
 initStay(moduleContext);
 initPrinting(moduleContext);
+registerReceptionBridge(moduleContext);
 
 app.use((err, req, res, next) => {
   console.error('Unhandled request error:', err);

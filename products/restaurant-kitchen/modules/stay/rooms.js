@@ -1,5 +1,21 @@
 import crypto from 'crypto';
 
+async function receptionJson(path) {
+  const token = String(process.env.RECEPTION_MODULE_TOKEN || '').trim();
+  const base = String(process.env.RECEPTION_MODULE_URL || '').replace(/\/$/, '');
+  if (!token || (!base && !globalThis.__RECEPTION_SERVICE)) return null;
+  const init = { headers: { 'x-aeon-module-token': token } };
+  try {
+    const response = globalThis.__RECEPTION_SERVICE
+      ? await globalThis.__RECEPTION_SERVICE.fetch(new Request(`https://aeon-reception.internal${path}`, init))
+      : await fetch(`${base}${path}`, init);
+    const payload = await response.json().catch(() => ({}));
+    return { ok: response.ok, status: response.status, payload };
+  } catch {
+    return null;
+  }
+}
+
 // Room CRUD, status/DND transitions, the guest-facing room-context/targets/folio endpoints,
 // and guest search — the core "rooms" surface of the Stay module.
 export function registerRoomRoutes({ app, broadcastSSE }) {
@@ -7,6 +23,9 @@ export function registerRoomRoutes({ app, broadcastSSE }) {
     const target = String(req.query.target || '').replace(/^Room-/, '').trim();
     if (!target) return res.status(400).json({ error: 'Oda hedefi zorunludur.' });
     try {
+      const remote = await receptionJson(`/api/module/dining/room-context?target=${encodeURIComponent(target)}`);
+      if (remote?.ok) return res.json(remote.payload);
+      if (remote && remote.status === 404) return res.status(404).json(remote.payload);
       const room = await req.db.get('SELECT id, room_number, room_type, floor, bed_type, capacity, view_type FROM rooms WHERE room_number = ?', [target]);
       if (!room) return res.status(404).json({ error: 'Oda QR hedefi bulunamadı.' });
       res.json({ target_identifier: `Room-${room.room_number}`, room });
@@ -34,6 +53,9 @@ export function registerRoomRoutes({ app, broadcastSSE }) {
     const roomNumber = String(req.query.target || '').replace(/^Room-/, '').trim();
     if (!roomNumber) return res.status(400).json({ error: 'Oda hedefi zorunludur.' });
     try {
+      const remote = await receptionJson(`/api/module/dining/folio?target=${encodeURIComponent(roomNumber)}`);
+      if (remote?.ok) return res.json(remote.payload);
+      if (remote && remote.status === 404) return res.status(404).json(remote.payload);
       const room = await req.db.get('SELECT id, room_number, status FROM rooms WHERE room_number = ?', [roomNumber]);
       if (!room) return res.status(404).json({ error: 'Oda QR hedefi bulunamadı.' });
       const activeStay = await req.db.get("SELECT folio_id, checkin_at FROM stays WHERE room_id = ? AND status = 'checked_in' ORDER BY checkin_at DESC LIMIT 1", [room.id]);

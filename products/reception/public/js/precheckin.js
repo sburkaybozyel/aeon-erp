@@ -1,4 +1,5 @@
 const tenantId = new URLSearchParams(window.location.search).get('tenant_id') || 'reception';
+const precheckinToken = new URLSearchParams(window.location.search).get('token') || '';
 const form = document.getElementById('precheckin-form');
 const message = document.getElementById('precheckin-message');
 const summary = document.getElementById('precheckin-summary');
@@ -57,7 +58,8 @@ form.addEventListener('submit', async event => {
   data.marketing_consent = formValues.has('marketing_consent');
   const copy = translations[languagePicker.value] || translations.tr;
   try {
-    const response = await fetch(`/api/guest/precheckin?tenant_id=${encodeURIComponent(tenantId)}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+    const endpoint = precheckinToken ? `/api/guest/precheckin/${encodeURIComponent(precheckinToken)}` : '/api/guest/precheckin';
+    const response = await fetch(`${endpoint}?tenant_id=${encodeURIComponent(tenantId)}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
     const result = await response.json();
     if (!response.ok) throw new Error(result.error || copy.failed);
     form.hidden = true;

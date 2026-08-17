@@ -250,9 +250,10 @@
             // Redirect based on role
             const role = (data.user.role || '').toLowerCase();
             const portalByRole = {
-              admin: '/staff-reception.html',
-              manager: '/staff-reception.html',
-              'yönetici': '/staff-reception.html',
+              admin: '/admin.html',
+              manager: '/admin.html',
+              'yönetici': '/admin.html',
+              'restoran müdürü': '/admin.html',
               reception: '/staff-reception.html',
             };
             const portal = portalByRole[role] || '/login.html';

@@ -2,6 +2,7 @@
   "name": "aeon-restaurant-kitchen",
   "main": "cloudflare-worker.js",
   "workers_dev": true,
+  "triggers": { "crons": ["*/5 * * * *"] },
   "compatibility_date": "2026-08-17",
   "compatibility_flags": ["nodejs_compat"],
   "d1_databases": [

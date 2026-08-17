@@ -142,7 +142,9 @@
         
         function getPortalForRole(r) {
           const roleLower = String(r || '').toLowerCase();
-          if (['admin', 'manager', 'yönetici', 'restoran müdürü', 'reception'].includes(roleLower)) {
+          if (['admin', 'manager', 'yönetici', 'restoran müdürü'].includes(roleLower)) {
+            return '/admin.html';
+          } else if (['reception', 'resepsiyon'].includes(roleLower)) {
             return '/staff-reception.html';
           } else if (['maintenance', 'technical'].includes(roleLower)) {
             return null;
@@ -171,9 +173,11 @@
             }
           } else {
             const isReceptionPage = path.includes('staff-reception.html');
+            const isAdminPage = path.includes('admin.html');
             
             let isCorrectPage = false;
             if (isReceptionPage && ['admin', 'manager', 'yönetici', 'restoran müdürü', 'reception'].includes(role)) isCorrectPage = true;
+            if (isAdminPage && ['admin', 'manager', 'yönetici', 'restoran müdürü'].includes(role)) isCorrectPage = true;
             
             if (!isCorrectPage) {
               if (targetPortal) {

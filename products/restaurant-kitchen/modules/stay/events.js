@@ -15,6 +15,7 @@ export function registerStayEvents({ eventBus, hookRegistry, getDb }) {
 
   // Register Event: room_charge_request
   eventBus.on('room_charge_request', async (data) => {
+    if (globalThis.__RECEPTION_SERVICE && String(process.env.RECEPTION_MODULE_TOKEN || '').trim()) return;
     const { tenantId, targetIdentifier, amount, requestId, createdBy, department, description } = data;
     try {
       const db = await getDb(tenantId);
@@ -40,6 +41,7 @@ export function registerStayEvents({ eventBus, hookRegistry, getDb }) {
   });
 
   eventBus.on('room_charge_reversal_request', async (data) => {
+    if (globalThis.__RECEPTION_SERVICE && String(process.env.RECEPTION_MODULE_TOKEN || '').trim()) return;
     const { tenantId, requestId, createdBy, reason } = data;
     try {
       const db = await getDb(tenantId);
@@ -66,6 +68,7 @@ export function registerStayEvents({ eventBus, hookRegistry, getDb }) {
   });
 
   eventBus.on('room_charge_adjustment_request', async (data) => {
+    if (globalThis.__RECEPTION_SERVICE && String(process.env.RECEPTION_MODULE_TOKEN || '').trim()) return;
     const { tenantId, requestId, ticketId, adjustmentAmount, createdBy, reason } = data;
     try {
       const amount = Math.abs(Number(adjustmentAmount || 0));
@@ -87,6 +90,7 @@ export function registerStayEvents({ eventBus, hookRegistry, getDb }) {
 
   // Register Event: order_delivered_to_room
   eventBus.on('order_delivered_to_room', async (data) => {
+    if (globalThis.__RECEPTION_SERVICE && String(process.env.RECEPTION_MODULE_TOKEN || '').trim()) return;
     const { tenantId, targetIdentifier, requestId } = data;
     try {
       const db = await getDb(tenantId);

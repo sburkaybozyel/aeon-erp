@@ -17,7 +17,7 @@ export function initReception({ app, eventBus, getDb }) {
 
   app.use('/api/reception', requireReception);
 
-  registerPrecheckinAdminRoutes({ app });
+  registerPrecheckinAdminRoutes({ app, eventBus });
   registerDashboardRoutes({ app });
   registerReservationRoutes({ app, eventBus });
   registerStayRoutes({ app, eventBus });

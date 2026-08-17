@@ -2,6 +2,7 @@
   "name": "aeon-reception",
   "main": "cloudflare-worker.js",
   "workers_dev": true,
+  "triggers": { "crons": ["*/5 * * * *"] },
   "compatibility_date": "2026-08-17",
   "compatibility_flags": ["nodejs_compat"],
   "d1_databases": [
@@ -26,8 +27,9 @@
     "MODULE_DEFAULT_TENANT": "reception",
     "MODULE_ALLOWED_TENANTS": "reception",
     "MODULE_D1_BOOTSTRAP": "true",
-    "MODULE_BUILD_ID": "reception-copy-2026-08-17-crm-bridge",
+    "MODULE_BUILD_ID": "reception-copy-2026-08-17-integrated-hub",
     "CRM_MODULE_URL": "https://aeon-crm.aeon-global.workers.dev",
+    "RESTAURANT_MODULE_URL": "https://aeon-restaurant-kitchen.aeon-global.workers.dev",
     "INITIAL_RECEPTION_PIN": "1234"
   }
 }

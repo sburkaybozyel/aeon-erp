@@ -2,7 +2,7 @@ import { syncMenuAvailability } from './menu.js';
 import { resolveFoodStationId } from './production.js';
 
 const ENABLE_STOCK_ALGORITHM = process.env.ENABLE_STOCK_ALGORITHM !== 'false';
-const RECEPTION_FORWARD_TYPES = new Set(['towel_request', 'cleaning_request', 'linen_request', 'amenity_request', 'maintenance_request', 'water_request', 'transport_request']);
+const RECEPTION_FORWARD_TYPES = new Set(['towel_request', 'cleaning_request', 'linen_request', 'amenity_request', 'maintenance_request', 'water_request', 'transport_request', 'room_dnd_change']);
 
 async function forwardGuestRequestToReception({ requestId, type, targetIdentifier, details }) {
   const receptionUrl = String(process.env.RECEPTION_MODULE_URL || '').trim().replace(/\/+$/, '');
@@ -53,6 +53,20 @@ async function forwardGuestRequestToReception({ requestId, type, targetIdentifie
   }
 }
 
+async function preflightReceptionRoomCharge(targetIdentifier) {
+  const receptionUrl = String(process.env.RECEPTION_MODULE_URL || '').trim().replace(/\/+$/, '');
+  const receptionToken = String(process.env.RECEPTION_MODULE_TOKEN || '').trim();
+  if (!receptionToken || (!receptionUrl && !globalThis.__RECEPTION_SERVICE)) throw Object.assign(new Error('Resepsiyon oda hesabı bağlantısı yapılandırılmamış.'), { statusCode: 503 });
+  const init = { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-AEON-MODULE-TOKEN': receptionToken }, body: JSON.stringify({ target_identifier: targetIdentifier }) };
+  const service = globalThis.__RECEPTION_SERVICE;
+  const response = service
+    ? await service.fetch(new Request('https://aeon-reception.internal/api/module/dining/preflight', init))
+    : await fetch(`${receptionUrl}/api/module/dining/preflight`, init);
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok || !payload.valid) throw Object.assign(new Error(payload.error || 'Oda için aktif resepsiyon konaklaması bulunamadı.'), { statusCode: response.status || 409 });
+  return payload;
+}
+
 export function initRequestCreate({ app, eventBus, broadcastSSE, normalizeTargetIdentifier, ensureRequestDepartments }) {
   app.post('/api/requests', async (req, res) => {
     const { type, details, payment_method } = req.body;
@@ -89,16 +103,25 @@ export function initRequestCreate({ app, eventBus, broadcastSSE, normalizeTarget
       const target_identifier = await normalizeTargetIdentifier(req.db, req.body.target_identifier);
       if (!target_identifier) return res.status(400).json({ error: 'Hedef bilgisi zorunludur.' });
       let targetRoom = null;
+      let receptionRoomPreflight = null;
       if (target_identifier.startsWith('Table-')) {
         const table = await req.db.get("SELECT id FROM tables WHERE table_number = ?", [target_identifier.slice(6)]);
         if (!table) return res.status(404).json({ error: 'Masa bulunamadı.' });
         if (effectivePaymentMethod === 'room_charge') return res.status(400).json({ error: 'Oda hesabına yazma yalnızca aktif konaklaması bulunan oda için kullanılabilir.' });
       } else if (target_identifier.startsWith('Room-')) {
         targetRoom = await req.db.get("SELECT id, status FROM rooms WHERE room_number = ?", [target_identifier.slice(5)]);
-        if (!targetRoom) return res.status(404).json({ error: 'Oda bulunamadı.' });
         if (type === 'order' && effectivePaymentMethod === 'room_charge') {
-          const activeStay = await req.db.get("SELECT s.id, s.folio_id FROM stays s JOIN folios f ON f.id = s.folio_id AND f.status = 'open' WHERE s.room_id = ? AND s.status = 'checked_in' ORDER BY s.checkin_at DESC LIMIT 1", [targetRoom.id]);
-          if (targetRoom.status !== 'occupied' || !activeStay?.folio_id) {
+          try {
+            receptionRoomPreflight = await preflightReceptionRoomCharge(target_identifier);
+          } catch (error) {
+            return res.status(error.statusCode || 409).json({ error: error.message });
+          }
+        }
+        if (!targetRoom && receptionRoomPreflight) targetRoom = { id: null, status: 'occupied' };
+        if (!targetRoom && !RECEPTION_FORWARD_TYPES.has(type)) return res.status(404).json({ error: 'Oda bulunamadı.' });
+        if (type === 'order' && effectivePaymentMethod === 'room_charge') {
+          const activeStay = targetRoom.id ? await req.db.get("SELECT s.id, s.folio_id FROM stays s JOIN folios f ON f.id = s.folio_id AND f.status = 'open' WHERE s.room_id = ? AND s.status = 'checked_in' ORDER BY s.checkin_at DESC LIMIT 1", [targetRoom.id]) : null;
+          if (!receptionRoomPreflight && (targetRoom.status !== 'occupied' || !activeStay?.folio_id)) {
             return res.status(409).json({ error: 'Oda siparişi için dolu oda, aktif konaklama ve açık folyo gereklidir.' });
           }
         }
@@ -339,6 +362,19 @@ export function initRequestCreate({ app, eventBus, broadcastSSE, normalizeTarget
           description: `${finalDepartment === 'Bar' ? 'Bar' : 'Restoran'} siparişi`
         });
       }
+
+      await eventBus.emit('dining_request_created', {
+        tenantId: req.tenantId,
+        requestId,
+        type,
+        targetIdentifier: target_identifier,
+        status: initialStatus,
+        amount: totalAmount,
+        payment_method: effectivePaymentMethod,
+        details: orderDetails.length > 0 ? orderDetails : details,
+        departments: routedDepartments,
+        createdBy: actorName
+      });
 
       if (type === 'order') {
         const printPayload = {

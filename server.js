@@ -59,23 +59,20 @@ app.get('/qr-health', (req, res) => {
 app.get('/q/:code', (req, res) => {
   const target = getQrTarget(req.params.code);
   if (!target) return res.status(404).send('QR hedefi bulunamadı.');
-  const params = new URLSearchParams({ tenant_id: 'aeon', type: target.type, target: target.target, qr: target.code });
   res.set('Cache-Control', 'no-store');
-  return res.redirect(303, `/${target.type === 'room' ? 'room' : 'restaurant'}?${params.toString()}`);
+  return res.redirect(303, `https://aeon-restaurant-kitchen.aeon-global.workers.dev/q/${encodeURIComponent(target.code)}`);
 });
 app.get('/room-qr/:code', (req, res) => {
   const target = getQrTarget(req.params.code);
   if (!target || target.type !== 'room') return res.status(404).send('Oda QR hedefi bulunamadı.');
-  const params = new URLSearchParams({ tenant_id: 'aeon', type: 'room', target: target.target, qr: target.code });
   res.set('Cache-Control', 'no-store');
-  return res.redirect(303, `/room?${params.toString()}`);
+  return res.redirect(303, `https://aeon-restaurant-kitchen.aeon-global.workers.dev/room-qr/${encodeURIComponent(target.code)}`);
 });
 app.get('/restaurant-qr/:code', (req, res) => {
   const target = getQrTarget(req.params.code);
   if (!target || target.type !== 'restaurant') return res.status(404).send('Restoran QR hedefi bulunamadı.');
-  const params = new URLSearchParams({ tenant_id: 'aeon', type: 'restaurant', target: target.target, qr: target.code });
   res.set('Cache-Control', 'no-store');
-  return res.redirect(303, `/restaurant?${params.toString()}`);
+  return res.redirect(303, `https://aeon-restaurant-kitchen.aeon-global.workers.dev/restaurant-qr/${encodeURIComponent(target.code)}`);
 });
 app.get(portalAliases, (req, res) => {
   res.set('Cache-Control', 'no-store');

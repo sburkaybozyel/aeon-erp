@@ -3,7 +3,7 @@ import { actor, audit, parse, profileFor } from './helpers.js';
 
 // Reception-side review/approval of guest-submitted precheckin forms (both the
 // reservation-linked token flow and the fixed-QR submission flow).
-export function registerPrecheckinAdminRoutes({ app }) {
+export function registerPrecheckinAdminRoutes({ app, eventBus }) {
   app.get('/api/reception/precheckins', async (req, res) => {
     const rows = await req.db.all('SELECT * FROM guest_precheckin_submissions ORDER BY submitted_at DESC');
     for (const row of rows.filter(item => item.status === 'reviewed' && !item.reservation_id && item.created_guest_id)) {
@@ -26,6 +26,8 @@ export function registerPrecheckinAdminRoutes({ app }) {
     const user = actor(req);
     await req.db.run("UPDATE guest_precheckin_submissions SET status = 'reviewed', reviewed_at = CURRENT_TIMESTAMP, reviewed_by = ?, created_guest_id = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?", [user.name, guestId, entry.id]);
     await audit(req.db, req, 'guest_precheckin_submission', entry.id, 'reviewed', null, { guest_id: guestId });
+    await eventBus?.emit('precheckin_reviewed', { id: entry.id, guest: payload, reservationId: entry.reservation_id, guestId, reviewedBy: user.name });
+    await eventBus?.emit('guest_profile_updated', { id: guestId, guest: payload, reservationId: entry.reservation_id, source: 'precheckin' });
     res.json({ success: true, guest_id: guestId, payload });
   });
 
@@ -72,6 +74,8 @@ export function registerPrecheckinAdminRoutes({ app }) {
     await req.db.run('UPDATE reservations SET main_guest_id = ?, contact_phone = ?, contact_email = ?, special_requests = ?, updated_at = CURRENT_TIMESTAMP, updated_by = ? WHERE id = ?', [guestId, data.phone || reservation.contact_phone, data.email || reservation.contact_email, data.special_requests || reservation.special_requests, user.name, reservation.id]);
     await req.db.run("UPDATE guest_precheckins SET status = 'reviewed', reviewed_at = CURRENT_TIMESTAMP, reviewed_by = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?", [user.name, entry.id]);
     await audit(req.db, req, 'reservation', reservation.id, 'precheckin_reviewed', null, { precheckin_id: entry.id, guest_id: guestId });
+    await eventBus?.emit('precheckin_reviewed', { id: entry.id, guest: data, reservationId: reservation.id, guestId, reviewedBy: user.name });
+    await eventBus?.emit('guest_profile_updated', { id: guestId, guest: data, reservationId: reservation.id, source: 'precheckin' });
     res.json({ success: true, guest_id: guestId });
   });
 }

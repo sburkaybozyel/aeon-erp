@@ -225,6 +225,17 @@ export function initRequests({ app, eventBus, broadcastSSE }) {
         });
         broadcastSSE && broadcastSSE(req.tenantId, 'room_updated', { target: request.target_identifier });
       }
+      await eventBus.emit('dining_request_updated', {
+        tenantId: req.tenantId,
+        requestId,
+        type: request.type,
+        targetIdentifier: request.target_identifier,
+        status: effectiveStatus,
+        amount: Number(request.total_amount || 0),
+        payment_method: effectivePaymentMethod,
+        details: updatedDetails,
+        createdBy: actorName
+      });
 
       res.json({ success: true, status: effectiveStatus });
     } catch (err) {
@@ -250,6 +261,17 @@ export function initRequests({ app, eventBus, broadcastSSE }) {
       await req.db.run('UPDATE requests SET details = ?, completed_by = ? WHERE id = ?', [details, req.actor?.name || 'Operasyon', requestId]);
       await req.db.run('INSERT INTO audit_logs (id, staff_name, action, details) VALUES (?, ?, ?, ?)', ['log_' + Math.random().toString(36).slice(2, 11), req.actor?.name || 'Operasyon', 'Sipariş/İstek Düzenlendi', `İstek #${requestId} notu güncellendi.`]);
       broadcastSSE && broadcastSSE(req.tenantId, 'request_updated', { requestId, status: request.status });
+      await eventBus.emit('dining_request_updated', {
+        tenantId: req.tenantId,
+        requestId,
+        type: request.type,
+        targetIdentifier: request.target_identifier,
+        status: request.status,
+        amount: Number(request.total_amount || 0),
+        payment_method: request.payment_method || null,
+        details,
+        createdBy: req.actor?.name || 'Operasyon'
+      });
       res.json({ success: true, requestId, note });
     } catch (err) {
       res.status(500).json({ error: err.message });
@@ -292,6 +314,17 @@ export function initRequests({ app, eventBus, broadcastSSE }) {
         "INSERT INTO audit_logs (id, staff_name, action, details) VALUES (?, ?, ?, ?)",
         [logId, staffName, 'Sipariş/İstek Silindi', `İstek #${requestId} (${request.target_identifier}, ${request.type}) ${staffName} tarafından silindi.`]
       );
+      await eventBus.emit('dining_request_updated', {
+        tenantId: req.tenantId,
+        requestId,
+        type: request.type,
+        targetIdentifier: request.target_identifier,
+        status: 'cancelled',
+        amount: Number(request.total_amount || 0),
+        payment_method: request.payment_method || null,
+        details: request.details || null,
+        createdBy: staffName
+      });
 
       await syncMenuAvailability(req.db);
       const tableUpdate = await refreshTableStatus(req.db, request.target_identifier);

@@ -17,12 +17,14 @@ app.listen(3000);
 const appHandler = httpServerHandler({ port: 3000 });
 const portalPaths = new Set(['/restaurant', '/restaurant/', '/restaurant.html', '/menu', '/menu/', '/menu.html', '/restaurant-menu', '/restaurant-menu/', '/room', '/room/', '/room.html', '/room-portal', '/room-portal/', '/room-portal.html', '/guest', '/guest/', '/guest.html']);
 
-function redirectForTarget(target) {
-  const params = new URLSearchParams({ tenant_id: 'aeon', type: target.type, target: target.target, qr: target.code });
+const publicDiningOrigin = 'https://aeon-restaurant-kitchen.aeon-global.workers.dev';
+
+function redirectForTarget(target, route) {
+  const path = route === 'room-qr' ? 'room-qr' : route === 'restaurant-qr' ? 'restaurant-qr' : 'q';
   return new Response(null, {
     status: 303,
     headers: {
-      Location: `/${target.type === 'room' ? 'room' : 'restaurant'}?${params.toString()}`,
+      Location: `${publicDiningOrigin}/${path}/${encodeURIComponent(target.code)}`,
       'Cache-Control': 'no-store'
     }
   });
@@ -45,7 +47,7 @@ export default {
         const target = getQrTarget(decodeURIComponent(qrMatch[2]));
         const expectedType = qrMatch[1] === 'room-qr' ? 'room' : qrMatch[1] === 'restaurant-qr' ? 'restaurant' : '';
         if (!target || (expectedType && target.type !== expectedType)) return new Response('QR hedefi bulunamadı.', { status: 404 });
-        return redirectForTarget(target);
+        return redirectForTarget(target, qrMatch[1]);
       }
       if (portalPaths.has(url.pathname)) {
         const assetUrl = new URL(request.url);

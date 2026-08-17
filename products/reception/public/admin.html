@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yönetici Paneli | AEON Reception</title>
+  <link rel="stylesheet" href="/css/aeon-tokens.css">
+  <link rel="stylesheet" href="/css/aeon-base.css">
+  <link rel="stylesheet" href="/css/aeon-shell.css">
+  <link rel="stylesheet" href="/css/aeon-components.css">
+  <link rel="stylesheet" href="/css/aeon-responsive.css">
+  <link rel="stylesheet" href="/css/admin-dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="/js/boot.js"></script>
+  <style>
+    .hub-scroll { padding: 28px 40px 48px; overflow-y: auto; }
+    .hub-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    .hub-departments { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    .hub-department { padding: 20px; border: 1px solid var(--border-glass); border-radius: 14px; background: var(--bg-surface); }
+    .hub-department-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+    .hub-department h3 { margin: 0; font-size: 16px; }
+    .hub-department small { color: var(--color-text-muted); }
+    .hub-status { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--color-success); }
+    .hub-status.offline { color: var(--color-danger); }
+    .hub-stat { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--border-glass); font-size: 13px; }
+    .hub-stat:last-child { border-bottom: 0; }
+    .hub-stat strong { font-size: 16px; }
+    .hub-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 26px; }
+    .hub-actions a { text-decoration: none; }
+    .hub-table-wrap { overflow-x: auto; }
+    .hub-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .hub-table th, .hub-table td { padding: 11px 10px; text-align: left; border-bottom: 1px solid var(--border-glass); white-space: nowrap; }
+    .hub-table th { color: var(--color-text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+    .hub-note { color: var(--color-text-muted); font-size: 13px; line-height: 1.5; }
+    .hub-alert { color: var(--color-danger); }
+    @media (max-width: 1100px) { .hub-grid, .hub-departments { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 700px) { .app-container { display: block; height: auto; min-height: 100vh; } .sidebar { min-height: auto; height: auto; } .nav-menu { flex-direction: row; overflow-x: auto; } .sidebar-footer { display: none; } .main-content { height: auto; min-height: calc(100vh - 210px); } .topbar { padding: 16px 20px; } .hub-scroll { padding: 20px; } .hub-grid, .hub-departments { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <img class="logo-brand-path" src="/brands/aeon/logo.svg" alt="AEON" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+        <div class="brand-text"><h1 class="brand-title">AEON Reception</h1><span>Modüler yönetici paneli</span></div>
+      </div>
+      <nav class="nav-menu">
+        <a class="nav-item active" href="#overview"><i class="fa-solid fa-gauge-high"></i> Genel Bakış</a>
+        <a class="nav-item" href="#reception"><i class="fa-solid fa-bell-concierge"></i> Resepsiyon</a>
+        <a class="nav-item" href="#restaurant"><i class="fa-solid fa-utensils"></i> Restoran</a>
+        <a class="nav-item" href="#kitchen"><i class="fa-solid fa-fire-burner"></i> Mutfak</a>
+        <a class="nav-item" href="#crm"><i class="fa-solid fa-users"></i> CRM</a>
+        <a class="nav-item" href="#" style="color:var(--color-danger);margin-top:auto" onclick="window.aeonLogout();return false"><i class="fa-solid fa-power-off"></i> Çıkış Yap</a>
+      </nav>
+      <div class="sidebar-footer"><div class="tenant-badge"><i class="fa-solid fa-circle"></i><span>Bağımsız modül ağı</span></div></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-title"><h2 style="margin:0">Yönetici Kontrol Merkezi</h2><small id="hub-actor" class="hub-note">Yükleniyor...</small></div>
+        <div style="display:flex;align-items:center;gap:14px"><span id="hub-updated" class="hub-note"></span><button class="btn btn-primary" id="hub-refresh"><i class="fa-solid fa-rotate"></i> Yenile</button></div>
+      </header>
+      <div class="hub-scroll" id="overview">
+        <div class="hub-grid">
+          <div class="card kpi-card" style="--kpi-color:var(--color-primary)"><div class="kpi-icon"><i class="fa-solid fa-bed"></i></div><span class="text-muted small">Dolu odalar</span><h2 id="kpi-occupied">—</h2><small id="kpi-rooms-note" class="hub-note">—</small></div>
+          <div class="card kpi-card" style="--kpi-color:var(--color-success)"><div class="kpi-icon"><i class="fa-solid fa-right-to-bracket"></i></div><span class="text-muted small">Aktif konaklama</span><h2 id="kpi-stays">—</h2><small id="kpi-precheckins" class="hub-note">Ön giriş: —</small></div>
+          <div class="card kpi-card" style="--kpi-color:var(--color-accent)"><div class="kpi-icon"><i class="fa-solid fa-bell"></i></div><span class="text-muted small">Açık operasyon</span><h2 id="kpi-open">—</h2><small id="kpi-folios" class="hub-note">Açık folyo: —</small></div>
+          <div class="card kpi-card" style="--kpi-color:var(--color-warning)"><div class="kpi-icon"><i class="fa-solid fa-link"></i></div><span class="text-muted small">Entegrasyon olayları</span><h2 id="kpi-events">—</h2><small id="kpi-mirrors" class="hub-note">Restoran aynası: —</small></div>
+        </div>
+        <div class="hub-actions">
+          <a class="btn btn-primary" href="/reception?tenant_id=reception"><i class="fa-solid fa-bell-concierge"></i> Resepsiyon ekranı</a>
+          <a class="btn btn-secondary" href="/precheckin?tenant_id=reception"><i class="fa-solid fa-qrcode"></i> Ön giriş kuyruğu</a>
+          <a class="btn btn-secondary" href="https://aeon-restaurant-kitchen.aeon-global.workers.dev/restaurant-staff"><i class="fa-solid fa-utensils"></i> Restoran</a>
+          <a class="btn btn-secondary" href="https://aeon-restaurant-kitchen.aeon-global.workers.dev/kitchen"><i class="fa-solid fa-fire-burner"></i> Mutfak</a>
+          <a class="btn btn-secondary" href="https://aeon-crm.aeon-global.workers.dev/"><i class="fa-solid fa-users"></i> CRM</a>
+        </div>
+        <section class="hub-departments" id="departments">
+          <article class="hub-department" id="reception"><div class="hub-department-head"><div><h3><i class="fa-solid fa-bell-concierge"></i> Resepsiyon</h3><small>Oda, rezervasyon ve misafir akışı</small></div><span class="hub-status"><i class="fa-solid fa-circle"></i> Bağlı</span></div><div class="hub-stat"><span>Oda kapasitesi</span><strong id="reception-rooms">—</strong></div><div class="hub-stat"><span>Rezervasyon</span><strong id="reception-reservations">—</strong></div><div class="hub-stat"><span>Ön giriş bekleyen</span><strong id="reception-precheckins">—</strong></div><div class="hub-stat"><span>Açık folyo</span><strong id="reception-folios">—</strong></div></article>
+          <article class="hub-department" id="restaurant"><div class="hub-department-head"><div><h3><i class="fa-solid fa-utensils"></i> Restoran</h3><small>QR sipariş ve masa akışı</small></div><span id="restaurant-status" class="hub-status"><i class="fa-solid fa-circle"></i> Kontrol ediliyor</span></div><div class="hub-stat"><span>Açık sipariş</span><strong id="restaurant-orders">—</strong></div><div class="hub-stat"><span>Açık masa</span><strong id="restaurant-tables">—</strong></div><div class="hub-stat"><span>Hazır servis</span><strong id="restaurant-ready">—</strong></div><div class="hub-stat"><span>Köprü kuyruğu</span><strong id="restaurant-outbox">—</strong></div></article>
+          <article class="hub-department" id="kitchen"><div class="hub-department-head"><div><h3><i class="fa-solid fa-fire-burner"></i> Mutfak</h3><small>KDS, üretim ve menü</small></div><span id="kitchen-status" class="hub-status"><i class="fa-solid fa-circle"></i> Restoran ile bağlı</span></div><div class="hub-stat"><span>Aktif bilet</span><strong id="kitchen-active">—</strong></div><div class="hub-stat"><span>Hazır bilet</span><strong id="kitchen-ready">—</strong></div><div class="hub-stat"><span>Menü dışı ürün</span><strong id="kitchen-unavailable">—</strong></div><div class="hub-stat"><span>Gönderilen köprü olayı</span><strong id="kitchen-sent">—</strong></div></article>
+          <article class="hub-department" id="crm"><div class="hub-department-head"><div><h3><i class="fa-solid fa-users"></i> CRM</h3><small>Kazanılan talep ve misafir geçmişi</small></div><span id="crm-status" class="hub-status"><i class="fa-solid fa-circle"></i> Kontrol ediliyor</span></div><div class="hub-stat"><span>Kontak</span><strong id="crm-contacts">—</strong></div><div class="hub-stat"><span>Açık fırsat</span><strong id="crm-opportunities">—</strong></div><div class="hub-stat"><span>Resepsiyon rezervasyonu</span><strong id="crm-reservations">—</strong></div><div class="hub-stat"><span>Alınan olay</span><strong id="crm-events">—</strong></div></article>
+        </section>
+        <section class="card" style="margin-top:24px"><div class="card-header"><h3><i class="fa-solid fa-list-check"></i> Son operasyonlar</h3><span class="hub-note">Resepsiyon ve QR akışından</span></div><div class="hub-table-wrap"><table class="hub-table"><thead><tr><th>Tür</th><th>Hedef</th><th>Durum</th><th>Tutar</th><th>Zaman</th></tr></thead><tbody id="recent-requests"><tr><td colspan="5" class="hub-note">Yükleniyor...</td></tr></tbody></table></div></section>
+        <p id="hub-error" class="hub-alert" role="alert"></p>
+        <p class="hub-note">Bu panel yalnızca Resepsiyon, Restoran, Mutfak ve CRM kopyalarının operasyon verilerini gösterir. Teknik bakım ve kat hizmetleri bu satış paketinin dışında tutulmuştur.</p>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="/js/admin-hub.js"></script>
+</body>
+</html>

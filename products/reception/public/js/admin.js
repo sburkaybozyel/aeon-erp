@@ -1180,11 +1180,12 @@ function renderRevenueDetail(requests, apaSummary) {
 async function loadMobileConnectionCard() {
   try {
     const origin = window.location.origin;
+    const publicModuleOrigin = 'https://aeon-restaurant-kitchen.aeon-global.workers.dev';
     
     // Core 3 Entry Points
-    const roomUrl = `${origin}/room?tenant_id=${state.currentTenant}`;
-    const restaurantUrl = `${origin}/restaurant?tenant_id=${state.currentTenant}`;
-    const staffUrl = `${origin}/staff.html?tenant_id=${state.currentTenant}`;
+    const roomUrl = `${publicModuleOrigin}/room-qr/oda-01`;
+    const restaurantUrl = `${publicModuleOrigin}/restaurant-qr/garden-01`;
+    const staffUrl = `${publicModuleOrigin}/restaurant-staff?tenant_id=${state.currentTenant}`;
 
     const elRoom = document.getElementById('mobile-room-url');
     if (elRoom) {
