@@ -40,7 +40,7 @@ export function registerModuleAdminRoutes(app) {
         recent_requests: recentRequests,
         restaurant,
         crm,
-        links: { reception: '/reception', precheckin: '/precheckin', restaurant: 'https://aeon-restaurant-kitchen.aeon-global.workers.dev/restaurant-staff', kitchen: 'https://aeon-restaurant-kitchen.aeon-global.workers.dev/kitchen', crm: 'https://aeon-crm.aeon-global.workers.dev/' }
+        links: { reception: '/staff-reception.html?tenant_id=reception', precheckin: '/precheckin?tenant_id=reception', restaurant: 'https://aeon-restaurant-kitchen.aeon-global.workers.dev/staff-restaurant.html?tenant_id=restaurant_kitchen', kitchen: 'https://aeon-restaurant-kitchen.aeon-global.workers.dev/staff-kitchen.html?tenant_id=restaurant_kitchen', crm: 'https://aeon-crm.aeon-global.workers.dev/?tenant_id=reception' }
       });
     } catch (error) {
       console.error('[module admin hub]', error);

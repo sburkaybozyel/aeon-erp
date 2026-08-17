@@ -46,10 +46,10 @@
       </div>
       <nav class="nav-menu">
         <a class="nav-item active" href="#overview"><i class="fa-solid fa-gauge-high"></i> Genel Bakış</a>
-        <a class="nav-item" href="#reception"><i class="fa-solid fa-bell-concierge"></i> Resepsiyon</a>
-        <a class="nav-item" href="#restaurant"><i class="fa-solid fa-utensils"></i> Restoran</a>
-        <a class="nav-item" href="#kitchen"><i class="fa-solid fa-fire-burner"></i> Mutfak</a>
-        <a class="nav-item" href="#crm"><i class="fa-solid fa-users"></i> CRM</a>
+        <a class="nav-item" href="/staff-reception.html?tenant_id=reception"><i class="fa-solid fa-bell-concierge"></i> Resepsiyon</a>
+        <a class="nav-item" href="https://aeon-restaurant-kitchen.aeon-global.workers.dev/staff-restaurant.html?tenant_id=restaurant_kitchen"><i class="fa-solid fa-utensils"></i> Restoran</a>
+        <a class="nav-item" href="https://aeon-restaurant-kitchen.aeon-global.workers.dev/staff-kitchen.html?tenant_id=restaurant_kitchen"><i class="fa-solid fa-fire-burner"></i> Mutfak</a>
+        <a class="nav-item" href="https://aeon-crm.aeon-global.workers.dev/?tenant_id=reception"><i class="fa-solid fa-users"></i> CRM</a>
         <a class="nav-item" href="#" style="color:var(--color-danger);margin-top:auto" onclick="window.aeonLogout();return false"><i class="fa-solid fa-power-off"></i> Çıkış Yap</a>
       </nav>
       <div class="sidebar-footer"><div class="tenant-badge"><i class="fa-solid fa-circle"></i><span>Bağımsız modül ağı</span></div></div>
@@ -67,11 +67,11 @@
           <div class="card kpi-card" style="--kpi-color:var(--color-warning)"><div class="kpi-icon"><i class="fa-solid fa-link"></i></div><span class="text-muted small">Entegrasyon olayları</span><h2 id="kpi-events">—</h2><small id="kpi-mirrors" class="hub-note">Restoran aynası: —</small></div>
         </div>
         <div class="hub-actions">
-          <a class="btn btn-primary" href="/reception?tenant_id=reception"><i class="fa-solid fa-bell-concierge"></i> Resepsiyon ekranı</a>
+          <a class="btn btn-primary" href="/staff-reception.html?tenant_id=reception"><i class="fa-solid fa-bell-concierge"></i> Resepsiyon ekranı</a>
           <a class="btn btn-secondary" href="/precheckin?tenant_id=reception"><i class="fa-solid fa-qrcode"></i> Ön giriş kuyruğu</a>
-          <a class="btn btn-secondary" href="https://aeon-restaurant-kitchen.aeon-global.workers.dev/restaurant-staff"><i class="fa-solid fa-utensils"></i> Restoran</a>
-          <a class="btn btn-secondary" href="https://aeon-restaurant-kitchen.aeon-global.workers.dev/kitchen"><i class="fa-solid fa-fire-burner"></i> Mutfak</a>
-          <a class="btn btn-secondary" href="https://aeon-crm.aeon-global.workers.dev/"><i class="fa-solid fa-users"></i> CRM</a>
+          <a class="btn btn-secondary" href="https://aeon-restaurant-kitchen.aeon-global.workers.dev/staff-restaurant.html?tenant_id=restaurant_kitchen"><i class="fa-solid fa-utensils"></i> Restoran</a>
+          <a class="btn btn-secondary" href="https://aeon-restaurant-kitchen.aeon-global.workers.dev/staff-kitchen.html?tenant_id=restaurant_kitchen"><i class="fa-solid fa-fire-burner"></i> Mutfak</a>
+          <a class="btn btn-secondary" href="https://aeon-crm.aeon-global.workers.dev/?tenant_id=reception"><i class="fa-solid fa-users"></i> CRM</a>
         </div>
         <section class="hub-departments" id="departments">
           <article class="hub-department" id="reception"><div class="hub-department-head"><div><h3><i class="fa-solid fa-bell-concierge"></i> Resepsiyon</h3><small>Oda, rezervasyon ve misafir akışı</small></div><span class="hub-status"><i class="fa-solid fa-circle"></i> Bağlı</span></div><div class="hub-stat"><span>Oda kapasitesi</span><strong id="reception-rooms">—</strong></div><div class="hub-stat"><span>Rezervasyon</span><strong id="reception-reservations">—</strong></div><div class="hub-stat"><span>Ön giriş bekleyen</span><strong id="reception-precheckins">—</strong></div><div class="hub-stat"><span>Açık folyo</span><strong id="reception-folios">—</strong></div></article>

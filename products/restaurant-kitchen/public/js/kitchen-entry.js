@@ -16,7 +16,8 @@ function escapeHtml(value) {
 
 document.addEventListener('DOMContentLoaded', async () => {
   const user = await window.aeonBoot();
-  if (!user || !['kitchen', 'chef'].includes(user.role.toLowerCase())) return;
+  const role = String(user?.role || '').toLocaleLowerCase('tr-TR');
+  if (!user || !['kitchen', 'chef', 'admin', 'manager', 'yönetici', 'restoran müdürü'].includes(role)) return;
 
   setupTabs();
   setupKdsQueueTabs();
@@ -600,7 +601,10 @@ async function handleReceiptImageUpload(event) {
         renderMarketReceiptItems();
       }
     } else {
-      alert("AI okuma hatası oluştu.");
+      const errorBody = await res.json().catch(() => ({}));
+      alert(errorBody.error_code === 'ocr_not_configured'
+        ? 'Otomatik fiş okuma şu anda yapılandırılmamış. Kalemleri elle girebilirsiniz.'
+        : (errorBody.error || 'AI okuma hatası oluştu.'));
     }
   } catch (err) {
     console.error(err);

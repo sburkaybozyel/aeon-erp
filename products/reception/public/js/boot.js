@@ -172,7 +172,7 @@
               window.aeonLogout();
             }
           } else {
-            const isReceptionPage = path.includes('staff-reception.html');
+            const isReceptionPage = path.includes('staff-reception.html') || path === '/reception' || path === '/reception/';
             const isAdminPage = path.includes('admin.html');
             
             let isCorrectPage = false;

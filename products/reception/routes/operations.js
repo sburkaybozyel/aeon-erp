@@ -117,6 +117,25 @@ eventBus.on('hotelrunner_sync', data => {
 });
 
 export function registerOperationsRoutes(app) {
+  app.get('/api/system/shift_notes', async (req, res) => {
+    try {
+      const row = await req.db.get("SELECT value FROM config WHERE key = 'SHIFT_NOTES'");
+      res.json({ notes: row?.value || '' });
+    } catch (error) {
+      res.status(500).json({ error: 'Vardiya notları alınamadı.' });
+    }
+  });
+
+  app.post('/api/system/shift_notes', async (req, res) => {
+    const notes = String(req.body?.notes || '').trim().slice(0, 4000);
+    try {
+      await req.db.run("INSERT OR REPLACE INTO config (key, value) VALUES ('SHIFT_NOTES', ?)", [notes]);
+      res.json({ success: true, notes });
+    } catch (error) {
+      res.status(500).json({ error: 'Vardiya notları kaydedilemedi.' });
+    }
+  });
+
   // Server-Sent Events endpoint
   app.get('/api/events', (req, res) => {
     res.setHeader('Content-Type', 'text/event-stream');

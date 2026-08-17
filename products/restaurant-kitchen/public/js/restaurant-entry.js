@@ -20,7 +20,8 @@ async function initRestaurantPortal() {
   setInterval(loadRestaurantData, 15000);
 
   const user = await window.aeonBoot();
-  if (!user || !['restaurant', 'waiter', 'restoran müdürü'].includes(user.role.toLowerCase())) return;
+  const role = String(user?.role || '').toLocaleLowerCase('tr-TR');
+  if (!user || !['restaurant', 'waiter', 'restoran müdürü', 'admin', 'manager', 'yönetici'].includes(role)) return;
 
   try {
     const [{ setupStaffPushNotifications }, { startRequestNotifications }] = await Promise.all([

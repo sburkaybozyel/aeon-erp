@@ -22,7 +22,8 @@ const taskTypeLabel = type => TASK_TYPE_LABELS[type] || escapeHtml(type || '-');
 document.addEventListener('DOMContentLoaded', async () => {
   // Check auth and branding
   const user = await window.aeonBoot();
-  if (!user || user.role.toLowerCase() !== 'reception') return;
+  const role = String(user?.role || '').toLocaleLowerCase('tr-TR');
+  if (!user || !['reception', 'admin', 'manager', 'yönetici', 'restoran müdürü'].includes(role)) return;
 
   setupTabs();
   setupActions();
@@ -485,8 +486,12 @@ async function saveShiftNotes() {
     });
     if (res.ok) {
       alert("Vardiya notları kaydedildi.");
+    } else {
+      const body = await res.json().catch(() => ({}));
+      alert(body.error || 'Vardiya notları kaydedilemedi.');
     }
   } catch (err) {
     console.error(err);
+    alert('Vardiya notları kaydedilemedi.');
   }
 }

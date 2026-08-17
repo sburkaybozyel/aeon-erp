@@ -600,7 +600,10 @@ async function handleReceiptImageUpload(event) {
         renderMarketReceiptItems();
       }
     } else {
-      alert("AI okuma hatası oluştu.");
+      const errorBody = await res.json().catch(() => ({}));
+      alert(errorBody.error_code === 'ocr_not_configured'
+        ? 'Otomatik fiş okuma şu anda yapılandırılmamış. Kalemleri elle girebilirsiniz.'
+        : (errorBody.error || 'AI okuma hatası oluştu.'));
     }
   } catch (err) {
     console.error(err);

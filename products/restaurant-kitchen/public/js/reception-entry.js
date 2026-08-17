@@ -485,8 +485,12 @@ async function saveShiftNotes() {
     });
     if (res.ok) {
       alert("Vardiya notları kaydedildi.");
+    } else {
+      const body = await res.json().catch(() => ({}));
+      alert(body.error || 'Vardiya notları kaydedilemedi.');
     }
   } catch (err) {
     console.error(err);
+    alert('Vardiya notları kaydedilemedi.');
   }
 }

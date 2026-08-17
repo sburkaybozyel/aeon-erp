@@ -172,12 +172,12 @@
               window.aeonLogout();
             }
           } else {
-            const isRestaurantPage = path.includes('staff-restaurant.html');
-            const isKitchenPage = path.includes('staff-kitchen.html');
+            const isRestaurantPage = path.includes('staff-restaurant.html') || path === '/restaurant-staff' || path === '/restaurant-staff/';
+            const isKitchenPage = path.includes('staff-kitchen.html') || path === '/kitchen' || path === '/kitchen/';
             
             let isCorrectPage = false;
             if (isRestaurantPage && ['admin', 'manager', 'yönetici', 'restoran müdürü', 'restaurant', 'waiter'].includes(role)) isCorrectPage = true;
-            else if (isKitchenPage && ['kitchen', 'chef'].includes(role)) isCorrectPage = true;
+            else if (isKitchenPage && ['kitchen', 'chef', 'admin', 'manager', 'yönetici', 'restoran müdürü'].includes(role)) isCorrectPage = true;
             
             if (!isCorrectPage) {
               if (targetPortal) {

@@ -1,5 +1,14 @@
 // Inventory & menu management endpoints, extracted verbatim from server.js — no behavior change.
 export function registerInventoryRoutes(app) {
+  app.post('/api/inventory/receipt/parse', async (req, res) => {
+    const imageBase64 = String(req.body?.imageBase64 || '').trim();
+    if (!imageBase64) return res.status(400).json({ error: 'Fiş görüntüsü zorunludur.' });
+    return res.status(503).json({
+      error: 'Otomatik fiş okuma sağlayıcısı yapılandırılmadı. Kalemleri elle girebilirsiniz.',
+      error_code: 'ocr_not_configured'
+    });
+  });
+
   app.post('/api/inventory/receipt', async (req, res) => {
     const { receipt_number, vendor, total_amount, items, created_by } = req.body;
     if (!Array.isArray(items) || !items.length) return res.status(400).json({ error: 'En az bir kalem gereklidir.' });

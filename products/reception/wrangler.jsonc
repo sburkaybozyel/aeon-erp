@@ -13,7 +13,8 @@
     }
   ],
   "services": [
-    { "binding": "CRM_SERVICE", "service": "aeon-crm" }
+    { "binding": "CRM_SERVICE", "service": "aeon-crm" },
+    { "binding": "RESTAURANT_SERVICE", "service": "aeon-restaurant-kitchen" }
   ],
   "assets": {
     "directory": "./public",
