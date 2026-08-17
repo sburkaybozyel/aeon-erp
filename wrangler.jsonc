@@ -25,6 +25,7 @@
       "/menu*",
       "/guest*",
       "/room*",
+      "/products*",
       "/q/*",
       "/qr-health"
     ]
@@ -32,7 +33,7 @@
   "vars": {
     "CLOUDFLARE_WORKER": "1",
     "AEON_D1_BOOTSTRAP": "true",
-    "AEON_BUILD_ID": "cloudflare-2026-08-12-menu-routing-refactor",
+    "AEON_BUILD_ID": "cloudflare-2026-08-17-modular-products",
     "AEON_DEFAULT_TENANT": "aeon",
     "AEON_ALLOWED_TENANTS": "aeon",
     "AEON_TENANT_HOSTS": "{\"aeon-erp.aeon-global.workers.dev\":\"aeon\"}",
