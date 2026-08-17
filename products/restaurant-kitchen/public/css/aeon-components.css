@@ -1,0 +1,924 @@
+/* public/css/aeon-components.css */
+
+/* Cards & Surface Primitives */
+.card, .glass, .aeon-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: var(--transition-smooth);
+  margin-bottom: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover, .aeon-card:hover {
+  box-shadow: var(--shadow-premium);
+  border-color: var(--color-primary);
+}
+
+/* KPI Cards */
+.kpi-card {
+  border-left: 4px solid var(--kpi-color, var(--color-primary));
+}
+
+.kpi-card .card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.kpi-icon {
+  font-size: 24px;
+  color: var(--kpi-color, var(--color-primary));
+  opacity: 0.8;
+  margin-bottom: 2px;
+}
+
+.kpi-card h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--kpi-color, var(--color-primary));
+  font-family: var(--font-heading);
+}
+
+.card-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-glass);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h3 {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Forms & Inputs */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label, label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+}
+
+.form-control, input, select, textarea {
+  width: 100%;
+  background: var(--bg-surface);
+  color: var(--color-text-main);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.form-control:focus, input:focus, select:focus, textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+.input-glass-mobile {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(8, 145, 178, 0.15);
+  color: var(--color-text-main);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-family: var(--font-body);
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 0.75rem 1.5rem;
+  font-size: 14px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-smooth);
+  gap: 0.5rem;
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+.btn-secondary:hover {
+  background-color: #e2e8f0;
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+  color: #000000;
+  font-weight: 700;
+}
+.btn-accent:hover {
+  background-color: #f5a623;
+}
+
+.btn-success {
+  background-color: var(--color-success);
+  color: #ffffff;
+}
+.btn-success:hover {
+  background-color: #0d9488;
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+  color: #ffffff;
+}
+.btn-danger:hover {
+  background-color: #e11d48;
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--border-glass);
+  color: var(--color-text-main);
+}
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 12px;
+}
+
+.btn-xs {
+  padding: 0.25rem 0.5rem;
+  font-size: 11px;
+}
+
+/* Borderless icon-only button (logout/close/kebab triggers). Sized to the shared tap
+   target so it stays easy to hit on a staff tablet. Several screens previously defined
+   their own copy of this — kept here as the one shared definition other screens can rely on. */
+.icon-button {
+  border: 0;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 18px;
+  cursor: pointer;
+  min-width: var(--tap-target);
+  min-height: var(--tap-target);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+.icon-button:hover {
+  color: var(--color-primary);
+  background: var(--bg-surface-secondary);
+}
+
+/* Badges */
+.badge, .room-badge, .aeon-badge {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 9999px;
+}
+
+.badge-success { background: #d1fae5; color: #065f46; }
+.badge-warning { background: #fef3c7; color: #92400e; }
+.badge-primary { background: #e0f2fe; color: #0369a1; }
+.badge-secondary { background: #f1f5f9; color: #334155; }
+.badge-danger { background: #fee2e2; color: #991b1b; }
+
+/* Room/order status color system — shared across every portal. These modifier classes
+   are already emitted by JS as literal status strings (e.g. class="room-badge occupied"),
+   so they're defined here once instead of being re-invented per screen. */
+.room-badge.clean, .room-badge.clean_vacant { background: var(--status-clean-bg); color: var(--status-clean-text); }
+.room-badge.occupied { background: var(--status-occupied-bg); color: var(--status-occupied-text); }
+.room-badge.dirty, .room-badge.dirty_vacant { background: var(--status-dirty-bg); color: var(--status-dirty-text); }
+.room-badge.maintenance { background: var(--status-maintenance-bg); color: var(--status-maintenance-text); }
+.room-badge.reserved { background: var(--status-reserved-bg); color: var(--status-reserved-text); }
+
+/* Order-ticket card (KDS / kitchen-bar tickets, task lists). Left accent bar communicates
+   status at a glance without reading text — important for a busy pass during service. */
+.kds-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 1rem;
+  transition: var(--transition-fast);
+}
+.kds-card:hover { box-shadow: var(--shadow-premium); }
+.kds-card.status-pending { border-left-color: var(--status-dirty); }
+.kds-card.status-preparing { border-left-color: var(--status-occupied); }
+.kds-card.status-ready { border-left-color: var(--status-clean); }
+.kds-card.status-completed { border-left-color: var(--status-maintenance); opacity: 0.75; }
+.kds-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Tables */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-surface);
+  text-align: left;
+}
+
+.table th, .table td {
+  padding: 0.85rem 1rem;
+  vertical-align: middle;
+  border-top: 1px solid var(--border-glass);
+  border-bottom: 1px solid var(--border-glass);
+  font-size: 13px;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid var(--border-glass);
+  background-color: var(--bg-canvas);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+.table tbody tr {
+  transition: var(--transition-smooth);
+}
+
+.table tbody tr:hover {
+  background-color: var(--bg-surface-secondary);
+}
+
+/* Room Rack Components */
+.room-rack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+.room-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 1.25rem;
+  border: 1px solid var(--border-glass);
+  border-left-width: 6px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.room-card:hover {
+  box-shadow: var(--shadow-premium);
+  transform: translateY(-2px);
+}
+
+.room-status-clean { border-left-color: var(--color-success); }
+.room-status-dirty { border-left-color: var(--color-warning); }
+.room-status-occupied { border-left-color: var(--color-primary); }
+.room-status-maintenance { border-left-color: #94a3b8; }
+
+.room-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.room-number {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  font-family: var(--font-heading);
+}
+
+.room-type {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.room-guest {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 0.5rem;
+}
+
+.room-details {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.rack-filter-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.rack-filter-bar button {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  color: var(--color-text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.rack-filter-bar button:hover {
+  background: var(--bg-surface-secondary);
+  color: var(--color-primary);
+}
+
+.rack-filter-bar button.active {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+}
+
+/* POS / Table Ordering components */
+.pos-container {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 1.5rem;
+  height: calc(100vh - 120px);
+}
+
+.pos-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.pos-categories {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.pos-category-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  font-size: 14px;
+}
+
+.pos-category-btn.active, .pos-category-btn:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+}
+
+.pos-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.pos-product-tile {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pos-product-tile:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-premium);
+}
+
+.pos-product-name {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.pos-product-price {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--color-primary);
+}
+
+.pos-sidebar {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-premium);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ticket-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 2px solid var(--border-glass);
+  background: var(--bg-canvas);
+}
+
+.ticket-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.ticket-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px dashed var(--border-glass);
+}
+
+.ticket-item-details {
+  flex: 1;
+}
+
+.ticket-item-name {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 0.25rem;
+}
+
+.ticket-item-price {
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.ticket-qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qty-btn {
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-glass);
+  color: var(--color-text-main);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.qty-btn:hover {
+  background: var(--border-glass);
+}
+
+.ticket-qty {
+  font-weight: 700;
+  font-size: 14px;
+  min-width: 24px;
+  text-align: center;
+}
+
+.ticket-footer {
+  padding: 1rem 1.25rem;
+  background: var(--bg-canvas);
+  border-top: 2px solid var(--border-glass);
+}
+
+.ticket-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+/* Modals & Overlays */
+.modal, .modal-overlay {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.show, .modal-overlay[style*="display: flex"], .modal-overlay[style*="display: block"] {
+  display: flex !important;
+}
+
+.modal-content, .modal-content-mobile {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  width: 90%;
+  max-width: 500px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-premium);
+  animation: modalFadeIn 0.25s ease-out;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 85vh;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(15px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-header, .modal-header-mobile {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-glass);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-surface);
+}
+
+.modal-header h2, .modal-header h3, .modal-header-mobile h3 {
+  margin: 0;
+  color: var(--color-text-main);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.modal-close, .btn-close-modal {
+  color: var(--color-text-muted);
+  font-size: 20px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  background: none;
+  border: none;
+}
+
+.modal-close:hover, .btn-close-modal:hover {
+  color: var(--color-text-main);
+}
+
+.modal-body, .modal-body-mobile {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modal-footer, .modal-footer-mobile {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-glass);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  background: var(--bg-canvas);
+}
+
+/* Logging console */
+.scrollable-y {
+  overflow-y: auto;
+}
+
+.log-entry {
+  font-family: monospace;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--border-glass);
+  color: var(--color-text-main);
+}
+
+.log-entry.system { color: var(--color-primary); }
+.log-entry.event { color: var(--color-success); }
+.log-entry.hook { color: var(--color-accent); }
+
+/* Numeric Numpad keys */
+.numpad, .mobile-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.numpad-btn, .mobile-keypad-btn {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 1px solid var(--border-glass);
+  background: var(--bg-surface);
+  color: var(--color-text-main);
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-card);
+}
+
+.numpad-btn:active, .mobile-keypad-btn:active {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+  transform: scale(0.92);
+}
+
+.pin-display, .mobile-pin-dots {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.pin-dot, .mobile-pin-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--border-glass);
+  background: transparent;
+  transition: var(--transition-smooth);
+}
+
+.pin-dot.filled, .mobile-pin-dot.filled {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 8px var(--color-primary);
+  transform: scale(1.15);
+}
+
+/* Department Cards */
+.dept-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-card);
+}
+
+.dept-card:active {
+  transform: scale(0.98);
+}
+
+.dept-card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.dept-card-text h3 {
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Toasts */
+.toast-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-left: 5px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  box-shadow: var(--shadow-premium);
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 320px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(100%) opacity: 0; }
+  to { transform: translateY(0) opacity: 1; }
+}
+
+/* Incoming order/request notifications */
+.request-notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100001;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 340px;
+}
+
+.request-notification-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-left: 5px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  box-shadow: var(--shadow-premium);
+  animation: slideIn 0.3s ease-out;
+}
+
+.request-notification-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.request-notification-title {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.request-notification-target {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+.request-notification-body {
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+
+.request-notification-amount {
+  margin-top: 6px;
+  font-weight: 700;
+}
+
+.request-notification-close {
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.7;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.request-notification-close:hover {
+  opacity: 1;
+}
+
+/* Bento Grid System (Magic UI Inspired) */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .bento-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .bento-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.bento-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--color-primary);
+  box-shadow: var(--glass-shadow), var(--glass-glow);
+  transform: translateY(-2px);
+}
+
+.bento-span-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .bento-span-2 {
+    grid-column: span 1;
+  }
+}
+
+/* Global Overrides for Liquid Glass & Bento Overhaul */
+.card, .aeon-card, .glass-card, .glass-panel, .login-card {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border-subtle) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--glass-shadow) !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.card:hover, .aeon-card:hover, .glass-card:hover, .glass-panel:hover {
+  border-color: var(--color-primary) !important;
+  box-shadow: var(--glass-shadow), var(--glass-glow) !important;
+}
+
+/* Visible keyboard focus for interactive glass surfaces and buttons (accessibility). */
+.card:focus-visible, .aeon-card:focus-visible, .btn:focus-visible, .room-card:focus-visible,
+.dept-card:focus-visible, .pos-product-tile:focus-visible {
+  box-shadow: var(--glass-shadow), var(--focus-ring) !important;
+}
+
+.mobile-header, .mobile-bottom-nav, .topbar {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border-bottom: 1px solid var(--glass-border-subtle) !important;
+}
+
+

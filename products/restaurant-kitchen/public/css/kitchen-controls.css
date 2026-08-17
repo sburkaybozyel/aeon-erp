@@ -1,0 +1,69 @@
+.kitchen-desktop-nav{display:flex;gap:9px;margin:20px 0 0;flex-wrap:wrap}.kitchen-desktop-nav button{border:1px solid #ecd8c4;background:#fff;color:#6b7d94;border-radius:11px;padding:10px 14px;font:800 13px var(--font-body);cursor:pointer}.kitchen-desktop-nav button.active{background:#d8730b;color:#fff;border-color:#d8730b}@media(max-width:900px){.kitchen-desktop-nav{display:none}}
+
+/* ─── Inventory Management Panel ─── */
+.kitchen-inv-toolbar{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;align-items:center}
+.kitchen-inv-search{flex:1;min-width:200px;padding:10px 14px;border:1px solid #ddd;border-radius:10px;font:14px var(--font-body);background:#faf8f5;transition:border-color .2s}
+.kitchen-inv-search:focus{outline:none;border-color:#d8730b;box-shadow:0 0 0 3px rgba(216,115,11,.12)}
+.kitchen-inv-toolbar select{padding:10px 14px;border:1px solid #ddd;border-radius:10px;font:14px var(--font-body);background:#faf8f5;cursor:pointer}
+
+.kitchen-inv-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid #e8ddd0;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.kitchen-inv-table{width:100%;border-collapse:collapse;font:14px var(--font-body)}
+.kitchen-inv-table thead{background:#f5f0e8;position:sticky;top:0;z-index:2}
+.kitchen-inv-table th{padding:12px 14px;text-align:left;font-weight:700;color:#5a4e3a;border-bottom:2px solid #e8ddd0;white-space:nowrap;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.kitchen-inv-table td{padding:10px 14px;border-bottom:1px solid #f0ebe3;vertical-align:middle}
+.kitchen-inv-table tr:hover{background:#fdf9f3}
+
+/* Row States */
+.inv-row-zero{background:#fff0f0!important}.inv-row-zero:hover{background:#ffe6e6!important}
+.inv-row-zero td:first-child{border-left:4px solid #dc3545}
+.inv-row-critical{background:#fff8e6!important}.inv-row-critical:hover{background:#fff3d6!important}
+.inv-row-critical td:first-child{border-left:4px solid #ffc107}
+
+.inv-stock-val{font-weight:700;font-size:16px}
+.inv-row-zero .inv-stock-val{color:#dc3545}
+.inv-row-critical .inv-stock-val{color:#e67e22}
+.inv-module{color:#8a7d6b;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.inv-purchase-equiv{color:#6b7d94;font-style:italic}
+
+/* Add Stock Inline Form */
+.inv-add-form{display:flex;align-items:center;gap:6px}
+.inv-add-qty{width:64px;padding:6px 8px;border:1px solid #ddd;border-radius:8px;text-align:center;font:14px var(--font-body)}
+.inv-add-qty:focus{outline:none;border-color:#d8730b;box-shadow:0 0 0 2px rgba(216,115,11,.15)}
+.inv-add-unit{font-size:12px;color:#6b7d94;white-space:nowrap}
+.inv-edit-btn{background:none;border:1px solid #ddd;border-radius:8px;padding:6px 10px;cursor:pointer;color:#6b7d94;transition:all .2s}
+.inv-edit-btn:hover{background:#d8730b;color:#fff;border-color:#d8730b}
+
+/* Edit Modal */
+.inv-edit-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;display:flex;align-items:center;justify-content:center;animation:fadeIn .2s}
+.inv-edit-modal{background:#fff;border-radius:16px;padding:28px 32px;width:min(420px,90vw);box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.inv-edit-modal h3{margin:0 0 20px;font-size:18px;color:#2c1810;display:flex;align-items:center;gap:10px}
+.inv-edit-modal h3 i{color:#d8730b}
+.inv-edit-modal label{display:flex;flex-direction:column;gap:4px;margin-bottom:14px;font-size:13px;font-weight:600;color:#5a4e3a}
+.inv-edit-modal input{padding:10px 12px;border:1px solid #ddd;border-radius:10px;font:14px var(--font-body);background:#faf8f5;transition:border-color .2s}
+.inv-edit-modal input:focus{outline:none;border-color:#d8730b;box-shadow:0 0 0 3px rgba(216,115,11,.12)}
+.inv-edit-actions{display:flex;gap:10px;margin-top:20px;justify-content:flex-end}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* Affected Items Panel */
+.inv-affected-panel{margin-top:16px;border:1px solid #f5c6cb;background:#fff5f5;border-radius:12px}
+.inv-affected-panel h3{color:#721c24;font-size:14px;margin:0;display:flex;align-items:center;gap:8px}
+.inv-affected-panel h3 i{color:#dc3545}
+.inv-affected-list .kitchen-list-row{border-bottom:1px solid #f0d5d8}
+
+/* Responsive */
+@media(max-width:768px){
+  .kitchen-inv-table th:nth-child(4),.kitchen-inv-table td:nth-child(4),
+  .kitchen-inv-table th:nth-child(5),.kitchen-inv-table td:nth-child(5){display:none}
+  .kitchen-inv-table{font-size:13px}
+  .kitchen-inv-table th,.kitchen-inv-table td{padding:8px 10px}
+  .inv-add-qty{width:50px}
+}
+
+/* ─── Category Group Headers ─── */
+.inv-module-header td{background:linear-gradient(135deg,#2c1810,#3d2518)!important;color:#fff!important;font:800 15px var(--font-body);padding:14px 16px!important;letter-spacing:.5px;text-transform:uppercase;border:none!important;position:sticky;top:38px;z-index:1}
+.inv-module-header td i{margin-right:8px}
+.inv-module-count{font-weight:400;opacity:.7;font-size:13px}
+
+.inv-subcat-header td{background:#f5f0e8!important;color:#5a4e3a!important;font:700 13px var(--font-body);padding:10px 16px 10px 28px!important;border-bottom:1px solid #e8ddd0!important;border-top:1px solid #e8ddd0!important}
+.inv-subcat-count{font-weight:400;color:#8a7d6b;font-size:12px;margin-left:4px}
+.inv-subcat-warn{color:#dc3545;font-weight:600}

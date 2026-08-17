@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ön Büro | Personel Portalı</title>
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="/css/aeon-tokens.css">
+  <link rel="stylesheet" href="/css/aeon-base.css">
+  <link rel="stylesheet" href="/css/aeon-shell.css">
+  <link rel="stylesheet" href="/css/aeon-components.css">
+  <link rel="stylesheet" href="/css/aeon-responsive.css">
+  <!-- Reception-specific liquid-glass styling (KPI bento row, feed cards, action tiles,
+       room grid density) layered on top of the shared mobile app shell above. -->
+  <link rel="stylesheet" href="/css/reception-pms.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script src="/js/boot.js"></script>
+</head>
+<body class="mobile-app-container">
+
+  <header class="mobile-header liquid-glass-panel">
+    <div class="mobile-title" id="reception-title">Ön Büro (Resepsiyon)</div>
+    <button class="btn-close-modal" id="btn-staff-logout" onclick="window.aeonLogout(); return false;" style="color: var(--color-danger); background:none; border:none; font-size:18px; cursor:pointer;" title="Çıkış">
+      <i class="fa-solid fa-power-off"></i>
+    </button>
+  </header>
+
+  <main class="mobile-content">
+    <!-- Connectivity banner — hidden unless a data refresh fails, so staff don't mistake a
+         dropped connection for an empty hotel. -->
+    <div id="reception-error-banner" class="rcp-banner rcp-banner-error" hidden>
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span>Veriler güncellenemedi. Bağlantı kontrol ediliyor…</span>
+    </div>
+
+    <!-- Tab 1: Akış (Dashboard/Feed) -->
+    <div id="reception-subview-feed" class="panel-section active">
+      <div id="reception-dashboard-stats" class="rcp-kpi-row"></div>
+
+      <!-- Shift Notes -->
+      <div class="card rcp-notes-card">
+        <div class="rcp-card-head">
+          <h4 class="rcp-eyebrow"><i class="fa-solid fa-book-open"></i> Vardiya Notları</h4>
+          <button class="btn btn-primary btn-sm" id="btn-save-shift-notes"><i class="fa-solid fa-save"></i> Kaydet</button>
+        </div>
+        <textarea id="reception-shift-notes" rows="3" placeholder="Sonraki vardiyaya not bırakın... (Oda 105 geç çıkış yapacak, vs.)"></textarea>
+      </div>
+
+      <!-- Feed of Active Tasks/Requests -->
+      <h4 class="rcp-eyebrow rcp-section-title">Aktif İstekler &amp; Talepler</h4>
+      <div id="staff-reception-grid" class="rcp-feed-list"></div>
+    </div>
+
+    <!-- Tab 2: Odalar & Misafirler -->
+    <div id="reception-subview-rooms" class="panel-section rcp-tab-pad">
+      <button class="btn btn-primary btn-block tap-target-lg rcp-new-checkin-btn" id="btn-reception-new-checkin">
+        <i class="fa-solid fa-user-plus"></i> Hızlı Giriş (Check-in)
+      </button>
+      <h4 class="rcp-eyebrow rcp-section-title">Oda Durumları &amp; Misafirler</h4>
+      <div class="room-rack-grid" id="reception-rooms-grid"></div>
+    </div>
+
+    <!-- Tab 3: İşlemler (Actions) -->
+    <div id="reception-subview-actions" class="panel-section rcp-tab-pad">
+      <h4 class="rcp-eyebrow rcp-section-title">Hızlı İşlemler</h4>
+      <div class="rcp-action-grid">
+        <button class="rcp-action-tile" id="btn-action-hk">
+          <span class="rcp-action-icon" style="--tile-color: var(--color-success)"><i class="fa-solid fa-broom"></i></span>
+          <span>Housekeeping Talebi</span>
+        </button>
+        <button class="rcp-action-tile" id="btn-action-tech">
+          <span class="rcp-action-icon" style="--tile-color: var(--color-danger)"><i class="fa-solid fa-wrench"></i></span>
+          <span>Teknik Servis Kaydı</span>
+        </button>
+        <button class="rcp-action-tile" id="btn-action-service">
+          <span class="rcp-action-icon" style="--tile-color: var(--color-primary)"><i class="fa-solid fa-bell-concierge"></i></span>
+          <span>Mutfak / Oda Servisi</span>
+        </button>
+        <button class="rcp-action-tile" id="btn-action-wakeup">
+          <span class="rcp-action-icon" style="--tile-color: var(--color-accent)"><i class="fa-solid fa-clock"></i></span>
+          <span>Uyandırma Servisi</span>
+        </button>
+        <button class="rcp-action-tile" id="btn-action-porter">
+          <span class="rcp-action-icon" style="--tile-color: var(--color-text-muted)"><i class="fa-solid fa-suitcase"></i></span>
+          <span>Bagaj Taşıma (Porter)</span>
+        </button>
+        <button class="rcp-action-tile" id="btn-action-taxi">
+          <span class="rcp-action-icon" style="--tile-color: var(--color-warning)"><i class="fa-solid fa-taxi"></i></span>
+          <span>Taksi / Vale Talebi</span>
+        </button>
+        <button class="rcp-action-tile" id="btn-action-minibar">
+          <span class="rcp-action-icon" style="--tile-color: var(--color-cyan)"><i class="fa-solid fa-martini-glass-citrus"></i></span>
+          <span>Minibar Talebi / Girişi</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="mobile-bottom-nav">
+    <a href="#" class="nav-item active" id="nav-reception-tab-feed">
+      <i class="fa-solid fa-bolt"></i>
+      <span>Akış</span>
+    </a>
+    <a href="#" class="nav-item" id="nav-reception-tab-rooms">
+      <i class="fa-solid fa-bed"></i>
+      <span>Odalar</span>
+    </a>
+    <a href="#" class="nav-item" id="nav-reception-tab-actions">
+      <i class="fa-solid fa-bolt-lightning"></i>
+      <span>İşlemler</span>
+    </a>
+  </nav>
+
+  <!-- ROOM DETAIL MODAL -->
+  <div class="modal-overlay" id="room-detail-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-room-title">Oda Detayı</h3>
+        <button class="btn-close-modal" id="btn-close-room-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Oda Durumu</label>
+          <select id="modal-room-status">
+            <option value="clean_vacant">Temiz (Boş)</option>
+            <option value="dirty_vacant">Kirli (Boş)</option>
+            <option value="occupied">Dolu (Misafir Girişli)</option>
+            <option value="maintenance">Bakımda / Teknik</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Klima Durumu</label>
+          <select id="modal-room-ac">
+            <option value="working">🟢 Klima Çalışıyor</option>
+            <option value="broken">🔴 Klima Arızalı</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Teknik Servis Notları / Arıza Detayı</label>
+          <input type="text" id="modal-room-notes" placeholder="Varsa arıza notu...">
+        </div>
+        <div class="form-group rcp-inline-checks">
+          <label class="rcp-check">
+            <input type="checkbox" id="modal-room-vip"> VIP
+          </label>
+          <label class="rcp-check">
+            <input type="checkbox" id="modal-room-late-checkout"> Geç Çıkış
+          </label>
+        </div>
+        <div id="modal-guest-section" class="rcp-modal-subcard" style="display:none;">
+          <h4><i class="fa-solid fa-user"></i> Misafir Bilgileri</h4>
+          <div class="rcp-modal-subcard-row">
+            <strong>Ad Soyad:</strong> <span id="modal-guest-name-disp">-</span>
+          </div>
+          <button class="btn btn-danger btn-sm btn-block" id="btn-modal-checkout">Checkout Yap</button>
+        </div>
+        <div id="modal-checkin-section" class="rcp-modal-subcard rcp-modal-subcard-success" style="display:none;">
+          <h4><i class="fa-solid fa-user-plus"></i> Giriş İşlemi</h4>
+          <div class="form-group">
+            <label>Misafir Adı</label>
+            <input type="text" id="modal-checkin-first-name" placeholder="Ad" autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label>Misafir Soyadı</label>
+            <input type="text" id="modal-checkin-last-name" placeholder="Soyad" autocomplete="family-name">
+          </div>
+          <button class="btn btn-success btn-sm btn-block" id="btn-modal-checkin">Giriş Yap (Dolu Yap)</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btn-cancel-room-modal">Kapat</button>
+        <button class="btn btn-primary btn-sm" id="btn-save-room-modal">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE TASK MODAL -->
+  <div class="modal-overlay" id="create-task-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-plus"></i> Yeni İşlem / Talep</h3>
+        <button class="btn-close-modal" id="btn-close-task-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>İşlem Türü</label>
+          <select id="modal-task-type">
+            <option value="housekeeping_request">Housekeeping Talebi</option>
+            <option value="maintenance_request">Teknik Servis Arıza Kaydı</option>
+            <option value="room_service">Oda Servisi Siparişi</option>
+            <option value="wakeup_call">Uyandırma Servisi / Not</option>
+            <option value="porter_request">Bagaj Taşıma (Porter)</option>
+            <option value="taxi_request">Taksi / Vale Talebi</option>
+            <option value="minibar_request">Minibar Talebi</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>İlgili Oda Seçimi</label>
+          <input type="hidden" id="modal-task-room" value="">
+          <div id="modal-task-room-grid" class="rcp-room-picker"></div>
+        </div>
+        <div class="form-group">
+          <label>Talep Detayı / Notlar</label>
+          <textarea id="modal-task-details" rows="3" placeholder="Detayları giriniz..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btn-cancel-task-modal">İptal</button>
+        <button class="btn btn-primary btn-sm" id="btn-submit-task-modal">Talebi Oluştur</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/reception-entry.js" type="module"></script>
+</body>
+</html>

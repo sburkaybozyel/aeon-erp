@@ -1,0 +1,463 @@
+/* public/css/guest-luxury.css
+   Luxury glassmorphism theme for the guest-facing QR menu (guest.html),
+   matching the Aeon Hotel Bozburun brand site (navy + gold, serif display type).
+   Scoped entirely under body.guest-luxury-theme so it never leaks into staff portals. */
+
+body.guest-luxury-theme {
+  --gl-navy-950: #0b0f17;
+  --gl-navy-900: #10151f;
+  --gl-navy-800: #171d2b;
+  --gl-navy-700: #212838;
+  --gl-gold: #d4af6a;
+  --gl-gold-bright: #e8c98a;
+  --gl-gold-dim: #a9865198;
+  --gl-cream: #f3ecd9;
+  --gl-text: #f2efe8;
+  --gl-text-muted: #aab0c0;
+  --gl-glass-bg: rgba(255, 255, 255, 0.055);
+  --gl-glass-bg-strong: rgba(255, 255, 255, 0.09);
+  --gl-glass-border: rgba(255, 255, 255, 0.14);
+  --gl-glass-blur: blur(22px) saturate(160%);
+  --gl-radius-xl: 26px;
+  --gl-radius-lg: 20px;
+  --gl-radius-md: 14px;
+  --gl-radius-sm: 10px;
+  --gl-shadow: 0 20px 45px -18px rgba(0, 0, 0, 0.55);
+
+  font-family: 'Manrope', var(--font-body);
+  background:
+    radial-gradient(1100px 620px at 12% -8%, rgba(212, 175, 106, 0.16), transparent 60%),
+    radial-gradient(900px 700px at 100% 0%, rgba(94, 130, 160, 0.14), transparent 55%),
+    linear-gradient(185deg, var(--gl-navy-950) 0%, var(--gl-navy-900) 45%, #0d1219 100%);
+  color: var(--gl-text);
+  min-height: 100vh;
+}
+
+body.guest-luxury-theme .gl-serif {
+  font-family: 'Playfair Display', 'Georgia', serif;
+}
+
+/* ---------- Header ---------- */
+body.guest-luxury-theme .mobile-header {
+  background: rgba(11, 15, 23, 0.72);
+  backdrop-filter: var(--gl-glass-blur);
+  -webkit-backdrop-filter: var(--gl-glass-blur);
+  border-bottom: 1px solid var(--gl-glass-border);
+  height: 64px;
+  box-shadow: 0 12px 30px -18px rgba(0, 0, 0, 0.6);
+}
+
+body.guest-luxury-theme .mobile-title,
+body.guest-luxury-theme .mobile-title .brand-title {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.14em;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  color: var(--gl-cream) !important;
+}
+
+body.guest-luxury-theme .mobile-title img.logo-brand-path {
+  border-color: var(--gl-gold) !important;
+}
+
+body.guest-luxury-theme #guest-location-badge {
+  background: var(--gl-glass-bg-strong);
+  border: 1px solid var(--gl-glass-border);
+  color: var(--gl-gold-bright);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+body.guest-luxury-theme .mobile-content {
+  padding: 22px 16px 130px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* The shared .room-rack-grid class auto-fills columns, which is right for a
+   flat grid of cards but wrong here: #guest-menu-grid holds whole category
+   *sections* that must always stack full-width, one under the other. */
+body.guest-luxury-theme #guest-menu-grid.room-rack-grid {
+  display: block;
+}
+
+/* ---------- Generic glass surfaces (welcome card, folio card, etc.) ---------- */
+body.guest-luxury-theme .card,
+body.guest-luxury-theme .aeon-card {
+  background: var(--gl-glass-bg);
+  backdrop-filter: var(--gl-glass-blur);
+  -webkit-backdrop-filter: var(--gl-glass-blur);
+  border: 1px solid var(--gl-glass-border);
+  border-radius: var(--gl-radius-lg);
+  box-shadow: var(--gl-shadow);
+  color: var(--gl-text);
+}
+
+body.guest-luxury-theme .card:hover,
+body.guest-luxury-theme .aeon-card:hover {
+  border-color: var(--gl-gold-dim);
+  box-shadow: 0 24px 50px -18px rgba(0, 0, 0, 0.6);
+}
+
+body.guest-luxury-theme #welcome-title {
+  font-family: 'Playfair Display', serif;
+  color: var(--gl-gold-bright) !important;
+  font-size: 21px !important;
+  letter-spacing: 0.01em;
+}
+
+body.guest-luxury-theme #welcome-text {
+  color: var(--gl-text-muted) !important;
+}
+
+body.guest-luxury-theme .form-control,
+body.guest-luxury-theme select#guest-target-select {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--gl-glass-border);
+  color: var(--gl-text);
+  border-radius: var(--gl-radius-sm);
+}
+
+/* Section eyebrow labels ("Hızlı İstek Gönder" etc.) */
+body.guest-luxury-theme .mobile-content h4 {
+  color: var(--gl-gold) !important;
+  font-weight: 700;
+  letter-spacing: 0.14em !important;
+}
+
+/* Quick action glass buttons */
+body.guest-luxury-theme .btn-secondary {
+  background: var(--gl-glass-bg-strong);
+  border: 1px solid var(--gl-glass-border);
+  color: var(--gl-cream);
+  border-radius: var(--gl-radius-md);
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+body.guest-luxury-theme .btn-secondary i {
+  color: var(--gl-gold);
+}
+
+body.guest-luxury-theme .btn-secondary:hover {
+  transform: translateY(-2px);
+  border-color: var(--gl-gold-dim);
+  background: rgba(255, 255, 255, 0.13);
+}
+
+/* ---------- Category chip nav ---------- */
+body.guest-luxury-theme .guest-menu-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 2px 14px;
+  margin: -4px -2px 4px;
+  scrollbar-width: none;
+}
+
+body.guest-luxury-theme .guest-menu-chips::-webkit-scrollbar { display: none; }
+
+body.guest-luxury-theme .guest-menu-chip {
+  flex: 0 0 auto;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--gl-glass-bg);
+  border: 1px solid var(--gl-glass-border);
+  color: var(--gl-text-muted);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.18s ease;
+  backdrop-filter: blur(10px);
+}
+
+body.guest-luxury-theme .guest-menu-chip:hover {
+  border-color: var(--gl-gold-dim);
+  color: var(--gl-cream);
+}
+
+body.guest-luxury-theme .guest-menu-chip.active {
+  background: linear-gradient(135deg, var(--gl-gold), #b8904f);
+  border-color: transparent;
+  color: #211705;
+  box-shadow: 0 8px 20px -8px rgba(212, 175, 106, 0.6);
+}
+
+/* ---------- Menu sections ---------- */
+body.guest-luxury-theme .guest-menu-section {
+  margin-bottom: 30px;
+  scroll-margin-top: 78px;
+}
+
+body.guest-luxury-theme .guest-menu-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.guest-luxury-theme .guest-menu-section-head span {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gl-gold);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+body.guest-luxury-theme .guest-menu-section-head h5 {
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  margin: 0;
+  color: var(--gl-text);
+  font-weight: 600;
+}
+
+body.guest-luxury-theme .guest-menu-section-head strong {
+  font-size: 12px;
+  color: var(--gl-text-muted);
+  font-weight: 700;
+  background: var(--gl-glass-bg);
+  border: 1px solid var(--gl-glass-border);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+body.guest-luxury-theme .guest-menu-section-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* ---------- Menu item card ---------- */
+body.guest-luxury-theme .guest-menu-card {
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--gl-radius-md) !important;
+}
+
+body.guest-luxury-theme .guest-menu-photo,
+body.guest-luxury-theme .guest-menu-icon {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.guest-luxury-theme .guest-menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: var(--gl-gold-dim);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+}
+
+body.guest-luxury-theme .guest-menu-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 15, 23, 0) 45%, rgba(11, 15, 23, 0.85) 100%);
+}
+
+body.guest-luxury-theme .guest-menu-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+}
+
+body.guest-luxury-theme .guest-menu-badge .room-badge {
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+body.guest-luxury-theme .guest-menu-name {
+  padding: 10px 12px 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  line-height: 1.25;
+  color: var(--gl-text) !important;
+  font-weight: 600;
+  min-height: 36px;
+}
+
+body.guest-luxury-theme .guest-menu-price {
+  padding: 4px 12px 0;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--gl-gold-bright) !important;
+}
+
+body.guest-luxury-theme .guest-menu-price span[style*="success"] {
+  color: var(--gl-gold-bright) !important;
+}
+
+body.guest-luxury-theme .guest-menu-campaign {
+  margin: 4px 12px 0;
+  font-size: 10.5px;
+  color: #ffcf7d;
+}
+
+body.guest-luxury-theme .guest-menu-cta {
+  padding: 8px 12px 12px;
+  margin-top: auto !important;
+}
+
+body.guest-luxury-theme .guest-add-pill {
+  width: 100%;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid var(--gl-glass-border) !important;
+  border-radius: 999px !important;
+  color: var(--gl-cream) !important;
+  font-weight: 700;
+  font-size: 11.5px;
+  padding: 7px 10px !important;
+  transition: all 0.18s ease;
+}
+
+body.guest-luxury-theme .guest-add-pill:hover {
+  background: linear-gradient(135deg, var(--gl-gold), #b8904f) !important;
+  color: #211705 !important;
+  border-color: transparent !important;
+}
+
+/* ---------- Floating glass cart bar ---------- */
+body.guest-luxury-theme #guest-cart-footer {
+  background: rgba(11, 15, 23, 0.82) !important;
+  backdrop-filter: var(--gl-glass-blur);
+  -webkit-backdrop-filter: var(--gl-glass-blur);
+  border-top: 1px solid var(--gl-glass-border) !important;
+  box-shadow: 0 -18px 40px -20px rgba(0, 0, 0, 0.6);
+}
+
+body.guest-luxury-theme #guest-cart-total {
+  color: var(--gl-gold-bright) !important;
+}
+
+body.guest-luxury-theme #btn-guest-submit-order {
+  background: linear-gradient(135deg, var(--gl-gold), #b8904f) !important;
+  color: #211705 !important;
+  border: none !important;
+  border-radius: 999px !important;
+  font-weight: 800;
+}
+
+body.guest-luxury-theme #guest-payment-method {
+  border-radius: var(--gl-radius-sm) !important;
+}
+
+@media (min-width: 560px) {
+  body.guest-luxury-theme .guest-menu-section-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  body.guest-luxury-theme .guest-menu-section-grid {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  }
+  body.guest-luxury-theme .mobile-content h4,
+  body.guest-luxury-theme .guest-menu-section-head span {
+    font-size: 12px;
+  }
+}
+
+/* ---------- Item Detail & Nutrition Modal ---------- */
+.guest-item-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.guest-item-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.guest-item-modal-content {
+  background: #141b27;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  max-width: 540px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 20px;
+  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.7);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #f1f5f9;
+}
+
+.guest-item-modal-overlay.active .guest-item-modal-content {
+  transform: translateY(0);
+}
+
+.guest-nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.guest-nutrition-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 6px;
+  text-align: center;
+}
+
+.guest-nutrition-card strong {
+  display: block;
+  font-size: 14px;
+  color: #f8fafc;
+}
+
+.guest-nutrition-card small {
+  font-size: 10px;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.guest-ingredients-box {
+  background: rgba(212, 175, 55, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-top: 14px;
+}
+
+.guest-ingredients-box p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #e2e8f0;
+  line-height: 1.5;
+}
+

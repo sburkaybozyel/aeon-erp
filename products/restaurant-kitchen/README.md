@@ -1,10 +1,8 @@
-# AEON QR Menü + Restoran + Mutfak
+# AEON Restaurant + Kitchen Module
 
-Bu klasör ana AEON ERP’den bağımsız çalışan ayrı bir Cloudflare Worker ürünüdür.
+This is a standalone deployment copied from the root AEON dining, kitchen and guest-menu code. It has its own Worker and D1 database and does not import or redirect to the main AEON ERP Worker.
 
-- Worker: `aeon-restaurant-kitchen`
-- D1: `aeon-restaurant-kitchen-db`
-- Kendi API’si: `/api/menu`, `/api/orders`, `/api/tables`
-- Kendi sayfaları: `/guest`, `/restaurant`, `/kitchen`
-
-Bu üründe ana AEON ERP importu, `AEON_DB`, `AEON_CRM_DB`, ana ERP session’ı, ana tenant yönlendirmesi veya ana ERP frontend dosyası yoktur.
+- Entry: https://aeon-restaurant-kitchen.aeon-global.workers.dev/
+- Guest QR menu: https://aeon-restaurant-kitchen.aeon-global.workers.dev/restaurant
+- Restaurant staff: https://aeon-restaurant-kitchen.aeon-global.workers.dev/restaurant-staff
+- Kitchen/KDS: https://aeon-restaurant-kitchen.aeon-global.workers.dev/kitchen

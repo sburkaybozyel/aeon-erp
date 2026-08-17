@@ -1,10 +1,7 @@
-# AEON Ön Büro / Resepsiyon
+# AEON Reception Module
 
-Bu klasör ana AEON ERP’den bağımsız çalışan ayrı bir Cloudflare Worker ürünüdür.
+This is a standalone deployment copied from the root AEON reception and pre-check-in code. It has its own Worker and D1 database and does not import or redirect to the main AEON ERP Worker.
 
-- Worker: `aeon-reception`
-- D1: `aeon-reception-db`
-- Kendi API’si: `/api/rooms`, `/api/reservations`, `/api/precheckins`
-- Kendi sayfaları: `/reception`, `/precheckin`
-
-Bu üründe ana AEON ERP importu, `AEON_DB`, `AEON_CRM_DB`, ana ERP session’ı, ana tenant yönlendirmesi veya ana ERP frontend dosyası yoktur.
+- Entry: https://aeon-reception.aeon-global.workers.dev/
+- Reception: https://aeon-reception.aeon-global.workers.dev/reception
+- Guest pre-check-in: https://aeon-reception.aeon-global.workers.dev/precheckin

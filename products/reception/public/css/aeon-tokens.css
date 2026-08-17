@@ -1,0 +1,123 @@
+/* public/css/aeon-tokens.css
+   ============================================================================
+   AEON "Liquid Glass" design system — shared base for every screen in the app.
+   Read this before styling a new screen; reuse these names instead of
+   inventing new ones so all portals (reception, bar, kitchen, housekeeping,
+   maintenance, CRM, guest, marina...) stay visually consistent.
+
+   GLASS SURFACES
+     .card / .aeon-card / .glass / .glass-card / .bento-card / .glass-panel
+       Frosted translucent panel: var(--glass-bg) + backdrop-filter blur,
+       var(--glass-border-subtle) border, var(--shadow-card) shadow.
+       Hover raises to var(--shadow-premium) + var(--glass-glow).
+     .bento-grid / .bento-grid-3 / .bento-grid-4 / .bento-span-2
+       Responsive auto-fit card grid (Bento layout) for dashboard sections.
+
+   STATUS COLOR SYSTEM (order + room states — reuse, do not reinvent per screen)
+     .room-badge.clean / .clean_vacant   -> green  (var(--status-clean))
+     .room-badge.occupied                -> blue   (var(--status-occupied))
+     .room-badge.dirty / .dirty_vacant   -> amber  (var(--status-dirty))
+     .room-badge.maintenance             -> slate  (var(--status-maintenance))
+     .room-badge.reserved                -> purple (var(--status-reserved))
+     .kds-card + .status-pending/.status-preparing/.status-ready/.status-completed
+       Order-ticket card with a left accent bar in the matching status color.
+     .badge-success/.badge-warning/.badge-primary/.badge-secondary/.badge-danger
+       Generic pill badges for anything that isn't a room/order state.
+
+   BUTTONS & FORMS
+     .btn, .btn-primary/-secondary/-accent/-success/-danger/-glass, .btn-sm/-xs/-block
+     .tap-target-lg — apply to any icon-only or single-action control that must
+       stay a comfortably large touch target on a staff tablet (min 48px).
+     .form-control (and bare input/select/textarea) — glass-tinted inputs.
+
+   MOTION
+     var(--transition-smooth) — general UI transitions (existing, unchanged).
+     var(--transition-fast)   — transform/opacity-only micro-interactions for
+       press/hover states on tablets; never animates layout-affecting
+       properties (width/height/top/left) so it stays cheap during a live
+       service.
+
+   SPACING / RADIUS / TYPE SCALE
+     --space-xs..--space-xl, --radius-sm..--radius-xl (existing), --font-heading/--font-body.
+
+   ACCESSIBILITY
+     :focus-visible everywhere uses var(--focus-ring) (aeon-base.css) — do not
+     remove focus outlines when styling custom controls.
+   ============================================================================ */
+:root {
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Coastal Light Theme Colors */
+  --bg-canvas: #F4F9FC;
+  --bg-surface: #FFFFFF;
+  --bg-surface-secondary: #EAF7FB;
+  --color-primary: #0284C7;
+  --color-primary-hover: #0369a1;
+  --color-bright-blue: #0EA5E9;
+  --color-cyan: #06B6D4;
+  --color-teal: #14B8A6;
+  --color-accent: #F2B84B;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-text-main: #0F172A;
+  --color-text-muted: #64748B;
+  --border-glass: #e2e8f0;
+  --border-glass-active: #0284c7;
+
+  /* Liquid Glass & UI UX Pro Max Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-bg-hover: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(255, 255, 255, 0.45);
+  --glass-border-subtle: rgba(226, 232, 240, 0.6);
+  --glass-blur: blur(16px) saturate(180%);
+  --glass-shadow: 0 12px 32px 0 rgba(2, 132, 199, 0.08);
+  --glass-glow: 0 0 20px 2px rgba(14, 165, 233, 0.15);
+
+  /* Shadows, radii, transitions */
+  --shadow-premium: 0 10px 30px -10px rgba(2, 132, 199, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-card: 0 4px 6px -1px rgba(15, 23, 42, 0.05);
+  --radius-xl: 20px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Cheap, layout-safe micro-interaction transition (transform/opacity only) — use this
+     instead of --transition-smooth on anything that renders/updates frequently on a
+     staff tablet during a live shift (order cards, room tiles, list items). */
+  --transition-fast: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease;
+
+  /* Spacing scale (additive utility tokens; existing rem-based inline spacing is untouched) */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Minimum comfortable touch target for staff-tablet controls (WCAG 2.5.5 / Apple HIG) */
+  --tap-target: 44px;
+
+  /* Focus ring used by :focus-visible globally (see aeon-base.css) */
+  --focus-ring: 0 0 0 3px rgba(2, 132, 199, 0.35);
+
+  /* Status color system — shared vocabulary for room/order states across all portals.
+     Reuse these tokens (and the .room-badge.* / .kds-card.status-* classes in
+     aeon-components.css) instead of introducing new per-screen status colors. */
+  --status-clean: #10B981;
+  --status-clean-bg: #d1fae5;
+  --status-clean-text: #065f46;
+  --status-occupied: #0284C7;
+  --status-occupied-bg: #e0f2fe;
+  --status-occupied-text: #0369a1;
+  --status-dirty: #F59E0B;
+  --status-dirty-bg: #fef3c7;
+  --status-dirty-text: #92400e;
+  --status-maintenance: #64748B;
+  --status-maintenance-bg: #e2e8f0;
+  --status-maintenance-text: #334155;
+  --status-reserved: #7c3aed;
+  --status-reserved-bg: #ede9fe;
+  --status-reserved-text: #5b21b6;
+}
+

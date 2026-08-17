@@ -1,24 +1,30 @@
 {
   "name": "aeon-restaurant-kitchen",
-  "main": "worker.js",
+  "main": "cloudflare-worker.js",
   "workers_dev": true,
   "compatibility_date": "2026-08-17",
   "compatibility_flags": ["nodejs_compat"],
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "aeon-restaurant-kitchen-db",
-      "database_id": "eaf01079-6c83-450f-922d-e83f5264c467"
+      "database_name": "aeon-restaurant-kitchen-module-db",
+      "database_id": "3440092d-c116-454e-a427-6961da304563"
     }
   ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
-    "html_handling": "auto-trailing-slash",
+    "html_handling": "none",
     "not_found_handling": "404-page"
   },
   "vars": {
-    "PRODUCT_ID": "aeon-restaurant-kitchen",
-    "PRODUCT_DB": "aeon-restaurant-kitchen-db"
+    "MODULE_ID": "restaurant-kitchen",
+    "MODULE_NAME": "AEON Restaurant & Kitchen",
+    "MODULE_DEFAULT_TENANT": "restaurant_kitchen",
+    "MODULE_ALLOWED_TENANTS": "restaurant_kitchen",
+    "MODULE_D1_BOOTSTRAP": "true",
+    "MODULE_BUILD_ID": "restaurant-kitchen-copy-2026-08-17",
+    "INITIAL_RESTAURANT_PIN": "2222",
+    "INITIAL_KITCHEN_PIN": "3333"
   }
 }

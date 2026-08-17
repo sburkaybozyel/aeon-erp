@@ -1,24 +1,29 @@
 {
   "name": "aeon-reception",
-  "main": "worker.js",
+  "main": "cloudflare-worker.js",
   "workers_dev": true,
   "compatibility_date": "2026-08-17",
   "compatibility_flags": ["nodejs_compat"],
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "aeon-reception-db",
-      "database_id": "9226aa5f-bc21-4778-b8e3-da0bff50a131"
+      "database_name": "aeon-reception-module-db",
+      "database_id": "45186a6f-70b8-4160-a4ba-ad10e8bb8cd9"
     }
   ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
-    "html_handling": "auto-trailing-slash",
+    "html_handling": "none",
     "not_found_handling": "404-page"
   },
   "vars": {
-    "PRODUCT_ID": "aeon-reception",
-    "PRODUCT_DB": "aeon-reception-db"
+    "MODULE_ID": "reception",
+    "MODULE_NAME": "AEON Reception",
+    "MODULE_DEFAULT_TENANT": "reception",
+    "MODULE_ALLOWED_TENANTS": "reception",
+    "MODULE_D1_BOOTSTRAP": "true",
+    "MODULE_BUILD_ID": "reception-copy-2026-08-17",
+    "INITIAL_RECEPTION_PIN": "1234"
   }
 }

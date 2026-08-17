@@ -1,1 +1,42 @@
-<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ön Check-in | AEON</title><link rel="stylesheet" href="/styles.css"></head><body><main class="page"><header class="topbar"><div><div class="brand">AEON Ön Check-in</div><div class="muted">Resepsiyondan bağımsız misafir formu</div></div><nav class="nav"><a href="/">Ürün</a><a href="/reception">Resepsiyon</a><a class="active" href="/precheckin">Ön Check-in</a></nav></header><section class="hero"><div class="brand">Misafir bilgileri</div><h1>Gelişinizden önce bilgilerinizi iletin.</h1><form id="form"><input name="guest_name" placeholder="Ad Soyad" required><input name="email" type="email" placeholder="E-posta"><input name="phone" placeholder="Telefon"><input name="reservation_id" placeholder="Rezervasyon numarası"><button class="button primary" type="submit">Bilgileri Gönder</button></form><div id="notice"></div></section></main><script type="module" src="/precheckin.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AEON Reception | Online Ön Giriş</title>
+  <link rel="stylesheet" href="/css/aeon-tokens.css">
+  <link rel="stylesheet" href="/css/aeon-base.css">
+  <link rel="stylesheet" href="/css/reception-pms.css">
+  <link rel="stylesheet" href="/css/precheckin.css">
+</head>
+<body class="pms-body">
+  <main class="precheckin-shell">
+    <section class="precheckin-card">
+      <img src="/brands/aeon/logo.png" alt="AEON Reception" class="precheckin-logo">
+      <div class="pms-section-tools"><p class="pms-muted">AEON Reception</p><div class="pms-actions" id="precheckin-language"><button class="btn btn-secondary" type="button" data-language="tr">Türkçe</button><button class="btn btn-secondary" type="button" data-language="en">English</button></div></div>
+      <h1 id="precheckin-title">Online Ön Giriş</h1>
+      <p id="precheckin-summary" class="pms-muted">Bilgilerinizi gönderin; resepsiyon ekibimiz rezervasyon, oda ve ödeme ayrıntılarını sizinle ayrıca teyit edecektir.</p>
+      <div id="precheckin-message" class="pms-banner" hidden></div>
+      <form id="precheckin-form" class="pms-form">
+        <label data-field="first_name">Ad<input name="first_name" required autocomplete="given-name"></label>
+        <label data-field="last_name">Soyad<input name="last_name" required autocomplete="family-name"></label>
+        <label data-field="phone">Telefon<input name="phone" required type="tel" autocomplete="tel"></label>
+        <label data-field="email">E-posta<input name="email" type="email" autocomplete="email"></label>
+        <label data-field="nationality">Uyruk<input name="nationality" id="nationality" list="nationality-list" required autocomplete="country-name"></label><datalist id="nationality-list"></datalist>
+        <label data-field="identity_number">T.C. Kimlik No<input name="identity_number" id="identity-number" inputmode="numeric" maxlength="11"></label>
+        <label id="passport-wrap" data-field="passport_number" hidden>Pasaport No<input name="passport_number" id="passport-number"></label>
+        <label data-field="date_of_birth">Doğum Tarihi<input name="date_of_birth" type="date"></label>
+        <label class="wide" data-field="address">Adres<textarea name="address"></textarea></label>
+        <label data-field="vehicle_plate">Araç Plakası<input name="vehicle_plate"></label>
+        <label>Dil<select name="language"><option value="tr">Türkçe</option><option value="en">English</option><option value="de">Deutsch</option><option value="ru">Русский</option></select></label>
+        <label class="wide" data-field="special_requests">Özel İstekler<textarea name="special_requests" placeholder="Alerji, transfer veya oda tercihi"></textarea></label>
+        <label class="wide precheckin-consent"><input type="checkbox" name="kvkk_consent" required><span id="privacy-consent">Kişisel bilgilerimin rezervasyon ve konaklama talebimin değerlendirilmesi için resepsiyon tarafından işlenmesine onay veriyorum.</span></label>
+        <label class="wide precheckin-consent"><input type="checkbox" name="marketing_consent"><span id="marketing-consent">Kampanya ve pazarlama iletileri için isteğe bağlı onay veriyorum.</span></label>
+        <div class="wide pms-actions"><button class="btn btn-primary" type="submit" id="precheckin-submit">Bilgilerimi Resepsiyona Gönder</button></div>
+      </form>
+      <p class="pms-muted precheckin-note" id="precheckin-note">Bu form tek başına rezervasyon oluşturmaz. Oda, tarih, fiyat ve ödeme bilgileri resepsiyon tarafından tamamlanır.</p>
+    </section>
+  </main>
+  <script type="module" src="/js/precheckin.js"></script>
+</body>
+</html>
