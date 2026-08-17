@@ -276,9 +276,6 @@ function setupModals() {
 
   document.getElementById('btn-add-mr-item').addEventListener('click', addMarketReceiptItem);
 
-  // File upload change listener
-  document.getElementById('ai-receipt-upload').addEventListener('change', handleReceiptImageUpload);
-
   // Other modals close buttons
   const closeButtons = [
     { btn: 'btn-close-prep-modal', modal: 'staff-prep-tasks-modal' },
@@ -554,66 +551,6 @@ window.removeMrItem = function(index) {
   marketReceiptItems.splice(index, 1);
   renderMarketReceiptItems();
 };
-
-async function handleReceiptImageUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const overlay = document.getElementById('receipt-loading-overlay');
-  if (overlay) overlay.style.display = 'flex';
-
-  try {
-    const base64String = await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result.split(',')[1]);
-      reader.onerror = error => reject(error);
-      reader.readAsDataURL(file);
-    });
-
-    const res = await fetch('/api/inventory/receipt/parse', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ imageBase64: base64String })
-    });
-
-    if (res.ok) {
-      const parsedData = await res.json();
-      if (parsedData.vendor) document.getElementById('mr-vendor').value = parsedData.vendor;
-      if (parsedData.total_amount) document.getElementById('mr-total').value = parsedData.total_amount;
-      
-      if (parsedData.items && parsedData.items.length > 0) {
-        parsedData.items.forEach(pItem => {
-          const invItem = kitchenInventory.find(i => 
-            i.name.toLowerCase().includes(pItem.name.toLowerCase()) || 
-            pItem.name.toLowerCase().includes(i.name.toLowerCase())
-          );
-          
-          if (invItem) {
-            marketReceiptItems.push({
-              inventory_id: invItem.id,
-              name: invItem.name,
-              quantity: pItem.quantity || 1,
-              unit_price: pItem.unit_price || 0,
-              total_price: (pItem.quantity || 1) * (pItem.unit_price || 0)
-            });
-          }
-        });
-        renderMarketReceiptItems();
-      }
-    } else {
-      const errorBody = await res.json().catch(() => ({}));
-      alert(errorBody.error_code === 'ocr_not_configured'
-        ? 'Otomatik fiş okuma şu anda yapılandırılmamış. Kalemleri elle girebilirsiniz.'
-        : (errorBody.error || 'AI okuma hatası oluştu.'));
-    }
-  } catch (err) {
-    console.error(err);
-    alert("Fotoğraf yüklenirken bir sorun oluştu.");
-  } finally {
-    if (overlay) overlay.style.display = 'none';
-    event.target.value = '';
-  }
-}
 
 async function submitMarketReceipt() {
   const vendor = document.getElementById('mr-vendor').value;
