@@ -1,0 +1,24 @@
+{
+  "name": "aeon-restaurant-kitchen",
+  "main": "worker.js",
+  "workers_dev": true,
+  "compatibility_date": "2026-08-17",
+  "compatibility_flags": ["nodejs_compat"],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "aeon-restaurant-kitchen-db",
+      "database_id": "eaf01079-6c83-450f-922d-e83f5264c467"
+    }
+  ],
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "vars": {
+    "PRODUCT_ID": "aeon-restaurant-kitchen",
+    "PRODUCT_DB": "aeon-restaurant-kitchen-db"
+  }
+}

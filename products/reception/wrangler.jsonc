@@ -1,0 +1,24 @@
+{
+  "name": "aeon-reception",
+  "main": "worker.js",
+  "workers_dev": true,
+  "compatibility_date": "2026-08-17",
+  "compatibility_flags": ["nodejs_compat"],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "aeon-reception-db",
+      "database_id": "9226aa5f-bc21-4778-b8e3-da0bff50a131"
+    }
+  ],
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "vars": {
+    "PRODUCT_ID": "aeon-reception",
+    "PRODUCT_DB": "aeon-reception-db"
+  }
+}

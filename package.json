@@ -11,7 +11,7 @@
     "start": "node --env-file-if-exists=.env.local server.js",
     "deploy:cloudflare": "wrangler deploy",
     "schema:crm": "node scripts/export-crm-schema.mjs crm/schema.sql",
-  "test": "NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/hotelrunner.test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node test_hotelrunner.mjs && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/bar-hotel-workflow.test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/public-portal-isolation.test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/crm-runtime.test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/product-modules.test.js",
+  "test": "NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/hotelrunner.test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node test_hotelrunner.mjs && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/bar-hotel-workflow.test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/public-portal-isolation.test.js && NODE_ENV=test AEON_ALLOW_TENANT_OVERRIDE=true node --test integrations/crm-runtime.test.js",
     "check": "npm test && npm run verify:runtime",
     "test:hotelrunner-client": "node --test integrations/hotelrunner.test.js",
     "test:hotelrunner": "node test_hotelrunner.mjs",

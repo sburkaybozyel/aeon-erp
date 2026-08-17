@@ -1,13 +1,10 @@
 # AEON Ön Büro / Resepsiyon
 
-Bu ticari kopya resepsiyonun bağımsız ürünüdür:
+Bu klasör ana AEON ERP’den bağımsız çalışan ayrı bir Cloudflare Worker ürünüdür.
 
-- Resepsiyon akışı ve aktif talepler
-- Oda rack ve misafir görünümü
-- Check-in/check-out
-- Ön check-in inceleme
-- Folio, ödeme, vardiya ve fatura adayları
+- Worker: `aeon-reception`
+- D1: `aeon-reception-db`
+- Kendi API’si: `/api/rooms`, `/api/reservations`, `/api/precheckins`
+- Kendi sayfaları: `/reception`, `/precheckin`
 
-QR restoran, mutfak, bar ve CRM bu kopyanın kapsamı dışındadır.
-
-Kaynak yüzeyler `lib/product-modules.js` içindeki `sourceSurfaces` alanında kayıtlıdır. Satış demosu `/products/reception` girişinden açılır. Operasyon ekranları, ilk aşamada doğrulanmış AEON backend sözleşmesini kullanır; müşteri tesliminde bu ürünün ayrı deploy ve veri sınırı oluşturulmalıdır.
+Bu üründe ana AEON ERP importu, `AEON_DB`, `AEON_CRM_DB`, ana ERP session’ı, ana tenant yönlendirmesi veya ana ERP frontend dosyası yoktur.

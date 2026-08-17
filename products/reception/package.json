@@ -1,0 +1,12 @@
+{
+  "name": "aeon-reception",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute aeon-reception-db --remote --file=schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.122.0"
+  }
+}
