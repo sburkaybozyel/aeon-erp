@@ -105,14 +105,15 @@ export async function initSchema(db, tenantId = 'default') {
   const isMarinaProfile = tenantId === 'marina_profile';
   const isYachtProfile = tenantId === 'yacht_profile';
 
-  const diningVal = 'true';
+  const moduleId = String(process.env.MODULE_ID || '');
+  const diningVal = moduleId === 'restaurant-kitchen' ? 'true' : 'false';
   const stayVal = 'true';
-  const cruiseVal = 'true'; // Marina/vessel-account module ships enabled by default on this demo base
+  const cruiseVal = 'false';
 
   await db.run("DELETE FROM config WHERE key = 'MODULE_DINING'");
   await db.run("INSERT INTO config (key, value) VALUES ('MODULE_DINING', ?)", [diningVal]);
   await db.run("DELETE FROM config WHERE key = 'MODULE_BAR'");
-  await db.run("INSERT INTO config (key, value) VALUES ('MODULE_BAR', 'true')");
+  await db.run("INSERT INTO config (key, value) VALUES ('MODULE_BAR', 'false')");
   await db.run("DELETE FROM config WHERE key = 'MODULE_STAY'");
   await db.run("INSERT INTO config (key, value) VALUES ('MODULE_STAY', ?)", [stayVal]);
   await db.run("DELETE FROM config WHERE key = 'MODULE_CRUISE'");

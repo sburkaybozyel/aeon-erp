@@ -104,9 +104,9 @@ export let state = {
   currentTenant: window.tenantId || 'reception',
   activePanel: 'panel-admin',
   featureFlags: {
-    MODULE_DINING: true,
+    MODULE_DINING: false,
     MODULE_STAY: true,
-    MODULE_CRUISE: true,
+    MODULE_CRUISE: false,
     MODULE_PRINTER: false
   },
   simulatedTarget: 'Table-Masa 1',
@@ -153,7 +153,7 @@ export async function loadAllData() {
       fetch(`/api/payment-methods${tenantParam}`)
     ]);
 
-    let config = { MODULE_DINING: true, MODULE_STAY: true, MODULE_CRUISE: true, MODULE_PRINTER: true, MODULE_POOL: false };
+    let config = { MODULE_DINING: false, MODULE_STAY: true, MODULE_CRUISE: false, MODULE_PRINTER: false, MODULE_POOL: false };
     if (cfgRes.ok) {
       const cfgData = await cfgRes.json();
       Object.keys(cfgData).forEach(k => {
