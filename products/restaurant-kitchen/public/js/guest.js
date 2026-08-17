@@ -143,16 +143,17 @@ async function sendQuickRequest(type, details) {
         details
       })
     });
+    const result = await res.json().catch(() => ({}));
     if (res.ok) {
       showGuestNotice({
         title: 'Talebiniz Alındı',
-        message: 'İsteğiniz ilgili ekibe iletildi.',
+        message: result.forwardedTo === 'reception' ? 'İsteğiniz doğrudan resepsiyona iletildi.' : 'İsteğiniz ilgili ekibe iletildi.',
         tone: 'success'
       });
     } else {
       showGuestNotice({
         title: 'İşlem Tamamlanamadı',
-        message: 'Bir hata oluştu, lütfen tekrar deneyin.',
+        message: result.error || 'Bir hata oluştu, lütfen tekrar deneyin.',
         tone: 'error'
       });
     }

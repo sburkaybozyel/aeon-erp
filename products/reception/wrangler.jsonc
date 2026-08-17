@@ -23,7 +23,7 @@
     "MODULE_DEFAULT_TENANT": "reception",
     "MODULE_ALLOWED_TENANTS": "reception",
     "MODULE_D1_BOOTSTRAP": "true",
-    "MODULE_BUILD_ID": "reception-copy-2026-08-17",
+    "MODULE_BUILD_ID": "reception-copy-2026-08-17-guest-inbox",
     "INITIAL_RECEPTION_PIN": "1234"
   }
 }

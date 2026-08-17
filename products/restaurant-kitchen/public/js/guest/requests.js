@@ -5,10 +5,12 @@ function requestTitle(type) {
   return ({ waiter_call: 'Garson çağrısı', bill_call: 'Hesap talebi', room_service_call: 'Oda servisi çağrısı', cleaning_request: 'Oda temizliği', towel_request: 'Ekstra havlu', linen_request: 'Çarşaf / yastık', amenity_request: 'Banyo seti', maintenance_request: 'Teknik servis', water_request: 'Su talebi', transport_request: 'Transfer / taksi' })[type] || 'Misafir talebi';
 }
 
+const receptionRequestTypes = new Set(['towel_request', 'cleaning_request', 'linen_request', 'amenity_request', 'maintenance_request', 'water_request', 'transport_request']);
+
 export async function confirmGuestRequest(type, details) {
   const confirmed = await showGuestConfirmation({
     title: requestTitle(type),
-    message: `${activeTarget.replace('Room-', 'Oda ')} için bu talep ilgili ekibe iletilecek.`
+    message: `${activeTarget.replace('Room-', 'Oda ')} için bu talep ${receptionRequestTypes.has(type) ? 'doğrudan resepsiyona' : 'ilgili ekibe'} iletilecek.`
   });
   if (confirmed) await sendQuickRequest(type, details);
 }
@@ -28,7 +30,7 @@ async function sendQuickRequest(type, details) {
     if (res.ok) {
       showGuestNotice({
         title: 'Talebiniz Alındı',
-        message: `${requestTitle(type)} ilgili ekibe iletildi. Talep no: ${result.requestId || '-'}`,
+        message: `${requestTitle(type)} ${result.forwardedTo === 'reception' ? 'doğrudan resepsiyona' : 'ilgili ekibe'} iletildi. Talep no: ${result.requestId || '-'}`,
         tone: 'success'
       });
     } else {

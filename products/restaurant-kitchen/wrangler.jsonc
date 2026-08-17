@@ -11,6 +11,12 @@
       "database_id": "3440092d-c116-454e-a427-6961da304563"
     }
   ],
+  "services": [
+    {
+      "binding": "RECEPTION_SERVICE",
+      "service": "aeon-reception"
+    }
+  ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
@@ -23,7 +29,8 @@
     "MODULE_DEFAULT_TENANT": "restaurant_kitchen",
     "MODULE_ALLOWED_TENANTS": "restaurant_kitchen",
     "MODULE_D1_BOOTSTRAP": "true",
-    "MODULE_BUILD_ID": "restaurant-kitchen-copy-2026-08-17",
+    "MODULE_BUILD_ID": "restaurant-kitchen-copy-2026-08-17-menu-relay",
+    "RECEPTION_MODULE_URL": "https://aeon-reception.aeon-global.workers.dev",
     "INITIAL_RESTAURANT_PIN": "2222",
     "INITIAL_KITCHEN_PIN": "3333"
   }

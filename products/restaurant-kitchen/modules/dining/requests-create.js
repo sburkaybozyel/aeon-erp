@@ -2,6 +2,56 @@ import { syncMenuAvailability } from './menu.js';
 import { resolveFoodStationId } from './production.js';
 
 const ENABLE_STOCK_ALGORITHM = process.env.ENABLE_STOCK_ALGORITHM !== 'false';
+const RECEPTION_FORWARD_TYPES = new Set(['towel_request', 'cleaning_request', 'linen_request', 'amenity_request', 'maintenance_request', 'water_request', 'transport_request']);
+
+async function forwardGuestRequestToReception({ requestId, type, targetIdentifier, details }) {
+  const receptionUrl = String(process.env.RECEPTION_MODULE_URL || '').trim().replace(/\/+$/, '');
+  const receptionToken = String(process.env.RECEPTION_MODULE_TOKEN || '').trim();
+  if (!receptionUrl || !receptionToken) {
+    const error = new Error('Resepsiyon istek bağlantısı yapılandırılmamış.');
+    error.statusCode = 503;
+    throw error;
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  try {
+    const bridgeRequest = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-AEON-MODULE-TOKEN': receptionToken
+      },
+      body: JSON.stringify({
+        request_id: requestId,
+        type,
+        target_identifier: targetIdentifier,
+        details
+      }),
+      signal: controller.signal
+    };
+    const receptionService = globalThis.__RECEPTION_SERVICE;
+    const response = receptionService
+      ? await receptionService.fetch(new Request('https://aeon-reception.internal/api/module/guest-requests', bridgeRequest))
+      : await fetch(`${receptionUrl}/api/module/guest-requests`, bridgeRequest);
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const error = new Error(payload.error ? `${payload.error} (HTTP ${response.status})` : `Resepsiyon isteği kaydedilemedi (HTTP ${response.status}).`);
+      error.statusCode = response.status >= 500 ? 503 : response.status;
+      throw error;
+    }
+    return payload;
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      const timeoutError = new Error('Resepsiyon modülü zamanında yanıt vermedi.');
+      timeoutError.statusCode = 503;
+      throw timeoutError;
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
 
 export function initRequestCreate({ app, eventBus, broadcastSSE, normalizeTargetIdentifier, ensureRequestDepartments }) {
   app.post('/api/requests', async (req, res) => {
@@ -56,6 +106,27 @@ export function initRequestCreate({ app, eventBus, broadcastSSE, normalizeTarget
         return res.status(400).json({ error: 'Hedef masa (Table-) veya oda (Room-) biçiminde olmalıdır.' });
       }
       const requestId = 'req_' + Math.random().toString(36).substr(2, 9);
+
+      if (RECEPTION_FORWARD_TYPES.has(type)) {
+        try {
+          const forwarded = await forwardGuestRequestToReception({
+            requestId,
+            type,
+            targetIdentifier: target_identifier,
+            details
+          });
+          return res.status(forwarded.idempotent ? 200 : 201).json({
+            success: true,
+            requestId: forwarded.requestId || requestId,
+            totalAmount: 0,
+            payment_method: null,
+            forwardedTo: 'reception'
+          });
+        } catch (error) {
+          return res.status(error.statusCode || 503).json({ error: error.message });
+        }
+      }
+
       let totalAmount = 0.0;
       let orderDetails = [];
       let catalogMap = {};

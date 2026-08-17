@@ -546,6 +546,7 @@ function isPublicApiRequest(req) {
   // check here does not make it open to the public.
   if (req.path === '/erp/health' || req.path.startsWith('/erp/')) return true;
   if (req.path === '/auth/login' || req.path === '/auth/logout' || req.path === '/tenant/branding' || req.path === '/system/persistence' || req.path === '/system/build' || req.path === '/system/health' || req.path === '/guest/precheckin' || req.path.startsWith('/guest/precheckin/') || req.path === '/integrations/hotelrunner/push') return true;
+  if (req.method === 'POST' && req.path === '/module/guest-requests') return true;
   if (req.method === 'GET' && ['/catalog/availability', '/guest/requests', '/guest/room-context', '/guest/folio', '/push/public-key', '/guest/targets'].includes(req.path)) return true;
   if (req.method === 'POST' && req.path === '/requests') return true;
   if (req.path.startsWith('/print-bridge/')) return true;
@@ -582,7 +583,10 @@ export function authorizeOperation(req, res, next) {
   }
   if (path.startsWith('/maintenance')) return hasAny([...reception, ...housekeeping, ...technical]) ? next() : res.status(403).json({ error: 'Bu işlem için teknik servis yetkisi gereklidir.' });
   if (path.startsWith('/bar/')) return hasAny(dining) ? next() : res.status(403).json({ error: 'Bu işlem için yeme-içme yetkisi gereklidir.' });
-  if (path.startsWith('/kitchen/') || path.startsWith('/tables') || path.startsWith('/requests') || path.startsWith('/inventory') || path.startsWith('/catalog') || path.startsWith('/recipes') || path.startsWith('/purchase_requests') || path.startsWith('/campaigns')) {
+  if (path.startsWith('/requests')) {
+    return hasAny([...dining, ...reception]) ? next() : res.status(403).json({ error: 'Bu işlem için departman yetkiniz yok.' });
+  }
+  if (path.startsWith('/kitchen/') || path.startsWith('/tables') || path.startsWith('/inventory') || path.startsWith('/catalog') || path.startsWith('/recipes') || path.startsWith('/purchase_requests') || path.startsWith('/campaigns')) {
     return hasAny(dining) ? next() : res.status(403).json({ error: 'Bu işlem için yeme-içme yetkisi gereklidir.' });
   }
   if (path.startsWith('/marina/')) return hasAny(['marina', 'reception', 'resepsiyon']) ? next() : res.status(403).json({ error: 'Bu işlem için marina yetkisi gereklidir.' });

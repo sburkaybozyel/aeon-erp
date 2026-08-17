@@ -6,6 +6,7 @@ for (const [key, value] of Object.entries(env)) {
   if (typeof value === 'string') process.env[key] = value;
 }
 globalThis.__MODULE_D1 = env.DB;
+globalThis.__RECEPTION_SERVICE = env.RECEPTION_SERVICE;
 
 const nodeVersion = process.versions?.node;
 if (process.versions) delete process.versions.node;

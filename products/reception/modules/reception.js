@@ -6,11 +6,13 @@ import { registerReservationRoutes } from './reception/reservations.js';
 import { registerStayRoutes } from './reception/stays.js';
 import { registerFolioRoutes } from './reception/folios.js';
 import { registerOperationsRoutes } from './reception/operations.js';
+import { registerGuestRequestRoutes } from './reception/guest-requests.js';
 
 export function initReception({ app, eventBus }) {
   // Public guest-facing precheckin endpoints must be registered before the
   // `/api/reception` auth gate below.
   registerGuestPortalRoutes({ app, eventBus });
+  registerGuestRequestRoutes({ app, eventBus });
 
   app.use('/api/reception', requireReception);
 
