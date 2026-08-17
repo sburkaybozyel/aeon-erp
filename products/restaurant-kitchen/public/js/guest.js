@@ -331,12 +331,16 @@ function renderMenuItemCard(item) {
   }
 
   const iconClass = item.category === 'drink' ? 'fa-glass-water' : item.category === 'minibar' ? 'fa-door-closed' : 'fa-utensils';
+  const imageUrl = typeof item.image_url === 'string' ? item.image_url.trim() : '';
+  const mediaHtml = imageUrl
+    ? `<div class="guest-menu-photo" style="background-image:url('${imageUrl.replace(/'/g, '%27')}')" role="img" aria-label="${String(item.name || 'Menü ürünü').replace(/"/g, '&quot;')}"></div>`
+    : `<div class="guest-menu-icon"><i class="fa-solid ${iconClass}"></i></div>`;
 
   itemCard.innerHTML = `
     <div class="guest-menu-badge">
       ${stockBadgeHtml}
     </div>
-    <div class="guest-menu-icon"><i class="fa-solid ${iconClass}"></i></div>
+    ${mediaHtml}
     <div class="card-title guest-menu-name">${item.name}</div>
     <div class="guest-menu-price">
       ${item.discountRate > 0 ? `
