@@ -72,8 +72,31 @@ async function load() {
   }
 }
 
+async function loadQrCodes() {
+  const body = byId('qr-codes-tbody');
+  if (!body) return;
+  try {
+    const response = await fetch('/api/admin/qr-codes?tenant_id=reception', { cache: 'no-store' });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || 'QR kodları alınamadı.');
+    const codes = Array.isArray(data.codes) ? data.codes : [];
+    if (!codes.length) {
+      body.innerHTML = '<tr><td colspan="4" class="hub-note">Tanımlı QR kodu yok.</td></tr>';
+      return;
+    }
+    body.innerHTML = codes.map(item => {
+      const url = `${window.location.origin}${item.path}`;
+      const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=${encodeURIComponent(url)}`;
+      return `<tr><td>${esc(item.label || item.code)}</td><td>${item.type === 'room' ? 'Oda' : 'Masa'}</td><td><a href="${esc(url)}" target="_blank" rel="noopener">${esc(url)}</a></td><td><img src="${qrSrc}" width="90" height="90" alt="${esc(item.label || item.code)} QR"></td></tr>`;
+    }).join('');
+  } catch (reason) {
+    body.innerHTML = `<tr><td colspan="4" class="hub-alert">${esc(reason.message || 'QR kodları alınamadı.')}</td></tr>`;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   byId('hub-refresh')?.addEventListener('click', load);
   load();
+  loadQrCodes();
   window.setInterval(load, 30000);
 });

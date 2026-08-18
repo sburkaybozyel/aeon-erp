@@ -11,6 +11,7 @@ import { registerAuthRoutes } from './routes/auth.js';
 import { registerStaffRoutes } from './routes/staff.js';
 import { registerInventoryRoutes } from './routes/inventory.js';
 import { registerModuleAdminRoutes } from './routes/module-admin.js';
+import { getQrTarget } from './lib/qr-targets.js';
 import { initDining } from './modules/dining.js';
 import { initStay } from './modules/stay.js';
 import { initReception } from './modules/reception.js';
@@ -42,6 +43,16 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.static(publicDir, { maxAge: 0 }));
+
+// Printed-QR short links: a static QR code per room/table (see lib/qr-targets.js)
+// redirects the guest straight to the correct guest.html entry point.
+app.get('/q/:code', (req, res) => {
+  const target = getQrTarget(req.params.code);
+  if (!target) return res.status(404).send('QR bulunamadı.');
+  const tenantId = process.env.MODULE_DEFAULT_TENANT || 'reception';
+  const destination = `/guest.html?type=${encodeURIComponent(target.type)}&target=${encodeURIComponent(target.target)}&tenant_id=${encodeURIComponent(tenantId)}`;
+  return res.redirect(302, destination);
+});
 
 app.use('/api', tenantDbResolver, resolveSession, authorizeOperation, requireDurableStorage);
 

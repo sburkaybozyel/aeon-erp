@@ -3,6 +3,7 @@ import { httpServerHandler } from 'cloudflare:node';
 import { eventBus } from './lib/event-bus.js';
 import { handleDiningModuleEvent, handleDiningModulePreflight, handleDiningModuleRoomContext, handleDiningModuleFolio } from './modules/reception/dining-bridge.js';
 import { flushCrmOutboxForTenant } from './modules/reception/crm-sync.js';
+import { getQrTarget } from './lib/qr-targets.js';
 
 process.env.CLOUDFLARE_WORKER = '1';
 for (const [key, value] of Object.entries(env)) {
@@ -292,6 +293,16 @@ export default {
   },
   async fetch(request, runtimeEnv, context) {
     const url = new URL(request.url);
+    const qrMatch = url.pathname.match(/^\/q\/([^/]+)$/i);
+    if ((request.method === 'GET' || request.method === 'HEAD') && qrMatch) {
+      const target = getQrTarget(decodeURIComponent(qrMatch[1]));
+      if (!target) return new Response('QR bulunamadı.', { status: 404 });
+      const destination = new URL('/guest.html', url.origin);
+      destination.searchParams.set('type', target.type);
+      destination.searchParams.set('target', target.target);
+      destination.searchParams.set('tenant_id', process.env.MODULE_DEFAULT_TENANT || 'reception');
+      return Response.redirect(destination.toString(), 302);
+    }
     if (request.method === 'POST' && url.pathname === '/api/module/guest-requests') {
       return handleModuleGuestRequest(request, runtimeEnv);
     }

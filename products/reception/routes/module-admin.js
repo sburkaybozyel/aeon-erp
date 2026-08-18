@@ -1,3 +1,5 @@
+import { qrTargets } from '../lib/qr-targets.js';
+
 async function ensureBridgeTables(db) {
   await db.run(`CREATE TABLE IF NOT EXISTS module_bridge_events (event_id TEXT PRIMARY KEY, source_system TEXT NOT NULL, source_id TEXT NOT NULL, event_type TEXT NOT NULL, payload_json TEXT NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)`);
   await db.run(`CREATE TABLE IF NOT EXISTS dining_order_mirrors (source_id TEXT PRIMARY KEY, source_system TEXT NOT NULL, target_identifier TEXT NOT NULL, status TEXT NOT NULL, total_amount REAL DEFAULT 0, payment_method TEXT, details TEXT, departments TEXT, created_by TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)`);
@@ -46,5 +48,15 @@ export function registerModuleAdminRoutes(app) {
       console.error('[module admin hub]', error);
       res.status(500).json({ error: 'Modül yönetici özeti oluşturulamadı.' });
     }
+  });
+
+  // Printable per-room/table QR short links (see lib/qr-targets.js and the
+  // GET /q/:code redirect in server.js). Staff use this list to print one
+  // static QR code per room/table that guests scan to reach guest.html.
+  app.get('/api/admin/qr-codes', (req, res) => {
+    res.json({
+      success: true,
+      codes: qrTargets.map(t => ({ code: t.code, label: t.label, type: t.type, target: t.target, path: `/q/${t.code}` }))
+    });
   });
 }

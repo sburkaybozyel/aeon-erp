@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "test": "node --check server.js && node --check cloudflare-worker.js && node --check modules/integration.js"
+    "test": "node --check server.js && node --check cloudflare-worker.js && node --check modules/integration.js && node --test test.js"
   },
   "dependencies": {
     "alasql": "^4.4.0",
