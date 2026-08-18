@@ -1180,12 +1180,11 @@ function renderRevenueDetail(requests, apaSummary) {
 async function loadMobileConnectionCard() {
   try {
     const origin = window.location.origin;
-    const publicModuleOrigin = 'https://aeon-restaurant-kitchen.aeon-global.workers.dev';
-    
-    // Core 3 Entry Points
-    const roomUrl = `${publicModuleOrigin}/room-qr/oda-01`;
-    const restaurantUrl = `${publicModuleOrigin}/restaurant-qr/garden-01`;
-    const staffUrl = `${publicModuleOrigin}/restaurant-staff?tenant_id=${state.currentTenant}`;
+
+    // Core 3 Entry Points (served directly by this module — reception bundles its own guest portal)
+    const roomUrl = `${origin}/guest.html?target=Room-1&type=room&tenant_id=${state.currentTenant}`;
+    const restaurantUrl = `${origin}/guest.html?target=${encodeURIComponent('Table-Garden 1')}&type=restaurant&tenant_id=${state.currentTenant}`;
+    const staffUrl = `${origin}/staff-reception.html?tenant_id=${state.currentTenant}`;
 
     const elRoom = document.getElementById('mobile-room-url');
     if (elRoom) {

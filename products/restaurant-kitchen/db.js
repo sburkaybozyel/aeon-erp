@@ -79,7 +79,7 @@ async function initializeDb(tenantId) {
   const loaded = !isNew ? await loadFromDisk(tenantId, dbInstance) : false;
   db.suspendSave = true;
   await runMigrations(db, tenantId);
-  if (tenantId === 'aeon') {
+  if (tenantId === 'aeon' || tenantId === (process.env.MODULE_DEFAULT_TENANT || 'restaurant_kitchen')) {
     await ensureDefaultRoomInventory(db);
     await ensureDefaultDiningMasterData(db);
     await ensureDefaultKitchenMasterData(db);

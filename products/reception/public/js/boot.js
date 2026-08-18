@@ -154,8 +154,7 @@
 
         const targetPortal = getPortalForRole(role);
         const path = window.location.pathname;
-        const isLoginPage = path.includes('login.html');
-        
+
         if (isLoginPage) {
           if (targetPortal) {
             window.location.replace(`${targetPortal}?tenant_id=${window.tenantId}`);

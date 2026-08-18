@@ -33,9 +33,19 @@ export function getSavePath(tenantId) {
       fs.mkdirSync(aeonDir, { recursive: true });
     }
     return join(aeonDir, 'db_alasql.json');
-  } else {
-    return join(dbDir, `tenant_${tenantId}_alasql.json`);
   }
+  // Non-Cloudflare (self-hosted Node/Express) deployments of this standalone module default to
+  // storing tenant data inside the app's own source tree, which loses AEON_DATA_PATH overrides
+  // and risks data files ending up inside the deployed/versioned app directory. Honor
+  // AEON_DATA_PATH for every tenant, not just the legacy 'aeon' one, when it's explicitly set.
+  if (process.env.AEON_DATA_PATH && !isEphemeralRuntime) {
+    const tenantDir = process.env.AEON_DATA_PATH;
+    if (!fs.existsSync(tenantDir)) {
+      fs.mkdirSync(tenantDir, { recursive: true });
+    }
+    return join(tenantDir, `tenant_${tenantId}_alasql.json`);
+  }
+  return join(dbDir, `tenant_${tenantId}_alasql.json`);
 }
 
 export const SAVE_TABLES = ['config', 'rooms', 'guest_registry', 'tables', 'inventory', 'catalog_items', 'recipes', 'purchase_requests', 'requests', 'bar_blind_audits', 'bar_ticket_lines', 'apa_ledger', 'campaigns', 'staff', 'sessions', 'idempotency_records', 'push_subscriptions', 'audit_logs', 'laundry_orders', 'lost_and_found', 'inventory_receipts', 'inventory_receipt_items', 'folios', 'registrations', 'pms_migrations', 'guest_profiles', 'reservations', 'reservation_guests', 'room_assignments', 'stays', 'stay_guests', 'folio_transactions', 'payments', 'invoices', 'invoice_items', 'cash_shifts', 'reception_tasks', 'identity_notifications', 'documents_metadata', 'audit_events', 'room_status_history', 'room_blocks', 'night_audits', 'guest_precheckins', 'guest_precheckin_submissions', 'channel_connections', 'channel_room_mappings', 'channel_reservation_events', 'channel_reservation_links', 'channel_sync_operations', 'channel_notifications', 'channel_cache', 'kitchen_stations', 'menu_kitchen_profiles', 'kitchen_ticket_lines', 'print_jobs', 'inventory_lots', 'kitchen_waste_logs', 'kitchen_temperature_logs', 'kitchen_stock_counts', 'kitchen_stock_count_lines', 'technical_assets', 'technical_work_orders', 'technical_work_order_parts', 'technical_maintenance_plans', 'technical_meter_readings', 'housekeeping_inspections', 'housekeeping_linen_counts', 'public_areas', 'berths', 'vessel_visits'];

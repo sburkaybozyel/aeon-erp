@@ -46,16 +46,16 @@ export async function checkAndApplyPinMigration(db, tenantId) {
           await db.run("UPDATE staff SET pin = ? WHERE id = ?", [hashPin(process.env.INITIAL_ADMIN_PIN), 'staff_manager']);
         }
         if (process.env.INITIAL_HOUSEKEEPING_PIN) {
-          await db.run("UPDATE staff SET pin = ? WHERE id = ?", [hashPin(process.env.INITIAL_HOUSEKEEPING_PIN), 'staff_ahmet']);
+          await db.run("UPDATE staff SET pin = ? WHERE id = ?", [hashPin(process.env.INITIAL_HOUSEKEEPING_PIN), 'staff_housekeeping']);
         }
         if (process.env.INITIAL_RESTAURANT_PIN) {
-          await db.run("UPDATE staff SET pin = ? WHERE id = ?", [hashPin(process.env.INITIAL_RESTAURANT_PIN), 'staff_mehmet']);
+          await db.run("UPDATE staff SET pin = ? WHERE id = ?", [hashPin(process.env.INITIAL_RESTAURANT_PIN), 'staff_waiter']);
         }
         if (process.env.INITIAL_KITCHEN_PIN) {
-          await db.run("UPDATE staff SET pin = ? WHERE id = ?", [hashPin(process.env.INITIAL_KITCHEN_PIN), 'staff_can']);
+          await db.run("UPDATE staff SET pin = ? WHERE id = ?", [hashPin(process.env.INITIAL_KITCHEN_PIN), 'staff_chef']);
         }
         if (process.env.INITIAL_MAINTENANCE_PIN) {
-          await db.run("UPDATE staff SET pin = ? WHERE id = ?", [hashPin(process.env.INITIAL_MAINTENANCE_PIN), 'staff_veli']);
+          await db.run("UPDATE staff SET pin = ? WHERE id = ?", [hashPin(process.env.INITIAL_MAINTENANCE_PIN), 'staff_maintenance']);
         }
 
         // Write the version to config table

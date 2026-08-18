@@ -99,14 +99,14 @@ export async function initSchema(db, tenantId = 'default') {
   await db.run("DELETE FROM staff WHERE id = ?", ['staff_rest_manager']);
 
   // Insert config based on tenant
-  const isBaseTenant = tenantId === 'aeon' || tenantId === 'default'; // 'default' is always the base tenant
+  const isBaseTenant = tenantId === 'aeon' || tenantId === 'default' || tenantId === (process.env.MODULE_DEFAULT_TENANT || 'reception'); // 'default' is always the base tenant
   const isDefaultProfile = tenantId === 'default_profile';
   const isSecondaryProfile = tenantId === 'secondary_profile';
   const isMarinaProfile = tenantId === 'marina_profile';
   const isYachtProfile = tenantId === 'yacht_profile';
 
   const moduleId = String(process.env.MODULE_ID || '');
-  const diningVal = moduleId === 'restaurant-kitchen' ? 'true' : 'false';
+  const diningVal = (moduleId === 'restaurant-kitchen' || moduleId === 'reception') ? 'true' : 'false';
   const stayVal = 'true';
   const cruiseVal = 'false';
 
