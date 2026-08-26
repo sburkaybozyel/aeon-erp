@@ -437,8 +437,9 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 .location-map-side {
   position: relative;
   overflow: hidden;
+  min-height: 500px;
 }
-.location-map-side img { position: absolute; inset: 0; }
+.location-map-side img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .location-info-side {
   background: var(--paper);
   padding: 7rem 5rem;
@@ -537,20 +538,29 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 }
 .booking-form-row.single { grid-template-columns: 1fr; }
 .form-field-bare {
-  padding: 1.75rem 0;
+  padding: 1.75rem 2rem 1.75rem 0;
   border-right: 1px solid rgba(255,255,255,0.1);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding-right: 2rem;
+  min-width: 0;
 }
-.form-field-bare:last-child { border-right: none; padding-right: 0; padding-left: 2rem; }
-.booking-form-row.single .form-field-bare { padding-left: 0; border-right: none; }
+.form-field-bare:last-child {
+  border-right: none;
+  padding-left: 2rem;
+  padding-right: 0;
+}
+.booking-form-row.single .form-field-bare {
+  padding-left: 0;
+  padding-right: 0;
+  border-right: none;
+}
 .form-field-bare label {
   font-size: 0.64rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.3);
+  flex-shrink: 0;
 }
 .form-field-bare input,
 .form-field-bare select,
@@ -563,6 +573,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   color: var(--white);
   width: 100%;
   padding: 0;
+  min-width: 0;
 }
 .form-field-bare textarea { resize: none; height: 80px; }
 .form-field-bare select option { background: var(--ink); color: var(--white); }
@@ -597,6 +608,8 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 .footer-hotel-name {
   font-family: var(--f-serif);
