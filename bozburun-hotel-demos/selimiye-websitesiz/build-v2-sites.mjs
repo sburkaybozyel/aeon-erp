@@ -1006,17 +1006,17 @@ function generateV2EditorialHTML(hotel) {
 
         <div class="hero-triptych-grid" data-reveal>
           <div class="triptych-frame-side">
-            <img src="../_shared/media/room.jpg" alt="Süit Detayı">
+            <img src="./media/room.jpg" alt="Süit Detayı">
           </div>
           <div class="triptych-center-hero">
-            <img src="../_shared/media/hero.jpg" alt="${escapeHtml(name)} Ana Görsel">
+            <img src="./media/hero.jpg" alt="${escapeHtml(name)} Ana Görsel">
             <div class="triptych-overlay-badge">
               <span class="badge-quote-italic">“Zamanın durduğu, denizin nefes aldığı kıyı.”</span>
               <span class="badge-loc-tag">SELİMİYE KOYU · ÖZEL İSKELE</span>
             </div>
           </div>
           <div class="triptych-frame-side">
-            <img src="../_shared/media/dining.jpg" alt="İskele Masası">
+            <img src="./media/dining.jpg" alt="İskele Masası">
           </div>
         </div>
 
@@ -1077,7 +1077,7 @@ function generateV2EditorialHTML(hotel) {
 
           <div class="polaroid-stack-frame" data-reveal>
             <div class="polaroid-img-main">
-              <img src="../_shared/media/suite_hd.jpg" alt="Taş Mimari">
+              <img src="./media/suite_hd.jpg" alt="Taş Mimari">
             </div>
             <div class="polaroid-caption-tape">
               <strong>${escapeHtml(name)}</strong>
@@ -1103,7 +1103,7 @@ function generateV2EditorialHTML(hotel) {
           ${rooms.map((room, idx) => `
             <article class="residence-editorial-row ${idx % 2 === 1 ? 'reverse' : ''}" data-reveal>
               <div class="r-visual">
-                <img src="${idx === 0 ? '../_shared/media/suite.jpg' : '../_shared/media/room.jpg'}" alt="${escapeHtml(room.title)}">
+                <img src="${idx === 0 ? './media/suite.jpg' : './media/room.jpg'}" alt="${escapeHtml(room.title)}">
                 <span class="r-badge">${escapeHtml(room.badge || 'Özel Seri')}</span>
               </div>
               <div class="r-details">
@@ -1166,8 +1166,8 @@ function generateV2EditorialHTML(hotel) {
           </div>
 
           <div class="gastro-video-editorial" data-reveal>
-            <video autoplay muted loop playsinline preload="metadata" poster="../_shared/media/dining.jpg">
-              <source src="../_shared/media/decor.mp4" type="video/mp4">
+            <video autoplay muted loop playsinline preload="metadata" poster="./media/dining.jpg">
+              <source src="./media/decor.mp4" type="video/mp4">
             </video>
           </div>
 
