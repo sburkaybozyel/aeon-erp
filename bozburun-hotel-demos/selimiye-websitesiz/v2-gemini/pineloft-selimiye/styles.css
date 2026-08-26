@@ -1,43 +1,42 @@
 /* ==========================================================================
-   SELİMİYE HOTELS — V2 LUMINOUS LIQUID GLASS & AWWWARDS-CALIBER LUXURY
+   PINELOFT SELIMIYE — V2 LUMINOUS LIQUID GLASS LUXURY
+   Theme: Pine Emerald & Sunset Amber
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --bg-deep: #02060d;
-  --bg-surface: #05101d;
-  --bg-glass: rgba(8, 20, 36, 0.55);
-  --bg-glass-heavy: rgba(4, 12, 24, 0.82);
-  --bg-glass-card: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-  --bg-glass-input: rgba(10, 26, 46, 0.7);
+  --bg-deep: #0c1512;
+  --bg-surface: color-mix(in srgb, #0c1512 85%, #ffffff 15%);
+  --bg-glass: rgba(18, 32, 26, 0.8);
+  --bg-glass-heavy: color-mix(in srgb, #0c1512 90%, #000000 10%);
+  --bg-glass-input: color-mix(in srgb, #0c1512 75%, #ffffff 25%);
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-heading: 'Cinzel', 'Playfair Display', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
-  --cyan-neon: #00f2fe;
-  --cyan-emerald: #10b981;
-  --cyan-glow: rgba(0, 242, 254, 0.35);
-  --cyan-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #00c6ff 100%);
-  
-  --gold-primary: #d4af37;
-  --gold-light: #fff3cf;
-  --gold-gradient: linear-gradient(135deg, #fff3cf 0%, #e2c174 35%, #c59b3f 70%, #8c6721 100%);
-  --gold-glow: rgba(212, 175, 55, 0.35);
+  --accent-primary: #2e5b4c;
+  --accent-secondary: #e5a93c;
+  --accent-light: #d0ebd9;
+
+  --glow-primary: #2e5b4c55;
+  --glow-secondary: #e5a93c55;
+  --gradient-accent: linear-gradient(135deg, #2e5b4c 0%, #e5a93c 100%);
+  --gradient-gold: linear-gradient(135deg, #fff3cf 0%, #e2c174 35%, #c59b3f 70%, #8c6721 100%);
 
   --border-glass: rgba(255, 255, 255, 0.14);
-  --border-glass-light: rgba(255, 255, 255, 0.22);
-  --border-cyan: rgba(0, 242, 254, 0.38);
-  --border-gold: rgba(212, 175, 55, 0.4);
+  --border-glass-light: rgba(255, 255, 255, 0.24);
+  --border-accent: #2e5b4c77;
+  --border-gold: rgba(212, 175, 55, 0.45);
 
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --text-dim: #64748b;
 
-  --shadow-liquid: 0 30px 80px -15px rgba(0, 0, 0, 0.85), 0 0 40px rgba(0, 242, 254, 0.08);
-  --shadow-glow: 0 0 50px rgba(0, 242, 254, 0.25);
-  --shadow-gold: 0 0 45px rgba(212, 175, 55, 0.35);
+  --shadow-liquid: 0 30px 80px -15px rgba(0, 0, 0, 0.9), 0 0 35px var(--glow-primary);
+  --shadow-glow: 0 0 50px var(--glow-primary);
+  --shadow-gold: 0 0 45px rgba(212, 175, 55, 0.4);
 
   --blur-heavy: blur(32px) saturate(210%);
   --blur-medium: blur(20px) saturate(180%);
@@ -86,7 +85,7 @@ body.v2-liquid-luminous {
   position: absolute;
   border-radius: 50%;
   filter: blur(140px);
-  opacity: 0.4;
+  opacity: 0.45;
   animation: auroraFloat 22s ease-in-out infinite alternate;
 }
 .aurora-1 {
@@ -94,14 +93,14 @@ body.v2-liquid-luminous {
   left: 10vw;
   width: 60vw;
   height: 60vw;
-  background: radial-gradient(circle, rgba(0, 242, 254, 0.28) 0%, rgba(79, 172, 254, 0.08) 70%, transparent 100%);
+  background: radial-gradient(circle, var(--glow-primary) 0%, transparent 70%);
 }
 .aurora-2 {
   top: 40vh;
   right: -10vw;
   width: 55vw;
   height: 55vw;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.24) 0%, rgba(180, 130, 30, 0.05) 70%, transparent 100%);
+  background: radial-gradient(circle, var(--glow-secondary) 0%, transparent 70%);
   animation-delay: -7s;
 }
 .aurora-3 {
@@ -109,7 +108,7 @@ body.v2-liquid-luminous {
   left: 20vw;
   width: 65vw;
   height: 65vw;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(14, 165, 233, 0.05) 70%, transparent 100%);
+  background: radial-gradient(circle, var(--glow-primary) 0%, transparent 70%);
   animation-delay: -14s;
 }
 @keyframes auroraFloat {
@@ -168,12 +167,12 @@ body.v2-liquid-luminous {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 25px rgba(0, 242, 254, 0.35), 0 0 15px rgba(212, 175, 55, 0.35);
+  box-shadow: 0 0 25px var(--glow-primary), 0 0 15px rgba(212, 175, 55, 0.35);
   transition: var(--transition);
 }
 .brand-logo-disc:hover {
   transform: scale(1.08) rotate(4deg);
-  box-shadow: 0 0 40px rgba(0, 242, 254, 0.55);
+  box-shadow: 0 0 40px var(--glow-primary);
 }
 .brand-logo-disc svg {
   width: 100%;
@@ -196,7 +195,7 @@ body.v2-liquid-luminous {
 .brand-h-sub {
   font-size: 0.7rem;
   letter-spacing: 0.25em;
-  background: var(--gold-gradient);
+  background: var(--gradient-gold);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
@@ -228,7 +227,7 @@ body.v2-liquid-luminous {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--cyan-gradient);
+  background: var(--gradient-accent);
   transition: width 0.3s ease;
   border-radius: var(--radius-full);
 }
@@ -245,11 +244,11 @@ body.v2-liquid-luminous {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 242, 254, 0.08);
-  border: 1px solid var(--border-cyan);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-accent);
   padding: 0.5rem 1.1rem;
   border-radius: var(--radius-full);
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   font-size: 0.8rem;
   font-weight: 700;
   text-decoration: none;
@@ -257,9 +256,9 @@ body.v2-liquid-luminous {
 .pulsing-dot {
   width: 8px;
   height: 8px;
-  background: var(--cyan-neon);
+  background: var(--accent-primary);
   border-radius: 50%;
-  box-shadow: 0 0 12px var(--cyan-neon);
+  box-shadow: 0 0 12px var(--accent-primary);
   animation: pulseBeacon 2s infinite;
 }
 @keyframes pulseBeacon {
@@ -268,7 +267,7 @@ body.v2-liquid-luminous {
 }
 
 .btn-liquid-gold-cta {
-  background: var(--gold-gradient);
+  background: var(--gradient-gold);
   color: #040810;
   border: none;
   font-family: var(--font-sans);
@@ -319,7 +318,7 @@ body.v2-liquid-luminous {
   gap: 10px;
   background: rgba(8, 26, 46, 0.88);
   backdrop-filter: var(--blur-medium);
-  border: 1px solid var(--border-cyan);
+  border: 1px solid var(--border-accent);
   padding: 0.55rem 1.5rem;
   border-radius: var(--radius-full);
   font-size: 0.8rem;
@@ -330,7 +329,7 @@ body.v2-liquid-luminous {
   box-shadow: var(--shadow-glow);
 }
 .tag-gold-sparkle {
-  background: var(--gold-gradient);
+  background: var(--gradient-gold);
   color: #000;
   font-size: 0.7rem;
   font-weight: 900;
@@ -351,7 +350,7 @@ body.v2-liquid-luminous {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 400;
-  background: var(--gold-gradient);
+  background: var(--gradient-gold);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -368,7 +367,7 @@ body.v2-liquid-luminous {
   width: 100%;
   background: var(--bg-glass);
   backdrop-filter: var(--blur-heavy);
-  border: 1px solid var(--border-cyan);
+  border: 1px solid var(--border-accent);
   border-radius: var(--radius-lg);
   padding: 1.75rem 2rem;
   box-shadow: var(--shadow-liquid), var(--shadow-glow);
@@ -388,7 +387,7 @@ body.v2-liquid-luminous {
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.12em;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   text-transform: uppercase;
 }
 .dock-cell-block input, .dock-cell-block select {
@@ -403,12 +402,12 @@ body.v2-liquid-luminous {
   transition: var(--transition);
 }
 .dock-cell-block input:focus, .dock-cell-block select:focus {
-  border-color: var(--cyan-neon);
-  box-shadow: 0 0 20px rgba(0, 242, 254, 0.35);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 20px var(--glow-primary);
 }
 
 .btn-dock-search {
-  background: var(--gold-gradient);
+  background: var(--gradient-gold);
   color: #040810;
   border: none;
   font-family: var(--font-sans);
@@ -437,7 +436,7 @@ body.v2-liquid-luminous {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1.5px solid var(--border-cyan);
+  border: 1.5px solid var(--border-accent);
   box-shadow: var(--shadow-liquid), var(--shadow-glow);
   height: 500px;
 }
@@ -455,7 +454,7 @@ body.v2-liquid-luminous {
   border: 1px solid var(--border-gold);
   padding: 0.65rem 1.3rem;
   border-radius: var(--radius-full);
-  color: var(--gold-light);
+  color: var(--accent-light);
   font-size: 0.8rem;
   font-weight: 800;
   display: flex;
@@ -483,7 +482,7 @@ body.v2-liquid-luminous {
 }
 .badge-glass-floating-bot span {
   font-size: 0.82rem;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
 }
 
 /* ============================================================================
@@ -503,14 +502,14 @@ body.v2-liquid-luminous {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 242, 254, 0.08);
-  border: 1px solid var(--border-cyan);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-accent);
   padding: 0.45rem 1.3rem;
   border-radius: var(--radius-full);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.16em;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   margin-bottom: 1.4rem;
 }
 .section-headline-xl {
@@ -550,7 +549,7 @@ body.v2-liquid-luminous {
   grid-template-columns: 1fr 1.15fr;
 }
 .suite-panoramic-card:hover {
-  border-color: var(--cyan-neon);
+  border-color: var(--accent-primary);
   transform: translateY(-8px);
   box-shadow: 0 35px 90px -15px rgba(0, 0, 0, 0.95), var(--shadow-glow);
 }
@@ -576,7 +575,7 @@ body.v2-liquid-luminous {
   background: rgba(2, 7, 14, 0.88);
   backdrop-filter: var(--blur-medium);
   border: 1px solid var(--border-gold);
-  color: var(--gold-light);
+  color: var(--accent-light);
   font-size: 0.76rem;
   font-weight: 800;
   padding: 6px 16px;
@@ -592,7 +591,7 @@ body.v2-liquid-luminous {
 .suite-index-kicker {
   font-size: 0.74rem;
   letter-spacing: 0.22em;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   text-transform: uppercase;
   font-weight: 800;
   margin-bottom: 0.6rem;
@@ -643,7 +642,7 @@ body.v2-liquid-luminous {
 }
 .price-tag-gold {
   font-size: 0.84rem;
-  color: var(--gold-light);
+  color: var(--accent-light);
   font-weight: 700;
 }
 
@@ -673,11 +672,11 @@ body.v2-liquid-luminous {
   left: 0;
   right: 0;
   height: 3.5px;
-  background: var(--cyan-gradient);
-  opacity: 0.8;
+  background: var(--gradient-accent);
+  opacity: 0.85;
 }
 .ritual-fluid-card:hover {
-  border-color: var(--cyan-neon);
+  border-color: var(--accent-primary);
   transform: translateY(-8px);
   box-shadow: var(--shadow-glow);
 }
@@ -685,7 +684,7 @@ body.v2-liquid-luminous {
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.14em;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   text-transform: uppercase;
   margin-bottom: 0.9rem;
   display: block;
@@ -742,7 +741,7 @@ body.v2-liquid-luminous {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 1.8rem;
-  color: var(--gold-light);
+  color: var(--accent-light);
   line-height: 1;
 }
 .entry-body strong {
@@ -760,7 +759,7 @@ body.v2-liquid-luminous {
 .video-frame-showcase {
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1.5px solid var(--border-cyan);
+  border: 1.5px solid var(--border-accent);
   box-shadow: var(--shadow-liquid), var(--shadow-glow);
 }
 .video-frame-showcase video {
@@ -788,7 +787,7 @@ body.v2-liquid-luminous {
   transition: var(--transition);
 }
 .cove-radar-card:hover {
-  border-color: var(--cyan-neon);
+  border-color: var(--accent-primary);
   transform: translateY(-8px);
   box-shadow: var(--shadow-glow);
 }
@@ -807,8 +806,8 @@ body.v2-liquid-luminous {
   left: 1.2rem;
   background: rgba(2, 7, 14, 0.88);
   backdrop-filter: var(--blur-medium);
-  border: 1px solid var(--border-cyan);
-  color: var(--cyan-neon);
+  border: 1px solid var(--border-accent);
+  color: var(--accent-primary);
   font-size: 0.74rem;
   font-weight: 800;
   padding: 5px 12px;
@@ -834,7 +833,7 @@ body.v2-liquid-luminous {
 .vip-terminal-capsule {
   background: var(--bg-glass-heavy);
   backdrop-filter: var(--blur-heavy);
-  border: 1.5px solid var(--border-cyan);
+  border: 1.5px solid var(--border-accent);
   border-radius: var(--radius-lg);
   padding: 4rem;
   box-shadow: var(--shadow-liquid), var(--shadow-glow);
@@ -859,7 +858,7 @@ body.v2-liquid-luminous {
 .vip-line-cell strong {
   display: block;
   font-size: 0.76rem;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -870,7 +869,7 @@ body.v2-liquid-luminous {
 }
 
 .vip-form-box-glass {
-  background: rgba(8, 24, 44, 0.82);
+  background: color-mix(in srgb, var(--bg-deep) 85%, #ffffff 15%);
   border: 1px solid var(--border-glass-light);
   padding: 2.5rem;
   border-radius: var(--radius-md);
@@ -902,8 +901,8 @@ body.v2-liquid-luminous {
   outline: none;
 }
 .form-input-cell input:focus, .form-input-cell select:focus, .form-input-cell textarea:focus {
-  border-color: var(--cyan-neon);
-  box-shadow: 0 0 18px rgba(0, 242, 254, 0.3);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 18px var(--glow-primary);
 }
 
 /* Footer */
@@ -934,7 +933,7 @@ body.v2-liquid-luminous {
 .footer-nav-col strong {
   font-size: 0.8rem;
   letter-spacing: 0.12em;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   text-transform: uppercase;
   margin-bottom: 0.6rem;
 }

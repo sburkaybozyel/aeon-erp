@@ -35,49 +35,55 @@ function escapeHtml(str) {
 }
 
 // ============================================================================
-// AWWWARDS-CALIBER 2026 LUMINOUS LIQUID GLASS CSS (V2)
+// DYNAMIC HOTEL-SPECIFIC LUMINOUS LIQUID GLASS CSS GENERATOR
 // ============================================================================
-function generateV2LiquidCSS() {
+function generateV2LiquidCSS(hotel) {
+  const theme = hotel.theme || {};
+  const primaryColor = theme.primary || '#00f2fe';
+  const secondaryColor = theme.secondary || '#d4af37';
+  const darkBg = theme.dark || '#02060d';
+  const cardBg = theme.card || 'rgba(8, 20, 36, 0.65)';
+  const accentLight = theme.accent || '#fff3cf';
+
   return `/* ==========================================================================
-   SELİMİYE HOTELS — V2 LUMINOUS LIQUID GLASS & AWWWARDS-CALIBER LUXURY
+   ${hotel.name.toUpperCase()} — V2 LUMINOUS LIQUID GLASS LUXURY
+   Theme: ${theme.paletteName || 'Luminous Aegean'}
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --bg-deep: #02060d;
-  --bg-surface: #05101d;
-  --bg-glass: rgba(8, 20, 36, 0.55);
-  --bg-glass-heavy: rgba(4, 12, 24, 0.82);
-  --bg-glass-card: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-  --bg-glass-input: rgba(10, 26, 46, 0.7);
+  --bg-deep: ${darkBg};
+  --bg-surface: color-mix(in srgb, ${darkBg} 85%, #ffffff 15%);
+  --bg-glass: ${cardBg};
+  --bg-glass-heavy: color-mix(in srgb, ${darkBg} 90%, #000000 10%);
+  --bg-glass-input: color-mix(in srgb, ${darkBg} 75%, #ffffff 25%);
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-heading: 'Cinzel', 'Playfair Display', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
-  --cyan-neon: #00f2fe;
-  --cyan-emerald: #10b981;
-  --cyan-glow: rgba(0, 242, 254, 0.35);
-  --cyan-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #00c6ff 100%);
-  
-  --gold-primary: #d4af37;
-  --gold-light: #fff3cf;
-  --gold-gradient: linear-gradient(135deg, #fff3cf 0%, #e2c174 35%, #c59b3f 70%, #8c6721 100%);
-  --gold-glow: rgba(212, 175, 55, 0.35);
+  --accent-primary: ${primaryColor};
+  --accent-secondary: ${secondaryColor};
+  --accent-light: ${accentLight};
+
+  --glow-primary: ${primaryColor}55;
+  --glow-secondary: ${secondaryColor}55;
+  --gradient-accent: linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%);
+  --gradient-gold: linear-gradient(135deg, #fff3cf 0%, #e2c174 35%, #c59b3f 70%, #8c6721 100%);
 
   --border-glass: rgba(255, 255, 255, 0.14);
-  --border-glass-light: rgba(255, 255, 255, 0.22);
-  --border-cyan: rgba(0, 242, 254, 0.38);
-  --border-gold: rgba(212, 175, 55, 0.4);
+  --border-glass-light: rgba(255, 255, 255, 0.24);
+  --border-accent: ${primaryColor}77;
+  --border-gold: rgba(212, 175, 55, 0.45);
 
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --text-dim: #64748b;
 
-  --shadow-liquid: 0 30px 80px -15px rgba(0, 0, 0, 0.85), 0 0 40px rgba(0, 242, 254, 0.08);
-  --shadow-glow: 0 0 50px rgba(0, 242, 254, 0.25);
-  --shadow-gold: 0 0 45px rgba(212, 175, 55, 0.35);
+  --shadow-liquid: 0 30px 80px -15px rgba(0, 0, 0, 0.9), 0 0 35px var(--glow-primary);
+  --shadow-glow: 0 0 50px var(--glow-primary);
+  --shadow-gold: 0 0 45px rgba(212, 175, 55, 0.4);
 
   --blur-heavy: blur(32px) saturate(210%);
   --blur-medium: blur(20px) saturate(180%);
@@ -126,7 +132,7 @@ body.v2-liquid-luminous {
   position: absolute;
   border-radius: 50%;
   filter: blur(140px);
-  opacity: 0.4;
+  opacity: 0.45;
   animation: auroraFloat 22s ease-in-out infinite alternate;
 }
 .aurora-1 {
@@ -134,14 +140,14 @@ body.v2-liquid-luminous {
   left: 10vw;
   width: 60vw;
   height: 60vw;
-  background: radial-gradient(circle, rgba(0, 242, 254, 0.28) 0%, rgba(79, 172, 254, 0.08) 70%, transparent 100%);
+  background: radial-gradient(circle, var(--glow-primary) 0%, transparent 70%);
 }
 .aurora-2 {
   top: 40vh;
   right: -10vw;
   width: 55vw;
   height: 55vw;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.24) 0%, rgba(180, 130, 30, 0.05) 70%, transparent 100%);
+  background: radial-gradient(circle, var(--glow-secondary) 0%, transparent 70%);
   animation-delay: -7s;
 }
 .aurora-3 {
@@ -149,7 +155,7 @@ body.v2-liquid-luminous {
   left: 20vw;
   width: 65vw;
   height: 65vw;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(14, 165, 233, 0.05) 70%, transparent 100%);
+  background: radial-gradient(circle, var(--glow-primary) 0%, transparent 70%);
   animation-delay: -14s;
 }
 @keyframes auroraFloat {
@@ -208,12 +214,12 @@ body.v2-liquid-luminous {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 25px rgba(0, 242, 254, 0.35), 0 0 15px rgba(212, 175, 55, 0.35);
+  box-shadow: 0 0 25px var(--glow-primary), 0 0 15px rgba(212, 175, 55, 0.35);
   transition: var(--transition);
 }
 .brand-logo-disc:hover {
   transform: scale(1.08) rotate(4deg);
-  box-shadow: 0 0 40px rgba(0, 242, 254, 0.55);
+  box-shadow: 0 0 40px var(--glow-primary);
 }
 .brand-logo-disc svg {
   width: 100%;
@@ -236,7 +242,7 @@ body.v2-liquid-luminous {
 .brand-h-sub {
   font-size: 0.7rem;
   letter-spacing: 0.25em;
-  background: var(--gold-gradient);
+  background: var(--gradient-gold);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
@@ -268,7 +274,7 @@ body.v2-liquid-luminous {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--cyan-gradient);
+  background: var(--gradient-accent);
   transition: width 0.3s ease;
   border-radius: var(--radius-full);
 }
@@ -285,11 +291,11 @@ body.v2-liquid-luminous {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 242, 254, 0.08);
-  border: 1px solid var(--border-cyan);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-accent);
   padding: 0.5rem 1.1rem;
   border-radius: var(--radius-full);
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   font-size: 0.8rem;
   font-weight: 700;
   text-decoration: none;
@@ -297,9 +303,9 @@ body.v2-liquid-luminous {
 .pulsing-dot {
   width: 8px;
   height: 8px;
-  background: var(--cyan-neon);
+  background: var(--accent-primary);
   border-radius: 50%;
-  box-shadow: 0 0 12px var(--cyan-neon);
+  box-shadow: 0 0 12px var(--accent-primary);
   animation: pulseBeacon 2s infinite;
 }
 @keyframes pulseBeacon {
@@ -308,7 +314,7 @@ body.v2-liquid-luminous {
 }
 
 .btn-liquid-gold-cta {
-  background: var(--gold-gradient);
+  background: var(--gradient-gold);
   color: #040810;
   border: none;
   font-family: var(--font-sans);
@@ -359,7 +365,7 @@ body.v2-liquid-luminous {
   gap: 10px;
   background: rgba(8, 26, 46, 0.88);
   backdrop-filter: var(--blur-medium);
-  border: 1px solid var(--border-cyan);
+  border: 1px solid var(--border-accent);
   padding: 0.55rem 1.5rem;
   border-radius: var(--radius-full);
   font-size: 0.8rem;
@@ -370,7 +376,7 @@ body.v2-liquid-luminous {
   box-shadow: var(--shadow-glow);
 }
 .tag-gold-sparkle {
-  background: var(--gold-gradient);
+  background: var(--gradient-gold);
   color: #000;
   font-size: 0.7rem;
   font-weight: 900;
@@ -391,7 +397,7 @@ body.v2-liquid-luminous {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 400;
-  background: var(--gold-gradient);
+  background: var(--gradient-gold);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -408,7 +414,7 @@ body.v2-liquid-luminous {
   width: 100%;
   background: var(--bg-glass);
   backdrop-filter: var(--blur-heavy);
-  border: 1px solid var(--border-cyan);
+  border: 1px solid var(--border-accent);
   border-radius: var(--radius-lg);
   padding: 1.75rem 2rem;
   box-shadow: var(--shadow-liquid), var(--shadow-glow);
@@ -428,7 +434,7 @@ body.v2-liquid-luminous {
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.12em;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   text-transform: uppercase;
 }
 .dock-cell-block input, .dock-cell-block select {
@@ -443,12 +449,12 @@ body.v2-liquid-luminous {
   transition: var(--transition);
 }
 .dock-cell-block input:focus, .dock-cell-block select:focus {
-  border-color: var(--cyan-neon);
-  box-shadow: 0 0 20px rgba(0, 242, 254, 0.35);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 20px var(--glow-primary);
 }
 
 .btn-dock-search {
-  background: var(--gold-gradient);
+  background: var(--gradient-gold);
   color: #040810;
   border: none;
   font-family: var(--font-sans);
@@ -477,7 +483,7 @@ body.v2-liquid-luminous {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1.5px solid var(--border-cyan);
+  border: 1.5px solid var(--border-accent);
   box-shadow: var(--shadow-liquid), var(--shadow-glow);
   height: 500px;
 }
@@ -495,7 +501,7 @@ body.v2-liquid-luminous {
   border: 1px solid var(--border-gold);
   padding: 0.65rem 1.3rem;
   border-radius: var(--radius-full);
-  color: var(--gold-light);
+  color: var(--accent-light);
   font-size: 0.8rem;
   font-weight: 800;
   display: flex;
@@ -523,7 +529,7 @@ body.v2-liquid-luminous {
 }
 .badge-glass-floating-bot span {
   font-size: 0.82rem;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
 }
 
 /* ============================================================================
@@ -543,14 +549,14 @@ body.v2-liquid-luminous {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 242, 254, 0.08);
-  border: 1px solid var(--border-cyan);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-accent);
   padding: 0.45rem 1.3rem;
   border-radius: var(--radius-full);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.16em;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   margin-bottom: 1.4rem;
 }
 .section-headline-xl {
@@ -590,7 +596,7 @@ body.v2-liquid-luminous {
   grid-template-columns: 1fr 1.15fr;
 }
 .suite-panoramic-card:hover {
-  border-color: var(--cyan-neon);
+  border-color: var(--accent-primary);
   transform: translateY(-8px);
   box-shadow: 0 35px 90px -15px rgba(0, 0, 0, 0.95), var(--shadow-glow);
 }
@@ -616,7 +622,7 @@ body.v2-liquid-luminous {
   background: rgba(2, 7, 14, 0.88);
   backdrop-filter: var(--blur-medium);
   border: 1px solid var(--border-gold);
-  color: var(--gold-light);
+  color: var(--accent-light);
   font-size: 0.76rem;
   font-weight: 800;
   padding: 6px 16px;
@@ -632,7 +638,7 @@ body.v2-liquid-luminous {
 .suite-index-kicker {
   font-size: 0.74rem;
   letter-spacing: 0.22em;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   text-transform: uppercase;
   font-weight: 800;
   margin-bottom: 0.6rem;
@@ -683,7 +689,7 @@ body.v2-liquid-luminous {
 }
 .price-tag-gold {
   font-size: 0.84rem;
-  color: var(--gold-light);
+  color: var(--accent-light);
   font-weight: 700;
 }
 
@@ -713,11 +719,11 @@ body.v2-liquid-luminous {
   left: 0;
   right: 0;
   height: 3.5px;
-  background: var(--cyan-gradient);
-  opacity: 0.8;
+  background: var(--gradient-accent);
+  opacity: 0.85;
 }
 .ritual-fluid-card:hover {
-  border-color: var(--cyan-neon);
+  border-color: var(--accent-primary);
   transform: translateY(-8px);
   box-shadow: var(--shadow-glow);
 }
@@ -725,7 +731,7 @@ body.v2-liquid-luminous {
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.14em;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   text-transform: uppercase;
   margin-bottom: 0.9rem;
   display: block;
@@ -782,7 +788,7 @@ body.v2-liquid-luminous {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 1.8rem;
-  color: var(--gold-light);
+  color: var(--accent-light);
   line-height: 1;
 }
 .entry-body strong {
@@ -800,7 +806,7 @@ body.v2-liquid-luminous {
 .video-frame-showcase {
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1.5px solid var(--border-cyan);
+  border: 1.5px solid var(--border-accent);
   box-shadow: var(--shadow-liquid), var(--shadow-glow);
 }
 .video-frame-showcase video {
@@ -828,7 +834,7 @@ body.v2-liquid-luminous {
   transition: var(--transition);
 }
 .cove-radar-card:hover {
-  border-color: var(--cyan-neon);
+  border-color: var(--accent-primary);
   transform: translateY(-8px);
   box-shadow: var(--shadow-glow);
 }
@@ -847,8 +853,8 @@ body.v2-liquid-luminous {
   left: 1.2rem;
   background: rgba(2, 7, 14, 0.88);
   backdrop-filter: var(--blur-medium);
-  border: 1px solid var(--border-cyan);
-  color: var(--cyan-neon);
+  border: 1px solid var(--border-accent);
+  color: var(--accent-primary);
   font-size: 0.74rem;
   font-weight: 800;
   padding: 5px 12px;
@@ -874,7 +880,7 @@ body.v2-liquid-luminous {
 .vip-terminal-capsule {
   background: var(--bg-glass-heavy);
   backdrop-filter: var(--blur-heavy);
-  border: 1.5px solid var(--border-cyan);
+  border: 1.5px solid var(--border-accent);
   border-radius: var(--radius-lg);
   padding: 4rem;
   box-shadow: var(--shadow-liquid), var(--shadow-glow);
@@ -899,7 +905,7 @@ body.v2-liquid-luminous {
 .vip-line-cell strong {
   display: block;
   font-size: 0.76rem;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -910,7 +916,7 @@ body.v2-liquid-luminous {
 }
 
 .vip-form-box-glass {
-  background: rgba(8, 24, 44, 0.82);
+  background: color-mix(in srgb, var(--bg-deep) 85%, #ffffff 15%);
   border: 1px solid var(--border-glass-light);
   padding: 2.5rem;
   border-radius: var(--radius-md);
@@ -942,8 +948,8 @@ body.v2-liquid-luminous {
   outline: none;
 }
 .form-input-cell input:focus, .form-input-cell select:focus, .form-input-cell textarea:focus {
-  border-color: var(--cyan-neon);
-  box-shadow: 0 0 18px rgba(0, 242, 254, 0.3);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 18px var(--glow-primary);
 }
 
 /* Footer */
@@ -974,7 +980,7 @@ body.v2-liquid-luminous {
 .footer-nav-col strong {
   font-size: 0.8rem;
   letter-spacing: 0.12em;
-  color: var(--cyan-neon);
+  color: var(--accent-primary);
   text-transform: uppercase;
   margin-bottom: 0.6rem;
 }
@@ -1025,9 +1031,11 @@ function generateV2LiquidHTML(hotel) {
   const slug = hotel.slug;
   const phone = hotel.phone || '0252 456 23 40';
   const cleanPhone = phone.replace(/\D/g, '') || '902524562340';
-  const address = hotel.address || 'Selimiye Koyu, Marmaris / Muğla';
+  const address = hotel.address || hotel.location || 'Selimiye Koyu, Marmaris / Muğla';
   const tagline = hotel.tagline || 'Selimiye’de Kristal Sular & Yüksek Kıyı Konforu';
   const concept = hotel.concept || 'Kıyı Dinginliği & Lüks Butik Deneyim';
+  const audience = hotel.targetAudience || 'Seçkin Misafirler & Çiftler';
+  const seaDist = hotel.seaDistance || 'Denize Sıfır & Özel İskele';
 
   const rooms = (hotel.rooms && hotel.rooms.length) ? hotel.rooms : [
     {
@@ -1059,15 +1067,15 @@ function generateV2LiquidHTML(hotel) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="description" content="${escapeHtml(name)} — Selimiye Koyu'nda ${escapeHtml(concept)}. Luminous Liquid Glass & Modern Kıyı Lüksü.">
+  <meta name="description" content="${escapeHtml(name)} — Selimiye Koyu'nda ${escapeHtml(concept)}. ${escapeHtml(audience)}.">
   <title>${escapeHtml(name)} — Selimiye | Luminous Liquid Glass (V2)</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="./styles.css?v=20260827">
-  <script defer src="./app.js?v=20260827"></script>
+  <link rel="stylesheet" href="./styles.css?v=${Date.now()}">
+  <script defer src="./app.js?v=${Date.now()}"></script>
 </head>
 <body class="v2-liquid-luminous" data-phone="${escapeHtml(cleanPhone)}" data-hotel="${escapeHtml(name)}">
 
@@ -1124,8 +1132,8 @@ function generateV2LiquidHTML(hotel) {
           <div class="hero-v2-text" data-reveal>
             <div class="hero-glow-badge">
               <span class="pulsing-dot"></span>
-              <span>SELİMİYE KOYU · ÖZEL İSKELE</span>
-              <span class="tag-gold-sparkle">V2 LIQUID GLASS</span>
+              <span>${escapeHtml(seaDist).toUpperCase()}</span>
+              <span class="tag-gold-sparkle">${escapeHtml(audience).toUpperCase()}</span>
             </div>
 
             <h1 class="hero-v2-h1">
@@ -1134,7 +1142,7 @@ function generateV2LiquidHTML(hotel) {
             </h1>
 
             <p class="hero-v2-lead-para">
-              ${escapeHtml(name)}; Selimiye’nin kristal turkuaz suları üzerinde, akışkan cam mimari ve masif ahşap iskele konforuyla tasarlanmış seçkin bir Ege inzivası sunar.
+              ${escapeHtml(name)}; Selimiye’nin kristal turkuaz suları üzerinde, ${escapeHtml(concept).toLowerCase()} ile tasarlanmış seçkin bir Ege inzivası sunar.
             </p>
 
             <!-- Hero Floating Booking Dock -->
@@ -1361,7 +1369,7 @@ function generateV2LiquidHTML(hotel) {
                 </div>
                 <div class="vip-line-cell">
                   <strong>WHATSAPP CANLI DANIŞMA</strong>
-                  <a href="https://wa.me/${escapeHtml(cleanPhone)}?text=Merhaba%20${encodeURIComponent(name)},%20m%C3%BCsaitlik%20bilgisi%20almak%20istiyorum." target="_blank" style="color:var(--cyan-neon);">+90 Selimiye VIP Concierge ↗</a>
+                  <a href="https://wa.me/${escapeHtml(cleanPhone)}?text=Merhaba%20${encodeURIComponent(name)},%20m%C3%BCsaitlik%20bilgisi%20almak%20istiyorum." target="_blank" style="color:var(--accent-primary);">+90 Selimiye VIP Concierge ↗</a>
                 </div>
               </div>
             </div>
@@ -1590,10 +1598,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Build all 24 V2 sites
 function buildAllV2Sites() {
-  console.log('💎 Compiling 24 V2 Selimiye Websites with Luminous Aegean Liquid Glass Architecture...');
-  
-  const css = generateV2LiquidCSS();
-  const js = generateV2LiquidJS();
+  console.log('💎 Compiling 24 V2 Selimiye Websites with BESPOKE Personalities and Luminous Liquid Glass...');
 
   for (const hotel of rawV2Data.hotels) {
     const slug = hotel.slug;
@@ -1602,14 +1607,16 @@ function buildAllV2Sites() {
       fs.mkdirSync(hotelDir, { recursive: true });
     }
 
+    const css = generateV2LiquidCSS(hotel);
     const html = generateV2LiquidHTML(hotel);
+    const js = generateV2LiquidJS();
 
     fs.writeFileSync(path.join(hotelDir, 'index.html'), html, 'utf8');
     fs.writeFileSync(path.join(hotelDir, 'styles.css'), css, 'utf8');
     fs.writeFileSync(path.join(hotelDir, 'app.js'), js, 'utf8');
   }
 
-  console.log('✅ Successfully compiled and deployed all 24 V2 Luminous Liquid Glass Websites!');
+  console.log('✅ Successfully compiled and deployed all 24 V2 Luminous Liquid Glass Websites with BESPOKE individual palettes and architectures!');
 }
 
 buildAllV2Sites();

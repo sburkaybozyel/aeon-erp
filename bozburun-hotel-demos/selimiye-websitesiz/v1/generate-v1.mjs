@@ -13,8 +13,17 @@ const outputRoot = here;
 const escapeHtml = (value='') => String(value).replace(/[&<>"']/g,(char)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
 // High-End Liquid Glass CSS for V1
-const sharedV1CSS = `/* ==========================================================================
-   SELİMİYE HOTELS — OBSIDIAN GOLD LIQUID GLASS LUXURY (V1)
+function generateV1CSS(hotel) {
+  const theme = hotel.theme || {};
+  const primaryColor = theme.primary || '#d4af37';
+  const secondaryColor = theme.secondary || '#f3df95';
+  const darkBg = theme.dark || '#060a10';
+  const cardBg = theme.card || 'rgba(14, 24, 36, 0.75)';
+  const accentColor = theme.accent || '#f8fafc';
+
+  return `/* ==========================================================================
+   ${hotel.name.toUpperCase()} — OBSIDIAN GOLD LIQUID GLASS LUXURY (V1)
+   Theme: ${theme.paletteName || 'Obsidian Luxury'}
    ========================================================================== */
 
 :root {
@@ -22,29 +31,29 @@ const sharedV1CSS = `/* ========================================================
   --font-heading: 'Cinzel', 'Cormorant Garamond', serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  --bg-deep: #060a10;
-  --bg-dark: #0b131e;
-  --bg-card: rgba(14, 24, 36, 0.75);
-  --bg-card-heavy: rgba(9, 16, 26, 0.9);
-  --bg-glass-input: rgba(255, 255, 255, 0.06);
+  --bg-deep: ${darkBg};
+  --bg-dark: color-mix(in srgb, ${darkBg} 85%, #ffffff 15%);
+  --bg-card: ${cardBg};
+  --bg-card-heavy: color-mix(in srgb, ${darkBg} 90%, #000000 10%);
+  --bg-glass-input: rgba(255, 255, 255, 0.08);
 
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --text-dim: #64748b;
 
-  --gold-primary: #d4af37;
-  --gold-light: #f3df95;
-  --gold-glow: rgba(212, 175, 55, 0.3);
-  --gold-gradient: linear-gradient(135deg, #f3df95 0%, #c59f42 50%, #9a7322 100%);
+  --gold-primary: ${primaryColor};
+  --gold-light: ${secondaryColor};
+  --gold-glow: ${primaryColor}55;
+  --gold-gradient: linear-gradient(135deg, ${secondaryColor} 0%, ${primaryColor} 100%);
   
-  --border-glass: rgba(255, 255, 255, 0.12);
-  --border-gold: rgba(212, 175, 55, 0.35);
+  --border-glass: rgba(255, 255, 255, 0.14);
+  --border-gold: ${primaryColor}66;
 
   --blur-heavy: blur(28px) saturate(190%);
   --blur-medium: blur(16px);
 
-  --shadow-liquid: 0 20px 50px -10px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.12);
-  --shadow-gold: 0 10px 30px rgba(212, 175, 55, 0.3);
+  --shadow-liquid: 0 20px 50px -10px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  --shadow-gold: 0 10px 30px ${primaryColor}55;
 
   --radius-sm: 8px;
   --radius-md: 16px;
@@ -1241,9 +1250,9 @@ body.selimiye-v1-liquid {
   .hero-strip-grid { grid-template-columns: 1fr; }
   .hub-layout, .amenities-card { padding: 1.75rem; }
   .form-row-2 { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr; }
 }
 `;
+}
 
 function generateV1Page(hotel, detail) {
   const name = hotel.name;
@@ -2163,7 +2172,7 @@ function main() {
 
     const pageHtml = generateV1Page(hotel, detail);
     fs.writeFileSync(path.join(hotelDir, 'index.html'), pageHtml, 'utf8');
-    fs.writeFileSync(path.join(hotelDir, 'styles.css'), sharedV1CSS, 'utf8');
+    fs.writeFileSync(path.join(hotelDir, 'styles.css'), generateV1CSS(hotel), 'utf8');
     fs.writeFileSync(path.join(hotelDir, 'app.js'), jsContent, 'utf8');
 
     manifest.push({
