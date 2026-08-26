@@ -67,17 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const checkin = document.getElementById('heroCheckin')?.value || '';
       const checkout = document.getElementById('heroCheckout')?.value || '';
       const guests = document.getElementById('heroGuests')?.value || '2 Yetişkin';
-      const suite = document.getElementById('heroSuite')?.value || 'Tüm Koleksiyon';
 
       const v2Checkin = document.getElementById('v2Checkin');
       const v2Checkout = document.getElementById('v2Checkout');
       const v2Guests = document.getElementById('v2Guests');
-      const v2Suite = document.getElementById('v2Suite');
 
       if (v2Checkin && checkin) v2Checkin.value = checkin;
       if (v2Checkout && checkout) v2Checkout.value = checkout;
       if (v2Guests && guests) v2Guests.value = guests;
-      if (v2Suite && suite !== 'all') v2Suite.value = suite;
 
       const section = document.getElementById('concierge');
       if (section) {
