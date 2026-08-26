@@ -10,24 +10,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="./styles.css?v=1787780815077">
-  <script defer src="./app.js?v=1787780815077"></script>
+  <link rel="stylesheet" href="./styles.css?v=1787780920307">
+  <script defer src="./app.js?v=1787780920307"></script>
 </head>
-<body class="v2-liquid-nextgen" data-phone="05326701680" data-hotel="Zakkum Frida Pansiyon">
+<body data-phone="05326701680" data-hotel="Zakkum Frida Pansiyon">
 
-  <!-- Ambient Liquid Plasma Mesh -->
-  <div class="ambient-liquid-plasma" aria-hidden="true">
-    <div class="plasma-orb plasma-1"></div>
-    <div class="plasma-orb plasma-2"></div>
-    <div class="plasma-orb plasma-3"></div>
-  </div>
-
-  <!-- FLOATING VISIONOS GLASS CAPSULE HEADER -->
-  <header class="v2-vision-header" id="v2Header">
-    <div class="vision-capsule-island">
-      
-      <a href="#top" class="brand-vision-unit">
-        <div class="brand-vision-medallion">
+  <!-- FLOATING VISIONOS GLASS NAVIGATION -->
+  <header class="liquid-topbar">
+    <div class="liquid-nav-island">
+      <a href="#top" class="brand-unit">
+        <div class="brand-medallion">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
   
   <defs>
@@ -89,368 +81,236 @@
       
 </svg>
         </div>
-        <div class="brand-title-stack">
-          <span class="brand-title-bold">ZAKKUM FRIDA PANSIYON</span>
-          <span class="brand-sub-badge">SELİMİYE · MARMARİS</span>
+        <div>
+          <span class="brand-title">ZAKKUM FRIDA PANSIYON</span>
+          <span class="brand-sub">SELİMİYE · MARMARİS</span>
         </div>
       </a>
 
-      <nav class="vision-nav-links">
-        <a href="#suites" class="v-nav-item">Süitler & Odalar</a>
-        <a href="#rituals" class="v-nav-item">Koy Ritüelleri</a>
-        <a href="#gastronomy" class="v-nav-item">Gastronomi</a>
-        <a href="#concierge" class="v-nav-item">VIP Danışma</a>
+      <nav class="nav-links">
+        <a href="#suites" class="nav-link">Süitler</a>
+        <a href="#rituals" class="nav-link">Koy Ritmi</a>
+        <a href="#concierge" class="nav-link">VIP Danışma</a>
       </nav>
 
-      <div class="vision-actions-group">
-        <div class="live-weather-capsule">
-          <span class="live-pulse-beacon"></span>
-          <span>☀️ 28°C Selimiye</span>
-        </div>
-        <button class="btn-vision-gold-cta" data-book>
-          <span>Rezervasyon</span>
-          <i>↗</i>
-        </button>
-      </div>
-
+      <button class="btn-gold-action" data-book>
+        <span>Müsaitlik Al ↗</span>
+      </button>
     </div>
   </header>
 
   <main id="top">
-    
-    <!-- HERO: FULL-VIEWPORT CINEMATIC CANVAS -->
-    <section class="hero-nextgen-canvas">
-      <div class="container-liquid">
-        <div class="hero-canvas-grid">
-          
-          <div class="hero-editorial-column">
-            <div class="hero-kicker-glow">
-              <span class="live-pulse-beacon"></span>
-              <span>DENIZE SIFIR / ÜCRETSIZ ÖZEL PLAJ ALANI</span>
-              <span class="badge-gold-sparkle">V2 LIQUID GLASS</span>
+    <!-- FULL-BLEED CINEMATIC HERO -->
+    <section class="hero-fullbleed-cinema">
+      <div class="container-liquid hero-cinema-content">
+        <div class="hero-eyebrow-chip">✦ DENIZE SIFIR / ÜCRETSIZ ÖZEL PLAJ ALANI</div>
+        <h1 class="hero-cinema-h1">
+          Zakkum Frida Pansiyon<br>
+          <em>Zakkum çiçekleri, Frida&#039;nın renkleri ve denize sıfır bohem bir dünya</em>
+        </h1>
+        <p class="hero-cinema-p">
+          Sanatçı ruhlu bohem pansiyon &amp; özel plaj alanı. Selimiye'nin sakin koyunda, günün temposundan uzaklaşarak berrak sularda dinlenin.
+        </p>
+
+        <!-- Floating Glass Dock -->
+        <div class="floating-glass-dock">
+          <form class="dock-form-grid" onsubmit="return false;">
+            <div class="dock-field">
+              <label>GİRİŞ TARİHİ</label>
+              <input type="date" id="heroCheckin" required>
             </div>
-
-            <h1 class="hero-monumental-h1">
-              Akışkan Camın Işığında,<br>
-              <em class="hero-highlight-italic">Zakkum çiçekleri, Frida&#039;nın renkleri ve denize sıfır bohem bir dünya</em>
-            </h1>
-
-            <p class="hero-narrative-lead">
-              Zakkum Frida Pansiyon; Selimiye’nin kristal turkuaz suları üzerinde, sanatçı ruhlu bohem pansiyon &amp; özel plaj alanı anlayışıyla tasarlanmış seçkin bir Ege inzivası sunar.
-            </p>
-
-            <!-- Hero Floating Booking Dock -->
-            <div class="hero-booking-dock-island">
-              <form class="dock-4fields-grid" onsubmit="return false;">
-                <div class="dock-cell-input">
-                  <label>GİRİŞ TARİHİ</label>
-                  <input type="date" id="heroCheckin" required>
-                </div>
-                <div class="dock-cell-input">
-                  <label>ÇIKIŞ TARİHİ</label>
-                  <input type="date" id="heroCheckout" required>
-                </div>
-                <div class="dock-cell-input">
-                  <label>MİSAFİR</label>
-                  <select id="heroGuests">
-                    <option value="2 Yetişkin">2 Yetişkin</option>
-                    <option value="1 Yetişkin">1 Yetişkin</option>
-                    <option value="3 Yetişkin">3 Yetişkin</option>
-                    <option value="4+ Yetişkin">4+ Yetişkin / Aile</option>
-                  </select>
-                </div>
-                <button type="button" class="btn-dock-find" id="heroSubmitBtn">
-                  <span>Müsaitlik Al →</span>
-                </button>
-              </form>
+            <div class="dock-field">
+              <label>ÇIKIŞ TARİHİ</label>
+              <input type="date" id="heroCheckout" required>
             </div>
-          </div>
-
-          <div class="hero-stage-theater">
-            <div class="theater-frame-main">
-              <img src="./media/hero.jpg" alt="Zakkum Frida Pansiyon Ana Görsel">
-              <div class="badge-theater-floating">
-                <strong>Zakkum Frida Pansiyon</strong>
-                <span>Sığliman Sokak No:21, Selimiye Mahallesi, 48710 Marmaris/Muğla</span>
-              </div>
+            <div class="dock-field">
+              <label>MİSAFİR</label>
+              <select id="heroGuests">
+                <option value="2 Yetişkin">2 Yetişkin</option>
+                <option value="1 Yetişkin">1 Yetişkin</option>
+                <option value="3+ Yetişkin">3+ Yetişkin / Aile</option>
+              </select>
             </div>
-          </div>
-
+            <button type="button" class="btn-gold-action" id="heroSubmitBtn" style="height:50px;">
+              <span>Müsaitlik Gör →</span>
+            </button>
+          </form>
         </div>
       </div>
     </section>
 
-    <!-- SUITES: EXPANSIVE 3D LOOKBOOK -->
-    <section class="v2-liquid-section" id="suites" style="background: rgba(2, 8, 16, 0.65);">
+    <!-- SUITES: 3D PANORAMIC LOOKBOOK -->
+    <section class="v2-section" id="suites">
       <div class="container-liquid">
-        
-        <div class="section-mast-center">
-          <div class="pill-section-kicker">PANORAMİK KONAKLAMA</div>
-          <h2 class="section-title-monument">Koleksiyon Süitleri</h2>
-          <p class="section-desc-subtle">Doğal kireçtaşı, keten tekstiller ve Ege koyunu kucaklayan geniş özel teraslar.</p>
+        <div class="section-center">
+          <div class="hero-eyebrow-chip">PANORAMİK KOLEKSİYON</div>
+          <h2>Koleksiyon Süitleri</h2>
+          <p style="color:#94a3b8; font-size:1.1rem;">Doğal kireçtaşı dokuları, keten kumaşlar ve kesintisiz Ege manzarası.</p>
         </div>
 
-        <div class="suites-lookbook-stack">
+        <div class="suites-stack">
           
-            <article class="suite-lookbook-card-3d ">
-              <div class="suite-photo-wrapper">
+            <article class="suite-card-liquid ">
+              <div class="suite-media-wrap">
                 <img src="./media/suite.jpg" alt="Frida Deniz Manzaralı Oda">
-                <span class="suite-floating-ribbon">Bohem Deniz</span>
               </div>
-              <div class="suite-meta-wrapper">
+              <div class="suite-content-wrap">
                 <div>
-                  <span class="suite-serial-kicker">REZİDANS N° 01</span>
-                  <h3 class="suite-title-large">Frida Deniz Manzaralı Oda</h3>
-                  <p class="suite-narrative-desc">Renkli tekstiller, sanatsal detaylar ve doğrudan denize bakan geniş balkon.</p>
-                  
-                  <div class="suite-specs-3capsules">
-                    <div class="capsule-spec-item"><span>ALAN</span><strong>28 m²</strong></div>
-                    <div class="capsule-spec-item"><span>MANZARA</span><strong>Doğrudan Sığliman Koyu</strong></div>
-                    <div class="capsule-spec-item"><span>YATAK</span><strong>King Size Yatak</strong></div>
-                  </div>
+                  <span style="color:var(--primary); font-size:0.75rem; letter-spacing:0.2em; font-weight:800; text-transform:uppercase; display:block; margin-bottom:0.6rem;">SÜİT 01</span>
+                  <h3>Frida Deniz Manzaralı Oda</h3>
+                  <p>Renkli tekstiller, sanatsal detaylar ve doğrudan denize bakan geniş balkon.</p>
                 </div>
-
-                <div class="suite-action-strip">
-                  <span class="rate-guarantee-tag">✦ En İyi Fiyat Garantisi</span>
-                  <button class="btn-vision-gold-cta" data-suite-name="Frida Deniz Manzaralı Oda">
-                    <span>Hemen Rezerve Et ↗</span>
-                  </button>
+                <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-glass); padding-top:1.5rem;">
+                  <span style="color:#fff3cf; font-weight:700;">28 m² · Doğrudan Sığliman Koyu</span>
+                  <button class="btn-gold-action" data-suite-name="Frida Deniz Manzaralı Oda"><span>Rezerve Et ↗</span></button>
                 </div>
               </div>
             </article>
           
-            <article class="suite-lookbook-card-3d reverse">
-              <div class="suite-photo-wrapper">
+            <article class="suite-card-liquid reverse">
+              <div class="suite-media-wrap">
                 <img src="./media/room.jpg" alt="Zakkumlu Bahçe Odası">
-                <span class="suite-floating-ribbon">Çiçekli Avlu</span>
               </div>
-              <div class="suite-meta-wrapper">
+              <div class="suite-content-wrap">
                 <div>
-                  <span class="suite-serial-kicker">REZİDANS N° 02</span>
-                  <h3 class="suite-title-large">Zakkumlu Bahçe Odası</h3>
-                  <p class="suite-narrative-desc">Pembe zakkum çiçeklerinin yanında, sakin ve ferah bir konaklama.</p>
-                  
-                  <div class="suite-specs-3capsules">
-                    <div class="capsule-spec-item"><span>ALAN</span><strong>24 m²</strong></div>
-                    <div class="capsule-spec-item"><span>MANZARA</span><strong>Zakkum Bahçesi</strong></div>
-                    <div class="capsule-spec-item"><span>YATAK</span><strong>Queen Size Yatak</strong></div>
-                  </div>
+                  <span style="color:var(--primary); font-size:0.75rem; letter-spacing:0.2em; font-weight:800; text-transform:uppercase; display:block; margin-bottom:0.6rem;">SÜİT 02</span>
+                  <h3>Zakkumlu Bahçe Odası</h3>
+                  <p>Pembe zakkum çiçeklerinin yanında, sakin ve ferah bir konaklama.</p>
                 </div>
-
-                <div class="suite-action-strip">
-                  <span class="rate-guarantee-tag">✦ En İyi Fiyat Garantisi</span>
-                  <button class="btn-vision-gold-cta" data-suite-name="Zakkumlu Bahçe Odası">
-                    <span>Hemen Rezerve Et ↗</span>
-                  </button>
+                <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-glass); padding-top:1.5rem;">
+                  <span style="color:#fff3cf; font-weight:700;">24 m² · Zakkum Bahçesi</span>
+                  <button class="btn-gold-action" data-suite-name="Zakkumlu Bahçe Odası"><span>Rezerve Et ↗</span></button>
                 </div>
               </div>
             </article>
           
         </div>
-
       </div>
     </section>
 
-    <!-- 24-HOUR RITUALS (ATMOSPHERE CANVAS) -->
-    <section class="v2-liquid-section" id="rituals">
+    <!-- RITUALS -->
+    <section class="v2-section" id="rituals" style="background: rgba(3, 8, 18, 0.7);">
       <div class="container-liquid">
-        <div class="section-mast-center">
-          <div class="pill-section-kicker">24 SAAT SELİMİYE</div>
-          <h2 class="section-title-monument">Koyda Zamanın Akışı</h2>
-          <p class="section-desc-subtle">Sabahın durgunluğundan gece yıldızlarına, acele etmeden yaşanan bir kıyı ritmi.</p>
+        <div class="section-center">
+          <div class="hero-eyebrow-chip">24 SAAT SELİMİYE</div>
+          <h2>Koyda Günün Akışı</h2>
         </div>
-
-        <div class="rituals-dynamic-grid">
+        <div class="rituals-grid">
           
-            <div class="ritual-glass-card">
-              <span class="ritual-time-badge">08:30 - 11:00</span>
+            <div class="ritual-card-glass">
+              <span style="color:var(--primary); font-size:0.78rem; font-weight:800; letter-spacing:0.12em; display:block; margin-bottom:0.8rem;">08:30 - 11:00</span>
               <h4>Kıyıda Renkli Ege Kahvaltısı</h4>
-              <p>El yapımı reçeller, sıcacık pişiler ve zeytinyağlı taze mezeler.</p>
+              <p style="color:#94a3b8; font-size:0.96rem; line-height:1.75;">El yapımı reçeller, sıcacık pişiler ve zeytinyağlı taze mezeler.</p>
             </div>
           
-            <div class="ritual-glass-card">
-              <span class="ritual-time-badge">11:30 - 18:00</span>
+            <div class="ritual-card-glass">
+              <span style="color:var(--primary); font-size:0.78rem; font-weight:800; letter-spacing:0.12em; display:block; margin-bottom:0.8rem;">11:30 - 18:00</span>
               <h4>Özel Plajda Şezlong &amp; Deniz</h4>
-              <p>Kapıdan çıkıp doğrudan denize girin, ücretsiz şezlongunuzda dinlenin.</p>
+              <p style="color:#94a3b8; font-size:0.96rem; line-height:1.75;">Kapıdan çıkıp doğrudan denize girin, ücretsiz şezlongunuzda dinlenin.</p>
             </div>
           
-            <div class="ritual-glass-card">
-              <span class="ritual-time-badge">19:30 - 23:00</span>
+            <div class="ritual-card-glass">
+              <span style="color:var(--primary); font-size:0.78rem; font-weight:800; letter-spacing:0.12em; display:block; margin-bottom:0.8rem;">19:30 - 23:00</span>
               <h4>Zakkumlar Altında Şarap &amp; Sohbet</h4>
-              <p>Dalga sesleri eşliğinde mum ışığında samimi sohbetler ve Ege tatları.</p>
+              <p style="color:#94a3b8; font-size:0.96rem; line-height:1.75;">Dalga sesleri eşliğinde mum ışığında samimi sohbetler ve Ege tatları.</p>
             </div>
           
         </div>
       </div>
     </section>
 
-    <!-- GASTRONOMY THEATER -->
-    <section class="v2-liquid-section" id="gastronomy" style="background: rgba(2, 8, 16, 0.65);">
+    <!-- VIP CONCIERGE -->
+    <section class="v2-section" id="concierge">
       <div class="container-liquid">
-        <div class="gastronomy-theater-layout">
-          
-          <div class="degustation-panel-glass">
-            <div class="degustation-top-header">
-              <span class="pill-section-kicker" style="margin-bottom:0.5rem;">TOPRAKTAN & DENİZDEN</span>
-              <h3>Tadım Sofrası & Kıyı Masası</h3>
-            </div>
-            <div class="degustation-courses-list">
-              <div class="course-item-box">
-                <span class="num-roman-gold">I.</span>
-                <div class="course-info">
-                  <strong>Organik Köy Kahvaltısı</strong>
-                  <p>Bozburun çam balı, taze keçi peynirleri ve taş fırın sıcak ekmekleri.</p>
-                </div>
-              </div>
-              <div class="course-item-box">
-                <span class="num-roman-gold">II.</span>
-                <div class="course-info">
-                  <strong>Erken Hasat Zeytinyağlılar</strong>
-                  <p>Bahçemizden toplanan şifalı Ege otları ve soğuk sıkım zeytinyağı.</p>
-                </div>
-              </div>
-              <div class="course-item-box">
-                <span class="num-roman-gold">III.</span>
-                <div class="course-info">
-                  <strong>Günlük Kıyı Avı & Izgara</strong>
-                  <p>Selimiye balıkçılarından günlük taze deniz balıkları ve ızgara kalamar.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="video-theater-frame">
-            <video autoplay muted loop playsinline preload="metadata" poster="./media/dining.jpg">
-              <source src="./media/decor.mp4" type="video/mp4">
-            </video>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- VIP CONCIERGE TERMINAL -->
-    <section class="v2-liquid-section" id="concierge">
-      <div class="container-liquid">
-        <div class="vip-terminal-deck">
-          <div class="vip-terminal-split">
-            
-            <div class="vip-terminal-left">
-              <span class="pill-section-kicker">VIP DANIŞMA</span>
-              <h2>Doğrudan<br><em class="hero-highlight-italic">Rezervasyon Terminali</em></h2>
-              <p style="color:#94a3b8; font-size:0.98rem; line-height:1.85;">
-                Tarihlerinizi iletin; en avantajlı doğrudan fiyatlandırma ve kişisel transfer seçenekleriyle size anında dönüş yapalım.
+        <div class="vip-terminal-box">
+          <div class="vip-grid-2col">
+            <div>
+              <div class="hero-eyebrow-chip">DOĞRUDAN REZERVASYON</div>
+              <h2>Zakkum Frida Pansiyon</h2>
+              <p style="color:#94a3b8; font-size:1.05rem; line-height:1.85; margin-bottom:2rem;">
+                Tarihlerinizi iletin; en avantajlı doğrudan fiyat teklifini WhatsApp üzerinden anında paylaşalım.
               </p>
-
-              <div class="vip-lines-column">
-                <div class="vip-line-box">
-                  <strong>KONUM</strong>
-                  <span>Sığliman Sokak No:21, Selimiye Mahallesi, 48710 Marmaris/Muğla</span>
-                </div>
-                <div class="vip-line-box">
-                  <strong>RESEPSİYON TELEFON</strong>
-                  <a href="tel:05326701680">0532 670 16 80</a>
-                </div>
-                <div class="vip-line-box">
-                  <strong>WHATSAPP CANLI DANIŞMA</strong>
-                  <a href="https://wa.me/05326701680?text=Merhaba%20Zakkum%20Frida%20Pansiyon,%20m%C3%BCsaitlik%20bilgisi%20almak%20istiyorum." target="_blank" style="color:var(--accent-primary);">+90 Selimiye VIP Concierge ↗</a>
-                </div>
+              <div style="display:flex; flex-direction:column; gap:1.25rem;">
+                <div><strong style="color:var(--primary); font-size:0.75rem; text-transform:uppercase;">Açık Adres</strong><p style="color:#fff;">Sığliman Sokak No:21, Selimiye Mahallesi, 48710 Marmaris/Muğla</p></div>
+                <div><strong style="color:var(--primary); font-size:0.75rem; text-transform:uppercase;">Resepsiyon</strong><p><a href="tel:05326701680" style="color:#fff; text-decoration:none;">0532 670 16 80</a></p></div>
+                <div><strong style="color:var(--primary); font-size:0.75rem; text-transform:uppercase;">WhatsApp Canlı</strong><p><a href="https://wa.me/05326701680?text=Merhaba%20Zakkum%20Frida%20Pansiyon,%20rezervasyon%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" style="color:var(--primary); font-weight:700;">+90 Selimiye VIP Concierge ↗</a></p></div>
               </div>
             </div>
 
-            <div class="vip-form-box">
-              <h3 style="font-family:var(--font-heading); color:#fff; font-size:1.45rem; margin-bottom:1.35rem;">Müsaitlik Talebi Gönder</h3>
+            <div class="vip-form-inner">
+              <h3 style="font-family:var(--font-heading); font-size:1.4rem; color:#fff; margin-bottom:1.5rem;">Müsaitlik Talebi Gönder</h3>
               <form id="v2ContactForm" onsubmit="return false;">
-                <div class="form-2inputs-row">
-                  <div class="form-input-block">
+                <div class="form-duo">
+                  <div class="form-field">
                     <label>Adınız Soyadınız *</label>
                     <input type="text" id="v2Name" placeholder="Adınız Soyadınız" required>
                   </div>
-                  <div class="form-input-block">
-                    <label>Telefon Numarası *</label>
+                  <div class="form-field">
+                    <label>Telefon *</label>
                     <input type="tel" id="v2Phone" placeholder="05XX XXX XX XX" required>
                   </div>
                 </div>
-
-                <div class="form-2inputs-row">
-                  <div class="form-input-block">
+                <div class="form-duo">
+                  <div class="form-field">
                     <label>Giriş Tarihi *</label>
                     <input type="date" id="v2Checkin" required>
                   </div>
-                  <div class="form-input-block">
+                  <div class="form-field">
                     <label>Çıkış Tarihi *</label>
                     <input type="date" id="v2Checkout" required>
                   </div>
                 </div>
-
-                <div class="form-2inputs-row">
-                  <div class="form-input-block">
+                <div class="form-duo">
+                  <div class="form-field">
                     <label>Oda Tercihi</label>
                     <select id="v2Suite">
-                      <option value="Tüm Koleksiyon">Tüm Odaları Göster</option>
+                      <option value="Tüm Odalar">Tüm Odaları Göster</option>
                       <option value="Frida Deniz Manzaralı Oda">Frida Deniz Manzaralı Oda</option><option value="Zakkumlu Bahçe Odası">Zakkumlu Bahçe Odası</option>
                     </select>
                   </div>
-                  <div class="form-input-block">
-                    <label>Misafir Sayısı</label>
+                  <div class="form-field">
+                    <label>Misafir</label>
                     <select id="v2Guests">
                       <option value="2 Yetişkin">2 Yetişkin</option>
                       <option value="1 Yetişkin">1 Yetişkin</option>
-                      <option value="3 Yetişkin">3 Yetişkin</option>
-                      <option value="4+ Yetişkin">4+ Yetişkin / Aile</option>
+                      <option value="3+ Yetişkin">3+ Yetişkin</option>
                     </select>
                   </div>
                 </div>
-
-                <div class="form-input-block" style="margin-bottom:1.6rem;">
-                  <label>Özel Talebiniz</label>
-                  <textarea id="v2Notes" rows="3" placeholder="Örn: Balayı karşılama ikramı, tekne transferi, geç giriş..."></textarea>
+                <div class="form-field" style="margin-bottom:1.5rem;">
+                  <label>Özel İstekler</label>
+                  <textarea id="v2Notes" rows="3" placeholder="Örn: Balayı ikramı, tekne transferi..."></textarea>
                 </div>
-
-                <button type="button" class="btn-dock-find" id="v2SubmitBtn" style="width:100%; justify-content:center; height:50px;">
+                <button type="button" class="btn-gold-action" id="v2SubmitBtn" style="width:100%; justify-content:center; height:50px;">
                   <span>Talebi İlet & Müsaitlik Al ↗</span>
                 </button>
               </form>
             </div>
-
           </div>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- FOOTER -->
-  <footer class="v2-liquid-footer">
+  <footer class="liquid-footer">
     <div class="container-liquid">
-      <div class="footer-panoramic-3col">
+      <div class="footer-3col">
         <div>
-          <div class="footer-brand-title">ZAKKUM FRIDA PANSIYON</div>
-          <p style="color:#94a3b8; font-size:0.92rem; line-height:1.75; margin-bottom:1.2rem;">
-            Zakkum çiçekleri, Frida&#039;nın renkleri ve denize sıfır bohem bir dünya
-          </p>
-          <small style="color:#64748b; display:block;">Sığliman Sokak No:21, Selimiye Mahallesi, 48710 Marmaris/Muğla</small>
+          <div style="font-family:var(--font-heading); font-size:1.4rem; color:#fff; margin-bottom:0.8rem;">ZAKKUM FRIDA PANSIYON</div>
+          <p style="color:#94a3b8; font-size:0.92rem; line-height:1.75; margin-bottom:1rem;">Zakkum çiçekleri, Frida&#039;nın renkleri ve denize sıfır bohem bir dünya</p>
+          <small style="color:#64748b;">Sığliman Sokak No:21, Selimiye Mahallesi, 48710 Marmaris/Muğla</small>
         </div>
-
-        <div class="footer-nav-column">
-          <strong>Hızlı Bağlantılar</strong>
-          <a href="#suites">Koleksiyon Süitleri</a>
-          <a href="#rituals">Koy Atmosferi</a>
-          <a href="#gastronomy">Gastronomi & İskele</a>
-          <a href="#concierge">VIP Danışma</a>
+        <div style="display:flex; flex-direction:column; gap:0.75rem;">
+          <strong style="color:var(--primary); font-size:0.8rem; text-transform:uppercase;">Gezinme</strong>
+          <a href="#suites" style="color:#94a3b8; text-decoration:none;">Koleksiyon Süitleri</a>
+          <a href="#rituals" style="color:#94a3b8; text-decoration:none;">Koy Ritüelleri</a>
+          <a href="#concierge" style="color:#94a3b8; text-decoration:none;">VIP Danışma</a>
         </div>
-
-        <div class="footer-nav-column">
-          <strong>İletişim & Rezervasyon</strong>
-          <a href="tel:05326701680">📞 0532 670 16 80</a>
-          <a href="https://wa.me/05326701680" target="_blank">💬 WhatsApp Canlı Hattı</a>
-          <span style="color:#64748b; font-size:0.84rem; margin-top:0.5rem;">7/24 Misafir Karşılama</span>
+        <div style="display:flex; flex-direction:column; gap:0.75rem;">
+          <strong style="color:var(--primary); font-size:0.8rem; text-transform:uppercase;">İletişim</strong>
+          <a href="tel:05326701680" style="color:#94a3b8; text-decoration:none;">📞 0532 670 16 80</a>
+          <a href="https://wa.me/05326701680" target="_blank" style="color:#94a3b8; text-decoration:none;">💬 WhatsApp Canlı Hattı</a>
         </div>
-      </div>
-
-      <div class="footer-bottom-bar">
-        <span>© 2026 Zakkum Frida Pansiyon. Tüm Hakları Saklıdır.</span>
-        <span>Selimiye Koyu · Marmaris / Muğla</span>
       </div>
     </div>
   </footer>

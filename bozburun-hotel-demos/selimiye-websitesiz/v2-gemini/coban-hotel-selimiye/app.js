@@ -1,15 +1,4 @@
-/**
- * SELİMİYE V2 NEXT-GEN LIQUID GLASS ENGINE
- */
 document.addEventListener('DOMContentLoaded', () => {
-  const header = document.getElementById('v2Header');
-  if (header) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 40) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
-    }, { passive: true });
-  }
-
   document.querySelectorAll('[data-book]').forEach(btn => {
     btn.addEventListener('click', () => {
       document.getElementById('concierge')?.scrollIntoView({ behavior: 'smooth' });

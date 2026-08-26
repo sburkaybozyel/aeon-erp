@@ -46,18 +46,16 @@ function syncUniqueMedia(hotel, hotelDir) {
 }
 
 // ============================================================================
-// REVOLUTIONARY 2026 LIQUID GLASS CSS (ZERO RESEMBLANCE TO OLD TEMPLATES)
+// TRUE FULL-BLEED CINEMATIC LIQUID GLASS CSS
 // ============================================================================
-function generateNextGenLiquidCSS(hotel) {
+function generateTrueLiquidCSS(hotel) {
   const theme = hotel.theme || {};
   const primary = theme.primary || '#00f2fe';
   const secondary = theme.secondary || '#d4af37';
-  const dark = theme.dark || '#02060e';
-  const card = theme.card || 'rgba(8, 22, 40, 0.65)';
-  const accentLight = theme.accent || '#fff3cf';
+  const dark = '#040914';
 
   return `/* ==========================================================================
-   SELİMİYE HOTELS — 2026 NEXT-GEN LIQUID GLASS ARCHITECTURE
+   SELİMİYE HOTELS — TRUE FULL-BLEED LIQUID GLASS
    Hotel: ${hotel.name.toUpperCase()}
    ========================================================================== */
 
@@ -65,897 +63,353 @@ function generateNextGenLiquidCSS(hotel) {
 
 :root {
   --bg-deep: ${dark};
-  --bg-liquid-surface: color-mix(in srgb, ${dark} 80%, #ffffff 20%);
-  --bg-glass-card: ${card};
-  --bg-glass-heavy: color-mix(in srgb, ${dark} 88%, #000000 12%);
-  --bg-glass-pill: rgba(255, 255, 255, 0.08);
-
-  --accent-primary: ${primary};
-  --accent-secondary: ${secondary};
-  --accent-light: ${accentLight};
-  --glow-primary: ${primary}55;
+  --primary: ${primary};
+  --secondary: ${secondary};
+  --glow-primary: ${primary}66;
   --glow-secondary: ${secondary}55;
 
-  --gradient-neon: linear-gradient(135deg, ${primary} 0%, #4facfe 50%, ${secondary} 100%);
-  --gradient-gold: linear-gradient(135deg, #fff3cf 0%, #e2c174 35%, #c59b3f 70%, #8c6721 100%);
-  --gradient-liquid-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%);
+  --glass-nav: rgba(6, 15, 28, 0.72);
+  --glass-card: rgba(8, 20, 38, 0.65);
+  --glass-dock: rgba(5, 14, 26, 0.78);
+  --glass-pill: rgba(255, 255, 255, 0.1);
+
+  --border-glass: rgba(255, 255, 255, 0.2);
+  --border-glass-bright: rgba(255, 255, 255, 0.35);
+  --border-accent: ${primary}88;
+  --border-gold: rgba(212, 175, 55, 0.6);
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-heading: 'Cinzel', 'Playfair Display', Georgia, serif;
+  --font-heading: 'Cinzel', serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
-  --border-glass: rgba(255, 255, 255, 0.14);
-  --border-glass-bright: rgba(255, 255, 255, 0.28);
-  --border-accent: ${primary}77;
-  --border-gold: rgba(212, 175, 55, 0.5);
+  --shadow-liquid: 0 30px 80px -10px rgba(0, 0, 0, 0.95), 0 0 40px var(--glow-primary);
+  --shadow-gold: 0 0 35px rgba(212, 175, 55, 0.45);
+  --shadow-inset-gloss: inset 0 1px 1px rgba(255, 255, 255, 0.45), inset 0 -1px 1px rgba(0, 0, 0, 0.5);
 
-  --shadow-liquid-deep: 0 35px 90px -15px rgba(0, 0, 0, 0.95), 0 0 45px var(--glow-primary);
-  --shadow-card-gloss: inset 0 1px 1px rgba(255, 255, 255, 0.35), inset 0 -1px 1px rgba(0, 0, 0, 0.5), 0 20px 60px rgba(0, 0, 0, 0.8);
-  --shadow-gold-glow: 0 0 45px rgba(212, 175, 55, 0.45);
-
-  --blur-ultra: blur(36px) saturate(220%);
-  --blur-medium: blur(20px) saturate(180%);
-
-  --radius-xs: 8px;
-  --radius-sm: 14px;
-  --radius-md: 24px;
-  --radius-lg: 36px;
+  --blur-glass: blur(28px) saturate(200%);
+  --radius-lg: 32px;
   --radius-full: 9999px;
-
-  --transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; background: var(--bg-deep); color: #f8fafc; }
+body { font-family: var(--font-sans); background: var(--bg-deep); color: #f8fafc; line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-  background-color: var(--bg-deep);
-  color: #f8fafc;
-}
+.container-liquid { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 2.5rem; position: relative; z-index: 2; }
 
-body.v2-liquid-nextgen {
-  font-family: var(--font-sans);
-  background-color: var(--bg-deep);
-  color: #f8fafc;
-  line-height: 1.7;
-  overflow-x: hidden;
+/* Floating VisionOS Glass Navigation */
+.liquid-topbar { position: fixed; top: 1.5rem; left: 0; right: 0; z-index: 100; transition: var(--transition); }
+.liquid-nav-island { max-width: 1360px; margin: 0 auto; padding: 0.75rem 2.25rem; display: flex; align-items: center; justify-content: space-between; background: var(--glass-nav); backdrop-filter: var(--blur-glass); -webkit-backdrop-filter: var(--blur-glass); border: 1px solid var(--border-glass-bright); border-radius: var(--radius-full); box-shadow: var(--shadow-liquid), var(--shadow-inset-gloss); }
+
+.brand-unit { display: flex; align-items: center; gap: 1.25rem; text-decoration: none; }
+.brand-medallion { width: 58px; height: 58px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 25px var(--glow-primary); transition: var(--transition); }
+.brand-medallion svg { width: 100%; height: 100%; display: block; }
+.brand-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; letter-spacing: 0.12em; color: #fff; line-height: 1.2; }
+.brand-sub { font-size: 0.7rem; letter-spacing: 0.22em; color: var(--primary); text-transform: uppercase; font-weight: 800; display: block; }
+
+.nav-links { display: flex; align-items: center; gap: 2.25rem; }
+.nav-link { font-size: 0.94rem; color: #cbd5e1; text-decoration: none; font-weight: 600; transition: color .2s; }
+.nav-link:hover { color: #fff; }
+
+.btn-gold-action { background: linear-gradient(135deg, #fff3cf 0%, #d4af37 100%); color: #040810; border: none; font-size: 0.88rem; font-weight: 800; padding: 0.75rem 1.8rem; border-radius: var(--radius-full); cursor: pointer; box-shadow: var(--shadow-gold); transition: var(--transition); display: inline-flex; align-items: center; gap: 6px; }
+.btn-gold-action:hover { transform: translateY(-2px); box-shadow: 0 0 45px rgba(212, 175, 55, 0.65); }
+
+/* ============================================================================
+   FULL-BLEED CINEMATIC HERO
+   ============================================================================ */
+.hero-fullbleed-cinema {
+  min-height: 100vh;
   position: relative;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Ambient Liquid Plasma Mesh */
-.ambient-liquid-plasma {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 12rem 0 6rem;
+  background: linear-gradient(180deg, rgba(4, 9, 20, 0.45) 0%, rgba(4, 9, 20, 0.88) 100%), url('./media/hero.jpg') center/cover no-repeat fixed;
   overflow: hidden;
 }
-.plasma-orb {
+.hero-fullbleed-cinema::before {
+  content: '';
   position: absolute;
-  border-radius: 50%;
-  filter: blur(140px);
-  opacity: 0.48;
-  animation: plasmaFloat 24s ease-in-out infinite alternate;
-}
-.plasma-1 {
-  top: -12vh;
-  left: 12vw;
-  width: 65vw;
-  height: 65vw;
-  background: radial-gradient(circle, var(--glow-primary) 0%, transparent 70%);
-}
-.plasma-2 {
-  top: 38vh;
-  right: -12vw;
-  width: 58vw;
-  height: 58vw;
-  background: radial-gradient(circle, var(--glow-secondary) 0%, transparent 70%);
-  animation-delay: -8s;
-}
-.plasma-3 {
-  bottom: -15vh;
-  left: 25vw;
-  width: 70vw;
-  height: 70vw;
-  background: radial-gradient(circle, var(--glow-primary) 0%, transparent 70%);
-  animation-delay: -16s;
-}
-@keyframes plasmaFloat {
-  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  50% { transform: translate(70px, -50px) scale(1.1) rotate(180deg); }
-  100% { transform: translate(-50px, 70px) scale(0.92) rotate(360deg); }
+  inset: 0;
+  background: radial-gradient(circle at 20% 40%, var(--glow-primary) 0%, transparent 50%), radial-gradient(circle at 80% 60%, var(--glow-secondary) 0%, transparent 50%);
+  pointer-events: none;
+  opacity: 0.5;
 }
 
-.container-liquid {
+.hero-cinema-content {
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2.5rem;
   position: relative;
   z-index: 2;
 }
-
-/* ============================================================================
-   VISIONOS FLOATING GLASS CAPSULE NAVIGATION
-   ============================================================================ */
-.v2-vision-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  padding: 1.25rem 0;
-  transition: var(--transition);
-}
-.v2-vision-header.scrolled {
-  padding: 0.65rem 0;
-}
-.vision-capsule-island {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0.75rem 2.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--bg-glass-heavy);
-  backdrop-filter: var(--blur-ultra);
-  border: 1px solid var(--border-glass-bright);
-  border-radius: var(--radius-full);
-  box-shadow: var(--shadow-liquid-deep), var(--shadow-card-gloss);
-}
-
-.brand-vision-unit {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  text-decoration: none;
-}
-.brand-vision-medallion {
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 28px var(--glow-primary), 0 0 15px rgba(212, 175, 55, 0.4);
-  transition: var(--transition);
-}
-.brand-vision-medallion:hover {
-  transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 0 45px var(--glow-primary);
-}
-.brand-vision-medallion svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.brand-title-stack {
-  display: flex;
-  flex-direction: column;
-}
-.brand-title-bold {
-  font-family: var(--font-heading);
-  font-size: 1.32rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  color: #ffffff;
-  line-height: 1.2;
-}
-.brand-sub-badge {
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
-  background: var(--gradient-gold);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-transform: uppercase;
-  font-weight: 800;
-}
-
-.vision-nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2.25rem;
-}
-.v-nav-item {
-  font-size: 0.94rem;
-  color: #cbd5e1;
-  text-decoration: none;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  transition: var(--transition);
-  position: relative;
-  padding: 0.4rem 0;
-}
-.v-nav-item:hover {
-  color: #ffffff;
-}
-.v-nav-item::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--gradient-neon);
-  transition: width 0.35s ease;
-  border-radius: var(--radius-full);
-}
-.v-nav-item:hover::after {
-  width: 100%;
-}
-
-.vision-actions-group {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-}
-.live-weather-capsule {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-accent);
-  padding: 0.5rem 1.2rem;
-  border-radius: var(--radius-full);
-  color: var(--accent-primary);
-  font-size: 0.82rem;
-  font-weight: 800;
-}
-.live-pulse-beacon {
-  width: 8px;
-  height: 8px;
-  background: var(--accent-primary);
-  border-radius: 50%;
-  box-shadow: 0 0 14px var(--accent-primary);
-  animation: pulseBeacon 2s infinite;
-}
-@keyframes pulseBeacon {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.35; transform: scale(0.7); }
-}
-
-.btn-vision-gold-cta {
-  background: var(--gradient-gold);
-  color: #040810;
-  border: none;
-  font-family: var(--font-sans);
-  font-size: 0.88rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  padding: 0.75rem 1.8rem;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  box-shadow: var(--shadow-gold-glow);
-  transition: var(--transition);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.btn-vision-gold-cta:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 0 45px rgba(212, 175, 55, 0.65);
-}
-
-/* ============================================================================
-   HERO: IMMERSIVE FULL-VIEWPORT LIQUID CINEMA
-   ============================================================================ */
-.hero-nextgen-canvas {
-  position: relative;
-  min-height: 94vh;
-  display: flex;
-  align-items: center;
-  padding: 6.5rem 0 5.5rem;
-  overflow: hidden;
-}
-.hero-canvas-grid {
-  display: grid;
-  grid-template-columns: 1.18fr 1fr;
-  gap: 5.5rem;
-  align-items: center;
-}
-
-.hero-editorial-column {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-}
-.hero-kicker-glow {
+.hero-eyebrow-chip {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(8, 26, 46, 0.9);
-  backdrop-filter: var(--blur-medium);
+  background: rgba(5, 14, 26, 0.8);
+  backdrop-filter: var(--blur-glass);
   border: 1px solid var(--border-accent);
-  padding: 0.58rem 1.6rem;
+  padding: 0.55rem 1.6rem;
   border-radius: var(--radius-full);
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.16em;
-  color: #ffffff;
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow-liquid-deep);
+  color: var(--primary);
+  margin-bottom: 1.8rem;
+  box-shadow: var(--shadow-liquid);
 }
-.badge-gold-sparkle {
-  background: var(--gradient-gold);
-  color: #000;
-  font-size: 0.72rem;
-  font-weight: 900;
-  padding: 2px 10px;
-  border-radius: var(--radius-full);
-}
-
-.hero-monumental-h1 {
+.hero-cinema-h1 {
   font-family: var(--font-heading);
-  font-size: clamp(2.8rem, 5.4vw, 4.8rem);
+  font-size: clamp(3.2rem, 6.5vw, 5.8rem);
   font-weight: 800;
-  line-height: 1.12;
-  color: #ffffff;
-  margin-bottom: 1.75rem;
-  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.98);
+  line-height: 1.08;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.95);
 }
-.hero-highlight-italic {
+.hero-cinema-h1 em {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 400;
-  background: var(--gradient-gold);
+  background: linear-gradient(135deg, #fff3cf 0%, #d4af37 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.hero-narrative-lead {
-  font-size: 1.18rem;
-  color: #cbd5e1;
-  line-height: 1.85;
-  margin-bottom: 2.85rem;
-  max-width: 650px;
+.hero-cinema-p {
+  font-size: 1.25rem;
+  color: #e2e8f0;
+  max-width: 720px;
+  line-height: 1.8;
+  margin-bottom: 3.5rem;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.9);
 }
 
-/* Floating Glass Hero Booking Island */
-.hero-booking-dock-island {
-  width: 100%;
-  background: var(--bg-glass-card);
-  backdrop-filter: var(--blur-ultra);
-  border: 1.5px solid var(--border-accent);
+/* Floating Glass Dock */
+.floating-glass-dock {
+  background: var(--glass-dock);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border: 1.5px solid var(--border-glass-bright);
   border-radius: var(--radius-lg);
-  padding: 1.85rem 2.25rem;
-  box-shadow: var(--shadow-liquid-deep), var(--shadow-card-gloss);
+  padding: 2rem 2.5rem;
+  box-shadow: var(--shadow-liquid), var(--shadow-inset-gloss);
 }
-.dock-4fields-grid {
+.dock-form-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr) auto;
-  gap: 1.35rem;
+  gap: 1.5rem;
   align-items: center;
 }
-.dock-cell-input {
+.dock-field {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
 }
-.dock-cell-input label {
+.dock-field label {
   font-size: 0.74rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
-  color: var(--accent-primary);
+  letter-spacing: 0.14em;
+  color: var(--primary);
   text-transform: uppercase;
 }
-.dock-cell-input input, .dock-cell-input select {
-  background: var(--bg-glass-pill);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: var(--radius-sm);
-  padding: 0.8rem 1rem;
-  color: #ffffff;
+.dock-field input, .dock-field select {
+  background: var(--glass-pill);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  padding: 0.85rem 1.1rem;
+  color: #fff;
   font-family: var(--font-sans);
-  font-size: 0.94rem;
+  font-size: 0.96rem;
   outline: none;
   transition: var(--transition);
 }
-.dock-cell-input input:focus, .dock-cell-input select:focus {
-  border-color: var(--accent-primary);
+.dock-field input:focus, .dock-field select:focus {
+  border-color: var(--primary);
   box-shadow: 0 0 25px var(--glow-primary);
 }
 
-.btn-dock-find {
-  background: var(--gradient-gold);
-  color: #040810;
-  border: none;
-  font-family: var(--font-sans);
-  font-size: 0.94rem;
-  font-weight: 800;
-  padding: 0.9rem 1.8rem;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: var(--shadow-gold-glow);
-  transition: var(--transition);
-  height: 52px;
-}
-.btn-dock-find:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 40px rgba(212, 175, 55, 0.7);
-}
-
-/* Hero Right 3D Visual Theater */
-.hero-stage-theater {
-  position: relative;
-}
-.theater-frame-main {
-  position: relative;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  border: 1.5px solid var(--border-accent);
-  box-shadow: var(--shadow-liquid-deep), var(--shadow-card-gloss);
-  height: 520px;
-}
-.theater-frame-main img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.badge-theater-floating {
-  position: absolute;
-  bottom: -1.75rem;
-  left: -1.75rem;
-  background: rgba(6, 18, 34, 0.94);
-  backdrop-filter: var(--blur-ultra);
-  border: 1px solid var(--border-glass-bright);
-  padding: 1.45rem 2rem;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-liquid-deep);
-  max-width: 320px;
-}
-.badge-theater-floating strong {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
-  color: #ffffff;
-  margin-bottom: 2px;
-}
-.badge-theater-floating span {
-  font-size: 0.85rem;
-  color: var(--accent-primary);
-}
-
 /* ============================================================================
-   SUITES: PANORAMIC LOOKBOOK (EXPANSIVE 3D GLASS CARDS)
+   SUITES: 3D PANORAMIC LOOKBOOK
    ============================================================================ */
-.v2-liquid-section {
-  padding: 8.5rem 0;
+.v2-section {
+  padding: 9rem 0;
   position: relative;
   z-index: 2;
 }
-.section-mast-center {
+.section-center {
   text-align: center;
-  max-width: 880px;
+  max-width: 860px;
   margin: 0 auto 5.5rem;
 }
-.pill-section-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-accent);
-  padding: 0.48rem 1.4rem;
-  border-radius: var(--radius-full);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  color: var(--accent-primary);
-  margin-bottom: 1.5rem;
-}
-.section-title-monument {
+.section-center h2 {
   font-family: var(--font-heading);
   font-size: clamp(2.4rem, 4.6vw, 3.6rem);
   font-weight: 800;
-  line-height: 1.18;
-  color: #ffffff;
-  margin-bottom: 1.4rem;
-}
-.section-desc-subtle {
-  font-size: 1.12rem;
-  color: #94a3b8;
-  line-height: 1.85;
+  color: #fff;
+  margin-bottom: 1.2rem;
 }
 
-.suites-lookbook-stack {
+.suites-stack {
   display: flex;
   flex-direction: column;
-  gap: 3.75rem;
+  gap: 4rem;
 }
-.suite-lookbook-card-3d {
+.suite-card-liquid {
   display: grid;
-  grid-template-columns: 1.18fr 1fr;
-  background: var(--bg-glass-card);
-  backdrop-filter: var(--blur-ultra);
+  grid-template-columns: 1.2fr 1fr;
+  background: var(--glass-card);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
   border: 1px solid var(--border-glass-bright);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-liquid-deep), var(--shadow-card-gloss);
+  box-shadow: var(--shadow-liquid), var(--shadow-inset-gloss);
   transition: var(--transition);
 }
-.suite-lookbook-card-3d.reverse {
-  grid-template-columns: 1fr 1.18fr;
+.suite-card-liquid.reverse {
+  grid-template-columns: 1fr 1.2fr;
 }
-.suite-lookbook-card-3d:hover {
-  border-color: var(--accent-primary);
+.suite-card-liquid:hover {
+  border-color: var(--primary);
   transform: translateY(-8px);
-  box-shadow: 0 40px 100px -15px rgba(0, 0, 0, 0.98), 0 0 55px var(--glow-primary);
 }
-
-.suite-photo-wrapper {
+.suite-media-wrap {
   position: relative;
-  min-height: 440px;
-  overflow: hidden;
+  min-height: 460px;
 }
-.suite-photo-wrapper img {
+.suite-media-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.8s ease;
 }
-.suite-lookbook-card-3d:hover .suite-photo-wrapper img {
-  transform: scale(1.06);
-}
-.suite-floating-ribbon {
-  position: absolute;
-  top: 1.75rem;
-  left: 1.75rem;
-  background: rgba(2, 7, 14, 0.9);
-  backdrop-filter: var(--blur-medium);
-  border: 1px solid var(--border-gold);
-  color: var(--accent-light);
-  font-size: 0.78rem;
-  font-weight: 800;
-  padding: 6px 18px;
-  border-radius: var(--radius-full);
-}
-
-.suite-meta-wrapper {
-  padding: 3.75rem;
+.suite-content-wrap {
+  padding: 4rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.suite-serial-kicker {
-  font-size: 0.76rem;
-  letter-spacing: 0.22em;
-  color: var(--accent-primary);
-  text-transform: uppercase;
-  font-weight: 800;
-  margin-bottom: 0.65rem;
-  display: block;
-}
-.suite-title-large {
+.suite-content-wrap h3 {
   font-family: var(--font-heading);
-  font-size: 2.1rem;
-  color: #ffffff;
+  font-size: 2.2rem;
+  color: #fff;
   margin-bottom: 1.2rem;
 }
-.suite-narrative-desc {
-  font-size: 1rem;
+.suite-content-wrap p {
   color: #94a3b8;
+  font-size: 1.05rem;
   line-height: 1.8;
-  margin-bottom: 2.4rem;
-}
-
-.suite-specs-3capsules {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.35rem;
-  margin-bottom: 2.4rem;
-  padding: 1.35rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-glass);
-  border-radius: var(--radius-sm);
-}
-.capsule-spec-item span {
-  display: block;
-  font-size: 0.72rem;
-  color: #64748b;
-  text-transform: uppercase;
-  font-weight: 800;
-  margin-bottom: 2px;
-}
-.capsule-spec-item strong {
-  font-size: 0.96rem;
-  color: #ffffff;
-}
-
-.suite-action-strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding-top: 1.85rem;
-}
-.rate-guarantee-tag {
-  font-size: 0.86rem;
-  color: var(--accent-light);
-  font-weight: 700;
+  margin-bottom: 2.5rem;
 }
 
 /* ============================================================================
-   24-HOUR RITUALS (DYNAMIC DAY-TO-NIGHT ATMOSPHERE CANVAS)
+   RITUALS & GASTRONOMY
    ============================================================================ */
-.rituals-dynamic-grid {
+.rituals-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2.5rem;
 }
-.ritual-glass-card {
-  background: var(--bg-glass-card);
-  backdrop-filter: var(--blur-ultra);
+.ritual-card-glass {
+  background: var(--glass-card);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
   border: 1px solid var(--border-glass-bright);
-  border-radius: var(--radius-lg);
-  padding: 3rem;
-  box-shadow: var(--shadow-liquid-deep), var(--shadow-card-gloss);
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-.ritual-glass-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3.5px;
-  background: var(--gradient-neon);
-  opacity: 0.85;
-}
-.ritual-glass-card:hover {
-  border-color: var(--accent-primary);
-  transform: translateY(-8px);
-  box-shadow: 0 0 50px var(--glow-primary);
-}
-.ritual-time-badge {
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  color: var(--accent-primary);
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  display: block;
-}
-.ritual-glass-card h4 {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  color: #ffffff;
-  margin-bottom: 0.9rem;
-}
-.ritual-glass-card p {
-  font-size: 0.96rem;
-  color: #94a3b8;
-  line-height: 1.8;
-}
-
-/* ============================================================================
-   GASTRONOMY: VIDEO & DEGUSTATION
-   ============================================================================ */
-.gastronomy-theater-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.18fr;
-  gap: 5rem;
-  align-items: center;
-}
-.degustation-panel-glass {
-  background: var(--bg-glass-card);
-  backdrop-filter: var(--blur-ultra);
-  border: 1px solid var(--border-gold);
   border-radius: var(--radius-lg);
   padding: 3.25rem;
-  box-shadow: var(--shadow-liquid-deep), var(--shadow-gold-glow);
+  box-shadow: var(--shadow-liquid), var(--shadow-inset-gloss);
+  transition: var(--transition);
 }
-.degustation-top-header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-  padding-bottom: 1.5rem;
-  margin-bottom: 2.25rem;
+.ritual-card-glass:hover {
+  border-color: var(--primary);
+  transform: translateY(-8px);
 }
-.degustation-top-header h3 {
+.ritual-card-glass h4 {
   font-family: var(--font-heading);
-  font-size: 1.85rem;
-  color: #ffffff;
-}
-.degustation-courses-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.85rem;
-}
-.course-item-box {
-  display: flex;
-  gap: 1.6rem;
-}
-.num-roman-gold {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.9rem;
-  color: var(--accent-light);
-  line-height: 1;
-}
-.course-info strong {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 1.12rem;
-  color: #ffffff;
-  margin-bottom: 3px;
-}
-.course-info p {
-  font-size: 0.92rem;
-  color: #94a3b8;
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 1rem;
 }
 
-.video-theater-frame {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  border: 1.5px solid var(--border-accent);
-  box-shadow: var(--shadow-liquid-deep), var(--shadow-card-gloss);
-}
-.video-theater-frame video {
-  width: 100%;
-  height: 460px;
-  object-fit: cover;
-  display: block;
-}
-
-/* ============================================================================
-   VIP CONCIERGE TERMINAL
-   ============================================================================ */
-.vip-terminal-deck {
-  background: var(--bg-glass-heavy);
-  backdrop-filter: var(--blur-ultra);
+/* VIP Terminal */
+.vip-terminal-box {
+  background: var(--glass-card);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
   border: 1.5px solid var(--border-accent);
   border-radius: var(--radius-lg);
-  padding: 4.25rem;
-  box-shadow: var(--shadow-liquid-deep), var(--shadow-card-gloss);
+  padding: 4.5rem;
+  box-shadow: var(--shadow-liquid), var(--shadow-inset-gloss);
 }
-.vip-terminal-split {
+.vip-grid-2col {
   display: grid;
-  grid-template-columns: 1fr 1.18fr;
+  grid-template-columns: 1fr 1.15fr;
   gap: 5rem;
 }
-.vip-terminal-left h2 {
+.vip-grid-2col h2 {
   font-family: var(--font-heading);
   font-size: 2.6rem;
-  color: #ffffff;
+  color: #fff;
   margin-bottom: 1.2rem;
 }
-.vip-lines-column {
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-  margin: 2.4rem 0;
-}
-.vip-line-box strong {
-  display: block;
-  font-size: 0.78rem;
-  color: var(--accent-primary);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.vip-line-box span, .vip-line-box a {
-  color: #ffffff;
-  font-size: 1.05rem;
-  text-decoration: none;
-}
-
-.vip-form-box {
-  background: color-mix(in srgb, var(--bg-deep) 85%, #ffffff 15%);
+.vip-form-inner {
+  background: rgba(4, 9, 20, 0.85);
   border: 1px solid var(--border-glass-bright);
   padding: 2.75rem;
-  border-radius: var(--radius-md);
+  border-radius: 24px;
 }
-.form-2inputs-row {
+.form-duo {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.2rem;
   margin-bottom: 1.2rem;
 }
-.form-input-block {
+.form-field {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
 }
-.form-input-block label {
-  font-size: 0.78rem;
+.form-field label {
+  font-size: 0.76rem;
   font-weight: 800;
   color: #94a3b8;
+  text-transform: uppercase;
 }
-.form-input-block input, .form-input-block select, .form-input-block textarea {
-  background: var(--bg-glass-pill);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: var(--radius-sm);
+.form-field input, .form-field select, .form-field textarea {
+  background: var(--glass-pill);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
   padding: 0.8rem 1rem;
-  color: #ffffff;
+  color: #fff;
   font-family: var(--font-sans);
   font-size: 0.94rem;
   outline: none;
 }
-.form-input-block input:focus, .form-input-block select:focus, .form-input-block textarea:focus {
-  border-color: var(--accent-primary);
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+  border-color: var(--primary);
   box-shadow: 0 0 20px var(--glow-primary);
 }
 
-/* Footer */
-.v2-liquid-footer {
+.liquid-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   padding: 5.5rem 0 3.5rem;
-  position: relative;
-  z-index: 2;
-  background: #010408;
+  background: #02050b;
 }
-.footer-panoramic-3col {
+.footer-3col {
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr;
   gap: 4.5rem;
-  margin-bottom: 4.5rem;
-}
-.footer-brand-title {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  color: #ffffff;
-  margin-bottom: 0.9rem;
-}
-.footer-nav-column {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-.footer-nav-column strong {
-  font-size: 0.82rem;
-  letter-spacing: 0.14em;
-  color: var(--accent-primary);
-  text-transform: uppercase;
-  margin-bottom: 0.65rem;
-}
-.footer-nav-column a {
-  color: #94a3b8;
-  text-decoration: none;
-  font-size: 0.96rem;
-  transition: var(--transition);
-}
-.footer-nav-column a:hover {
-  color: #ffffff;
-}
-.footer-bottom-bar {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 2.4rem;
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.86rem;
-  color: #64748b;
 }
 
 @media (max-width: 1024px) {
-  .vision-nav-links, .live-weather-capsule { display: none; }
-  .hero-canvas-grid, .gastronomy-theater-layout, .vip-terminal-split { grid-template-columns: 1fr; gap: 4rem; }
-  .suite-lookbook-card-3d, .suite-lookbook-card-3d.reverse { grid-template-columns: 1fr; }
-  .rituals-dynamic-grid { grid-template-columns: 1fr; }
-  .dock-4fields-grid { grid-template-columns: 1fr 1fr; }
-  .btn-dock-find { grid-column: span 2; }
-  .footer-panoramic-3col { grid-template-columns: 1fr 1fr; }
-}
-
-@media (max-width: 640px) {
-  .dock-4fields-grid { grid-template-columns: 1fr; }
-  .btn-dock-find { grid-column: span 1; }
-  .form-2inputs-row { grid-template-columns: 1fr; }
-  .vip-terminal-deck { padding: 2rem; }
-  .suite-meta-wrapper { padding: 2rem; }
-  .footer-panoramic-3col { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .dock-form-grid, .suite-card-liquid, .suite-card-liquid.reverse, .rituals-grid, .vip-grid-2col, .footer-3col { grid-template-columns: 1fr; }
 }
 `;
 }
 
 // ============================================================================
-// REVOLUTIONARY 2026 LIQUID GLASS HTML BUILDER
+// TRUE FULL-BLEED CINEMATIC LIQUID GLASS HTML
 // ============================================================================
-function generateNextGenLiquidHTML(hotel, detail) {
+function generateTrueLiquidHTML(hotel, detail) {
   const name = hotel.name;
   const slug = hotel.slug;
   const phone = detail?.phone || hotel.phone || '0252 456 23 40';
@@ -992,346 +446,216 @@ function generateNextGenLiquidHTML(hotel, detail) {
   <link rel="stylesheet" href="./styles.css?v=${Date.now()}">
   <script defer src="./app.js?v=${Date.now()}"></script>
 </head>
-<body class="v2-liquid-nextgen" data-phone="${escapeHtml(cleanPhone)}" data-hotel="${escapeHtml(name)}">
+<body data-phone="${escapeHtml(cleanPhone)}" data-hotel="${escapeHtml(name)}">
 
-  <!-- Ambient Liquid Plasma Mesh -->
-  <div class="ambient-liquid-plasma" aria-hidden="true">
-    <div class="plasma-orb plasma-1"></div>
-    <div class="plasma-orb plasma-2"></div>
-    <div class="plasma-orb plasma-3"></div>
-  </div>
-
-  <!-- FLOATING VISIONOS GLASS CAPSULE HEADER -->
-  <header class="v2-vision-header" id="v2Header">
-    <div class="vision-capsule-island">
-      
-      <a href="#top" class="brand-vision-unit">
-        <div class="brand-vision-medallion">
+  <!-- FLOATING VISIONOS GLASS NAVIGATION -->
+  <header class="liquid-topbar">
+    <div class="liquid-nav-island">
+      <a href="#top" class="brand-unit">
+        <div class="brand-medallion">
           ${getLuxuryEmblem(slug, name, true)}
         </div>
-        <div class="brand-title-stack">
-          <span class="brand-title-bold">${escapeHtml(name).toUpperCase()}</span>
-          <span class="brand-sub-badge">SELİMİYE · MARMARİS</span>
+        <div>
+          <span class="brand-title">${escapeHtml(name).toUpperCase()}</span>
+          <span class="brand-sub">SELİMİYE · MARMARİS</span>
         </div>
       </a>
 
-      <nav class="vision-nav-links">
-        <a href="#suites" class="v-nav-item">Süitler & Odalar</a>
-        <a href="#rituals" class="v-nav-item">Koy Ritüelleri</a>
-        <a href="#gastronomy" class="v-nav-item">Gastronomi</a>
-        <a href="#concierge" class="v-nav-item">VIP Danışma</a>
+      <nav class="nav-links">
+        <a href="#suites" class="nav-link">Süitler</a>
+        <a href="#rituals" class="nav-link">Koy Ritmi</a>
+        <a href="#concierge" class="nav-link">VIP Danışma</a>
       </nav>
 
-      <div class="vision-actions-group">
-        <div class="live-weather-capsule">
-          <span class="live-pulse-beacon"></span>
-          <span>☀️ 28°C Selimiye</span>
-        </div>
-        <button class="btn-vision-gold-cta" data-book>
-          <span>Rezervasyon</span>
-          <i>↗</i>
-        </button>
-      </div>
-
+      <button class="btn-gold-action" data-book>
+        <span>Müsaitlik Al ↗</span>
+      </button>
     </div>
   </header>
 
   <main id="top">
-    
-    <!-- HERO: FULL-VIEWPORT CINEMATIC CANVAS -->
-    <section class="hero-nextgen-canvas">
-      <div class="container-liquid">
-        <div class="hero-canvas-grid">
-          
-          <div class="hero-editorial-column">
-            <div class="hero-kicker-glow">
-              <span class="live-pulse-beacon"></span>
-              <span>${escapeHtml(seaDist).toUpperCase()}</span>
-              <span class="badge-gold-sparkle">V2 LIQUID GLASS</span>
+    <!-- FULL-BLEED CINEMATIC HERO -->
+    <section class="hero-fullbleed-cinema">
+      <div class="container-liquid hero-cinema-content">
+        <div class="hero-eyebrow-chip">✦ ${escapeHtml(seaDist).toUpperCase()}</div>
+        <h1 class="hero-cinema-h1">
+          ${escapeHtml(name)}<br>
+          <em>${escapeHtml(tagline)}</em>
+        </h1>
+        <p class="hero-cinema-p">
+          ${escapeHtml(concept)}. Selimiye'nin sakin koyunda, günün temposundan uzaklaşarak berrak sularda dinlenin.
+        </p>
+
+        <!-- Floating Glass Dock -->
+        <div class="floating-glass-dock">
+          <form class="dock-form-grid" onsubmit="return false;">
+            <div class="dock-field">
+              <label>GİRİŞ TARİHİ</label>
+              <input type="date" id="heroCheckin" required>
             </div>
-
-            <h1 class="hero-monumental-h1">
-              Akışkan Camın Işığında,<br>
-              <em class="hero-highlight-italic">${escapeHtml(tagline)}</em>
-            </h1>
-
-            <p class="hero-narrative-lead">
-              ${escapeHtml(name)}; Selimiye’nin kristal turkuaz suları üzerinde, ${escapeHtml(concept).toLowerCase()} anlayışıyla tasarlanmış seçkin bir Ege inzivası sunar.
-            </p>
-
-            <!-- Hero Floating Booking Dock -->
-            <div class="hero-booking-dock-island">
-              <form class="dock-4fields-grid" onsubmit="return false;">
-                <div class="dock-cell-input">
-                  <label>GİRİŞ TARİHİ</label>
-                  <input type="date" id="heroCheckin" required>
-                </div>
-                <div class="dock-cell-input">
-                  <label>ÇIKIŞ TARİHİ</label>
-                  <input type="date" id="heroCheckout" required>
-                </div>
-                <div class="dock-cell-input">
-                  <label>MİSAFİR</label>
-                  <select id="heroGuests">
-                    <option value="2 Yetişkin">2 Yetişkin</option>
-                    <option value="1 Yetişkin">1 Yetişkin</option>
-                    <option value="3 Yetişkin">3 Yetişkin</option>
-                    <option value="4+ Yetişkin">4+ Yetişkin / Aile</option>
-                  </select>
-                </div>
-                <button type="button" class="btn-dock-find" id="heroSubmitBtn">
-                  <span>Müsaitlik Al →</span>
-                </button>
-              </form>
+            <div class="dock-field">
+              <label>ÇIKIŞ TARİHİ</label>
+              <input type="date" id="heroCheckout" required>
             </div>
-          </div>
-
-          <div class="hero-stage-theater">
-            <div class="theater-frame-main">
-              <img src="./media/hero.jpg" alt="${escapeHtml(name)} Ana Görsel">
-              <div class="badge-theater-floating">
-                <strong>${escapeHtml(name)}</strong>
-                <span>${escapeHtml(address)}</span>
-              </div>
+            <div class="dock-field">
+              <label>MİSAFİR</label>
+              <select id="heroGuests">
+                <option value="2 Yetişkin">2 Yetişkin</option>
+                <option value="1 Yetişkin">1 Yetişkin</option>
+                <option value="3+ Yetişkin">3+ Yetişkin / Aile</option>
+              </select>
             </div>
-          </div>
-
+            <button type="button" class="btn-gold-action" id="heroSubmitBtn" style="height:50px;">
+              <span>Müsaitlik Gör →</span>
+            </button>
+          </form>
         </div>
       </div>
     </section>
 
-    <!-- SUITES: EXPANSIVE 3D LOOKBOOK -->
-    <section class="v2-liquid-section" id="suites" style="background: rgba(2, 8, 16, 0.65);">
+    <!-- SUITES: 3D PANORAMIC LOOKBOOK -->
+    <section class="v2-section" id="suites">
       <div class="container-liquid">
-        
-        <div class="section-mast-center">
-          <div class="pill-section-kicker">PANORAMİK KONAKLAMA</div>
-          <h2 class="section-title-monument">Koleksiyon Süitleri</h2>
-          <p class="section-desc-subtle">Doğal kireçtaşı, keten tekstiller ve Ege koyunu kucaklayan geniş özel teraslar.</p>
+        <div class="section-center">
+          <div class="hero-eyebrow-chip">PANORAMİK KOLEKSİYON</div>
+          <h2>Koleksiyon Süitleri</h2>
+          <p style="color:#94a3b8; font-size:1.1rem;">Doğal kireçtaşı dokuları, keten kumaşlar ve kesintisiz Ege manzarası.</p>
         </div>
 
-        <div class="suites-lookbook-stack">
+        <div class="suites-stack">
           ${rooms.map((room, idx) => `
-            <article class="suite-lookbook-card-3d ${idx % 2 === 1 ? 'reverse' : ''}">
-              <div class="suite-photo-wrapper">
+            <article class="suite-card-liquid ${idx % 2 === 1 ? 'reverse' : ''}">
+              <div class="suite-media-wrap">
                 <img src="${idx === 0 ? './media/suite.jpg' : './media/room.jpg'}" alt="${escapeHtml(room.title)}">
-                <span class="suite-floating-ribbon">${escapeHtml(room.badge || 'Özel Seri')}</span>
               </div>
-              <div class="suite-meta-wrapper">
+              <div class="suite-content-wrap">
                 <div>
-                  <span class="suite-serial-kicker">REZİDANS N° 0${idx + 1}</span>
-                  <h3 class="suite-title-large">${escapeHtml(room.title)}</h3>
-                  <p class="suite-narrative-desc">${escapeHtml(room.desc || 'Ferah banyo, doğal keten dokular ve dingin koy manzarası.')}</p>
-                  
-                  <div class="suite-specs-3capsules">
-                    <div class="capsule-spec-item"><span>ALAN</span><strong>${escapeHtml(room.size || '36 m²')}</strong></div>
-                    <div class="capsule-spec-item"><span>MANZARA</span><strong>${escapeHtml(room.view || 'Deniz & Avlu')}</strong></div>
-                    <div class="capsule-spec-item"><span>YATAK</span><strong>${escapeHtml(room.bed || 'King Size')}</strong></div>
-                  </div>
+                  <span style="color:var(--primary); font-size:0.75rem; letter-spacing:0.2em; font-weight:800; text-transform:uppercase; display:block; margin-bottom:0.6rem;">SÜİT 0${idx + 1}</span>
+                  <h3>${escapeHtml(room.title)}</h3>
+                  <p>${escapeHtml(room.desc)}</p>
                 </div>
-
-                <div class="suite-action-strip">
-                  <span class="rate-guarantee-tag">✦ En İyi Fiyat Garantisi</span>
-                  <button class="btn-vision-gold-cta" data-suite-name="${escapeHtml(room.title)}">
-                    <span>Hemen Rezerve Et ↗</span>
-                  </button>
+                <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-glass); padding-top:1.5rem;">
+                  <span style="color:#fff3cf; font-weight:700;">${escapeHtml(room.size)} · ${escapeHtml(room.view)}</span>
+                  <button class="btn-gold-action" data-suite-name="${escapeHtml(room.title)}"><span>Rezerve Et ↗</span></button>
                 </div>
               </div>
             </article>
           `).join('')}
         </div>
-
       </div>
     </section>
 
-    <!-- 24-HOUR RITUALS (ATMOSPHERE CANVAS) -->
-    <section class="v2-liquid-section" id="rituals">
+    <!-- RITUALS -->
+    <section class="v2-section" id="rituals" style="background: rgba(3, 8, 18, 0.7);">
       <div class="container-liquid">
-        <div class="section-mast-center">
-          <div class="pill-section-kicker">24 SAAT SELİMİYE</div>
-          <h2 class="section-title-monument">Koyda Zamanın Akışı</h2>
-          <p class="section-desc-subtle">Sabahın durgunluğundan gece yıldızlarına, acele etmeden yaşanan bir kıyı ritmi.</p>
+        <div class="section-center">
+          <div class="hero-eyebrow-chip">24 SAAT SELİMİYE</div>
+          <h2>Koyda Günün Akışı</h2>
         </div>
-
-        <div class="rituals-dynamic-grid">
+        <div class="rituals-grid">
           ${rituals.map(r => `
-            <div class="ritual-glass-card">
-              <span class="ritual-time-badge">${escapeHtml(r.time)}</span>
+            <div class="ritual-card-glass">
+              <span style="color:var(--primary); font-size:0.78rem; font-weight:800; letter-spacing:0.12em; display:block; margin-bottom:0.8rem;">${escapeHtml(r.time)}</span>
               <h4>${escapeHtml(r.title)}</h4>
-              <p>${escapeHtml(r.desc)}</p>
+              <p style="color:#94a3b8; font-size:0.96rem; line-height:1.75;">${escapeHtml(r.desc)}</p>
             </div>
           `).join('')}
         </div>
       </div>
     </section>
 
-    <!-- GASTRONOMY THEATER -->
-    <section class="v2-liquid-section" id="gastronomy" style="background: rgba(2, 8, 16, 0.65);">
+    <!-- VIP CONCIERGE -->
+    <section class="v2-section" id="concierge">
       <div class="container-liquid">
-        <div class="gastronomy-theater-layout">
-          
-          <div class="degustation-panel-glass">
-            <div class="degustation-top-header">
-              <span class="pill-section-kicker" style="margin-bottom:0.5rem;">TOPRAKTAN & DENİZDEN</span>
-              <h3>Tadım Sofrası & Kıyı Masası</h3>
-            </div>
-            <div class="degustation-courses-list">
-              <div class="course-item-box">
-                <span class="num-roman-gold">I.</span>
-                <div class="course-info">
-                  <strong>Organik Köy Kahvaltısı</strong>
-                  <p>Bozburun çam balı, taze keçi peynirleri ve taş fırın sıcak ekmekleri.</p>
-                </div>
-              </div>
-              <div class="course-item-box">
-                <span class="num-roman-gold">II.</span>
-                <div class="course-info">
-                  <strong>Erken Hasat Zeytinyağlılar</strong>
-                  <p>Bahçemizden toplanan şifalı Ege otları ve soğuk sıkım zeytinyağı.</p>
-                </div>
-              </div>
-              <div class="course-item-box">
-                <span class="num-roman-gold">III.</span>
-                <div class="course-info">
-                  <strong>Günlük Kıyı Avı & Izgara</strong>
-                  <p>Selimiye balıkçılarından günlük taze deniz balıkları ve ızgara kalamar.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="video-theater-frame">
-            <video autoplay muted loop playsinline preload="metadata" poster="./media/dining.jpg">
-              <source src="./media/decor.mp4" type="video/mp4">
-            </video>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- VIP CONCIERGE TERMINAL -->
-    <section class="v2-liquid-section" id="concierge">
-      <div class="container-liquid">
-        <div class="vip-terminal-deck">
-          <div class="vip-terminal-split">
-            
-            <div class="vip-terminal-left">
-              <span class="pill-section-kicker">VIP DANIŞMA</span>
-              <h2>Doğrudan<br><em class="hero-highlight-italic">Rezervasyon Terminali</em></h2>
-              <p style="color:#94a3b8; font-size:0.98rem; line-height:1.85;">
-                Tarihlerinizi iletin; en avantajlı doğrudan fiyatlandırma ve kişisel transfer seçenekleriyle size anında dönüş yapalım.
+        <div class="vip-terminal-box">
+          <div class="vip-grid-2col">
+            <div>
+              <div class="hero-eyebrow-chip">DOĞRUDAN REZERVASYON</div>
+              <h2>${escapeHtml(name)}</h2>
+              <p style="color:#94a3b8; font-size:1.05rem; line-height:1.85; margin-bottom:2rem;">
+                Tarihlerinizi iletin; en avantajlı doğrudan fiyat teklifini WhatsApp üzerinden anında paylaşalım.
               </p>
-
-              <div class="vip-lines-column">
-                <div class="vip-line-box">
-                  <strong>KONUM</strong>
-                  <span>${escapeHtml(address)}</span>
-                </div>
-                <div class="vip-line-box">
-                  <strong>RESEPSİYON TELEFON</strong>
-                  <a href="tel:${escapeHtml(cleanPhone)}">${escapeHtml(phone)}</a>
-                </div>
-                <div class="vip-line-box">
-                  <strong>WHATSAPP CANLI DANIŞMA</strong>
-                  <a href="https://wa.me/${escapeHtml(cleanPhone)}?text=Merhaba%20${encodeURIComponent(name)},%20m%C3%BCsaitlik%20bilgisi%20almak%20istiyorum." target="_blank" style="color:var(--accent-primary);">+90 Selimiye VIP Concierge ↗</a>
-                </div>
+              <div style="display:flex; flex-direction:column; gap:1.25rem;">
+                <div><strong style="color:var(--primary); font-size:0.75rem; text-transform:uppercase;">Açık Adres</strong><p style="color:#fff;">${escapeHtml(address)}</p></div>
+                <div><strong style="color:var(--primary); font-size:0.75rem; text-transform:uppercase;">Resepsiyon</strong><p><a href="tel:${escapeHtml(cleanPhone)}" style="color:#fff; text-decoration:none;">${escapeHtml(phone)}</a></p></div>
+                <div><strong style="color:var(--primary); font-size:0.75rem; text-transform:uppercase;">WhatsApp Canlı</strong><p><a href="https://wa.me/${escapeHtml(cleanPhone)}?text=Merhaba%20${encodeURIComponent(name)},%20rezervasyon%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" style="color:var(--primary); font-weight:700;">+90 Selimiye VIP Concierge ↗</a></p></div>
               </div>
             </div>
 
-            <div class="vip-form-box">
-              <h3 style="font-family:var(--font-heading); color:#fff; font-size:1.45rem; margin-bottom:1.35rem;">Müsaitlik Talebi Gönder</h3>
+            <div class="vip-form-inner">
+              <h3 style="font-family:var(--font-heading); font-size:1.4rem; color:#fff; margin-bottom:1.5rem;">Müsaitlik Talebi Gönder</h3>
               <form id="v2ContactForm" onsubmit="return false;">
-                <div class="form-2inputs-row">
-                  <div class="form-input-block">
+                <div class="form-duo">
+                  <div class="form-field">
                     <label>Adınız Soyadınız *</label>
                     <input type="text" id="v2Name" placeholder="Adınız Soyadınız" required>
                   </div>
-                  <div class="form-input-block">
-                    <label>Telefon Numarası *</label>
+                  <div class="form-field">
+                    <label>Telefon *</label>
                     <input type="tel" id="v2Phone" placeholder="05XX XXX XX XX" required>
                   </div>
                 </div>
-
-                <div class="form-2inputs-row">
-                  <div class="form-input-block">
+                <div class="form-duo">
+                  <div class="form-field">
                     <label>Giriş Tarihi *</label>
                     <input type="date" id="v2Checkin" required>
                   </div>
-                  <div class="form-input-block">
+                  <div class="form-field">
                     <label>Çıkış Tarihi *</label>
                     <input type="date" id="v2Checkout" required>
                   </div>
                 </div>
-
-                <div class="form-2inputs-row">
-                  <div class="form-input-block">
+                <div class="form-duo">
+                  <div class="form-field">
                     <label>Oda Tercihi</label>
                     <select id="v2Suite">
-                      <option value="Tüm Koleksiyon">Tüm Odaları Göster</option>
+                      <option value="Tüm Odalar">Tüm Odaları Göster</option>
                       ${rooms.map(r => `<option value="${escapeHtml(r.title)}">${escapeHtml(r.title)}</option>`).join('')}
                     </select>
                   </div>
-                  <div class="form-input-block">
-                    <label>Misafir Sayısı</label>
+                  <div class="form-field">
+                    <label>Misafir</label>
                     <select id="v2Guests">
                       <option value="2 Yetişkin">2 Yetişkin</option>
                       <option value="1 Yetişkin">1 Yetişkin</option>
-                      <option value="3 Yetişkin">3 Yetişkin</option>
-                      <option value="4+ Yetişkin">4+ Yetişkin / Aile</option>
+                      <option value="3+ Yetişkin">3+ Yetişkin</option>
                     </select>
                   </div>
                 </div>
-
-                <div class="form-input-block" style="margin-bottom:1.6rem;">
-                  <label>Özel Talebiniz</label>
-                  <textarea id="v2Notes" rows="3" placeholder="Örn: Balayı karşılama ikramı, tekne transferi, geç giriş..."></textarea>
+                <div class="form-field" style="margin-bottom:1.5rem;">
+                  <label>Özel İstekler</label>
+                  <textarea id="v2Notes" rows="3" placeholder="Örn: Balayı ikramı, tekne transferi..."></textarea>
                 </div>
-
-                <button type="button" class="btn-dock-find" id="v2SubmitBtn" style="width:100%; justify-content:center; height:50px;">
+                <button type="button" class="btn-gold-action" id="v2SubmitBtn" style="width:100%; justify-content:center; height:50px;">
                   <span>Talebi İlet & Müsaitlik Al ↗</span>
                 </button>
               </form>
             </div>
-
           </div>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- FOOTER -->
-  <footer class="v2-liquid-footer">
+  <footer class="liquid-footer">
     <div class="container-liquid">
-      <div class="footer-panoramic-3col">
+      <div class="footer-3col">
         <div>
-          <div class="footer-brand-title">${escapeHtml(name).toUpperCase()}</div>
-          <p style="color:#94a3b8; font-size:0.92rem; line-height:1.75; margin-bottom:1.2rem;">
-            ${escapeHtml(tagline)}
-          </p>
-          <small style="color:#64748b; display:block;">${escapeHtml(address)}</small>
+          <div style="font-family:var(--font-heading); font-size:1.4rem; color:#fff; margin-bottom:0.8rem;">${escapeHtml(name).toUpperCase()}</div>
+          <p style="color:#94a3b8; font-size:0.92rem; line-height:1.75; margin-bottom:1rem;">${escapeHtml(tagline)}</p>
+          <small style="color:#64748b;">${escapeHtml(address)}</small>
         </div>
-
-        <div class="footer-nav-column">
-          <strong>Hızlı Bağlantılar</strong>
-          <a href="#suites">Koleksiyon Süitleri</a>
-          <a href="#rituals">Koy Atmosferi</a>
-          <a href="#gastronomy">Gastronomi & İskele</a>
-          <a href="#concierge">VIP Danışma</a>
+        <div style="display:flex; flex-direction:column; gap:0.75rem;">
+          <strong style="color:var(--primary); font-size:0.8rem; text-transform:uppercase;">Gezinme</strong>
+          <a href="#suites" style="color:#94a3b8; text-decoration:none;">Koleksiyon Süitleri</a>
+          <a href="#rituals" style="color:#94a3b8; text-decoration:none;">Koy Ritüelleri</a>
+          <a href="#concierge" style="color:#94a3b8; text-decoration:none;">VIP Danışma</a>
         </div>
-
-        <div class="footer-nav-column">
-          <strong>İletişim & Rezervasyon</strong>
-          <a href="tel:${escapeHtml(cleanPhone)}">📞 ${escapeHtml(phone)}</a>
-          <a href="https://wa.me/${escapeHtml(cleanPhone)}" target="_blank">💬 WhatsApp Canlı Hattı</a>
-          <span style="color:#64748b; font-size:0.84rem; margin-top:0.5rem;">7/24 Misafir Karşılama</span>
+        <div style="display:flex; flex-direction:column; gap:0.75rem;">
+          <strong style="color:var(--primary); font-size:0.8rem; text-transform:uppercase;">İletişim</strong>
+          <a href="tel:${escapeHtml(cleanPhone)}" style="color:#94a3b8; text-decoration:none;">📞 ${escapeHtml(phone)}</a>
+          <a href="https://wa.me/${escapeHtml(cleanPhone)}" target="_blank" style="color:#94a3b8; text-decoration:none;">💬 WhatsApp Canlı Hattı</a>
         </div>
-      </div>
-
-      <div class="footer-bottom-bar">
-        <span>© ${new Date().getFullYear()} ${escapeHtml(name)}. Tüm Hakları Saklıdır.</span>
-        <span>Selimiye Koyu · Marmaris / Muğla</span>
       </div>
     </div>
   </footer>
@@ -1340,19 +664,8 @@ function generateNextGenLiquidHTML(hotel, detail) {
 </html>`;
 }
 
-function generateNextGenLiquidJS() {
-  return `/**
- * SELİMİYE V2 NEXT-GEN LIQUID GLASS ENGINE
- */
-document.addEventListener('DOMContentLoaded', () => {
-  const header = document.getElementById('v2Header');
-  if (header) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 40) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
-    }, { passive: true });
-  }
-
+function generateTrueLiquidJS() {
+  return `document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-book]').forEach(btn => {
     btn.addEventListener('click', () => {
       document.getElementById('concierge')?.scrollIntoView({ behavior: 'smooth' });
@@ -1415,8 +728,8 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 function buildAllV2Sites() {
-  console.log('💎 Compiling 24 V2 Selimiye Websites with REVOLUTIONARY NEXT-GEN LIQUID GLASS ARCHITECTURE...');
-  const js = generateNextGenLiquidJS();
+  console.log('💎 Compiling 24 V2 Selimiye Websites with TRUE FULL-BLEED LIQUID GLASS ARCHITECTURE...');
+  const js = generateTrueLiquidJS();
 
   for (const hotel of rawV2Data.hotels) {
     const slug = hotel.slug;
@@ -1426,15 +739,15 @@ function buildAllV2Sites() {
 
     syncUniqueMedia(hotel, hotelDir);
 
-    const css = generateNextGenLiquidCSS(hotel);
-    const html = generateNextGenLiquidHTML(hotel, detail);
+    const css = generateTrueLiquidCSS(hotel);
+    const html = generateTrueLiquidHTML(hotel, detail);
 
     fs.writeFileSync(path.join(hotelDir, 'index.html'), html, 'utf8');
     fs.writeFileSync(path.join(hotelDir, 'styles.css'), css, 'utf8');
     fs.writeFileSync(path.join(hotelDir, 'app.js'), js, 'utf8');
   }
 
-  console.log('✅ Successfully compiled 24 V2 websites with NEXT-GEN LIQUID GLASS ARCHITECTURE!');
+  console.log('✅ Successfully compiled 24 V2 websites with TRUE FULL-BLEED LIQUID GLASS!');
 }
 
 buildAllV2Sites();
