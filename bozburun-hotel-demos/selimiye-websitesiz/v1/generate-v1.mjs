@@ -11,7 +11,7 @@ const outputRoot = here;
 
 const escapeHtml = (value='') => String(value).replace(/[&<>"']/g,(char)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
-// Shared High-End Liquid Glass CSS for V1
+// High-End Liquid Glass CSS for V1
 const sharedV1CSS = `/* ==========================================================================
    SELİMİYE HOTELS — OBSIDIAN GOLD LIQUID GLASS LUXURY (V1)
    ========================================================================== */
@@ -21,11 +21,11 @@ const sharedV1CSS = `/* ========================================================
   --font-heading: 'Cinzel', 'Cormorant Garamond', serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  --bg-deep: #070d14;
-  --bg-dark: #0c1520;
-  --bg-card: rgba(15, 26, 38, 0.72);
-  --bg-card-heavy: rgba(10, 18, 28, 0.88);
-  --bg-glass-input: rgba(255, 255, 255, 0.05);
+  --bg-deep: #060a10;
+  --bg-dark: #0b131e;
+  --bg-card: rgba(14, 24, 36, 0.75);
+  --bg-card-heavy: rgba(9, 16, 26, 0.9);
+  --bg-glass-input: rgba(255, 255, 255, 0.06);
 
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
@@ -74,7 +74,6 @@ body.selimiye-v1-liquid {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Ambient Glow Orbs */
 .ambient-glow {
   position: fixed;
   border-radius: 50%;
@@ -107,7 +106,7 @@ body.selimiye-v1-liquid {
   z-index: 2;
 }
 
-/* Floating Glass Header */
+/* Header */
 .v1-header {
   position: sticky;
   top: 0;
@@ -378,9 +377,7 @@ body.selimiye-v1-liquid {
   width: 100%;
 }
 
-/* ==========================================================================
-   HERO SECTION
-   ========================================================================== */
+/* Hero */
 .hero-v1 {
   position: relative;
   min-height: 92vh;
@@ -513,8 +510,7 @@ body.selimiye-v1-liquid {
   color: var(--gold-light);
   letter-spacing: 0.08em;
 }
-.dock-input,
-.dock-select {
+.dock-input, .dock-select {
   background: var(--bg-glass-input);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-sm);
@@ -525,8 +521,7 @@ body.selimiye-v1-liquid {
   outline: none;
   transition: var(--transition);
 }
-.dock-input:focus,
-.dock-select:focus {
+.dock-input:focus, .dock-select:focus {
   border-color: var(--gold-primary);
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
   background: rgba(255, 255, 255, 0.08);
@@ -560,7 +555,6 @@ body.selimiye-v1-liquid {
   box-shadow: 0 10px 35px rgba(212, 175, 55, 0.55);
 }
 
-/* Hero Strip Grid */
 .hero-strip-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -599,9 +593,7 @@ body.selimiye-v1-liquid {
   color: var(--text-muted);
 }
 
-/* ==========================================================================
-   GLOBAL SECTION HEADERS & GLASS CARDS
-   ========================================================================== */
+/* Sections */
 .v1-section {
   padding: 6.5rem 0;
   position: relative;
@@ -662,9 +654,7 @@ body.selimiye-v1-liquid {
   box-shadow: var(--shadow-liquid);
 }
 
-/* ==========================================================================
-   STORY & MOSAIC
-   ========================================================================== */
+/* Story */
 .story-grid {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
@@ -686,7 +676,6 @@ body.selimiye-v1-liquid {
   line-height: 1.8;
   margin-bottom: 1.75rem;
 }
-
 .story-pillars {
   display: flex;
   flex-direction: column;
@@ -709,20 +698,7 @@ body.selimiye-v1-liquid {
   border-radius: var(--radius-sm);
   border: 1px solid rgba(212, 175, 55, 0.3);
 }
-.pillar-item strong {
-  display: inline;
-  color: #fff;
-  font-size: 0.92rem;
-  margin-right: 4px;
-}
-.pillar-item span {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
 
-.story-mosaic {
-  position: relative;
-}
 .mosaic-main-card {
   position: relative;
   border-radius: var(--radius-lg);
@@ -748,26 +724,8 @@ body.selimiye-v1-liquid {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-gold);
 }
-.badge-live-tag {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--gold-light);
-  margin-bottom: 2px;
-}
-.mosaic-glass-badge strong {
-  display: block;
-  color: #fff;
-  font-size: 0.95rem;
-}
-.mosaic-glass-badge small {
-  color: var(--text-muted);
-  font-size: 0.76rem;
-}
 
-/* ==========================================================================
-   SUITES & ROOMS
-   ========================================================================== */
+/* Suites */
 .suites-glass-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -811,8 +769,6 @@ body.selimiye-v1-liquid {
   color: #050b10;
   font-weight: 800;
   font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   padding: 4px 12px;
   border-radius: var(--radius-full);
 }
@@ -832,22 +788,12 @@ body.selimiye-v1-liquid {
   color: #fff;
   font-weight: 600;
 }
-
 .suite-body {
   padding: 2.25rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
-}
-.suite-type {
-  color: var(--gold-light);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 0.4rem;
 }
 .suite-name {
   font-family: var(--font-heading);
@@ -876,13 +822,6 @@ body.selimiye-v1-liquid {
   padding: 3px 9px;
   border-radius: var(--radius-full);
 }
-.suite-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 1.25rem;
-}
 .btn-suite-reserve {
   background: var(--bg-card-heavy);
   border: 1px solid var(--border-gold);
@@ -901,9 +840,45 @@ body.selimiye-v1-liquid {
   box-shadow: var(--shadow-gold);
 }
 
-/* ==========================================================================
-   GASTRONOMY & COVES & EXPERIENCES
-   ========================================================================== */
+/* Günün Ritmi (Rituals) */
+.rituals-deck {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3.5rem;
+}
+.ritual-card {
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  transition: var(--transition);
+}
+.ritual-card:hover {
+  border-color: var(--gold-primary);
+  transform: translateY(-4px);
+}
+.ritual-time {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  margin-bottom: 0.75rem;
+}
+.ritual-card h4 {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.ritual-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Gastronomy & Coves */
 .gastro-grid {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
@@ -951,17 +926,9 @@ body.selimiye-v1-liquid {
 }
 .gastro-video-box video {
   width: 100%;
-  height: 320px;
+  height: 340px;
   object-fit: cover;
   display: block;
-}
-.gastro-sub-img {
-  height: 200px;
-}
-.gastro-sub-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .dest-grid-3 {
@@ -1021,6 +988,7 @@ body.selimiye-v1-liquid {
   line-height: 1.65;
 }
 
+/* Experiences & Amenities */
 .exp-grid-6 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1049,9 +1017,6 @@ body.selimiye-v1-liquid {
   font-weight: 700;
   color: rgba(212, 175, 55, 0.3);
 }
-.exp-icon {
-  font-size: 2rem;
-}
 .exp-card h3 {
   font-family: var(--font-heading);
   font-size: 1.25rem;
@@ -1065,35 +1030,15 @@ body.selimiye-v1-liquid {
   line-height: 1.65;
   margin-bottom: 1.5rem;
 }
-.exp-foot {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 1rem;
-}
-.exp-foot span {
-  font-size: 0.76rem;
-  color: var(--gold-light);
-  font-weight: 600;
-}
 .btn-exp-link {
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--gold-light);
   font-weight: 700;
   font-size: 0.84rem;
   cursor: pointer;
-  transition: var(--transition);
-}
-.btn-exp-link:hover {
-  color: var(--gold-light);
-  transform: translateX(4px);
 }
 
-/* ==========================================================================
-   AMENITIES & TESTIMONIALS & CONTACT
-   ========================================================================== */
 .amenities-card {
   padding: 4rem;
 }
@@ -1114,50 +1059,7 @@ body.selimiye-v1-liquid {
   font-size: 0.86rem;
 }
 
-.testi-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-.testi-card {
-  padding: 2.25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.t-stars {
-  color: var(--gold-primary);
-  font-size: 0.95rem;
-  letter-spacing: 2px;
-  margin-bottom: 1.25rem;
-}
-.testi-card p {
-  font-style: italic;
-  font-size: 1.05rem;
-  color: #e2ecf5;
-  line-height: 1.7;
-  margin-bottom: 1.75rem;
-}
-.t-author {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 1.25rem;
-}
-.author-monogram {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-sm);
-  background: var(--gold-gradient);
-  color: #050b10;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-}
-
+/* Hub & Footer */
 .hub-layout {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -1179,17 +1081,6 @@ body.selimiye-v1-liquid {
   height: 32px;
   border-radius: 50%;
 }
-.hub-brand-badge strong {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  color: #fff;
-  display: block;
-}
-.hub-brand-badge small {
-  font-size: 0.65rem;
-  color: var(--gold-light);
-}
-
 .hub-title {
   font-family: var(--font-heading);
   font-size: 2.3rem;
@@ -1204,10 +1095,6 @@ body.selimiye-v1-liquid {
   gap: 1.2rem;
   margin: 2rem 0;
 }
-.h-item {
-  display: flex;
-  gap: 0.85rem;
-}
 .h-item strong {
   display: block;
   font-size: 0.78rem;
@@ -1218,9 +1105,6 @@ body.selimiye-v1-liquid {
   color: #fff;
   font-size: 0.92rem;
   text-decoration: none;
-}
-.h-item a:hover {
-  color: var(--gold-light);
 }
 
 .form-box {
@@ -1268,10 +1152,6 @@ body.selimiye-v1-liquid {
   font-size: 0.88rem;
   outline: none;
 }
-.f-field input:focus, .f-field select:focus, .f-field textarea:focus {
-  border-color: var(--gold-primary);
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
-}
 
 .v1-footer {
   background: #04070a;
@@ -1286,60 +1166,13 @@ body.selimiye-v1-liquid {
   gap: 3rem;
   margin-bottom: 3.5rem;
 }
-.footer-logo-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
 .footer-avatar {
   width: 38px;
   height: 38px;
   border-radius: 50%;
   border: 1.5px solid var(--gold-primary);
 }
-.footer-logo-row span {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #fff;
-}
-.footer-col strong {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--gold-light);
-  margin-bottom: 1.25rem;
-}
-.footer-col a {
-  display: block;
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.85rem;
-  margin-bottom: 0.6rem;
-  transition: var(--transition);
-}
-.footer-col a:hover {
-  color: #fff;
-  transform: translateX(4px);
-}
-.footer-col p {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  margin-bottom: 0.6rem;
-}
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding-top: 1.5rem;
-  font-size: 0.78rem;
-  color: var(--text-dim);
-}
 
-/* Modal */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -1367,12 +1200,6 @@ body.selimiye-v1-liquid {
   width: 100%;
   padding: 2.5rem;
   position: relative;
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), var(--shadow-gold);
-  transform: scale(0.95);
-  transition: var(--transition);
-}
-.modal-backdrop.active .modal-window {
-  transform: scale(1);
 }
 .modal-close {
   position: absolute;
@@ -1394,7 +1221,7 @@ body.selimiye-v1-liquid {
   .btn-dock-submit { grid-column: span 2; }
   .hero-strip-grid { grid-template-columns: repeat(2, 1fr); }
   .story-grid, .gastro-grid, .hub-layout { grid-template-columns: 1fr; gap: 3rem; }
-  .suites-glass-grid, .dest-grid-3, .exp-grid-6, .testi-grid, .amenities-grid { grid-template-columns: 1fr; }
+  .suites-glass-grid, .dest-grid-3, .exp-grid-6, .rituals-deck, .amenities-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -1408,164 +1235,6 @@ body.selimiye-v1-liquid {
   .hub-layout, .amenities-card { padding: 1.75rem; }
   .form-row-2 { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-}
-`;
-
-// Shared JS for V1
-const sharedV1JS = `
-document.addEventListener('DOMContentLoaded', () => {
-  initHeader();
-  initMobileDrawer();
-  initRevealAnimations();
-  initBookingModals();
-  setDefaultDates();
-});
-
-function initHeader() {
-  const header = document.getElementById('v1Header');
-  if (!header) return;
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
-  }, { passive: true });
-}
-
-function initMobileDrawer() {
-  const btn = document.getElementById('mobileMenuToggle');
-  const drawer = document.getElementById('mobileDrawer');
-  const close = document.getElementById('drawerClose');
-  const links = document.querySelectorAll('.drawer-link');
-  if (!btn || !drawer) return;
-  const openDrawer = () => drawer.classList.add('active');
-  const closeDrawer = () => drawer.classList.remove('active');
-  btn.addEventListener('click', openDrawer);
-  if (close) close.addEventListener('click', closeDrawer);
-  links.forEach(l => l.addEventListener('click', closeDrawer));
-}
-
-function initRevealAnimations() {
-  const elements = document.querySelectorAll('[data-reveal]');
-  if (!elements.length) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  elements.forEach((el, index) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = \`opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) \${index % 4 * 0.08}s, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) \${index % 4 * 0.08}s\`;
-    observer.observe(el);
-  });
-}
-
-function initBookingModals() {
-  const modal = document.getElementById('bookingModal');
-  const modalClose = document.getElementById('modalCloseBtn');
-  const modalSuite = document.getElementById('modalSuiteChoice');
-  const modalTitle = document.getElementById('modalTitleText');
-  const modalForm = document.getElementById('modalBookingForm');
-  const heroSubmitBtn = document.getElementById('heroSubmitBtn');
-  const contactForm = document.getElementById('contactMainForm');
-  const hotelPhone = document.body.getAttribute('data-phone') || '902524562340';
-  const hotelName = document.body.getAttribute('data-hotel') || 'Otel';
-
-  document.querySelectorAll('[data-book]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      openModal('Özel Rezervasyon Talebi', \`\${hotelName} Genel Rezervasyon\`);
-    });
-  });
-
-  document.querySelectorAll('[data-suite-name]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const name = btn.getAttribute('data-suite-name');
-      openModal(name, name);
-    });
-  });
-
-  document.querySelectorAll('[data-exp-title]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const exp = btn.getAttribute('data-exp-title');
-      openModal(\`Deneyim Talebi: \${exp}\`, exp);
-    });
-  });
-
-  function openModal(title, suite) {
-    if (!modal) return;
-    if (modalTitle) modalTitle.textContent = title;
-    if (modalSuite) modalSuite.value = suite;
-    modal.classList.add('active');
-  }
-
-  function closeModal() {
-    if (!modal) return;
-    modal.classList.remove('active');
-  }
-
-  if (modalClose) modalClose.addEventListener('click', closeModal);
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
-  }
-
-  if (modalForm) {
-    modalForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const suite = document.getElementById('modalSuiteChoice')?.value || 'Süit';
-      const checkin = document.getElementById('mCheckin')?.value || '';
-      const checkout = document.getElementById('mCheckout')?.value || '';
-      const guests = document.getElementById('mGuests')?.value || '2 Yetişkin';
-      const phone = document.getElementById('mPhone')?.value || '';
-      const notes = document.getElementById('mNotes')?.value || '';
-      const msg = \`Merhaba \${hotelName},%0A%0AWeb sitenizden doğrudan rezervasyon talebinde bulunmak istiyorum:%0A✦ *Kategori:* \${suite}%0A✦ *Tarihler:* \${checkin} - \${checkout}%0A✦ *Misafir Sayısı:* \${guests}%0A✦ *Telefon:* \${phone}%0A✦ *Özel İstek:* \${notes || 'Yok'}\`;
-      window.open(\`https://wa.me/\${hotelPhone.replace(/\\D/g, '')}?text=\${msg}\`, '_blank');
-      closeModal();
-    });
-  }
-
-  if (heroSubmitBtn) {
-    heroSubmitBtn.addEventListener('click', () => {
-      const checkin = document.getElementById('heroCheckin')?.value || '';
-      const checkout = document.getElementById('heroCheckout')?.value || '';
-      const guests = document.getElementById('heroGuests')?.value || '2';
-      const suite = document.getElementById('heroSuite')?.value || 'all';
-      const msg = \`Merhaba \${hotelName},%0A%0AWeb siteniz üzerinden \${checkin} - \${checkout} tarihleri için \${guests} misafir için müsaitlik ve fiyat teklifi rica ediyorum. (Tercih: \${suite})\`;
-      window.open(\`https://wa.me/\${hotelPhone.replace(/\\D/g, '')}?text=\${msg}\`, '_blank');
-    });
-  }
-
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('contactName')?.value || '';
-      const phone = document.getElementById('contactPhone')?.value || '';
-      const checkin = document.getElementById('contactCheckin')?.value || '';
-      const checkout = document.getElementById('contactCheckout')?.value || '';
-      const guests = document.getElementById('contactGuests')?.value || '';
-      const suite = document.getElementById('contactSuite')?.value || '';
-      const notes = document.getElementById('contactNotes')?.value || '';
-      const msg = \`Merhaba \${hotelName},%0A%0AAdım \${name}. Web sitenizden rezervasyon talebi iletiyorum:%0A✦ *Tarih:* \${checkin} - \${checkout}%0A✦ *Kişi:* \${guests}%0A✦ *Oda:* \${suite}%0A✦ *Telefon:* \${phone}%0A✦ *Not:* \${notes || 'Yok'}\`;
-      window.open(\`https://wa.me/\${hotelPhone.replace(/\\D/g, '')}?text=\${msg}\`, '_blank');
-    });
-  }
-}
-
-function setDefaultDates() {
-  const today = new Date();
-  const nextWeek = new Date();
-  nextWeek.setDate(today.getDate() + 4);
-  const formatDate = (d) => d.toISOString().split('T')[0];
-  const checkins = [document.getElementById('heroCheckin'), document.getElementById('contactCheckin'), document.getElementById('mCheckin')];
-  const checkouts = [document.getElementById('heroCheckout'), document.getElementById('contactCheckout'), document.getElementById('mCheckout')];
-  checkins.forEach(el => { if (el) el.value = formatDate(today); });
-  checkouts.forEach(el => { if (el) el.value = formatDate(nextWeek); });
 }
 `;
 
@@ -1597,13 +1266,19 @@ function generateV1Page(hotel, detail) {
     }
   ];
 
+  const rituals = (hotel.rituals && hotel.rituals.length) ? hotel.rituals : [
+    { time: "08:30 - 11:00", title: "Koyda Yavaş Kahvaltı", desc: "Yerel Selimiye zeytinleri, keçi peyniri ve ev yapımı incir reçeliyle güne acele etmeden başlayın." },
+    { time: "14:00 - 17:30", title: "İskelede Tuz & Güneş", desc: "Kristal berraklığındaki koy suyunda yüzün, gölgede kitabınızı okurken dinlenin." },
+    { time: "19:30 - 23:00", title: "Gün Batımı & Kıyı Masası", desc: "Gökyüzü kızıla bürünürken taze Ege mezeleri eşliğinde baş başa bir akşam." }
+  ];
+
   return `<!doctype html>
 <html lang="tr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="description" content="${escapeHtml(name)} — Selimiye Koyu'nda ${escapeHtml(concept)}. Özel iskele, taş mimari ve Ege konukseverliği.">
-  <title>${escapeHtml(name)} — Selimiye | Obsidian Gold Liquid Glass</title>
+  <title>${escapeHtml(name)} — Selimiye | Obsidian Gold Liquid Glass (V1)</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1617,7 +1292,7 @@ function generateV1Page(hotel, detail) {
   <div class="ambient-glow glow-1" aria-hidden="true"></div>
   <div class="ambient-glow glow-2" aria-hidden="true"></div>
 
-  <!-- Floating Liquid Glass Header -->
+  <!-- Header -->
   <header class="v1-header" id="v1Header">
     <div class="header-island">
       <a href="#top" class="brand-link" aria-label="${escapeHtml(name)} Ana Sayfa">
@@ -1633,10 +1308,10 @@ function generateV1Page(hotel, detail) {
       <nav class="v1-nav">
         <a href="#about" class="nav-link">Felsefe</a>
         <a href="#suites" class="nav-link">Süitler & Odalar</a>
+        <a href="#rituals" class="nav-link">Günün Ritmi</a>
         <a href="#gastronomy" class="nav-link">Gastronomi</a>
-        <a href="#coves" class="nav-link">Selimiye Rehberi</a>
+        <a href="#coves" class="nav-link">Koylar Rehberi</a>
         <a href="#experiences" class="nav-link">Deneyimler</a>
-        <a href="#amenities" class="nav-link">Ayrıcalıklar</a>
         <a href="#contact" class="nav-link">İletişim</a>
       </nav>
 
@@ -1648,10 +1323,6 @@ function generateV1Page(hotel, detail) {
             <option value="USD">$ USD</option>
             <option value="GBP">£ GBP</option>
           </select>
-        </div>
-        <div class="lang-capsule hide-mobile">
-          <button class="lang-btn active">TR</button>
-          <button class="lang-btn">EN</button>
         </div>
         <a href="tel:${escapeHtml(cleanPhone)}" class="btn-phone-direct hide-mobile" title="Resepsiyon">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -1678,10 +1349,10 @@ function generateV1Page(hotel, detail) {
       <nav class="drawer-nav">
         <a href="#about" class="drawer-link">01. Felsefe & Taş Mimari</a>
         <a href="#suites" class="drawer-link">02. Süitler & Odalar</a>
-        <a href="#gastronomy" class="drawer-link">03. Gastronomi & İskele</a>
-        <a href="#coves" class="drawer-link">04. Selimiye & Saklı Koylar</a>
-        <a href="#experiences" class="drawer-link">05. Özel Aktiviteler</a>
-        <a href="#amenities" class="drawer-link">06. Ayrıcalıklar</a>
+        <a href="#rituals" class="drawer-link">03. Günün Ritmi</a>
+        <a href="#gastronomy" class="drawer-link">04. Gastronomi & İskele</a>
+        <a href="#coves" class="drawer-link">05. Selimiye & Saklı Koylar</a>
+        <a href="#experiences" class="drawer-link">06. Özel Aktiviteler</a>
         <a href="#contact" class="drawer-link">07. İletişim</a>
       </nav>
       <div class="drawer-footer">
@@ -1696,7 +1367,7 @@ function generateV1Page(hotel, detail) {
     <!-- HERO SECTION -->
     <section class="hero-v1">
       <div class="hero-bg-wrap">
-        <img src="../../template-system/visual-assets/anfora-hotel/hero.jpg" alt="${escapeHtml(name)} Selimiye Panoraması" class="hero-bg-img">
+        <img src="../_shared/media/hero.jpg" alt="${escapeHtml(name)} Selimiye Panoraması" class="hero-bg-img">
         <div class="hero-overlay"></div>
       </div>
 
@@ -1851,7 +1522,7 @@ function generateV1Page(hotel, detail) {
 
           <div class="story-mosaic" data-reveal>
             <div class="mosaic-main-card">
-              <img src="../../template-system/visual-assets/anfora-hotel/room.jpg" alt="${escapeHtml(name)} Yaşam Alanı">
+              <img src="../_shared/media/room.jpg" alt="${escapeHtml(name)} Yaşam Alanı">
               <div class="mosaic-glass-badge">
                 <div class="badge-live-tag">✦ SELİMİYE KIYISI</div>
                 <strong>${escapeHtml(name)}</strong>
@@ -1885,7 +1556,7 @@ function generateV1Page(hotel, detail) {
           ${rooms.map((room, idx) => `
             <article class="suite-card" data-reveal>
               <div class="suite-visual">
-                <img src="${idx === 0 ? '../../template-system/visual-assets/anfora-hotel/room.jpg' : '../../template-system/visual-assets/moonlight-butik-hotel/room.jpg'}" alt="${escapeHtml(room.title)}">
+                <img src="${idx === 0 ? '../_shared/media/suite_hd.jpg' : '../_shared/media/room.jpg'}" alt="${escapeHtml(room.title)}">
                 <span class="suite-tag">${escapeHtml(room.badge || 'Özel Oda')}</span>
                 <div class="suite-specs-bar">
                   <span>📐 ${escapeHtml(room.size || '32 m²')}</span>
@@ -1894,7 +1565,6 @@ function generateV1Page(hotel, detail) {
                 </div>
               </div>
               <div class="suite-body">
-                <span class="suite-type">Selimiye Serisi</span>
                 <h3 class="suite-name">${escapeHtml(room.title)}</h3>
                 <p class="suite-desc">${escapeHtml(room.desc || 'Ferah banyo, doğal keten dokular ve dingin koy manzarası.')}</p>
                 <div class="suite-amenities">
@@ -1916,8 +1586,28 @@ function generateV1Page(hotel, detail) {
       </div>
     </section>
 
+    <!-- GÜNÜN RİTMİ (RITUALS) -->
+    <section class="v1-section" id="rituals">
+      <div class="container">
+        <div class="section-center-head" data-reveal>
+          <div class="section-eyebrow-pill"><span class="eyebrow-dot"></span><span>GÜNÜN RİTMİ</span><span class="eyebrow-dot"></span></div>
+          <h2 class="section-title">Selimiye’de Zamanın Akışı</h2>
+          <p class="section-subtitle">Acele etmeden, her saatin tadını çıkararak yaşanan bir tatil deneyimi.</p>
+        </div>
+        <div class="rituals-deck">
+          ${rituals.map(r => `
+            <div class="ritual-card" data-reveal>
+              <span class="ritual-time">${escapeHtml(r.time)}</span>
+              <h4>${escapeHtml(r.title)}</h4>
+              <p>${escapeHtml(r.desc)}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </section>
+
     <!-- GASTRONOMY -->
-    <section class="v1-section" id="gastronomy">
+    <section class="v1-section bg-v1-dark" id="gastronomy">
       <div class="container">
         <div class="gastro-grid">
           <div class="gastro-text" data-reveal>
@@ -1949,8 +1639,8 @@ function generateV1Page(hotel, detail) {
 
           <div class="gastro-media" data-reveal>
             <div class="gastro-video-box">
-              <video autoplay muted loop playsinline preload="metadata" poster="../../template-system/visual-assets/anfora-hotel/dining.jpg">
-                <source src="../../new-demos/moonlight/media/decor.mp4" type="video/mp4">
+              <video autoplay muted loop playsinline preload="metadata" poster="../_shared/media/dining.jpg">
+                <source src="../_shared/media/decor.mp4" type="video/mp4">
               </video>
             </div>
           </div>
@@ -1959,7 +1649,7 @@ function generateV1Page(hotel, detail) {
     </section>
 
     <!-- SELİMİYE DESTINATION & COVES -->
-    <section class="v1-section bg-v1-dark" id="coves">
+    <section class="v1-section" id="coves">
       <div class="container">
         <div class="section-center-head" data-reveal>
           <div class="section-eyebrow-pill">
@@ -1978,7 +1668,7 @@ function generateV1Page(hotel, detail) {
         <div class="dest-grid-3">
           <div class="dest-card" data-reveal>
             <div class="dest-img-box">
-              <img src="../../template-system/visual-assets/anfora-hotel/hero.jpg" alt="Sığliman Koyu">
+              <img src="../_shared/media/jetty_hd.jpg" alt="Sığliman Koyu">
               <span class="dest-pill">Sığliman Koyu</span>
             </div>
             <div class="dest-body">
@@ -1989,7 +1679,7 @@ function generateV1Page(hotel, detail) {
 
           <div class="dest-card" data-reveal>
             <div class="dest-img-box">
-              <img src="../../template-system/visual-assets/anfora-hotel/dining.jpg" alt="Kamelya Adası">
+              <img src="../_shared/media/boat-arrival.jpg" alt="Kamelya Adası">
               <span class="dest-pill">Tarihi Miras</span>
             </div>
             <div class="dest-body">
@@ -2000,7 +1690,7 @@ function generateV1Page(hotel, detail) {
 
           <div class="dest-card" data-reveal>
             <div class="dest-img-box">
-              <img src="../../template-system/visual-assets/anfora-hotel/room.jpg" alt="Karia Yolu">
+              <img src="../_shared/media/terrace-view.jpg" alt="Karia Yolu">
               <span class="dest-pill">Doğa Yürüyüşü</span>
             </div>
             <div class="dest-body">
@@ -2013,7 +1703,7 @@ function generateV1Page(hotel, detail) {
     </section>
 
     <!-- EXPERIENCES -->
-    <section class="v1-section" id="experiences">
+    <section class="v1-section bg-v1-dark" id="experiences">
       <div class="container">
         <div class="section-center-head" data-reveal>
           <div class="section-eyebrow-pill">
@@ -2028,31 +1718,28 @@ function generateV1Page(hotel, detail) {
 
         <div class="exp-grid-6">
           <div class="glass-card exp-card" data-reveal>
-            <div class="exp-top"><span class="exp-num">01</span><span class="exp-icon">⛵</span></div>
+            <div class="exp-top"><span class="exp-num">01</span><span style="font-size:2rem;">⛵</span></div>
             <h3>Özel Gulet ile Saklı Koylar Turu</h3>
             <p>Otel iskelesinden hareketle Bencik, Kameriye ve Aşk Adası’na gün boyu özel mavi tur.</p>
-            <div class="exp-foot">
-              <span>Tam Gün</span>
+            <div>
               <button class="btn-exp-link" data-exp-title="Özel Gulet Turu">Bilgi Al ↗</button>
             </div>
           </div>
 
           <div class="glass-card exp-card" data-reveal>
-            <div class="exp-top"><span class="exp-num">02</span><span class="exp-icon">🧘</span></div>
+            <div class="exp-top"><span class="exp-num">02</span><span style="font-size:2rem;">🧘</span></div>
             <h3>İskelede Gün Doğumu Yogası</h3>
             <p>Sabahın erken saatlerinde sakin deniz üzerinde zihni dinlendiren nefes ve esneme seansı.</p>
-            <div class="exp-foot">
-              <span>Sabah 08:00</span>
+            <div>
               <button class="btn-exp-link" data-exp-title="Gün Doğumu Yogası">Bilgi Al ↗</button>
             </div>
           </div>
 
           <div class="glass-card exp-card" data-reveal>
-            <div class="exp-top"><span class="exp-num">03</span><span class="exp-icon">🫒</span></div>
+            <div class="exp-top"><span class="exp-num">03</span><span style="font-size:2rem;">🫒</span></div>
             <h3>Zeytinyağı & Şarap Tadımı</h3>
             <p>Bozburun Yarımadası’nın asırlık ağaçlarından elde edilen soğuk sıkım erken hasat zeytinyağları.</p>
-            <div class="exp-foot">
-              <span>Gurme Atölye</span>
+            <div>
               <button class="btn-exp-link" data-exp-title="Zeytinyağı Tadımı">Bilgi Al ↗</button>
             </div>
           </div>
@@ -2061,7 +1748,7 @@ function generateV1Page(hotel, detail) {
     </section>
 
     <!-- AMENITIES -->
-    <section class="v1-section bg-v1-dark" id="amenities">
+    <section class="v1-section" id="amenities">
       <div class="container">
         <div class="glass-card amenities-card" data-reveal>
           <div class="section-center-head">
@@ -2099,7 +1786,7 @@ function generateV1Page(hotel, detail) {
     </section>
 
     <!-- CONTACT & RESERVATION HUB -->
-    <section class="v1-section" id="contact">
+    <section class="v1-section bg-v1-dark" id="contact">
       <div class="container">
         <div class="glass-card hub-layout" data-reveal>
           <div class="hub-left">
@@ -2282,15 +1969,168 @@ function generateV1Page(hotel, detail) {
 `;
 }
 
+function generateJS() {
+  return `
+document.addEventListener('DOMContentLoaded', () => {
+  initHeader();
+  initMobileDrawer();
+  initRevealAnimations();
+  initBookingModals();
+  setDefaultDates();
+});
+
+function initHeader() {
+  const header = document.getElementById('v1Header');
+  if (!header) return;
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  }, { passive: true });
+}
+
+function initMobileDrawer() {
+  const btn = document.getElementById('mobileMenuToggle');
+  const drawer = document.getElementById('mobileDrawer');
+  const close = document.getElementById('drawerClose');
+  const links = document.querySelectorAll('.drawer-link');
+  if (!btn || !drawer) return;
+  const openDrawer = () => drawer.classList.add('active');
+  const closeDrawer = () => drawer.classList.remove('active');
+  btn.addEventListener('click', openDrawer);
+  if (close) close.addEventListener('click', closeDrawer);
+  links.forEach(l => l.addEventListener('click', closeDrawer));
+}
+
+function initRevealAnimations() {
+  const elements = document.querySelectorAll('[data-reveal]');
+  if (!elements.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  elements.forEach((el, index) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = \`opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) \${index % 4 * 0.08}s, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) \${index % 4 * 0.08}s\`;
+    observer.observe(el);
+  });
+}
+
+function initBookingModals() {
+  const modal = document.getElementById('bookingModal');
+  const modalClose = document.getElementById('modalCloseBtn');
+  const modalSuite = document.getElementById('modalSuiteChoice');
+  const modalTitle = document.getElementById('modalTitleText');
+  const modalForm = document.getElementById('modalBookingForm');
+  const heroSubmitBtn = document.getElementById('heroSubmitBtn');
+  const contactForm = document.getElementById('contactMainForm');
+  const hotelPhone = document.body.getAttribute('data-phone') || '902524562340';
+  const hotelName = document.body.getAttribute('data-hotel') || 'Otel';
+
+  document.querySelectorAll('[data-book]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      openModal('Özel Rezervasyon Talebi', \`\${hotelName} Genel Rezervasyon\`);
+    });
+  });
+
+  document.querySelectorAll('[data-suite-name]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.getAttribute('data-suite-name');
+      openModal(name, name);
+    });
+  });
+
+  document.querySelectorAll('[data-exp-title]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const exp = btn.getAttribute('data-exp-title');
+      openModal(\`Deneyim Talebi: \${exp}\`, exp);
+    });
+  });
+
+  function openModal(title, suite) {
+    if (!modal) return;
+    if (modalTitle) modalTitle.textContent = title;
+    if (modalSuite) modalSuite.value = suite;
+    modal.classList.add('active');
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('active');
+  }
+
+  if (modalClose) modalClose.addEventListener('click', closeModal);
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  }
+
+  if (modalForm) {
+    modalForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const suite = document.getElementById('modalSuiteChoice')?.value || 'Süit';
+      const checkin = document.getElementById('mCheckin')?.value || '';
+      const checkout = document.getElementById('mCheckout')?.value || '';
+      const guests = document.getElementById('mGuests')?.value || '2 Yetişkin';
+      const phone = document.getElementById('mPhone')?.value || '';
+      const notes = document.getElementById('mNotes')?.value || '';
+      const msg = \`Merhaba \${hotelName},%0A%0AWeb sitenizden doğrudan rezervasyon talebinde bulunmak istiyorum:%0A✦ *Kategori:* \${suite}%0A✦ *Tarihler:* \${checkin} - \${checkout}%0A✦ *Misafir Sayısı:* \${guests}%0A✦ *Telefon:* \${phone}%0A✦ *Özel İstek:* \${notes || 'Yok'}\`;
+      window.open(\`https://wa.me/\${hotelPhone.replace(/\\D/g, '')}?text=\${msg}\`, '_blank');
+      closeModal();
+    });
+  }
+
+  if (heroSubmitBtn) {
+    heroSubmitBtn.addEventListener('click', () => {
+      const checkin = document.getElementById('heroCheckin')?.value || '';
+      const checkout = document.getElementById('heroCheckout')?.value || '';
+      const guests = document.getElementById('heroGuests')?.value || '2';
+      const suite = document.getElementById('heroSuite')?.value || 'all';
+      const msg = \`Merhaba \${hotelName},%0A%0AWeb siteniz üzerinden \${checkin} - \${checkout} tarihleri için \${guests} misafir için müsaitlik ve fiyat teklifi rica ediyorum. (Tercih: \${suite})\`;
+      window.open(\`https://wa.me/\${hotelPhone.replace(/\\D/g, '')}?text=\${msg}\`, '_blank');
+    });
+  }
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('contactName')?.value || '';
+      const phone = document.getElementById('contactPhone')?.value || '';
+      const checkin = document.getElementById('contactCheckin')?.value || '';
+      const checkout = document.getElementById('contactCheckout')?.value || '';
+      const guests = document.getElementById('contactGuests')?.value || '';
+      const suite = document.getElementById('contactSuite')?.value || '';
+      const notes = document.getElementById('contactNotes')?.value || '';
+      const msg = \`Merhaba \${hotelName},%0A%0AAdım \${name}. Web sitenizden rezervasyon talebi iletiyorum:%0A✦ *Tarih:* \${checkin} - \${checkout}%0A✦ *Kişi:* \${guests}%0A✦ *Oda:* \${suite}%0A✦ *Telefon:* \${phone}%0A✦ *Not:* \${notes || 'Yok'}\`;
+      window.open(\`https://wa.me/\${hotelPhone.replace(/\\D/g, '')}?text=\${msg}\`, '_blank');
+    });
+  }
+}
+
+function setDefaultDates() {
+  const today = new Date();
+  const nextWeek = new Date();
+  nextWeek.setDate(today.getDate() + 4);
+  const formatDate = (d) => d.toISOString().split('T')[0];
+  const checkins = [document.getElementById('heroCheckin'), document.getElementById('contactCheckin'), document.getElementById('mCheckin')];
+  const checkouts = [document.getElementById('heroCheckout'), document.getElementById('contactCheckout'), document.getElementById('mCheckout')];
+  checkins.forEach(el => { if (el) el.value = formatDate(today); });
+  checkouts.forEach(el => { if (el) el.value = formatDate(nextWeek); });
+}
+`;
+}
+
 function main() {
   const hotels = researchV2.hotels;
   const manifest = [];
-
-  // Write shared CSS & JS
-  const sharedDir = path.join(outputRoot, '_shared');
-  if (!fs.existsSync(sharedDir)) fs.mkdirSync(sharedDir, { recursive: true });
-  fs.writeFileSync(path.join(sharedDir, 'styles.css'), sharedV1CSS, 'utf8');
-  fs.writeFileSync(path.join(sharedDir, 'app.js'), sharedV1JS, 'utf8');
+  const jsContent = generateJS();
 
   for (const hotel of hotels) {
     const slug = hotel.slug;
@@ -2298,11 +2138,10 @@ function main() {
     const hotelDir = path.join(outputRoot, slug);
     if (!fs.existsSync(hotelDir)) fs.mkdirSync(hotelDir, { recursive: true });
 
-    // Write index.html, styles.css and app.js into each hotel directory for standalone portability
     const pageHtml = generateV1Page(hotel, detail);
     fs.writeFileSync(path.join(hotelDir, 'index.html'), pageHtml, 'utf8');
     fs.writeFileSync(path.join(hotelDir, 'styles.css'), sharedV1CSS, 'utf8');
-    fs.writeFileSync(path.join(hotelDir, 'app.js'), sharedV1JS, 'utf8');
+    fs.writeFileSync(path.join(hotelDir, 'app.js'), jsContent, 'utf8');
 
     manifest.push({
       slug,
@@ -2313,7 +2152,7 @@ function main() {
   }
 
   fs.writeFileSync(path.join(outputRoot, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
-  console.log(`✅ Successfully generated all ${manifest.length} V1 Selimiye Websites with Obsidian Gold Liquid Glass architecture!`);
+  console.log(`✅ Generated ${manifest.length} V1 Selimiye Websites with Obsidian Gold Liquid Glass & Günün Ritmi!`);
 }
 
 main();

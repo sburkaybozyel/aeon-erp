@@ -1,6 +1,7 @@
 /* ==========================================================================
    SELİMİYE HOTELS — HAUTE EDITORIAL MEDITERRANEAN GAZETTE (V2)
    Design: Editorial Magazine / Travertine Linen / Cypress Green
+   Hotel: Üzüm Tatil Evi
    ========================================================================== */
 
 :root {
@@ -73,9 +74,7 @@ body.v2-editorial-gazette {
   z-index: 2;
 }
 
-/* ==========================================================================
-   TOP MASTHEAD & SPLIT NAVIGATION
-   ========================================================================== */
+/* Masthead */
 .editorial-masthead {
   background: var(--bg-page);
   border-bottom: 1px solid var(--border-light);
@@ -178,9 +177,7 @@ body.v2-editorial-gazette {
   transform: translateY(-2px);
 }
 
-/* ==========================================================================
-   HERO: HIGH-FASHION EDITORIAL TRIPTYCH
-   ========================================================================== */
+/* Hero */
 .editorial-hero {
   padding: 4rem 0 5rem;
   border-bottom: 1px solid var(--border-light);
@@ -277,7 +274,7 @@ body.v2-editorial-gazette {
   line-height: 1.8;
 }
 
-/* Concierge Desk Booking Dock */
+/* Concierge Dock */
 .concierge-desk-dock {
   background: #ffffff;
   border: 1px solid var(--border-medium);
@@ -321,9 +318,7 @@ body.v2-editorial-gazette {
   background: #ffffff;
 }
 
-/* ==========================================================================
-   STORY: LA DOLCE VITA & TAŞIN BELLEĞİ (MAGAZINE EDITORIAL)
-   ========================================================================== */
+/* Story */
 .editorial-section {
   padding: 6.5rem 0;
   border-bottom: 1px solid var(--border-light);
@@ -413,9 +408,7 @@ body.v2-editorial-gazette {
   color: var(--text-muted);
 }
 
-/* ==========================================================================
-   RESIDENCE LOOKBOOK (SÜİTLER & REZİDANSLAR)
-   ========================================================================== */
+/* Lookbook */
 .section-editorial-head {
   text-align: center;
   max-width: 760px;
@@ -544,9 +537,7 @@ body.v2-editorial-gazette {
   color: #ffffff;
 }
 
-/* ==========================================================================
-   GASTRONOMY: TASTING MENU CARD & HARVEST
-   ========================================================================== */
+/* Tasting Menu */
 .gastronomy-editorial-box {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -612,9 +603,7 @@ body.v2-editorial-gazette {
   display: block;
 }
 
-/* ==========================================================================
-   NAUTICAL LOGBOOK & COVES
-   ========================================================================== */
+/* Nautical Logbook */
 .nautical-logbook-deck {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -653,9 +642,7 @@ body.v2-editorial-gazette {
   line-height: 1.7;
 }
 
-/* ==========================================================================
-   CURATED SALONS / EXPERIENCES
-   ========================================================================== */
+/* Curated Salons */
 .salons-editorial-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -716,9 +703,7 @@ body.v2-editorial-gazette {
   cursor: pointer;
 }
 
-/* ==========================================================================
-   RESERVATION SALON & CONTACT
-   ========================================================================== */
+/* Reservation Salon */
 .reservation-salon-card {
   background: #ffffff;
   border: 1px solid var(--border-medium);
@@ -818,7 +803,6 @@ body.v2-editorial-gazette {
   color: var(--cypress);
 }
 
-/* Modal */
 .modal-editorial-backdrop {
   position: fixed;
   inset: 0;

@@ -44,11 +44,12 @@ function escapeHtml(value='') {
   return String(value).replace(/[&<>"']/g,(char)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 }
 
-// Generate Haute Editorial Gazette CSS for V2 (Completely different from V1)
+// Generate Haute Editorial Gazette CSS for V2
 function generateV2EditorialCSS(hotel) {
   return `/* ==========================================================================
    SELİMİYE HOTELS — HAUTE EDITORIAL MEDITERRANEAN GAZETTE (V2)
    Design: Editorial Magazine / Travertine Linen / Cypress Green
+   Hotel: ${hotel.name}
    ========================================================================== */
 
 :root {
@@ -121,9 +122,7 @@ body.v2-editorial-gazette {
   z-index: 2;
 }
 
-/* ==========================================================================
-   TOP MASTHEAD & SPLIT NAVIGATION
-   ========================================================================== */
+/* Masthead */
 .editorial-masthead {
   background: var(--bg-page);
   border-bottom: 1px solid var(--border-light);
@@ -226,9 +225,7 @@ body.v2-editorial-gazette {
   transform: translateY(-2px);
 }
 
-/* ==========================================================================
-   HERO: HIGH-FASHION EDITORIAL TRIPTYCH
-   ========================================================================== */
+/* Hero */
 .editorial-hero {
   padding: 4rem 0 5rem;
   border-bottom: 1px solid var(--border-light);
@@ -325,7 +322,7 @@ body.v2-editorial-gazette {
   line-height: 1.8;
 }
 
-/* Concierge Desk Booking Dock */
+/* Concierge Dock */
 .concierge-desk-dock {
   background: #ffffff;
   border: 1px solid var(--border-medium);
@@ -369,9 +366,7 @@ body.v2-editorial-gazette {
   background: #ffffff;
 }
 
-/* ==========================================================================
-   STORY: LA DOLCE VITA & TAŞIN BELLEĞİ (MAGAZINE EDITORIAL)
-   ========================================================================== */
+/* Story */
 .editorial-section {
   padding: 6.5rem 0;
   border-bottom: 1px solid var(--border-light);
@@ -461,9 +456,7 @@ body.v2-editorial-gazette {
   color: var(--text-muted);
 }
 
-/* ==========================================================================
-   RESIDENCE LOOKBOOK (SÜİTLER & REZİDANSLAR)
-   ========================================================================== */
+/* Lookbook */
 .section-editorial-head {
   text-align: center;
   max-width: 760px;
@@ -592,9 +585,7 @@ body.v2-editorial-gazette {
   color: #ffffff;
 }
 
-/* ==========================================================================
-   GASTRONOMY: TASTING MENU CARD & HARVEST
-   ========================================================================== */
+/* Tasting Menu */
 .gastronomy-editorial-box {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -660,9 +651,7 @@ body.v2-editorial-gazette {
   display: block;
 }
 
-/* ==========================================================================
-   NAUTICAL LOGBOOK & COVES
-   ========================================================================== */
+/* Nautical Logbook */
 .nautical-logbook-deck {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -701,9 +690,7 @@ body.v2-editorial-gazette {
   line-height: 1.7;
 }
 
-/* ==========================================================================
-   CURATED SALONS / EXPERIENCES
-   ========================================================================== */
+/* Curated Salons */
 .salons-editorial-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -764,9 +751,7 @@ body.v2-editorial-gazette {
   cursor: pointer;
 }
 
-/* ==========================================================================
-   RESERVATION SALON & CONTACT
-   ========================================================================== */
+/* Reservation Salon */
 .reservation-salon-card {
   background: #ffffff;
   border: 1px solid var(--border-medium);
@@ -866,7 +851,6 @@ body.v2-editorial-gazette {
   color: var(--cypress);
 }
 
-/* Modal */
 .modal-editorial-backdrop {
   position: fixed;
   inset: 0;
@@ -1022,17 +1006,17 @@ function generateV2EditorialHTML(hotel) {
 
         <div class="hero-triptych-grid" data-reveal>
           <div class="triptych-frame-side">
-            <img src="../../template-system/visual-assets/anfora-hotel/room.jpg" alt="Süit Detayı">
+            <img src="../_shared/media/room.jpg" alt="Süit Detayı">
           </div>
           <div class="triptych-center-hero">
-            <img src="../../template-system/visual-assets/anfora-hotel/hero.jpg" alt="${escapeHtml(name)} Ana Görsel">
+            <img src="../_shared/media/hero.jpg" alt="${escapeHtml(name)} Ana Görsel">
             <div class="triptych-overlay-badge">
               <span class="badge-quote-italic">“Zamanın durduğu, denizin nefes aldığı kıyı.”</span>
               <span class="badge-loc-tag">SELİMİYE KOYU · ÖZEL İSKELE</span>
             </div>
           </div>
           <div class="triptych-frame-side">
-            <img src="../../template-system/visual-assets/anfora-hotel/dining.jpg" alt="İskele Masası">
+            <img src="../_shared/media/dining.jpg" alt="İskele Masası">
           </div>
         </div>
 
@@ -1093,7 +1077,7 @@ function generateV2EditorialHTML(hotel) {
 
           <div class="polaroid-stack-frame" data-reveal>
             <div class="polaroid-img-main">
-              <img src="../../template-system/visual-assets/anfora-hotel/room.jpg" alt="Taş Mimari">
+              <img src="../_shared/media/suite_hd.jpg" alt="Taş Mimari">
             </div>
             <div class="polaroid-caption-tape">
               <strong>${escapeHtml(name)}</strong>
@@ -1119,7 +1103,7 @@ function generateV2EditorialHTML(hotel) {
           ${rooms.map((room, idx) => `
             <article class="residence-editorial-row ${idx % 2 === 1 ? 'reverse' : ''}" data-reveal>
               <div class="r-visual">
-                <img src="${idx === 0 ? '../../template-system/visual-assets/anfora-hotel/room.jpg' : '../../template-system/visual-assets/moonlight-butik-hotel/room.jpg'}" alt="${escapeHtml(room.title)}">
+                <img src="${idx === 0 ? '../_shared/media/suite.jpg' : '../_shared/media/room.jpg'}" alt="${escapeHtml(room.title)}">
                 <span class="r-badge">${escapeHtml(room.badge || 'Özel Seri')}</span>
               </div>
               <div class="r-details">
@@ -1182,8 +1166,8 @@ function generateV2EditorialHTML(hotel) {
           </div>
 
           <div class="gastro-video-editorial" data-reveal>
-            <video autoplay muted loop playsinline preload="metadata" poster="../../template-system/visual-assets/anfora-hotel/dining.jpg">
-              <source src="../../new-demos/moonlight/media/decor.mp4" type="video/mp4">
+            <video autoplay muted loop playsinline preload="metadata" poster="../_shared/media/dining.jpg">
+              <source src="../_shared/media/decor.mp4" type="video/mp4">
             </video>
           </div>
 
@@ -1598,7 +1582,7 @@ function buildAll() {
     fs.writeFileSync(path.join(hotelDir, 'index.html'), htmlContent, 'utf8');
   }
 
-  console.log(`✅ Successfully generated all ${hotels.length} V2 Selimiye Websites with Haute Editorial Gazette architecture!`);
+  console.log(`✅ Generated ${hotels.length} V2 Selimiye Websites with Haute Editorial Gazette architecture!`);
 }
 
 buildAll();

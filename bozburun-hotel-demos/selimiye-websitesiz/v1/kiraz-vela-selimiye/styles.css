@@ -7,11 +7,11 @@
   --font-heading: 'Cinzel', 'Cormorant Garamond', serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  --bg-deep: #070d14;
-  --bg-dark: #0c1520;
-  --bg-card: rgba(15, 26, 38, 0.72);
-  --bg-card-heavy: rgba(10, 18, 28, 0.88);
-  --bg-glass-input: rgba(255, 255, 255, 0.05);
+  --bg-deep: #060a10;
+  --bg-dark: #0b131e;
+  --bg-card: rgba(14, 24, 36, 0.75);
+  --bg-card-heavy: rgba(9, 16, 26, 0.9);
+  --bg-glass-input: rgba(255, 255, 255, 0.06);
 
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
@@ -60,7 +60,6 @@ body.selimiye-v1-liquid {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Ambient Glow Orbs */
 .ambient-glow {
   position: fixed;
   border-radius: 50%;
@@ -93,7 +92,7 @@ body.selimiye-v1-liquid {
   z-index: 2;
 }
 
-/* Floating Glass Header */
+/* Header */
 .v1-header {
   position: sticky;
   top: 0;
@@ -364,9 +363,7 @@ body.selimiye-v1-liquid {
   width: 100%;
 }
 
-/* ==========================================================================
-   HERO SECTION
-   ========================================================================== */
+/* Hero */
 .hero-v1 {
   position: relative;
   min-height: 92vh;
@@ -499,8 +496,7 @@ body.selimiye-v1-liquid {
   color: var(--gold-light);
   letter-spacing: 0.08em;
 }
-.dock-input,
-.dock-select {
+.dock-input, .dock-select {
   background: var(--bg-glass-input);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-sm);
@@ -511,8 +507,7 @@ body.selimiye-v1-liquid {
   outline: none;
   transition: var(--transition);
 }
-.dock-input:focus,
-.dock-select:focus {
+.dock-input:focus, .dock-select:focus {
   border-color: var(--gold-primary);
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
   background: rgba(255, 255, 255, 0.08);
@@ -546,7 +541,6 @@ body.selimiye-v1-liquid {
   box-shadow: 0 10px 35px rgba(212, 175, 55, 0.55);
 }
 
-/* Hero Strip Grid */
 .hero-strip-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -585,9 +579,7 @@ body.selimiye-v1-liquid {
   color: var(--text-muted);
 }
 
-/* ==========================================================================
-   GLOBAL SECTION HEADERS & GLASS CARDS
-   ========================================================================== */
+/* Sections */
 .v1-section {
   padding: 6.5rem 0;
   position: relative;
@@ -648,9 +640,7 @@ body.selimiye-v1-liquid {
   box-shadow: var(--shadow-liquid);
 }
 
-/* ==========================================================================
-   STORY & MOSAIC
-   ========================================================================== */
+/* Story */
 .story-grid {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
@@ -672,7 +662,6 @@ body.selimiye-v1-liquid {
   line-height: 1.8;
   margin-bottom: 1.75rem;
 }
-
 .story-pillars {
   display: flex;
   flex-direction: column;
@@ -695,20 +684,7 @@ body.selimiye-v1-liquid {
   border-radius: var(--radius-sm);
   border: 1px solid rgba(212, 175, 55, 0.3);
 }
-.pillar-item strong {
-  display: inline;
-  color: #fff;
-  font-size: 0.92rem;
-  margin-right: 4px;
-}
-.pillar-item span {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
 
-.story-mosaic {
-  position: relative;
-}
 .mosaic-main-card {
   position: relative;
   border-radius: var(--radius-lg);
@@ -734,26 +710,8 @@ body.selimiye-v1-liquid {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-gold);
 }
-.badge-live-tag {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--gold-light);
-  margin-bottom: 2px;
-}
-.mosaic-glass-badge strong {
-  display: block;
-  color: #fff;
-  font-size: 0.95rem;
-}
-.mosaic-glass-badge small {
-  color: var(--text-muted);
-  font-size: 0.76rem;
-}
 
-/* ==========================================================================
-   SUITES & ROOMS
-   ========================================================================== */
+/* Suites */
 .suites-glass-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -797,8 +755,6 @@ body.selimiye-v1-liquid {
   color: #050b10;
   font-weight: 800;
   font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   padding: 4px 12px;
   border-radius: var(--radius-full);
 }
@@ -818,22 +774,12 @@ body.selimiye-v1-liquid {
   color: #fff;
   font-weight: 600;
 }
-
 .suite-body {
   padding: 2.25rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
-}
-.suite-type {
-  color: var(--gold-light);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 0.4rem;
 }
 .suite-name {
   font-family: var(--font-heading);
@@ -862,13 +808,6 @@ body.selimiye-v1-liquid {
   padding: 3px 9px;
   border-radius: var(--radius-full);
 }
-.suite-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 1.25rem;
-}
 .btn-suite-reserve {
   background: var(--bg-card-heavy);
   border: 1px solid var(--border-gold);
@@ -887,9 +826,45 @@ body.selimiye-v1-liquid {
   box-shadow: var(--shadow-gold);
 }
 
-/* ==========================================================================
-   GASTRONOMY & COVES & EXPERIENCES
-   ========================================================================== */
+/* Günün Ritmi (Rituals) */
+.rituals-deck {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3.5rem;
+}
+.ritual-card {
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  transition: var(--transition);
+}
+.ritual-card:hover {
+  border-color: var(--gold-primary);
+  transform: translateY(-4px);
+}
+.ritual-time {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  margin-bottom: 0.75rem;
+}
+.ritual-card h4 {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.ritual-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Gastronomy & Coves */
 .gastro-grid {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
@@ -937,17 +912,9 @@ body.selimiye-v1-liquid {
 }
 .gastro-video-box video {
   width: 100%;
-  height: 320px;
+  height: 340px;
   object-fit: cover;
   display: block;
-}
-.gastro-sub-img {
-  height: 200px;
-}
-.gastro-sub-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .dest-grid-3 {
@@ -1007,6 +974,7 @@ body.selimiye-v1-liquid {
   line-height: 1.65;
 }
 
+/* Experiences & Amenities */
 .exp-grid-6 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1035,9 +1003,6 @@ body.selimiye-v1-liquid {
   font-weight: 700;
   color: rgba(212, 175, 55, 0.3);
 }
-.exp-icon {
-  font-size: 2rem;
-}
 .exp-card h3 {
   font-family: var(--font-heading);
   font-size: 1.25rem;
@@ -1051,35 +1016,15 @@ body.selimiye-v1-liquid {
   line-height: 1.65;
   margin-bottom: 1.5rem;
 }
-.exp-foot {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 1rem;
-}
-.exp-foot span {
-  font-size: 0.76rem;
-  color: var(--gold-light);
-  font-weight: 600;
-}
 .btn-exp-link {
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--gold-light);
   font-weight: 700;
   font-size: 0.84rem;
   cursor: pointer;
-  transition: var(--transition);
-}
-.btn-exp-link:hover {
-  color: var(--gold-light);
-  transform: translateX(4px);
 }
 
-/* ==========================================================================
-   AMENITIES & TESTIMONIALS & CONTACT
-   ========================================================================== */
 .amenities-card {
   padding: 4rem;
 }
@@ -1100,50 +1045,7 @@ body.selimiye-v1-liquid {
   font-size: 0.86rem;
 }
 
-.testi-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-.testi-card {
-  padding: 2.25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.t-stars {
-  color: var(--gold-primary);
-  font-size: 0.95rem;
-  letter-spacing: 2px;
-  margin-bottom: 1.25rem;
-}
-.testi-card p {
-  font-style: italic;
-  font-size: 1.05rem;
-  color: #e2ecf5;
-  line-height: 1.7;
-  margin-bottom: 1.75rem;
-}
-.t-author {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 1.25rem;
-}
-.author-monogram {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-sm);
-  background: var(--gold-gradient);
-  color: #050b10;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-}
-
+/* Hub & Footer */
 .hub-layout {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -1165,17 +1067,6 @@ body.selimiye-v1-liquid {
   height: 32px;
   border-radius: 50%;
 }
-.hub-brand-badge strong {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  color: #fff;
-  display: block;
-}
-.hub-brand-badge small {
-  font-size: 0.65rem;
-  color: var(--gold-light);
-}
-
 .hub-title {
   font-family: var(--font-heading);
   font-size: 2.3rem;
@@ -1190,10 +1081,6 @@ body.selimiye-v1-liquid {
   gap: 1.2rem;
   margin: 2rem 0;
 }
-.h-item {
-  display: flex;
-  gap: 0.85rem;
-}
 .h-item strong {
   display: block;
   font-size: 0.78rem;
@@ -1204,9 +1091,6 @@ body.selimiye-v1-liquid {
   color: #fff;
   font-size: 0.92rem;
   text-decoration: none;
-}
-.h-item a:hover {
-  color: var(--gold-light);
 }
 
 .form-box {
@@ -1254,10 +1138,6 @@ body.selimiye-v1-liquid {
   font-size: 0.88rem;
   outline: none;
 }
-.f-field input:focus, .f-field select:focus, .f-field textarea:focus {
-  border-color: var(--gold-primary);
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
-}
 
 .v1-footer {
   background: #04070a;
@@ -1272,60 +1152,13 @@ body.selimiye-v1-liquid {
   gap: 3rem;
   margin-bottom: 3.5rem;
 }
-.footer-logo-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
 .footer-avatar {
   width: 38px;
   height: 38px;
   border-radius: 50%;
   border: 1.5px solid var(--gold-primary);
 }
-.footer-logo-row span {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #fff;
-}
-.footer-col strong {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--gold-light);
-  margin-bottom: 1.25rem;
-}
-.footer-col a {
-  display: block;
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.85rem;
-  margin-bottom: 0.6rem;
-  transition: var(--transition);
-}
-.footer-col a:hover {
-  color: #fff;
-  transform: translateX(4px);
-}
-.footer-col p {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  margin-bottom: 0.6rem;
-}
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding-top: 1.5rem;
-  font-size: 0.78rem;
-  color: var(--text-dim);
-}
 
-/* Modal */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -1353,12 +1186,6 @@ body.selimiye-v1-liquid {
   width: 100%;
   padding: 2.5rem;
   position: relative;
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), var(--shadow-gold);
-  transform: scale(0.95);
-  transition: var(--transition);
-}
-.modal-backdrop.active .modal-window {
-  transform: scale(1);
 }
 .modal-close {
   position: absolute;
@@ -1380,7 +1207,7 @@ body.selimiye-v1-liquid {
   .btn-dock-submit { grid-column: span 2; }
   .hero-strip-grid { grid-template-columns: repeat(2, 1fr); }
   .story-grid, .gastro-grid, .hub-layout { grid-template-columns: 1fr; gap: 3rem; }
-  .suites-glass-grid, .dest-grid-3, .exp-grid-6, .testi-grid, .amenities-grid { grid-template-columns: 1fr; }
+  .suites-glass-grid, .dest-grid-3, .exp-grid-6, .rituals-deck, .amenities-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -1394,5 +1221,4 @@ body.selimiye-v1-liquid {
   .hub-layout, .amenities-card { padding: 1.75rem; }
   .form-row-2 { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
 }
