@@ -1,10 +1,7 @@
-/**
- * SELİMİYE V2 MULTI-ARCHETYPE ENGINE
- */
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-book]').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.getElementById('concierge')?.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     });
   });
 
@@ -12,26 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', (e) => {
       const name = e.currentTarget.getAttribute('data-suite-name');
       const select = document.getElementById('v2Suite');
-      if (select) select.value = name;
-      document.getElementById('concierge')?.scrollIntoView({ behavior: 'smooth' });
+      if (select && name) select.value = name;
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     });
   });
-
-  const heroBtn = document.getElementById('heroSubmitBtn');
-  if (heroBtn) {
-    heroBtn.addEventListener('click', () => {
-      const checkin = document.getElementById('heroCheckin')?.value || '';
-      const checkout = document.getElementById('heroCheckout')?.value || '';
-      const guests = document.getElementById('heroGuests')?.value || '2 Yetişkin';
-      const v2Checkin = document.getElementById('v2Checkin');
-      const v2Checkout = document.getElementById('v2Checkout');
-      const v2Guests = document.getElementById('v2Guests');
-      if (v2Checkin && checkin) v2Checkin.value = checkin;
-      if (v2Checkout && checkout) v2Checkout.value = checkout;
-      if (v2Guests && guests) v2Guests.value = guests;
-      document.getElementById('concierge')?.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
 
   const submitBtn = document.getElementById('v2SubmitBtn');
   if (submitBtn) {
