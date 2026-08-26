@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getLuxuryEmblem } from '../generate-logos.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const parent = path.resolve(here, '..');
@@ -1303,7 +1304,7 @@ function generateV1Page(hotel, detail) {
     <div class="header-island">
       <a href="#top" class="brand-link" aria-label="${escapeHtml(name)} Ana Sayfa">
         <div class="brand-logo-frame">
-          <img src="./media/logo.svg" alt="${escapeHtml(name)} Logo" class="brand-logo-img">
+          ${getLuxuryEmblem(slug, name, true)}
         </div>
         <div class="brand-names">
           <span class="brand-main-title">${escapeHtml(name).toUpperCase()}</span>
@@ -1799,7 +1800,9 @@ function generateV1Page(hotel, detail) {
         <div class="glass-card hub-layout" data-reveal>
           <div class="hub-left">
             <div class="hub-brand-badge">
-              <img src="./media/logo.svg" alt="${escapeHtml(name)} Logo">
+              <div style="width:36px; height:36px; border-radius:50%; overflow:hidden;">
+                ${getLuxuryEmblem(slug, name, true)}
+              </div>
               <div>
                 <strong>${escapeHtml(name).toUpperCase()}</strong>
                 <small>SELİMİYE / MARMARİS</small>
@@ -1812,22 +1815,22 @@ function generateV1Page(hotel, detail) {
               <div class="h-item">
                 <span>📍</span>
                 <div>
-                  <strong>Adres</strong>
+                  <strong>KONUM</strong>
                   <span>${escapeHtml(address)}</span>
                 </div>
               </div>
               <div class="h-item">
                 <span>📞</span>
                 <div>
-                  <strong>Telefon</strong>
+                  <strong>TELEFON & REZERVASYON</strong>
                   <a href="tel:${escapeHtml(cleanPhone)}">${escapeHtml(phone)}</a>
                 </div>
               </div>
               <div class="h-item">
                 <span>💬</span>
                 <div>
-                  <strong>WhatsApp</strong>
-                  <a href="https://wa.me/${escapeHtml(cleanPhone)}" target="_blank">${escapeHtml(phone)}</a>
+                  <strong>WHATSAPP DANIŞMA</strong>
+                  <a href="https://wa.me/${escapeHtml(cleanPhone)}" target="_blank">+90 Selimiye Concierge</a>
                 </div>
               </div>
             </div>
@@ -1835,31 +1838,45 @@ function generateV1Page(hotel, detail) {
 
           <div class="hub-right">
             <div class="form-box">
-              <h3>Müsaitlik & Rezervasyon Talebi</h3>
-              <form class="real-form" id="contactMainForm">
+              <div class="form-header">
+                <span class="badge-tag">HIZLI MÜSAİTLİK</span>
+                <h3>Doğrudan Rezervasyon Talebi</h3>
+                <p>En uygun fiyat garantisi ve doğrudan otel iletişimi.</p>
+              </div>
+
+              <form class="real-form" onsubmit="return false;">
                 <div class="form-row-2">
                   <div class="f-field">
-                    <label>Adınız Soyadınız *</label>
-                    <input type="text" id="contactName" placeholder="Ad Soyad" required>
+                    <label>Ad Soyad</label>
+                    <input type="text" id="contactName" placeholder="Adınız ve Soyadınız" required>
                   </div>
                   <div class="f-field">
-                    <label>Telefon / WhatsApp *</label>
-                    <input type="tel" id="contactPhone" placeholder="+90 5xx xxx xx xx" required>
+                    <label>Telefon / WhatsApp</label>
+                    <input type="tel" id="contactPhone" placeholder="05XX XXX XX XX" required>
                   </div>
                 </div>
+
                 <div class="form-row-2">
                   <div class="f-field">
-                    <label>Giriş Tarihi *</label>
+                    <label>Giriş Tarihi</label>
                     <input type="date" id="contactCheckin" required>
                   </div>
                   <div class="f-field">
-                    <label>Çıkış Tarihi *</label>
+                    <label>Çıkış Tarihi</label>
                     <input type="date" id="contactCheckout" required>
                   </div>
                 </div>
+
                 <div class="form-row-2">
                   <div class="f-field">
-                    <label>Kişi Sayısı</label>
+                    <label>Oda Tercihi</label>
+                    <select id="contactSuite">
+                      <option value="Tüm Koleksiyon">Tüm Odalar</option>
+                      ${rooms.map(r => `<option value="${escapeHtml(r.title)}">${escapeHtml(r.title)}</option>`).join('')}
+                    </select>
+                  </div>
+                  <div class="f-field">
+                    <label>Misafir Sayısı</label>
                     <select id="contactGuests">
                       <option value="2 Yetişkin">2 Yetişkin</option>
                       <option value="1 Yetişkin">1 Yetişkin</option>
@@ -1867,18 +1884,16 @@ function generateV1Page(hotel, detail) {
                       <option value="4+ Yetişkin">4+ Yetişkin / Aile</option>
                     </select>
                   </div>
-                  <div class="f-field">
-                    <label>Oda Tercihi</label>
-                    <select id="contactSuite">
-                      ${rooms.map(r => `<option value="${escapeHtml(r.title)}">${escapeHtml(r.title)}</option>`).join('')}
-                    </select>
-                  </div>
                 </div>
+
                 <div class="f-field">
-                  <label>Özel Notlar</label>
-                  <textarea id="contactNotes" rows="2" placeholder="Özel talepleriniz veya transfer isteğiniz..."></textarea>
+                  <label>Özel İstek veya Notunuz (Opsiyonel)</label>
+                  <textarea id="contactNotes" rows="3" placeholder="Örn: Balayı karşılaması, tekne transferi, vegan kahvaltı..."></textarea>
                 </div>
-                <button type="submit" class="btn-gold-cta w-full">WhatsApp ile Rezervasyon İlet ↗</button>
+
+                <button type="button" class="btn-gold-submit" id="contactSubmitBtn">
+                  <span>Rezervasyon Talebini Gönder</span> <i>→</i>
+                </button>
               </form>
             </div>
           </div>

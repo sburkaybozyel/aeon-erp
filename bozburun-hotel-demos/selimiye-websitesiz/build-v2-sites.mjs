@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getLuxuryEmblem } from './generate-logos.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -960,7 +961,7 @@ function generateV2EditorialHTML(hotel) {
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="./styles.css">
   <script defer src="./app.js"></script>
@@ -973,7 +974,7 @@ function generateV2EditorialHTML(hotel) {
       
       <a href="#top" class="masthead-center-brand">
         <div class="brand-logo-emblem">
-          <img src="./media/logo.svg" alt="${escapeHtml(name)} Logo" width="100%" height="100%">
+          ${getLuxuryEmblem(hotel.slug, hotel.name, false)}
         </div>
         <span class="brand-gazette-title">${escapeHtml(name).toUpperCase()}</span>
         <span class="brand-gazette-sub">RESORT & PRIVATE PIER · SELİMİYE</span>

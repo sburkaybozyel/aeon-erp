@@ -8,7 +8,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="./styles.css">
   <script defer src="./app.js"></script>
@@ -21,7 +21,66 @@
       
       <a href="#top" class="masthead-center-brand">
         <div class="brand-logo-emblem">
-          <img src="./media/logo.svg" alt="Çoban Hotel Selimiye Logo" width="100%" height="100%">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
+  
+  <defs>
+    <!-- Rich Bullion Gold Gradient -->
+    <linearGradient id="goldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff0b8"/>
+      <stop offset="20%" stop-color="#e5c158"/>
+      <stop offset="45%" stop-color="#c99726"/>
+      <stop offset="70%" stop-color="#8a6111"/>
+      <stop offset="90%" stop-color="#d8a834"/>
+      <stop offset="100%" stop-color="#fdf2c6"/>
+    </linearGradient>
+
+    <!-- Ring Specular Gradient -->
+    <linearGradient id="goldRadial" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9a6e18"/>
+      <stop offset="35%" stop-color="#fff2c2"/>
+      <stop offset="70%" stop-color="#c59424"/>
+      <stop offset="100%" stop-color="#734f0c"/>
+    </linearGradient>
+
+    <!-- Midnight Obsidian Backdrop -->
+    <radialGradient id="darkBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#152232"/>
+      <stop offset="65%" stop-color="#09101a"/>
+      <stop offset="100%" stop-color="#04070c"/>
+    </radialGradient>
+
+    <!-- Deep Emerald Backdrop for V2 -->
+    <radialGradient id="emeraldBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1b4634"/>
+      <stop offset="65%" stop-color="#0c251b"/>
+      <stop offset="100%" stop-color="#05140e"/>
+    </radialGradient>
+  </defs>
+
+  
+    <!-- Solid Dark Backdrop Medallion -->
+    <circle cx="150" cy="150" r="146" fill="url(#emeraldBg)"/>
+    <circle cx="150" cy="150" r="140" fill="none" stroke="url(#goldLinear)" stroke-width="3"/>
+    <circle cx="150" cy="150" r="132" fill="none" stroke="url(#goldRadial)" stroke-width="1.2" stroke-dasharray="3 3"/>
+    <circle cx="150" cy="150" r="125" fill="none" stroke="url(#goldLinear)" stroke-width="1.5"/>
+
+    <!-- 4 Cardinal Gold Points -->
+    <polygon points="150,11 154,19 146,19" fill="url(#goldLinear)"/>
+    <polygon points="150,289 154,281 146,281" fill="url(#goldLinear)"/>
+    <polygon points="11,150 19,154 19,146" fill="url(#goldLinear)"/>
+    <polygon points="289,150 281,154 281,146" fill="url(#goldLinear)"/>
+  
+  
+        <!-- COBAN: Imperial Aries Ram Horns -->
+        <g transform="translate(150, 110)">
+          <path d="M-24 -8 C-38 -30 -12 -38 0 -20 C12 -38 38 -30 24 -8 C14 8 -14 8 -24 -8 Z" fill="none" stroke="url(#goldLinear)" stroke-width="3"/>
+          <polygon points="0,-12 9,14 -9,14" fill="none" stroke="url(#goldRadial)" stroke-width="2"/>
+          <circle cx="0" cy="24" r="4" fill="url(#goldLinear)"/>
+        </g>
+        <text x="150" y="196" font-family="'Cinzel', Georgia, serif" font-size="22" font-weight="700" fill="url(#goldLinear)" text-anchor="middle" letter-spacing="6">ÇOBAN</text>
+        <text x="150" y="215" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#f9e8af" text-anchor="middle" letter-spacing="4">HOTEL SELİMİYE</text>
+      
+</svg>
         </div>
         <span class="brand-gazette-title">ÇOBAN HOTEL SELIMIYE</span>
         <span class="brand-gazette-sub">RESORT & PRIVATE PIER · SELİMİYE</span>

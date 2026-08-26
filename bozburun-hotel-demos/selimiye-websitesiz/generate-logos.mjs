@@ -407,8 +407,7 @@ function getLuxuryEmblem(slug, name, isDark = true) {
       `;
   }
 
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
   ${sharedDefs}
   ${frame}
   ${inner}
@@ -439,3 +438,5 @@ function deployAllLogos() {
 }
 
 deployAllLogos();
+
+export { getLuxuryEmblem };
