@@ -1,20 +1,15 @@
 /**
- * SELİMİYE V2 — LUMINOUS LIQUID GLASS ENGINE
+ * SELİMİYE V2 MULTI-ARCHETYPE ENGINE
  */
 document.addEventListener('DOMContentLoaded', () => {
-  // Sticky header on scroll
   const header = document.getElementById('v2Header');
   if (header) {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 40) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
+      if (window.scrollY > 40) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
     }, { passive: true });
   }
 
-  // Scroll reveal animation
   const reveals = document.querySelectorAll('[data-reveal]');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
@@ -25,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
 
     reveals.forEach(el => {
       el.style.opacity = '0';
@@ -35,55 +30,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Book buttons scroll to concierge
   document.querySelectorAll('[data-book]').forEach(btn => {
     btn.addEventListener('click', () => {
-      const section = document.getElementById('concierge');
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-      }
+      document.getElementById('concierge')?.scrollIntoView({ behavior: 'smooth' });
     });
   });
 
-  // Suite Reserve buttons
   document.querySelectorAll('[data-suite-name]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const name = e.currentTarget.getAttribute('data-suite-name');
       const select = document.getElementById('v2Suite');
-      if (select) {
-        select.value = name;
-      }
-      const section = document.getElementById('concierge');
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (select) select.value = name;
+      document.getElementById('concierge')?.scrollIntoView({ behavior: 'smooth' });
     });
   });
 
-  // Hero Dock Submit Button
   const heroBtn = document.getElementById('heroSubmitBtn');
   if (heroBtn) {
     heroBtn.addEventListener('click', () => {
       const checkin = document.getElementById('heroCheckin')?.value || '';
       const checkout = document.getElementById('heroCheckout')?.value || '';
       const guests = document.getElementById('heroGuests')?.value || '2 Yetişkin';
-
       const v2Checkin = document.getElementById('v2Checkin');
       const v2Checkout = document.getElementById('v2Checkout');
       const v2Guests = document.getElementById('v2Guests');
-
       if (v2Checkin && checkin) v2Checkin.value = checkin;
       if (v2Checkout && checkout) v2Checkout.value = checkout;
       if (v2Guests && guests) v2Guests.value = guests;
-
-      const section = document.getElementById('concierge');
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-      }
+      document.getElementById('concierge')?.scrollIntoView({ behavior: 'smooth' });
     });
   }
 
-  // WhatsApp Routing Form
   const submitBtn = document.getElementById('v2SubmitBtn');
   if (submitBtn) {
     submitBtn.addEventListener('click', () => {
