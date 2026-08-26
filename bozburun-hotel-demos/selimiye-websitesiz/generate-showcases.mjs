@@ -196,11 +196,11 @@ function generateShowcaseHTML(activeVersion) {
     <header>
       <div class="eyebrow">SELİMİYE BUTİK OTEL PORTFÖYÜ</div>
       <h1>24 Butik Otel, <em>48 Özel Web Sitesi</em></h1>
-      <p class="lead">Her otele özel tasarlanmış logo/amblem, zengin sıvı cam mimarisi (V1) ve Akdeniz Riviera lüksü (V2) ile hazırlanan web siteleri.</p>
+      <p class="lead">Her otele özel tasarlanmış 3D altın mühür amblem, Obsidian Gold (V1) ve Luminous Aegean Liquid Glass (V2) mimarisiyle hazırlanan web siteleri.</p>
       
       <div class="version-switcher">
         <a href="../v1/index.html" class="v-tab ${!isV2 ? 'active' : ''}">V1: Obsidian Gold Liquid Glass</a>
-        <a href="../v2-gemini/index.html" class="v-tab ${isV2 ? 'active' : ''}">V2: Mediterranean Riviera Luxury</a>
+        <a href="../v2-gemini/index.html" class="v-tab ${isV2 ? 'active' : ''}">V2: Luminous Aegean Liquid Glass</a>
       </div>
     </header>
 
