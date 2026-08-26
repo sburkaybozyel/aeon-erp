@@ -138,16 +138,22 @@ body.selimiye-v1-liquid {
   text-decoration: none;
 }
 .brand-logo-frame {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   overflow: hidden;
   border: 1.5px solid var(--gold-primary);
-  box-shadow: 0 0 15px var(--gold-glow);
+  box-shadow: 0 0 20px var(--gold-glow);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #000;
+  background: #05080e;
+  padding: 2px;
+  transition: var(--transition);
+}
+.brand-logo-frame:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
 }
 .brand-logo-img {
   width: 100%;

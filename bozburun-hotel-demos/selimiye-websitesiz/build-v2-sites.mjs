@@ -148,14 +148,19 @@ body.v2-editorial-gazette {
   text-decoration: none;
 }
 .brand-logo-emblem {
-  width: 48px;
-  height: 48px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  border: 1px solid var(--cypress);
-  padding: 6px;
-  margin-bottom: 0.5rem;
+  border: 1.5px solid var(--border-gold);
+  padding: 4px;
+  margin-bottom: 0.75rem;
   background: #ffffff;
-  box-shadow: 0 4px 15px rgba(20, 53, 39, 0.08);
+  box-shadow: 0 8px 25px rgba(20, 53, 39, 0.12);
+  transition: var(--transition);
+}
+.brand-logo-emblem:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(20, 53, 39, 0.2);
 }
 .brand-gazette-title {
   font-family: var(--font-display);
