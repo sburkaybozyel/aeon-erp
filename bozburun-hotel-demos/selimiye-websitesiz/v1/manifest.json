@@ -1,0 +1,146 @@
+[
+  {
+    "slug": "mi-amor-selimiye",
+    "name": "Mi Amor Selimiye",
+    "version": "v1",
+    "phone": "0534 689 32 32"
+  },
+  {
+    "slug": "dut-selimiye",
+    "name": "Dut Selimiye",
+    "version": "v1",
+    "phone": "0536 354 72 62"
+  },
+  {
+    "slug": "makia-otel",
+    "name": "Makia Otel Selimiye",
+    "version": "v1",
+    "phone": "0533 111 22 33"
+  },
+  {
+    "slug": "pineloft-selimiye",
+    "name": "Pineloft Selimiye",
+    "version": "v1",
+    "phone": "0533 696 77 05"
+  },
+  {
+    "slug": "doga-pansiyon",
+    "name": "Doğa Pansiyon Selimiye",
+    "version": "v1",
+    "phone": "0537 658 84 40"
+  },
+  {
+    "slug": "duru-selimiye",
+    "name": "Duru Selimiye",
+    "version": "v1",
+    "phone": "0531 082 07 20"
+  },
+  {
+    "slug": "ekin-pansiyon",
+    "name": "Ekin Pansiyon Selimiye",
+    "version": "v1",
+    "phone": "0532 555 44 33"
+  },
+  {
+    "slug": "ekin-tatil-evi",
+    "name": "Ekin Tatil Evi",
+    "version": "v1",
+    "phone": "0537 869 19 33"
+  },
+  {
+    "slug": "dantel-pansiyon-restaurant",
+    "name": "Dantel Pansiyon & Restaurant",
+    "version": "v1",
+    "phone": "0532 651 18 94"
+  },
+  {
+    "slug": "elia-selimiye",
+    "name": "Elia Selimiye",
+    "version": "v1",
+    "phone": "0532 393 81 48"
+  },
+  {
+    "slug": "portakal-butik-otel",
+    "name": "Portakal Butik Otel",
+    "version": "v1",
+    "phone": "0535 601 19 26"
+  },
+  {
+    "slug": "salkim-sahil-evi",
+    "name": "Salkım Sahil Evi",
+    "version": "v1",
+    "phone": "0552 428 49 15"
+  },
+  {
+    "slug": "mavi-melek-hotel",
+    "name": "Mavi Melek Hotel",
+    "version": "v1",
+    "phone": "0532 999 88 77"
+  },
+  {
+    "slug": "hydas-pansiyon",
+    "name": "Hydas Pansiyon",
+    "version": "v1",
+    "phone": "0505 316 75 62"
+  },
+  {
+    "slug": "yamac-motel-selimiye",
+    "name": "Yamaç Motel Selimiye",
+    "version": "v1",
+    "phone": "0541 536 63 86"
+  },
+  {
+    "slug": "moka-butik-hotel",
+    "name": "Moka Butik Hotel",
+    "version": "v1",
+    "phone": "0532 051 75 94"
+  },
+  {
+    "slug": "uzum-tatil-evi",
+    "name": "Üzüm Tatil Evi",
+    "version": "v1",
+    "phone": "0530 799 68 48; eski dizinde 0252 446 43 34"
+  },
+  {
+    "slug": "naxos-beach",
+    "name": "Naxos Beach Selimiye",
+    "version": "v1",
+    "phone": "0531 271 88 48 Google; restoran kaydında 0507 809 74 33"
+  },
+  {
+    "slug": "selimiye-11-oda",
+    "name": "Selimiye 11 Oda",
+    "version": "v1",
+    "phone": "0533 888 77 66"
+  },
+  {
+    "slug": "sigliman-glamping-beach",
+    "name": "Sığliman Glamping Beach",
+    "version": "v1",
+    "phone": "0545 639 60 30; 0541 690 87 41; 0553 978 62 19"
+  },
+  {
+    "slug": "selimiye-sakli-bahce-hotel",
+    "name": "Selimiye Saklı Bahçe Hotel",
+    "version": "v1",
+    "phone": "0544 953 91 28; eski dizinde 0252 446 41 42"
+  },
+  {
+    "slug": "zakkum-frida-pansiyon",
+    "name": "Zakkum Frida Pansiyon",
+    "version": "v1",
+    "phone": "0532 670 16 80"
+  },
+  {
+    "slug": "coban-hotel-selimiye",
+    "name": "Çoban Hotel Selimiye",
+    "version": "v1",
+    "phone": "0542 290 91 53 Google; eski dizinde 0252 446 40 39"
+  },
+  {
+    "slug": "kiraz-vela-selimiye",
+    "name": "Kiraz Vela Selimiye",
+    "version": "v1",
+    "phone": "0532 200 10 90"
+  }
+]

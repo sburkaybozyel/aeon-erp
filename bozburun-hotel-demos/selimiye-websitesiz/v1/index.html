@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Selimiye Butik Otel Siteleri Koleksiyonu — 48 Web Sitesi (24 Otel x V1/V2)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #070d14;
+      --card-bg: rgba(15, 26, 38, 0.75);
+      --gold: #d4af37;
+      --gold-light: #f3df95;
+      --emerald: #00f5a0;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.1);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-heading: 'Cinzel', serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-image: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15), transparent 60%);
+    }
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    h1 em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .lead {
+      max-width: 760px;
+      margin: 0 auto 30px;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    .version-switcher {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 6px;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      gap: 6px;
+    }
+    .v-tab {
+      padding: 10px 24px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text-muted);
+      transition: all 0.3s;
+    }
+    .v-tab.active {
+      background: var(--gold);
+      color: #050a10;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .hotel-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hotel-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .logo-frame {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #000;
+      border: 1.5px solid var(--gold);
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+    }
+    .hotel-name {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .tagline {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 16px;
+    }
+    .btn-preview {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .btn-v1 {
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      color: var(--gold-light);
+    }
+    .btn-v1:hover {
+      background: var(--gold);
+      color: #000;
+    }
+    .btn-v2 {
+      background: rgba(0, 245, 160, 0.12);
+      border: 1px solid rgba(0, 245, 160, 0.35);
+      color: var(--emerald);
+    }
+    .btn-v2:hover {
+      background: var(--emerald);
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="eyebrow">SELİMİYE BUTİK OTEL PORTFÖYÜ</div>
+      <h1>24 Butik Otel, <em>48 Özel Web Sitesi</em></h1>
+      <p class="lead">Her otele özel tasarlanmış logo/amblem, zengin sıvı cam mimarisi (V1) ve Akdeniz Riviera lüksü (V2) ile hazırlanan web siteleri.</p>
+      
+      <div class="version-switcher">
+        <a href="../v1/index.html" class="v-tab active">V1: Obsidian Gold Liquid Glass</a>
+        <a href="../v2-gemini/index.html" class="v-tab ">V2: Mediterranean Riviera Luxury</a>
+      </div>
+    </header>
+
+    <div class="grid">
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/mi-amor-selimiye/media/logo.svg" alt="Mi Amor Selimiye Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Mi Amor Selimiye</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#1 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Kıyıda kalmanın daha güzel hali</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/mi-amor-selimiye/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/mi-amor-selimiye/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/dut-selimiye/media/logo.svg" alt="Dut Selimiye Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Dut Selimiye</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#2 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Asırlık dutların gölgesinde, denizin tam kıyısında</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/dut-selimiye/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/dut-selimiye/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/makia-otel/media/logo.svg" alt="Makia Otel Selimiye Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Makia Otel Selimiye</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#3 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">10 odalı tasarım butik, teras bar ve sakin Ege mimarisi</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/makia-otel/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/makia-otel/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/pineloft-selimiye/media/logo.svg" alt="Pineloft Selimiye Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Pineloft Selimiye</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#4 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Çam ormanının eteklerinde loft yaşamı ve havuz ferahlığı</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/pineloft-selimiye/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/pineloft-selimiye/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/doga-pansiyon/media/logo.svg" alt="Doğa Pansiyon Selimiye Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Doğa Pansiyon Selimiye</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#5 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Limon ve zeytin ağaçları arasında gerçek bir Ege sığınağı</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/doga-pansiyon/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/doga-pansiyon/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/duru-selimiye/media/logo.svg" alt="Duru Selimiye Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Duru Selimiye</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#6 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Berrak bir deniz, sade ve zarif bir konaklama</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/duru-selimiye/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/duru-selimiye/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/ekin-pansiyon/media/logo.svg" alt="Ekin Pansiyon Selimiye Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Ekin Pansiyon Selimiye</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#7 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Denize 15 adım mesafede, Selimiye'nin köklü konukseverliği</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/ekin-pansiyon/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/ekin-pansiyon/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/ekin-tatil-evi/media/logo.svg" alt="Ekin Tatil Evi Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Ekin Tatil Evi</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#8 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Kendi evinizin konforunda, bağımsız bir Selimiye tatili</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/ekin-tatil-evi/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/ekin-tatil-evi/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/dantel-pansiyon-restaurant/media/logo.svg" alt="Dantel Pansiyon & Restaurant Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Dantel Pansiyon & Restaurant</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#9 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Sığliman'ın masmavi kıyısında, suyun üstünde bir Ege masalı</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/dantel-pansiyon-restaurant/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/dantel-pansiyon-restaurant/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/elia-selimiye/media/logo.svg" alt="Elia Selimiye Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Elia Selimiye</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#10 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Zeytin ağaçları, özel plaj ve sakin lüksün buluştuğu köşe</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/elia-selimiye/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/elia-selimiye/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/portakal-butik-otel/media/logo.svg" alt="Portakal Butik Otel Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Portakal Butik Otel</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#11 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Portakal çiçekleri kokusu, yüzme havuzu ve 24 saat kesintisiz konfor</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/portakal-butik-otel/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/portakal-butik-otel/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/salkim-sahil-evi/media/logo.svg" alt="Salkım Sahil Evi Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Salkım Sahil Evi</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#12 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Hanım Pınarı'nda 8 odalı özel bir ev sıcaklığı</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/salkim-sahil-evi/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/salkim-sahil-evi/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/mavi-melek-hotel/media/logo.svg" alt="Mavi Melek Hotel Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Mavi Melek Hotel</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#13 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Sığliman'ın gökyüzüyle buluştuğu yerde, 17 odalı ferah bir tatil</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/mavi-melek-hotel/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/mavi-melek-hotel/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/hydas-pansiyon/media/logo.svg" alt="Hydas Pansiyon Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Hydas Pansiyon</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#14 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Antik Karia kenti Hydas'ın adını taşıyan, denize sıfır huzur iskelesi</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/hydas-pansiyon/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/hydas-pansiyon/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/yamac-motel-selimiye/media/logo.svg" alt="Yamaç Motel Selimiye Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Yamaç Motel Selimiye</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#15 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Yamacın yeşilliğinde 6 odalı butik sıcaklık, ev yemekleri ve deniz</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/yamac-motel-selimiye/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/yamac-motel-selimiye/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/moka-butik-hotel/media/logo.svg" alt="Moka Butik Hotel Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Moka Butik Hotel</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#16 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Bük mevkiinde artizan kahve kokusu, şık tasarım ve yavaş tatil</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/moka-butik-hotel/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/moka-butik-hotel/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/uzum-tatil-evi/media/logo.svg" alt="Üzüm Tatil Evi Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Üzüm Tatil Evi</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#17 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">6 odalı butik bağ evi, özel plaj erişimi ve koyun en tatlı köşesi</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/uzum-tatil-evi/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/uzum-tatil-evi/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/naxos-beach/media/logo.svg" alt="Naxos Beach Selimiye Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Naxos Beach Selimiye</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#18 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Selimiye merkezinde enerjik sahil kulübü, lüks odalar ve gurme lezzetler</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/naxos-beach/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/naxos-beach/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/selimiye-11-oda/media/logo.svg" alt="Selimiye 11 Oda Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Selimiye 11 Oda</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#19 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Tamı tamına 11 özel oda, +12 yaş konsepti ve sessiz lüks</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/selimiye-11-oda/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/selimiye-11-oda/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/sigliman-glamping-beach/media/logo.svg" alt="Sığliman Glamping Beach Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Sığliman Glamping Beach</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#20 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Selimiye'nin en özel koyunda, deniz kenarında safari lüksü</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/sigliman-glamping-beach/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/sigliman-glamping-beach/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/selimiye-sakli-bahce-hotel/media/logo.svg" alt="Selimiye Saklı Bahçe Hotel Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Selimiye Saklı Bahçe Hotel</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#21 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Sığliman'ın gizli vahasında 10 odalı aile sıcaklığı ve havuz keyfi</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/selimiye-sakli-bahce-hotel/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/selimiye-sakli-bahce-hotel/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/zakkum-frida-pansiyon/media/logo.svg" alt="Zakkum Frida Pansiyon Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Zakkum Frida Pansiyon</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#22 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Zakkum çiçekleri, Frida'nın renkleri ve denize sıfır bohem bir dünya</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/zakkum-frida-pansiyon/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/zakkum-frida-pansiyon/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/coban-hotel-selimiye/media/logo.svg" alt="Çoban Hotel Selimiye Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Çoban Hotel Selimiye</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#23 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">Sığliman'ın en uç noktasında denize sıfır lezzet ve konaklama</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/coban-hotel-selimiye/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/coban-hotel-selimiye/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+        <div class="hotel-card">
+          <div>
+            <div class="card-top">
+              <div class="logo-frame">
+                <img src="../v2-gemini/kiraz-vela-selimiye/media/logo.svg" alt="Kiraz Vela Selimiye Logo" width="100%" height="100%">
+              </div>
+              <div>
+                <h3 class="hotel-name">Kiraz Vela Selimiye</h3>
+                <small style="color:var(--gold-light); font-size:0.75rem;">#24 · Selimiye Koyu</small>
+              </div>
+            </div>
+            <p class="tagline">+16 Yetişkin huzuru, evcil hayvan dostu lüks ve yüzme havuzu</p>
+          </div>
+          <div class="card-actions">
+            <a href="../v1/kiraz-vela-selimiye/index.html" class="btn-preview btn-v1" target="_blank">V1 Demo ↗</a>
+            <a href="../v2-gemini/kiraz-vela-selimiye/index.html" class="btn-preview btn-v2" target="_blank">V2 Demo ↗</a>
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</body>
+</html>

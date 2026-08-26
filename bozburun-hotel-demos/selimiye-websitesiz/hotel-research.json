@@ -1,0 +1,47 @@
+{
+  "researchedAt": "2026-08-21",
+  "scope": "Selimiye, Marmaris; Etstur'daki 50 tesislik envanter ve tamamlayıcı güncel işletme kayıtları",
+  "definition": "No independent official website found in open-web research; OTA and directory pages are not counted as the hotel's own website.",
+  "sourceInventory": [
+    "https://www.etstur.com/Selimiye-Otelleri",
+    "https://www.etstur.com/Selimiye-Otelleri?page=2",
+    "https://www.etstur.com/Selimiye-Otelleri?page=3"
+  ],
+  "priorityNoIndependentSite": [
+    {"name":"Mi Amor Selimiye","status":"active","phone":"0534 689 32 32","evidence":["https://www.etstur.com/Mi-Amor-Selimiye","https://www.google.com.gh/travel/hotels/entity/ChkItqTI28ac5IZWGg0vZy8xMXZ3azJtXzVsEAE"],"notes":"Google 4.8/5, 131 reviews; Etstur 8.8/10, 22 reviews."},
+    {"name":"Dut Selimiye","status":"active","evidence":["https://www.setur.com.tr/dut-selimiye?room=2","https://www.booking.com/hotel/tr/dut-selimiye-marmaris.en-gb.html"]},
+    {"name":"Makia Otel","status":"active","evidence":["https://www.etstur.com/Makia-Otel","https://www.tripadvisor.co.uk/Hotel_Review-g298033-d34016977-Reviews-MAKIA_OTEL-Marmaris_Marmaris_District_Mugla_Province_Turkish_Aegean_Coast.html"],"notes":"Etstur lists 10-room boutique property; Tripadvisor includes 2026 reviews."},
+    {"name":"Pineloft Selimiye","status":"active","phone":"0533 696 77 05","evidence":["https://www.booking.com/hotel/tr/pineloft-selimiye.en-gb.html","https://www.google.com.tr/travel/hotels/entity/CgsIx9Hog_Kb3cjAARAB"],"notes":"Google 4.9/5, 159 reviews."},
+    {"name":"Doğa Pansiyon","status":"active","phone":"0537 658 84 40","evidence":["https://www.setur.com.tr/doga-pansiyon-selimiye","https://www.obilet.com/otel/mugla-marmaris-doga-pansiyon"]},
+    {"name":"Duru Selimiye","status":"active","phone":"0531 082 07 20","evidence":["https://www.etstur.com/Duru-Selimiye","https://www.booking.com/hotel/tr/duru-selimiye-konukevi.en-gb.html"]},
+    {"name":"Ekin Pansiyon","status":"active","evidence":["https://www.etstur.com/Ekin-Pansiyon"],"notes":"Selimiye kaydı, Demre'deki aynı isimli tesisle karıştırılmamalı."},
+    {"name":"Ekin Tatil Evi","status":"active","phone":"0537 869 19 33","evidence":["https://www.google.com.tr/travel/hotels/entity/ChoIib2Qpajlrr78ARoNL2cvMTFoenAxcmNfdxAB"]},
+    {"name":"Dantel Pansiyon & Restaurant","status":"active","phone":"0532 651 18 94","evidence":["https://www.google.co.uk/travel/hotels/entity/ChkIwuWw38GD4poaGg0vZy8xMWY2NnRicDdxEAE","https://restaurantguru.com/Dantel-Pansiyon-Restoran-Selimiye-Koyu"]},
+    {"name":"Elia Selimiye","status":"active","phone":"0532 393 81 48","evidence":["https://www.google.com.tr/travel/hotels/Marmaris/entity/ChoIme2UwYKVyNaKARoNL2cvMTFoZ3J4OGtjMhAB"]},
+    {"name":"Portakal Butik Otel","status":"active","phone":"0535 601 19 26","evidence":["https://www.google.com.tr/travel/hotels/entity/ChkI17aOtL3k0Z0hGg0vZy8xMWNtX2h2anBzEAE","https://portakal-butik-otel.aegeanhotelspage.com/tr/"]},
+    {"name":"Salkım Sahil Evi","status":"active","phone":"0552 428 49 15","evidence":["https://www.tumisyeri.com/salk%C4%B1m-sahil-evi-0552-428-49-15"]},
+    {"name":"Mavi Melek Hotel","status":"active","evidence":["https://turcia.directbooking.ro/booking-mavi-melek-hotel-selimiye-reservation-offer-7974977.aspx"]},
+    {"name":"Hydas Pansiyon","status":"active","evidence":["https://www.obilet.com/otel/hydas-pansiyon"]},
+    {"name":"Yamaç Motel Selimiye","status":"active","phone":"0541 536 63 86","evidence":["https://www.obilet.com/otel/yamac-motel-selimiye","https://yandex.com.tr/maps/org/yamac_motel_selimiye/241724632765/panorama/"]},
+    {"name":"Moka Butik Hotel","status":"active","phone":"0532 051 75 94","evidence":["https://www.obilet.com/otel/moka-butik-hotel"]},
+    {"name":"Üzüm Tatil Evi","status":"active","phone":"0530 799 68 48","evidence":["https://www.reseliva.com/booknow/Uzum-Tatil-Evi/"]},
+    {"name":"Naxos Beach","status":"active","phone":"0531 271 88 48","evidence":["https://www.google.com.tr/travel/hotels/entity/ChoI0Pf7mMGnsLDHARoNL2cvMTFubjF4N200cRAB"]},
+    {"name":"Selimiye 11 Oda","status":"active","evidence":["https://www.reseliva.com/booknow/selimiye11oda/"]},
+    {"name":"Sığliman Glamping Beach","status":"active","evidence":["https://tatilimsensin.com/bungalovlar/sigliman-glamping-beach"]},
+    {"name":"Selimiye Saklı Bahçe Hotel","status":"active","evidence":["https://www.obilet.com/otel/selimiye-sakli-bahce-hotel"]},
+    {"name":"Zakkum Frida Pansiyon","status":"active","evidence":["https://www.obilet.com/otel/zakkum-frida-pansiyon"]},
+    {"name":"Çoban Hotel Selimiye","status":"active","evidence":["https://www.etstur.com/Coban-Otel-Selimiye"]},
+    {"name":"Kiraz Vela Selimiye","status":"active","evidence":["https://www.booking.com/hotel/tr/kiraz-vela-selimiye.en-gb.html"]}
+  ],
+  "websiteExistsButWeakOrBroken": [
+    {"name":"Karia Konuk Evi","website":"https://kariaselimiye.com/","status":"domain-listed-direct-check-502","evidence":["https://www.tumisyeri.com/karia-konuk-evi-0554-868-57-54","https://www.etstur.com/Karia-Konuk-Evi"]},
+    {"name":"Büşra Selimiye","website":"https://busraselimiye.com/","status":"domain-listed-direct-check-403","evidence":["https://yandex.com.tr/maps/org/busra_pansiyon/1009013302/","https://www.boutiquesmallhotels.com/busra-hotel"]},
+    {"name":"Begovina","website":"https://begovina.com.tr/","status":"domain-listed-direct-check-502","evidence":["https://yandex.com.tr/maps/org/begovina_restoran/1241222334/","https://www.google.com.gh/travel/hotels/entity/ChgIu4aI_vb2yYRFGgwvZy8xaGM0cmw5ODkQAQ"]},
+    {"name":"Fıska Boutique Hotel","website":"https://fiskahotel.com/","status":"domain-listed","evidence":["https://yandex.com.tr/maps/org/fiska_butik_hotel/148065773226/panorama/","https://www.tripadvisor.com/Hotel_Review-g1507463-d10434932-Reviews-FIska_Butik_Hotel-Selimiye_Marmaris_District_Mugla_Province_Turkish_Aegean_Coast.html"]},
+    {"name":"Green Heaven Boutique Hotel","website":"https://greenheaven.my.canva.site/","status":"site-exists-basic-canva","evidence":["https://greenheaven.my.canva.site/","https://www.setur.com.tr/green-heaven-boutique-hotel"]},
+    {"name":"Saadet Apart","website":"https://www.saadetapart.net/","status":"domain-listed-active-status-to-confirm","evidence":["https://www.firmasec.com/firma/ttbrz-saadet-apart-otel","https://www.reseliva.com/booknow/Flora-Saadet-Apart-Hotel/"]},
+    {"name":"Harmanyeri Tatilevi","website":"https://www.harmanyeritatilevi.com/","status":"site-exists","evidence":["https://www.tumisyeri.com/harmanyeri-tatilevi-selimiye-0532-604-88-46"]},
+    {"name":"Selimiye 9 Oda","website":"https://selimiye9oda.com/","status":"site-exists","evidence":["https://selimiye9oda.com/","https://www.google.com.tr/travel/hotels/entity/ChoIjZnttuC_4bOIARoNL2cvMTFwejcxdDJ3aBAB"]}
+  ],
+  "lowConfidenceFieldCheck": ["Nane Limon Pansiyon", "Sarmaşık Hotel", "The Address", "Kapri"]
+}

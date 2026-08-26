@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Selimiye Saklı Bahçe Hotel — Selimiye Koyu'nda 10 odalı gizli bahçe, yüzme havuzu &amp; restoran terası. Haute Horlogerie & Mediterranean Luxury Gazette.">
+  <title>Selimiye Saklı Bahçe Hotel — Selimiye | Haute Editorial Gazette (V2)</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./app.js"></script>
+</head>
+<body class="v2-editorial-gazette" data-phone="0544953912802524464142" data-hotel="Selimiye Saklı Bahçe Hotel">
+
+  <!-- TOP CENTER CLASSICAL MASTHEAD -->
+  <header class="editorial-masthead" id="editorialMasthead">
+    <div class="container-editorial">
+      
+      <a href="#top" class="masthead-center-brand">
+        <div class="brand-logo-emblem">
+          <img src="./media/logo.svg" alt="Selimiye Saklı Bahçe Hotel Logo" width="100%" height="100%">
+        </div>
+        <span class="brand-gazette-title">SELIMIYE SAKLI BAHÇE HOTEL</span>
+        <span class="brand-gazette-sub">RESORT & PRIVATE PIER · SELİMİYE</span>
+      </a>
+
+      <div class="masthead-split-bar">
+        <nav class="split-nav-left">
+          <a href="#story" class="e-nav-link">Felsefe & Hikaye</a>
+          <a href="#residences" class="e-nav-link">Süitler & Rezidanslar</a>
+          <a href="#gastronomy" class="e-nav-link">Bağlar & Gastronomi</a>
+        </nav>
+
+        <div class="masthead-quick-cta">
+          <a href="tel:0544953912802524464142" class="e-nav-link" title="Resepsiyon">📞 0544 953 91 28; eski dizinde 0252 446 41 42</a>
+          <button class="btn-editorial-book" data-book>
+            <span>Rezervasyon</span>
+            <i>↗</i>
+          </button>
+        </div>
+
+        <nav class="split-nav-right">
+          <a href="#nautical" class="e-nav-link">Karia Rotası</a>
+          <a href="#salons" class="e-nav-link">Küratörlü Deneyimler</a>
+          <a href="#concierge" class="e-nav-link">İletişim</a>
+        </nav>
+      </div>
+
+    </div>
+  </header>
+
+  <main id="top">
+    
+    <!-- HIGH-FASHION HERO TRIPTYCH -->
+    <section class="editorial-hero">
+      <div class="container-editorial">
+        
+        <div class="hero-editorial-titles" data-reveal>
+          <div class="e-kicker">HAUTE EDITORIAL EDITION · SELİMİYE</div>
+          <h1 class="e-headline">Selimiye Saklı Bahçe Hotel:<br><em>Sığliman&#39;ın gizli vahasında 10 odalı aile sıcaklığı ve havuz keyfi</em></h1>
+          <p class="e-lead">Kristal Yeşilova ve Selimiye sularında, masif kestane ve doğal kireçtaşı dokuların sükunetle buluştuğu yüksek Ege konaklama sanatı.</p>
+        </div>
+
+        <div class="hero-triptych-grid" data-reveal>
+          <div class="triptych-frame-side">
+            <img src="../../template-system/visual-assets/anfora-hotel/room.jpg" alt="Süit Detayı">
+          </div>
+          <div class="triptych-center-hero">
+            <img src="../../template-system/visual-assets/anfora-hotel/hero.jpg" alt="Selimiye Saklı Bahçe Hotel Ana Görsel">
+            <div class="triptych-overlay-badge">
+              <span class="badge-quote-italic">“Zamanın durduğu, denizin nefes aldığı kıyı.”</span>
+              <span class="badge-loc-tag">SELİMİYE KOYU · ÖZEL İSKELE</span>
+            </div>
+          </div>
+          <div class="triptych-frame-side">
+            <img src="../../template-system/visual-assets/anfora-hotel/dining.jpg" alt="İskele Masası">
+          </div>
+        </div>
+
+        <!-- Concierge Desk Booking Dock -->
+        <div class="concierge-desk-dock" data-reveal>
+          <form class="c-desk-form" onsubmit="return false;">
+            <div class="c-field-group">
+              <label>GİRİŞ TARİHİ</label>
+              <input type="date" id="heroCheckin" class="c-input" required>
+            </div>
+            <div class="c-field-group">
+              <label>ÇIKIŞ TARİHİ</label>
+              <input type="date" id="heroCheckout" class="c-input" required>
+            </div>
+            <div class="c-field-group">
+              <label>MİSAFİR</label>
+              <select id="heroGuests" class="c-select">
+                <option value="2 Yetişkin">2 Yetişkin</option>
+                <option value="1 Yetişkin">1 Yetişkin</option>
+                <option value="3 Yetişkin">3 Yetişkin</option>
+                <option value="4+ Yetişkin">4+ Yetişkin / Aile</option>
+              </select>
+            </div>
+            <div class="c-field-group">
+              <label>SÜİT TERCİHİ</label>
+              <select id="heroSuite" class="c-select">
+                <option value="all">Tüm Koleksiyon</option>
+                <option value="Havuz Manzaralı Teras Odası">Havuz Manzaralı Teras Odası</option><option value="Saklı Bahçe Standart Oda">Saklı Bahçe Standart Oda</option>
+              </select>
+            </div>
+            <button type="button" class="btn-editorial-book" id="heroSubmitBtn" style="height:42px;">
+              <span>Müsaitlik Sorgula →</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STORY: LA DOLCE VITA & TAŞIN BELLEĞİ -->
+    <section class="editorial-section" id="story">
+      <div class="container-editorial">
+        <div class="magazine-story-grid">
+          
+          <div data-reveal>
+            <div class="e-kicker">01. FELSEFE & MİMARİ</div>
+            <h2 class="e-headline" style="font-size:2.8rem; text-align:left; margin-bottom:1.5rem;">Taşın Serinliğinde,<br><em>Yavaşlayan Bir Ege Hikayesi.</em></h2>
+            
+            <p class="drop-cap-paragraph">
+              Selimiye Saklı Bahçe Hotel, modern telaşlardan arınmış, doğanın kendi ritmine teslim olan bir yaşam alanıdır. Selimiye’nin antik zeytinlikleri ve kristal suları arasına yerleşen taş mimarimiz, Ege’nin bin yıllık taş ustalığını çağdaş bir lüks duygusuyla harmanlar.
+            </p>
+
+            <div class="story-quote-card">
+              <blockquote>“Burada lüks, altın varaklarda değil; sabah denize açılan kapının sessizliğinde ve dalga seslerinde gizlidir.”</blockquote>
+              <cite>— Selimiye Saklı Bahçe Hotel Concierge Felsefesi</cite>
+            </div>
+          </div>
+
+          <div class="polaroid-stack-frame" data-reveal>
+            <div class="polaroid-img-main">
+              <img src="../../template-system/visual-assets/anfora-hotel/room.jpg" alt="Taş Mimari">
+            </div>
+            <div class="polaroid-caption-tape">
+              <strong>Selimiye Saklı Bahçe Hotel</strong>
+              <small>Özel Ahşap İskele & Avlu</small>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- RESIDENCES LOOKBOOK -->
+    <section class="editorial-section bg-warm-sand" id="residences">
+      <div class="container-editorial">
+        
+        <div class="section-editorial-head" data-reveal>
+          <div class="e-kicker">02. REZİDANSLAR & SÜİTLER</div>
+          <h2 class="e-headline">Koleksiyon Odaları</h2>
+          <p class="e-lead">Her biri bağımsız teras, keten tekstiller ve panoramik koy manzarası sunan özel konaklama alanları.</p>
+        </div>
+
+        <div class="lookbook-vertical-stack">
+          
+            <article class="residence-editorial-row " data-reveal>
+              <div class="r-visual">
+                <img src="../../template-system/visual-assets/anfora-hotel/room.jpg" alt="Havuz Manzaralı Teras Odası">
+                <span class="r-badge">Bahçe Manzaralı</span>
+              </div>
+              <div class="r-details">
+                <div>
+                  <span class="r-serial">REZİDANS N° 01</span>
+                  <h3 class="r-title">Havuz Manzaralı Teras Odası</h3>
+                  <p class="r-desc">Geniş terasından havuzu ve yeşillikleri gören aydınlık köşe oda.</p>
+                </div>
+                <div>
+                  <div class="r-specs-table">
+                    <div class="spec-box"><span>ALAN</span><strong>30 m²</strong></div>
+                    <div class="spec-box"><span>MANZARA</span><strong>Havuz ve Saklı Bahçe</strong></div>
+                    <div class="spec-box"><span>YATAK</span><strong>1 Çift + 1 Tek Kişilik Yatak</strong></div>
+                  </div>
+                  <button class="btn-reserve-gold" data-suite-name="Havuz Manzaralı Teras Odası">
+                    <span>Rezerve Et ↗</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+          
+            <article class="residence-editorial-row reverse" data-reveal>
+              <div class="r-visual">
+                <img src="../../template-system/visual-assets/moonlight-butik-hotel/room.jpg" alt="Saklı Bahçe Standart Oda">
+                <span class="r-badge">Sakin Dinlenme</span>
+              </div>
+              <div class="r-details">
+                <div>
+                  <span class="r-serial">REZİDANS N° 02</span>
+                  <h3 class="r-title">Saklı Bahçe Standart Oda</h3>
+                  <p class="r-desc">Çiçek kokularına açılan balkon, minibar, TV ve ferah banyo.</p>
+                </div>
+                <div>
+                  <div class="r-specs-table">
+                    <div class="spec-box"><span>ALAN</span><strong>24 m²</strong></div>
+                    <div class="spec-box"><span>MANZARA</span><strong>Begonvil Bahçesi</strong></div>
+                    <div class="spec-box"><span>YATAK</span><strong>Queen Size Yatak</strong></div>
+                  </div>
+                  <button class="btn-reserve-gold" data-suite-name="Saklı Bahçe Standart Oda">
+                    <span>Rezerve Et ↗</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+          
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GASTRONOMY: TASTING MENU -->
+    <section class="editorial-section" id="gastronomy">
+      <div class="container-editorial">
+        <div class="gastronomy-editorial-box">
+          
+          <div class="menu-tasting-card" data-reveal>
+            <div class="tasting-header">
+              <span class="e-kicker">BAHÇEDEN VE DENİZDEN</span>
+              <h3>Tadım Sofrası</h3>
+            </div>
+            <div class="tasting-course-list">
+              <div class="course-item">
+                <span class="course-num">I.</span>
+                <div class="course-body">
+                  <strong>Organik Köy Kahvaltısı</strong>
+                  <p>Bozburun çam balı, taze keçi peynirleri ve taş fırın ekmekleri.</p>
+                </div>
+              </div>
+              <div class="course-item">
+                <span class="course-num">II.</span>
+                <div class="course-body">
+                  <strong>Erken Hasat Zeytinyağlılar</strong>
+                  <p>Bahçemizden toplanan şifalı otlar ve soğuk sıkım zeytinyağı.</p>
+                </div>
+              </div>
+              <div class="course-item">
+                <span class="course-num">III.</span>
+                <div class="course-body">
+                  <strong>Günlük Kıyı Avı & Izgara</strong>
+                  <p>Selimiye balıkçılarından günlük taze deniz balıkları ve kalamar.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gastro-video-editorial" data-reveal>
+            <video autoplay muted loop playsinline preload="metadata" poster="../../template-system/visual-assets/anfora-hotel/dining.jpg">
+              <source src="../../new-demos/moonlight/media/decor.mp4" type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- NAUTICAL LOGBOOK & COVES -->
+    <section class="editorial-section bg-warm-sand" id="nautical">
+      <div class="container-editorial">
+        
+        <div class="section-editorial-head" data-reveal>
+          <div class="e-kicker">03. DESTİNASYON REHBERİ</div>
+          <h2 class="e-headline">Denizcilik & Koylar Seyir Defteri</h2>
+        </div>
+
+        <div class="nautical-logbook-deck">
+          <div class="logbook-card" data-reveal>
+            <div class="logbook-top"><span>KOORDİNAT</span><span>36°42'N 28°05'E</span></div>
+            <h4>Sığliman Koyu</h4>
+            <p>Durgun göl berraklığında, sığ ve ılık suları ile Selimiye’nin en korunaklı yüzme koyu.</p>
+          </div>
+          <div class="logbook-card" data-reveal>
+            <div class="logbook-top"><span>MESAFE</span><span>15 DK DENİZDEN</span></div>
+            <h4>Kamelya & Dişlice</h4>
+            <p>Antik manastır kalıntıları ve volkanik kaya dehlizleriyle ünlü turkuaz ada turları.</p>
+          </div>
+          <div class="logbook-card" data-reveal>
+            <div class="logbook-top"><span>PARKUR</span><span>KARİA YOLU</span></div>
+            <h4>Antik Karia Patikaları</h4>
+            <p>Adaçayı kokuları eşliğinde Selimiye tepelerinden panoramik gün batımı yürüyüş rotaları.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CURATED SALONS -->
+    <section class="editorial-section" id="salons">
+      <div class="container-editorial">
+        <div class="section-editorial-head" data-reveal>
+          <div class="e-kicker">04. KİŞİYE ÖZEL AKTİVİTELER</div>
+          <h2 class="e-headline">Küratörlü Deneyimler</h2>
+        </div>
+
+        <div class="salons-editorial-grid">
+          <div class="salon-card" data-reveal>
+            <div>
+              <div class="salon-badge-top"><span class="salon-num">01</span><span>⛵</span></div>
+              <h4>Özel Gulet ile Mavi Tur</h4>
+              <p>Otel iskelesinden kalkan ahşap guletimizle Dirsekbükü ve Bencik koylarına özel seyir.</p>
+            </div>
+            <div class="salon-footer">
+              <button class="btn-inquire-salon" data-exp-title="Özel Gulet Turu">Bilgi Al ↗</button>
+            </div>
+          </div>
+
+          <div class="salon-card" data-reveal>
+            <div>
+              <div class="salon-badge-top"><span class="salon-num">02</span><span>🧘</span></div>
+              <h4>İskelede Gün Doğumu Yogası</h4>
+              <p>Sabahın sessizliğinde deniz üzerinde zihni ve bedeni arındıran nefes seansı.</p>
+            </div>
+            <div class="salon-footer">
+              <button class="btn-inquire-salon" data-exp-title="Gün Doğumu Yogası">Bilgi Al ↗</button>
+            </div>
+          </div>
+
+          <div class="salon-card" data-reveal>
+            <div>
+              <div class="salon-badge-top"><span class="salon-num">03</span><span>🫒</span></div>
+              <h4>Zeytinyağı & Şarap Eşleşmesi</h4>
+              <p>Bozburun Yarımadası’nın asırlık ağaçlarından elde edilen erken hasat tadımları.</p>
+            </div>
+            <div class="salon-footer">
+              <button class="btn-inquire-salon" data-exp-title="Zeytinyağı Tadımı">Bilgi Al ↗</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESERVATION SALON & CONTACT -->
+    <section class="editorial-section bg-warm-sand" id="concierge">
+      <div class="container-editorial">
+        <div class="reservation-salon-card" data-reveal>
+          <div class="salon-layout">
+            
+            <div class="salon-left">
+              <div class="e-kicker">REZERVASYON SALONU</div>
+              <h2>Sakinliğin Kıyısına<br><em>Davetlisiniz.</em></h2>
+              <p class="e-lead">Tarihlerinizi iletin, size en uygun süit seçeneği ve doğrudan rezervasyon teklifiyle anında dönüş yapalım.</p>
+              
+              <div class="salon-contacts">
+                <div class="sc-item">
+                  <strong>AÇIK ADRES</strong>
+                  <span>Sığliman Sokak No:84, Selimiye/Marmaris</span>
+                </div>
+                <div class="sc-item">
+                  <strong>RESEPSİYON TELEFON</strong>
+                  <a href="tel:0544953912802524464142">0544 953 91 28; eski dizinde 0252 446 41 42</a>
+                </div>
+                <div class="sc-item">
+                  <strong>WHATSAPP CONCIERGE</strong>
+                  <a href="https://wa.me/0544953912802524464142" target="_blank">0544 953 91 28; eski dizinde 0252 446 41 42</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="salon-right">
+              <div class="salon-form-box">
+                <h3>Doğrudan Rezervasyon Talebi</h3>
+                <form class="editorial-form" id="contactMainForm">
+                  <div class="form-duo">
+                    <div class="ed-field">
+                      <label>Ad Soyad *</label>
+                      <input type="text" id="contactName" placeholder="Adınız Soyadınız" required>
+                    </div>
+                    <div class="ed-field">
+                      <label>Telefon / WhatsApp *</label>
+                      <input type="tel" id="contactPhone" placeholder="+90 5xx xxx xx xx" required>
+                    </div>
+                  </div>
+                  <div class="form-duo">
+                    <div class="ed-field">
+                      <label>Giriş Tarihi *</label>
+                      <input type="date" id="contactCheckin" required>
+                    </div>
+                    <div class="ed-field">
+                      <label>Çıkış Tarihi *</label>
+                      <input type="date" id="contactCheckout" required>
+                    </div>
+                  </div>
+                  <div class="form-duo">
+                    <div class="ed-field">
+                      <label>Kişi Sayısı</label>
+                      <select id="contactGuests">
+                        <option value="2 Yetişkin">2 Yetişkin</option>
+                        <option value="1 Yetişkin">1 Yetişkin</option>
+                        <option value="3 Yetişkin">3 Yetişkin</option>
+                        <option value="4+ Yetişkin">4+ Yetişkin</option>
+                      </select>
+                    </div>
+                    <div class="ed-field">
+                      <label>Süit Tercihi</label>
+                      <select id="contactSuite">
+                        <option value="Havuz Manzaralı Teras Odası">Havuz Manzaralı Teras Odası</option><option value="Saklı Bahçe Standart Oda">Saklı Bahçe Standart Oda</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="ed-field">
+                    <label>Özel Notlar</label>
+                    <textarea id="contactNotes" rows="2" placeholder="Özel talepleriniz..."></textarea>
+                  </div>
+                  <button type="submit" class="btn-editorial-book" style="width:100%; justify-content:center; padding:0.85rem;">
+                    <span>WhatsApp ile Talebi İlet ↗</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="editorial-footer">
+    <div class="container-editorial">
+      <div class="footer-editorial-grid">
+        <div>
+          <span class="f-brand-title">SELIMIYE SAKLI BAHÇE HOTEL</span>
+          <p style="color:var(--text-muted); font-size:0.88rem; margin-top:0.5rem;">Sığliman&#39;ın gizli vahasında 10 odalı aile sıcaklığı ve havuz keyfi</p>
+        </div>
+        <div>
+          <strong style="color:var(--cypress); font-size:0.9rem; text-transform:uppercase;">Bağlantılar</strong>
+          <p style="margin-top:0.5rem;"><a href="#story" style="color:var(--text-muted); text-decoration:none;">Felsefe</a></p>
+          <p><a href="#residences" style="color:var(--text-muted); text-decoration:none;">Rezidanslar</a></p>
+          <p><a href="#gastronomy" style="color:var(--text-muted); text-decoration:none;">Gastronomi</a></p>
+        </div>
+        <div>
+          <strong style="color:var(--cypress); font-size:0.9rem; text-transform:uppercase;">Selimiye</strong>
+          <p style="margin-top:0.5rem;"><a href="#nautical" style="color:var(--text-muted); text-decoration:none;">Sığliman Koyu</a></p>
+          <p><a href="#nautical" style="color:var(--text-muted); text-decoration:none;">Kamelya Adası</a></p>
+        </div>
+        <div>
+          <strong style="color:var(--cypress); font-size:0.9rem; text-transform:uppercase;">İletişim</strong>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.5rem;">Sığliman Sokak No:84, Selimiye/Marmaris</p>
+          <p><a href="tel:0544953912802524464142" style="color:var(--cypress); font-weight:700; text-decoration:none;">0544 953 91 28; eski dizinde 0252 446 41 42</a></p>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border-light); padding-top:1.5rem; display:flex; justify-content:space-between; font-size:0.78rem; color:var(--text-muted);">
+        <p>© 2026 Selimiye Saklı Bahçe Hotel. Tüm Hakları Saklıdır.</p>
+        <span>AEON Haute Hospitality Architecture</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal-editorial-backdrop" id="bookingModal">
+    <div class="modal-editorial-window">
+      <button class="modal-close-btn" id="modalCloseBtn">✕</button>
+      <div style="margin-bottom:1.5rem;">
+        <span class="e-kicker">DOĞRUDAN REZERVASYON</span>
+        <h3 id="modalTitleText" style="font-family:var(--font-display); color:var(--cypress); font-size:1.6rem;">Selimiye Saklı Bahçe Hotel</h3>
+      </div>
+      <form class="editorial-form" id="modalBookingForm">
+        <div class="ed-field">
+          <label>Seçilen Oda</label>
+          <input type="text" id="modalSuiteChoice" readonly>
+        </div>
+        <div class="form-duo">
+          <div class="ed-field">
+            <label>Giriş Tarihi</label>
+            <input type="date" id="mCheckin" required>
+          </div>
+          <div class="ed-field">
+            <label>Çıkış Tarihi</label>
+            <input type="date" id="mCheckout" required>
+          </div>
+        </div>
+        <div class="form-duo">
+          <div class="ed-field">
+            <label>Misafir</label>
+            <select id="mGuests">
+              <option value="2 Yetişkin">2 Yetişkin</option>
+              <option value="1 Yetişkin">1 Yetişkin</option>
+              <option value="3 Yetişkin">3 Yetişkin</option>
+              <option value="4+ Yetişkin">4+ Yetişkin</option>
+            </select>
+          </div>
+          <div class="ed-field">
+            <label>Telefon / WhatsApp *</label>
+            <input type="tel" id="mPhone" placeholder="+90 5xx xxx xx xx" required>
+          </div>
+        </div>
+        <div class="ed-field">
+          <label>Özel Notlar</label>
+          <input type="text" id="mNotes" placeholder="Özel istekleriniz...">
+        </div>
+        <button type="submit" class="btn-editorial-book" style="width:100%; justify-content:center; padding:0.85rem;">
+          <span>WhatsApp ile Gönder ↗</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

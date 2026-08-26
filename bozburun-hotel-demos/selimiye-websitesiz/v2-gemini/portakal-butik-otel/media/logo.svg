@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%" color="#f97316">
+  <defs>
+    <linearGradient id="goldGrad-portakal-butik-otel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#7c2d12"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="currentColor">
+    
+      <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <!-- Orange Blossom & Slice -->
+      <circle cx="50" cy="52" r="22" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M50 24 Q58 14 66 18 Q62 26 50 26" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M50 52 L50 30" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M50 52 L68 42" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M50 52 L66 64" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M50 52 L34 64" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M50 52 L32 42" stroke="currentColor" stroke-width="1.2"/>
+    
+  </g>
+</svg>

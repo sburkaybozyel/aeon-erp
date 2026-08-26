@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%" color="#d4af37">
+  <defs>
+    <linearGradient id="goldGrad-ekin-tatil-evi" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#1c1917"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="currentColor">
+    
+      <rect x="8" y="8" width="84" height="84" rx="14" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <!-- Stone Cottage & Chimney -->
+      <path d="M26 52 L50 30 L74 52 L74 76 L26 76 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M62 36 L62 26 L68 26 L68 42" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      <rect x="42" y="58" width="16" height="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    
+  </g>
+</svg>

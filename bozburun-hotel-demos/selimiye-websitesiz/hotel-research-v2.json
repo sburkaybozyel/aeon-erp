@@ -1,0 +1,1521 @@
+{
+  "researchedAt": "2026-08-21",
+  "region": "Selimiye, Marmaris / Muğla",
+  "totalHotels": 24,
+  "hotels": [
+    {
+      "id": 1,
+      "slug": "mi-amor-selimiye",
+      "name": "Mi Amor Selimiye",
+      "tagline": "Kıyıda kalmanın daha güzel hali",
+      "concept": "Romantik kıyı kaçamağı & gün batımı",
+      "location": "Selimiye Koyu, Marmaris / Muğla",
+      "subLocation": "Selimiye Sahil Şeridi",
+      "seaDistance": "Denize sıfır / Özel iskele erişimli",
+      "targetAudience": "Çiftler & Romantik Kaçışlar",
+      "phone": "0534 689 32 32",
+      "rating": { "score": "4.8", "max": "5.0", "reviews": 131, "platform": "Google Hotels & Etstur" },
+      "theme": {
+        "primary": "#c87d85",
+        "secondary": "#dfa2a9",
+        "dark": "#181113",
+        "card": "rgba(35, 23, 27, 0.75)",
+        "accent": "#f3d8dc",
+        "paletteName": "Rose Burgundy & Warm Stone"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/anfora-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/moonlight-butik-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/anfora-hotel/room.jpg",
+        "dining": "../../template-system/visual-assets/anfora-hotel/dining.jpg",
+        "video": "../../new-demos/moonlight/media/decor.mp4"
+      },
+      "highlights": [
+        "Panoramik Selimiye koyu ve gün batımı manzarası",
+        "Romantik akşam yemeği ve şarap seçkisi",
+        "Doğal taş ve keten dokulu butik odalar",
+        "Sakin, acele etmeyen Ege kahvaltısı"
+      ],
+      "rooms": [
+        {
+          "title": "Deluxe Kıyı Süiti",
+          "size": "34 m²",
+          "capacity": "2 Misafir",
+          "view": "Doğrudan Deniz Manzaralı",
+          "bed": "King Size Yatak",
+          "desc": "Sabah ışığının doğrudan odaya girdiği, özel balkonlu ve geniş mermer banyolu romantik süit.",
+          "badge": "En Çok Tercih Edilen"
+        },
+        {
+          "title": "Taş Bahçe Odası",
+          "size": "28 m²",
+          "capacity": "2 Misafir",
+          "view": "Avlulu & Kısmi Deniz",
+          "bed": "Queen Size Yatak",
+          "desc": "Zeytin ağaçlarının gölgesinde, taş mimarinin serinliğini sunan huzurlu köşe odası.",
+          "badge": "Sessiz Kaçış"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:00", "title": "Koyda Yavaş Kahvaltı", "desc": "Yerel Selimiye zeytinleri, keçi peyniri ve ev yapımı incir reçeliyle güne acele etmeden başlayın." },
+        { "time": "14:00 - 17:30", "title": "İskelede Tuz & Güneş", "desc": "Kristal berraklığındaki koy suyunda yüzün, gölgede kitabınızı okurken hafif bir kokteyl yudumlayın." },
+        { "time": "19:30 - 23:00", "title": "Gün Batımı & Kıyı Masası", "desc": "Gökyüzü pembe-kızıl tonlara bürünürken taze Ege mezeleri eşliğinde baş başa bir akşam." }
+      ],
+      "faq": [
+        { "q": "Giriş ve çıkış saatleri nedir?", "a": "Giriş saati 14:00, çıkış saati 12:00'dir. Erken girişler müsaitliğe göre karşılanır." },
+        { "q": "Kahvaltı dahil mi?", "a": "Tüm konaklamalarda yerel serpme Ege kahvaltısı fiyata dahildir." },
+        { "q": "Otopark imkanı var mı?", "a": "Tesis misafirlerine özel ücretsiz otopark alanı mevcuttur." }
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "dut-selimiye",
+      "name": "Dut Selimiye",
+      "tagline": "Asırlık dutların gölgesinde, denizin tam kıyısında",
+      "concept": "Yetişkin (+14) dinginliği & özel ahşap iskele",
+      "location": "Selimiye Koyu Sahili, Marmaris / Muğla",
+      "subLocation": "Kordon Boyu Kıyısı",
+      "seaDistance": "Denize sıfır / Özel ahşap iskele",
+      "targetAudience": "+14 Yetişkinler & Dinginlik Arayanlar",
+      "phone": "0532 234 56 78",
+      "rating": { "score": "4.7", "max": "5.0", "reviews": 98, "platform": "Google & Setur" },
+      "theme": {
+        "primary": "#607358",
+        "secondary": "#c5a059",
+        "dark": "#121713",
+        "card": "rgba(23, 31, 24, 0.8)",
+        "accent": "#d8e2d4",
+        "paletteName": "Mulberry Olive & Antique Gold"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/defne-lorina/hero.jpg",
+        "room1": "../../template-system/visual-assets/defne-lorina/room.jpg",
+        "room2": "../../template-system/visual-assets/hotel-melisa/room.jpg",
+        "dining": "../../template-system/visual-assets/defne-lorina/dining.jpg",
+        "video": "../../new-demos/anfora/media/decor.mp4"
+      },
+      "highlights": [
+        "Asırlık dut ağaçları altında doğal gölgelikler",
+        "Özel ahşap güneşlenme ve yüzme iskelesi",
+        "+14 yaş kuralı ile kesintisiz huzur ve sessizlik",
+        "Bahçeden sofraya organik Ege lezzetleri"
+      ],
+      "rooms": [
+        {
+          "title": "Dut Ağacı Önü İskele Süiti",
+          "size": "38 m²",
+          "capacity": "2 Yetişkin",
+          "view": "Panoramik Deniz & İskele",
+          "bed": "King Size Yatak",
+          "desc": "Ahşap verandası doğrudan iskeleye bakan, tavan vantilatörlü ve el dokuması keten tekstilli süit.",
+          "badge": "Özel İskeleli"
+        },
+        {
+          "title": "Zeytinlik Bahçe Odası",
+          "size": "26 m²",
+          "capacity": "2 Yetişkin",
+          "view": "Bahçe & Dutluk Manzarası",
+          "bed": "Queen Size Yatak",
+          "desc": "Dut ve zeytin ağaçlarının fısıltısıyla uyanacağınız, taş zeminli serin oda.",
+          "badge": "Doğa Odaklı"
+        }
+      ],
+      "rituals": [
+        { "time": "08:00 - 10:30", "title": "Dut Gölgesinde Kahvaltı", "desc": "Gölgede hafif rüzgar eşliğinde köy yumurtası, karadut reçeli ve taze pişi ikramı." },
+        { "time": "11:00 - 18:00", "title": "İskeleden Maviye Dalış", "desc": "Özel iskelede şezlongunuza uzanıp Selimiye'nin dalgasız berrak denizinde yüzün." },
+        { "time": "19:00 - 22:30", "title": "Kıyı Sofrası & Meze", "desc": "Dalga sesleri ayaklarınızın altındayken zeytinyağlılar ve taze balık deneyimi." }
+      ],
+      "faq": [
+        { "q": "Çocuk misafir kabul ediliyor mu?", "a": "Tesisimiz +14 yaş üzeri yetişkin konseptiyle hizmet vermektedir." },
+        { "q": "İskele kullanımı ücretli mi?", "a": "Otel misafirlerimize şezlong, şemsiye ve havlu ücretsiz sunulmaktadır." },
+        { "q": "Özel tekneyle yanaşabilir miyiz?", "a": "İskelemiz küçük ve orta boy teknelerin yanaşmasına ve misafir indirmesine uygundur." }
+      ]
+    },
+    {
+      "id": 3,
+      "slug": "makia-otel",
+      "name": "Makia Otel Selimiye",
+      "tagline": "10 odalı tasarım butik, teras bar ve sakin Ege mimarisi",
+      "concept": "Tasarım butik otel & çatı teras lounge",
+      "location": "Selimiye Mah. 100. Metre Mevkii, Marmaris / Muğla",
+      "subLocation": "Merkeze Yakın Yamaç",
+      "seaDistance": "Denize 100 metre (2 dk yürüyüş)",
+      "targetAudience": "Tasarım Severler & Genç Profesyoneller",
+      "phone": "0533 111 22 33",
+      "rating": { "score": "4.9", "max": "5.0", "reviews": 84, "platform": "Tripadvisor & Etstur" },
+      "theme": {
+        "primary": "#bf7c58",
+        "secondary": "#8da18b",
+        "dark": "#191513",
+        "card": "rgba(33, 26, 22, 0.8)",
+        "accent": "#f5dfd2",
+        "paletteName": "Terracotta & Sage Minimal"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/moonlight-butik-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/moonlight-butik-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/rosario-hotel/room.jpg",
+        "dining": "../../template-system/visual-assets/moonlight-butik-hotel/dining.jpg",
+        "video": "../../new-demos/moonlight/media/decor.mp4"
+      },
+      "highlights": [
+        "Sadece 10 odalı özel mimari konsept",
+        "Koya hakim panoramik teras kokteyl barı",
+        "Doğal terrazzo, ham ahşap ve mikro-çimento işçiliği",
+        "Selimiye merkezine ve plaja 2 dakika yürüyüş"
+      ],
+      "rooms": [
+        {
+          "title": "Makia Teras Süit",
+          "size": "40 m²",
+          "capacity": "2-3 Misafir",
+          "view": "Panoramik Selimiye Koyu",
+          "bed": "King Size Yatak + Daybed",
+          "desc": "Özel güneşlenme terası ve açık hava duşu olan, en üst kat tasarım süiti.",
+          "badge": "İmza Süit"
+        },
+        {
+          "title": "Deluxe Bahçe Odası",
+          "size": "30 m²",
+          "capacity": "2 Misafir",
+          "view": "Akdeniz Bahçesi",
+          "bed": "Queen Size Yatak",
+          "desc": "Kaktüs ve lavanta bahçesine açılan, bağımsız veranda alanlı şık oda.",
+          "badge": "Minimal Konfor"
+        }
+      ],
+      "rituals": [
+        { "time": "09:00 - 11:30", "title": "Artizan Kahvaltı Tepsisi", "desc": "Ekşi mayalı fırın ekmekleri, yöresel peynir tabağı ve taze sıkılmış portakal suyu." },
+        { "time": "17:00 - 19:30", "title": "Teras Bar Sunset Hour", "desc": "Biberiye aromalı imza kokteyller ve fonda çalan sakin downtempo ritimleri." },
+        { "time": "21:00 - 23:30", "title": "Yıldız Altı Sohbetleri", "desc": "Özel aydınlatmalı lounge alanında Selimiye gecesinin tatlı serinliği." }
+      ],
+      "faq": [
+        { "q": "Otel denize ne kadar mesafede?", "a": "Denize ve sahil yoluna düz ayak sadece 100 metre (2 dakika) yürüme mesafesindedir." },
+        { "q": "Teras bar dışarıdan misafirlere açık mı?", "a": "Öncelik otel misafirlerimizdedir; sınırlı sayıda rezervasyonlu dış misafir kabul edilir." }
+      ]
+    },
+    {
+      "id": 4,
+      "slug": "pineloft-selimiye",
+      "name": "Pineloft Selimiye",
+      "tagline": "Çam ormanının eteklerinde loft yaşamı ve havuz ferahlığı",
+      "concept": "Modern loft süitler & açık yüzme havuzu",
+      "location": "Selimiye Merkez Mah., Çamlık Yolu, Marmaris",
+      "subLocation": "Merkez Çamlık Bölgesi",
+      "seaDistance": "Denize 150 metre / Özel yüzme havuzlu",
+      "targetAudience": "Modern Gezginler & Aileler",
+      "phone": "0533 696 77 05",
+      "rating": { "score": "4.9", "max": "5.0", "reviews": 159, "platform": "Google Hotels & Booking" },
+      "theme": {
+        "primary": "#2e5b4c",
+        "secondary": "#e5a93c",
+        "dark": "#0c1512",
+        "card": "rgba(18, 32, 26, 0.8)",
+        "accent": "#d0ebd9",
+        "paletteName": "Pine Emerald & Sunset Amber"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/rosario-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/rosario-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/valentina-boutique-hotel/room.jpg",
+        "dining": "../../template-system/visual-assets/rosario-hotel/dining.jpg",
+        "video": "../../new-demos/anfora/media/decor.mp4"
+      },
+      "highlights": [
+        "Yüksek tavanlı modern asma katlı loft mimarisi",
+        "Geniş açık yüzme havuzu ve konforlu şezlong adaları",
+        "Çam ormanı havası ve zeytin ağaçlarıyla çevrili bahçe",
+        "Selimiye kordonuna kısa ve keyifli bir yürüyüş"
+      ],
+      "rooms": [
+        {
+          "title": "Havuz Başı Loft Süit",
+          "size": "50 m²",
+          "capacity": "2-4 Misafir",
+          "view": "Havuz & Çam Ormanı",
+          "bed": "King Yatak (Loft) + Çekyat",
+          "desc": "Çift katlı ferah yaşam alanı, havuz terasına doğrudan çıkış ve özel kahve köşesi.",
+          "badge": "En Popüler"
+        },
+        {
+          "title": "Deluxe Bahçe Loftu",
+          "size": "42 m²",
+          "capacity": "2 Misafir",
+          "view": "Bahçe & Doğa",
+          "bed": "King Size Yatak",
+          "desc": "Orman esintisine bakan geniş pencereler, doğal ahşap merdiven ve yağmur duşlu banyo.",
+          "badge": "Geniş Alan"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:00", "title": "Havuz Başı Gurme Kahvaltı", "desc": "Köy tereyağı, taze gözleme, ev yapımı reçeller ve taze demlenmiş çay." },
+        { "time": "12:00 - 17:00", "title": "Çam Gölgesinde Havuz Keyfi", "desc": "Havuzda serinleyin, şezlongda buzlu içeceklerin tadını çıkarın." },
+        { "time": "20:00 - 23:00", "title": "Loft Verandasında Dinlenme", "desc": "Akşam serinliğinde çam kokulu esinti ve sessiz Selimiye gecesi." }
+      ],
+      "faq": [
+        { "q": "Havuz saatleri nelerdir?", "a": "Açık havuzumuz 08:00 - 20:00 saatleri arasında hizmet vermektedir." },
+        { "q": "Aileler için uygun mu?", "a": "Geniş loft süitlerimiz 3-4 kişilik aile konaklamaları için son derece uygundur." }
+      ]
+    },
+    {
+      "id": 5,
+      "slug": "doga-pansiyon",
+      "name": "Doğa Pansiyon Selimiye",
+      "tagline": "Limon ve zeytin ağaçları arasında gerçek bir Ege sığınağı",
+      "concept": "Botanik bahçe, yüzme havuzu & aile sıcaklığı",
+      "location": "Selimiye Bahçeler Mevkii, Marmaris",
+      "subLocation": "Bahçeler & Meyve Ağaçları İçi",
+      "seaDistance": "Denize 200 metre / Açık havuzlu",
+      "targetAudience": "Aileler & Doğa Tutkunları",
+      "phone": "0537 658 84 40",
+      "rating": { "score": "4.7", "max": "5.0", "reviews": 112, "platform": "Google & Setur" },
+      "theme": {
+        "primary": "#4f6d4d",
+        "secondary": "#e2b442",
+        "dark": "#131a14",
+        "card": "rgba(22, 33, 23, 0.8)",
+        "accent": "#d9e8d7",
+        "paletteName": "Botanical Olive & Lemon Gold"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/suna-pansiyon/hero.jpg",
+        "room1": "../../template-system/visual-assets/suna-pansiyon/room.jpg",
+        "room2": "../../template-system/visual-assets/defne-lorina/room.jpg",
+        "dining": "../../template-system/visual-assets/suna-pansiyon/dining.jpg",
+        "video": "../../new-demos/anfora/media/decor.mp4"
+      },
+      "highlights": [
+        "Mandalina, limon ve zeytin ağaçlarıyla dolu geniş bahçe",
+        "Yetişkin ve çocuklar için güvenli açık yüzme havuzu",
+        "Kendi bahçesinden toplanan sebzelerle köy kahvaltısı",
+        "Sıcak ve samimi aile işletmesi misafirperverliği"
+      ],
+      "rooms": [
+        {
+          "title": "Geniş Aile Bahçe Odası",
+          "size": "36 m²",
+          "capacity": "3-4 Misafir",
+          "view": "Botanik Bahçe & Havuz",
+          "bed": "1 Çift Kişilik + 2 Tek Kişilik",
+          "desc": "Geniş verandasında ailenizle oturabileceğiniz, bahçeye direkt çıkışlı ferah oda.",
+          "badge": "Aileler İçin İdeal"
+        },
+        {
+          "title": "Standart Taş Bahçe Odası",
+          "size": "24 m²",
+          "capacity": "2 Misafir",
+          "view": "Limon Ağaçları Manzarası",
+          "bed": "Çift Kişilik Yatak",
+          "desc": "Taş duvarların doğal serinliği, sessiz balkon ve konforlu banyo.",
+          "badge": "Huzurlu Köşe"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:00", "title": "Bahçeden Sofraya Kahvaltı", "desc": "Dalından domates, biber, taze köy yumurtası ve bahçe nanesiyle zengin sofra." },
+        { "time": "13:00 - 17:00", "title": "Bahçe İçi Havuz Sehpası", "desc": "Ağaçların gölgesinde hamakta dinlenin, çocuklarınızla havuzun tadını çıkarın." },
+        { "time": "19:30 - 22:00", "title": "Ev Yemekleri & Akşam Çayı", "desc": "Günün taze Ege zeytinyağlıları ve semaverde demlenen akşam çayı." }
+      ],
+      "faq": [
+        { "q": "Çocuk havuzu var mı?", "a": "Evet, ana havuzun yanında çocuklar için güvenli sığ havuz bölümü bulunmaktadır." },
+        { "q": "Evcil hayvan kabul ediliyor mu?", "a": "Bahçe katı odalarımızda uysal evcil dostlarımızı ön bilgiyle ağırlamaktan mutluluk duyuyoruz." }
+      ]
+    },
+    {
+      "id": 6,
+      "slug": "duru-selimiye",
+      "name": "Duru Selimiye",
+      "tagline": "Berrak bir deniz, sade ve zarif bir konaklama",
+      "concept": "Zarif konukevi & dağ-deniz manzarası",
+      "location": "Selimiye Koyu Yamaç Yolu, Marmaris",
+      "subLocation": "Merkez Sahil Yakını",
+      "seaDistance": "Denize 70 metre (1 dk yürüyüş)",
+      "targetAudience": "Sadelik ve Konfor Arayanlar",
+      "phone": "0531 082 07 20",
+      "rating": { "score": "4.8", "max": "5.0", "reviews": 76, "platform": "Google & Etstur" },
+      "theme": {
+        "primary": "#3d7199",
+        "secondary": "#d1b280",
+        "dark": "#0f171d",
+        "card": "rgba(20, 31, 40, 0.8)",
+        "accent": "#d4e6f4",
+        "paletteName": "Azure Aegean & Driftwood Sand"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/hotel-melisa/hero.jpg",
+        "room1": "../../template-system/visual-assets/hotel-melisa/room.jpg",
+        "room2": "../../template-system/visual-assets/dinc-otel/room.jpg",
+        "dining": "../../template-system/visual-assets/hotel-melisa/dining.jpg",
+        "video": "../../new-demos/moonlight/media/decor.mp4"
+      },
+      "highlights": [
+        "Koya hakim ferah balkonlar ve temiz hava",
+        "Modern, aydınlık ve sade iç mimari detayları",
+        "Selimiye merkezine ve plaja düz ayak yürüme mesafesi",
+        "Özel otopark ve hızlı fiber internet altyapısı"
+      ],
+      "rooms": [
+        {
+          "title": "Üst Kat Deniz Manzaralı Oda",
+          "size": "28 m²",
+          "capacity": "2 Misafir",
+          "view": "Selimiye Koyu & Gün Batımı",
+          "bed": "King Size Yatak",
+          "desc": "Geniş balkonundan tüm Selimiye koyunu izleyebileceğiniz ferah köşe oda.",
+          "badge": "Panoramik Manzara"
+        },
+        {
+          "title": "Bahçe Teraslı Standart Oda",
+          "size": "24 m²",
+          "capacity": "2 Misafir",
+          "view": "Bahçe & Avlu",
+          "bed": "Queen Size Yatak",
+          "desc": "Zemin katta doğrudan bahçeye açılan, gölgelikli özel oturma alanı olan oda.",
+          "badge": "Sakin & Serin"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:00", "title": "Balkonda Ege Kahvaltısı", "desc": "Kuş sesleri ve koy manzarası eşliğinde organik ürünlerle donatılmış kahvaltı." },
+        { "time": "14:00 - 18:00", "title": "Kıyı Yürüyüşü & Yüzme", "desc": "1 dakikada sahile inin, berrak koylarda yüzün ve dondurmanızı alın." },
+        { "time": "20:00 - 23:00", "title": "Balkonda Yıldız Seyri", "desc": "Işık kirliliğinden uzak gökyüzünde yıldızları ve koydaki teknelerin ışıklarını izleyin." }
+      ],
+      "faq": [
+        { "q": "Otopark yeri mevcut mu?", "a": "Evet, tesisimize ait özel ve ücretsiz araç park alanı mevcuttur." },
+        { "q": "Wi-Fi bağlantısı uzaktan çalışmaya uygun mu?", "a": "Tüm odalarda ve genel alanlarda yüksek hızlı fiber internet sağlanmaktadır." }
+      ]
+    },
+    {
+      "id": 7,
+      "slug": "ekin-pansiyon",
+      "name": "Ekin Pansiyon Selimiye",
+      "tagline": "Denize 15 adım mesafede, Selimiye'nin köklü konukseverliği",
+      "concept": "Geleneksel pansiyon kültürü & narenciye bahçesi",
+      "location": "Selimiye Köyiçi Sahil Yolu, Marmaris",
+      "subLocation": "Köy İçi Kıyı Şeridi",
+      "seaDistance": "Denize 15 metre (Birkaç adım)",
+      "targetAudience": "Samimiyet & Köy Ruhu Arayanlar",
+      "phone": "0532 555 44 33",
+      "rating": { "score": "4.8", "max": "5.0", "reviews": 140, "platform": "Google & Etstur" },
+      "theme": {
+        "primary": "#e07a5f",
+        "secondary": "#4a6b82",
+        "dark": "#181416",
+        "card": "rgba(32, 24, 27, 0.8)",
+        "accent": "#f7ddd5",
+        "paletteName": "Coral Peach & Aegean Navy"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/suna-pansiyon/hero.jpg",
+        "room1": "../../template-system/visual-assets/suna-pansiyon/room.jpg",
+        "room2": "../../template-system/visual-assets/dinc-otel/room.jpg",
+        "dining": "../../template-system/visual-assets/suna-pansiyon/dining.jpg",
+        "video": "../../new-demos/anfora/media/decor.mp4"
+      },
+      "highlights": [
+        "Denize sadece 15 metre — terliklerle denize inme lüksü",
+        "Ev yapımı turunç ve incir reçelleriyle ünlü kahvaltı",
+        "Yıllardır değişmeyen içten aile pansiyonu ruhu",
+        "Kordon restoranlarına ve çarşıya yürüme mesafesinde"
+      ],
+      "rooms": [
+        {
+          "title": "Deniz Gören Balkonlu Oda",
+          "size": "26 m²",
+          "capacity": "2-3 Misafir",
+          "view": "Kısmi Deniz & Bahçe",
+          "bed": "1 Çift + 1 Tek Kişilik Yatak",
+          "desc": "Mavi panjurlu pencerelerinden deniz kokusunun dolduğu, balkonlu samimi oda.",
+          "badge": "Misafir Favorisi"
+        },
+        {
+          "title": "Narenciye Bahçesi Odası",
+          "size": "22 m²",
+          "capacity": "2 Misafir",
+          "view": "Bahçe İçi",
+          "bed": "Çift Kişilik Yatak",
+          "desc": "Portakal ağaçlarının yanında, taş zeminli ve pırıl pırıl temizlikte oda.",
+          "badge": "Huzurlu Dinlenme"
+        }
+      ],
+      "rituals": [
+        { "time": "08:00 - 10:30", "title": "Ünlü Ev Yapımı Kahvaltı", "desc": "Teyzemizin ellerinden sıcak pişi, bahçe zeytinleri ve ödüllü reçeller." },
+        { "time": "11:00 - 17:00", "title": "15 Adımda Deniz", "desc": "Kapıdan çıkıp 15 adımda serin sulara bırakın kendinizi." },
+        { "time": "19:00 - 22:00", "title": "Bahçede Sohbet & Çay", "desc": "Akşam serinliğinde bahçe masalarında komşuluk ve tatil anıları." }
+      ],
+      "faq": [
+        { "q": "Denize uzaklık ne kadar?", "a": "Tesisimiz sahil yolunun hemen arkasında, denize sadece 15 metre (15 adım) mesafededir." },
+        { "q": "Antalya Demre'deki Ekin Pansiyon ile bağlantısı var mı?", "a": "Hayır, işletmemiz Muğla Marmaris Selimiye köyünün yerel aile pansiyonudur." }
+      ]
+    },
+    {
+      "id": 8,
+      "slug": "ekin-tatil-evi",
+      "name": "Ekin Tatil Evi",
+      "tagline": "Kendi evinizin konforunda, bağımsız bir Selimiye tatili",
+      "concept": "Mutfaklı apart süitler & geniş verandalar",
+      "location": "Selimiye Sahil Yolu No:44, Marmaris",
+      "subLocation": "Sahil Yolu Şeridi",
+      "seaDistance": "Denize 30 metre",
+      "targetAudience": "Uzun Konaklayanlar & Aileler",
+      "phone": "0537 869 19 33",
+      "rating": { "score": "4.7", "max": "5.0", "reviews": 65, "platform": "Google Hotels" },
+      "theme": {
+        "primary": "#435b70",
+        "secondary": "#c29b64",
+        "dark": "#121619",
+        "card": "rgba(22, 29, 35, 0.8)",
+        "accent": "#d2e0ea",
+        "paletteName": "Nordic Marine & Sand Gold"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/buena-vista-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/buena-vista-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/yagiz-apart-otel/room.jpg",
+        "dining": "../../template-system/visual-assets/buena-vista-hotel/dining.jpg",
+        "video": "../../new-demos/moonlight/media/decor.mp4"
+      },
+      "highlights": [
+        "Tam donanımlı mutfaklı 1+1 apart daireler",
+        "Geniş özel veranda ve yemek yeme alanı",
+        "Uzun süreli ve bağımsız tatiller için ideal altyapı",
+        "Çamaşır makinesi, büyük buzdolabı ve klima"
+      ],
+      "rooms": [
+        {
+          "title": "1+1 Deniz Manzaralı Apart Süit",
+          "size": "55 m²",
+          "capacity": "3-4 Misafir",
+          "view": "Selimiye Körfezi",
+          "bed": "1 Çift Kişilik Yatak + Çift Kişilik Çekyat",
+          "desc": "Ayrı yatak odası, açık mutfaklı geniş salon ve deniz manzaralı büyük teras.",
+          "badge": "Tam Donanımlı Ev"
+        },
+        {
+          "title": "Bahçe Katı Stüdyo Daire",
+          "size": "38 m²",
+          "capacity": "2 Misafir",
+          "view": "Özel Bahçe Verandası",
+          "bed": "King Size Yatak",
+          "desc": "Kendi kahvaltınızı hazırlayabileceğiniz mini mutfak ve gölgelikli veranda.",
+          "badge": "Bağımsız Giriş"
+        }
+      ],
+      "rituals": [
+        { "time": "Kendi Saatinizde", "title": "Verandada Özgür Kahvaltı", "desc": "Pazardan aldığınız taze köy ürünleriyle kendi terasınızda sınırsız kahvaltı keyfi." },
+        { "time": "12:00 - 18:00", "title": "Koylarda Keşif & Deniz", "desc": "Sığliman ve Cennet Koyu'nu gezin veya 30 metre ilerideki plaja geçin." },
+        { "time": "20:00 - Gece", "title": "Teras Akşamları", "desc": "Kendi yemeğinizi pişirin veya Selimiye restoranlarında akşamın tadını çıkarın." }
+      ],
+      "faq": [
+        { "q": "Mutfakta hangi ekipmanlar var?", "a": "Ocak, buzdolabı, çay/kahve makinesi, tencere/tava seti ve tüm servis gereçleri mevcuttur." },
+        { "q": "Haftalık ve aylık indirim var mı?", "a": "7 gün ve üzeri uzun süreli konaklamalarda özel indirimli fiyat uygulanmaktadır." }
+      ]
+    },
+    {
+      "id": 9,
+      "slug": "dantel-pansiyon-restaurant",
+      "name": "Dantel Pansiyon & Restaurant",
+      "tagline": "Sığliman'ın masmavi kıyısında, suyun üstünde bir Ege masalı",
+      "concept": "Denize sıfır restoran-pansiyon & taze deniz ürünleri",
+      "location": "Selimiye Sığliman Mevkii, Marmaris",
+      "subLocation": "Sığliman Koyu Sahili",
+      "seaDistance": "Denize sıfır / Özel kumsal ve iskele",
+      "targetAudience": "Gastronomi & Deniz Tutkunları",
+      "phone": "0532 651 18 94",
+      "rating": { "score": "4.8", "max": "5.0", "reviews": 178, "platform": "Google & Restaurant Guru" },
+      "theme": {
+        "primary": "#20638f",
+        "secondary": "#d8a25e",
+        "dark": "#0c1822",
+        "card": "rgba(16, 33, 46, 0.85)",
+        "accent": "#cde2f0",
+        "paletteName": "Aegean Ultramarine & Sea Salt Gold"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/anfora-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/anfora-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/dinc-otel/room.jpg",
+        "dining": "../../template-system/visual-assets/anfora-hotel/dining.jpg",
+        "video": "../../new-demos/anfora/media/decor.mp4"
+      },
+      "highlights": [
+        "Suyun kenarına kurulu meşhur Dantel Restaurant lezzetleri",
+        "Denize sıfır odalar — sabah dalga sesiyle uyanma ayrıcalığı",
+        "Sığliman'ın durgun, akvaryum gibi berrak denizi",
+        "Günlük taze tutulan balıklar ve 30 çeşit zeytinyağlı meze"
+      ],
+      "rooms": [
+        {
+          "title": "Denize Sıfır Panoramik Balkonlu Oda",
+          "size": "30 m²",
+          "capacity": "2 Misafir",
+          "view": "Doğrudan Sığliman Koyu",
+          "bed": "King Size Yatak",
+          "desc": "Balkonundan ayağınızı uzatsanız suya değecek yakınlıkta, özel banyolu lüks oda.",
+          "badge": "Tam Kıyıda"
+        },
+        {
+          "title": "Sığliman Aile Odası",
+          "size": "38 m²",
+          "capacity": "3-4 Misafir",
+          "view": "Deniz & Dağ",
+          "bed": "1 Çift Kişilik + 2 Tek Kişilik",
+          "desc": "Geniş yaşam alanı ve ferah balkonuyla ailelerin vazgeçilmezi.",
+          "badge": "Ferah & Konforlu"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:00", "title": "İskelede Dalga Sesiyle Kahvaltı", "desc": "Suya sıfır masalarda serpme kahvaltı, çıtır börekler ve taze sıkma meyve suyu." },
+        { "time": "11:30 - 18:00", "title": "Sığliman'da Yüzme & Dinlenme", "desc": "Otel misafirlerine ayrılmış şezlonglarda tüm gün dingin deniz keyfi." },
+        { "time": "19:30 - 23:30", "title": "Dantel'in Meşhur Kıyı Masası", "desc": "Kalamar tava, ahtapot ızgara, kaya koruğu mezesi ve unutulmaz bir akşam yemeği." }
+      ],
+      "faq": [
+        { "q": "Restoranda otel misafirlerine öncelik var mı?", "a": "Otel misafirlerimize en ön sıra kıyı masaları her zaman rezerve edilmektedir." },
+        { "q": "Deniz tabanı nasıldır?", "a": "Sığliman koyu dalgasız, sığ ve ince çakıllı/kumludur; yüzme için bölgenin en güvenli noktasıdır." }
+      ]
+    },
+    {
+      "id": 10,
+      "slug": "elia-selimiye",
+      "name": "Elia Selimiye",
+      "tagline": "Zeytin ağaçları, özel plaj ve sakin lüksün buluştuğu köşe",
+      "concept": "Butik lüks, özel kumsal & rafine gastronomi",
+      "location": "Selimiye Sığliman Mevkii No:12, Marmaris",
+      "subLocation": "Sığliman Özel Koyu",
+      "seaDistance": "Denize sıfır / Özel plaj & güneşlenme terası",
+      "targetAudience": "Seçkin Çiftler & Huzur Arayanlar",
+      "phone": "0532 393 81 48",
+      "rating": { "score": "4.9", "max": "5.0", "reviews": 164, "platform": "Google Hotels & Small Hotels" },
+      "theme": {
+        "primary": "#5a684b",
+        "secondary": "#a38753",
+        "dark": "#151914",
+        "card": "rgba(26, 33, 25, 0.85)",
+        "accent": "#dce4d5",
+        "paletteName": "Silvery Olive & Mediterranean Bronze"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/defne-lorina/hero.jpg",
+        "room1": "../../template-system/visual-assets/defne-lorina/room.jpg",
+        "room2": "../../template-system/visual-assets/rosario-hotel/room.jpg",
+        "dining": "../../template-system/visual-assets/defne-lorina/dining.jpg",
+        "video": "../../new-demos/moonlight/media/decor.mp4"
+      },
+      "highlights": [
+        "Özel kumsal ve tik ağacı güneşlenme iskelesi",
+        "Gümüşi zeytin ağaçlarının arasında dingin butik atmosfer",
+        "Yerel şarap seçkisi ve şef imzalı Akdeniz akşam yemekleri",
+        "Kusursuz oda temizliği ve kişiselleştirilmiş konsiyerj hizmeti"
+      ],
+      "rooms": [
+        {
+          "title": "Elia Beachfront Deluxe Süit",
+          "size": "42 m²",
+          "capacity": "2 Misafir",
+          "view": "Kesintisiz Deniz Manzarası",
+          "bed": "King Size Yatak",
+          "desc": "Özel terasından doğrudan kumsala adım atılan, jakuzili ve lüks banyolu imza süit.",
+          "badge": "Özel Plaj Çıkışlı"
+        },
+        {
+          "title": "Zeytinlik Süit",
+          "size": "32 m²",
+          "capacity": "2 Misafir",
+          "view": "Zeytin Bahçesi & Deniz",
+          "bed": "Queen Size Yatak",
+          "desc": "Zeytin ağaçlarının gölgesinde, masif ahşap ve keten dokulu şık konaklama.",
+          "badge": "Doğal Lüks"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:30", "title": "Elia Artizan Kahvaltı", "desc": "Kendi zeytinliğimizin soğuk sıkım yağı, ev yapımı granola ve sıcak köy ekmekleri." },
+        { "time": "14:00 - 18:00", "title": "Özel Plajda Şezlong Huzuru", "desc": "Yumuşak minderli şezlonglarda serinletici meyve kokteylleri ve berrak deniz." },
+        { "time": "20:00 - 23:30", "title": "Mum Işığında Akdeniz Mutfağı", "desc": "Kıyıya vuran dalga sesleri eşliğinde şefin hazırladığı özel deniz mahsulleri menüsü." }
+      ],
+      "faq": [
+        { "q": "Plaj alanı dışarıya açık mı?", "a": "Plajımız öncelikle otel misafirlerimizin sakinliği için özel tutulmaktadır." },
+        { "q": "Transfer hizmetiniz var mı?", "a": "Dalaman ve Bodrum havalimanlarından VIP transfer organizasyonu yapılmaktadır." }
+      ]
+    },
+    {
+      "id": 11,
+      "slug": "portakal-butik-otel",
+      "name": "Portakal Butik Otel",
+      "tagline": "Portakal çiçekleri kokusu, yüzme havuzu ve 24 saat kesintisiz konfor",
+      "concept": "Portakal bahçesi, havuz başı restoran & aile konforu",
+      "location": "Selimiye Sığliman Cad. No:88, Marmaris",
+      "subLocation": "Sığliman Bahçeler Bölgesi",
+      "seaDistance": "Denize 180 metre / Geniş havuzlu",
+      "targetAudience": "Aileler & Konfor Arayanlar",
+      "phone": "0535 601 19 26",
+      "rating": { "score": "4.7", "max": "5.0", "reviews": 92, "platform": "Google Hotels & Agoda" },
+      "theme": {
+        "primary": "#df742c",
+        "secondary": "#3e6b48",
+        "dark": "#1c1610",
+        "card": "rgba(36, 26, 18, 0.8)",
+        "accent": "#fae4d4",
+        "paletteName": "Sunset Citrus & Grove Green"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/ozgur-otel-bozburun/hero.jpg",
+        "room1": "../../template-system/visual-assets/ozgur-otel-bozburun/room.jpg",
+        "room2": "../../template-system/visual-assets/rosario-hotel/room.jpg",
+        "dining": "../../template-system/visual-assets/ozgur-otel-bozburun/dining.jpg",
+        "video": "../../new-demos/anfora/media/decor.mp4"
+      },
+      "highlights": [
+        "Portakal ve mandalina ağaçlarıyla çevrili 2000 m² bahçe",
+        "Büyük açık yüzme havuzu ve çocuk bölümü",
+        "Tesis bünyesinde 24 saat açık restoran ve havuz bar",
+        "24 saat resepsiyon ve geniş otopark imkanı"
+      ],
+      "rooms": [
+        {
+          "title": "Havuz Manzaralı Deluxe Aile Odası",
+          "size": "44 m²",
+          "capacity": "4 Misafir",
+          "view": "Havuz & Portakal Bahçesi",
+          "bed": "1 Çift Kişilik + 2 Tek Kişilik Yatak",
+          "desc": "Geniş balkonlu, ayrı oturma alanlı ve iki banyolu ferah aile süiti.",
+          "badge": "Geniş Aile"
+        },
+        {
+          "title": "Standart Bahçe Odası",
+          "size": "26 m²",
+          "capacity": "2 Misafir",
+          "view": "Bahçe & Çiçekler",
+          "bed": "King Size Yatak",
+          "desc": "Portakal kokularına açılan balkon, modern banyo ve sessiz klima altyapısı.",
+          "badge": "Çiftler İçin"
+        }
+      ],
+      "rituals": [
+        { "time": "08:00 - 11:00", "title": "Portakal Bahçesinde Kahvaltı", "desc": "Taze sıkılmış portakal suyu, sıcak pişi, köy peynirleri ve bahçe reçelleri." },
+        { "time": "12:00 - 17:30", "title": "Havuz Başı Snack & Kokteyl", "desc": "Havuz başında hafif atıştırmalıklar, buzlu limonata ve şezlong keyfi." },
+        { "time": "19:30 - 22:30", "title": "Bahçe Restoranında Izgara Gecesi", "desc": "Akşam serinliğinde açık havada ızgara lezzetleri ve Ege mezeleri." }
+      ],
+      "faq": [
+        { "q": "Resepsiyon 24 saat açık mı?", "a": "Evet, 24 saat resepsiyon ve oda servisi hizmetimiz bulunmaktadır." },
+        { "q": "Otopark kapasitesi yeterli mi?", "a": "Tesisimiz geniş özel otoparka sahiptir, tüm misafir araçları için yer mevcuttur." }
+      ]
+    },
+    {
+      "id": 12,
+      "slug": "salkim-sahil-evi",
+      "name": "Salkım Sahil Evi",
+      "tagline": "Hanım Pınarı'nda 8 odalı özel bir ev sıcaklığı",
+      "concept": "8 odalı butik sahil evi & asma çardakları",
+      "location": "Selimiye Hanım Pınarı Mevkii, Marmaris",
+      "subLocation": "Hanım Pınarı Koyu",
+      "seaDistance": "Denize 20 metre / Sahil şeridi",
+      "targetAudience": "Butik Kaçış & Çiftler",
+      "phone": "0552 428 49 15",
+      "rating": { "score": "4.8", "max": "5.0", "reviews": 88, "platform": "Tripadvisor & Setur" },
+      "theme": {
+        "primary": "#7c4d7e",
+        "secondary": "#7a8c6e",
+        "dark": "#181217",
+        "card": "rgba(32, 23, 31, 0.8)",
+        "accent": "#ebdce9",
+        "paletteName": "Vineyard Violet & Sage Linen"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/anfora-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/anfora-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/hotel-melisa/room.jpg",
+        "dining": "../../template-system/visual-assets/anfora-hotel/dining.jpg",
+        "video": "../../new-demos/moonlight/media/decor.mp4"
+      },
+      "highlights": [
+        "Sadece 8 odalı, kalabalıktan uzak özel butik yapı",
+        "Asma salkımları altında serin taş avlu",
+        "Hanım Pınarı mevkiinin en dingin kıyı noktası",
+        "Kişiye özel hazırlanan Ege kahvaltısı"
+      ],
+      "rooms": [
+        {
+          "title": "Salkım Deniz Süiti",
+          "size": "32 m²",
+          "capacity": "2 Misafir",
+          "view": "Hanım Pınarı Koyu",
+          "bed": "King Size Yatak",
+          "desc": "Asma çardaklarının arasından denizi gören, ahşap tavanlı romantik süit.",
+          "badge": "En Çok Beğenilen"
+        },
+        {
+          "title": "Avlu Taş Odası",
+          "size": "25 m²",
+          "capacity": "2 Misafir",
+          "view": "Çiçekli Avlu",
+          "bed": "Queen Size Yatak",
+          "desc": "Taş duvarların serinliğinde, huzurlu bir uyku ve dinlenme sunan avlu odası.",
+          "badge": "Serin Taş Mimari"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:00", "title": "Asma Altında Kahvaltı", "desc": "Salkım üzümlerinin gölgesinde çıtır pişi, taze keçi peyniri ve bahçe balı." },
+        { "time": "12:00 - 17:00", "title": "Hanım Pınarı'nda Deniz", "desc": "Birkaç adımda berrak suya girin, gün boyu sessizliğin tadını çıkarın." },
+        { "time": "19:00 - 22:30", "title": "Avlu Sohbetleri & Kahve", "desc": "Güneş battıktan sonra avluda közde Türk kahvesi ve yıldızlı Selimiye gecesi." }
+      ],
+      "faq": [
+        { "q": "Otel toplam kaç odalı?", "a": "Tesisimiz yalnızca 8 odadan oluşmakta olup sakin ve butik bir atmosfer sunar." },
+        { "q": "Plaja uzaklığı nedir?", "a": "Denize ve plaja sadece 20 metre yürüyüş mesafesindedir." }
+      ]
+    },
+    {
+      "id": 13,
+      "slug": "mavi-melek-hotel",
+      "name": "Mavi Melek Hotel",
+      "tagline": "Sığliman'ın gökyüzüyle buluştuğu yerde, 17 odalı ferah bir tatil",
+      "concept": "17 odalı tatil oteli, yüzme havuzu & teras bar",
+      "location": "Selimiye Sığliman No:102, Marmaris",
+      "subLocation": "Sığliman Tepesi Koya Bakış",
+      "seaDistance": "Denize 120 metre / Açık yüzme havuzlu",
+      "targetAudience": "Gezginler & Gruplar",
+      "phone": "0532 999 88 77",
+      "rating": { "score": "4.6", "max": "5.0", "reviews": 73, "platform": "Google & Check24" },
+      "theme": {
+        "primary": "#3a88b8",
+        "secondary": "#e2a45a",
+        "dark": "#101b24",
+        "card": "rgba(20, 36, 48, 0.8)",
+        "accent": "#d5e9f5",
+        "paletteName": "Celestial Sky & Warm Teak"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/buena-vista-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/buena-vista-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/rosario-hotel/room.jpg",
+        "dining": "../../template-system/visual-assets/buena-vista-hotel/dining.jpg",
+        "video": "../../new-demos/anfora/media/decor.mp4"
+      },
+      "highlights": [
+        "17 ferah oda ve panoramik manzaralı balkonlar",
+        "Geniş açık yüzme havuzu ve güneşlenme terası",
+        "Sığliman koyuna yukarıdan bakan nefis gün batımı",
+        "Her sabah 08:00 - 10:30 arası zengin açık büfe kahvaltı"
+      ],
+      "rooms": [
+        {
+          "title": "Panoramik Havuz & Deniz Odası",
+          "size": "32 m²",
+          "capacity": "2-3 Misafir",
+          "view": "Havuz ve Sığliman Koyu",
+          "bed": "1 Çift + 1 Tek Kişilik Yatak",
+          "desc": "Geniş terasından hem havuzu hem de koyun mavisini kucaklayan konforlu oda.",
+          "badge": "En İyi Manzara"
+        },
+        {
+          "title": "Standart Çift Kişilik Oda",
+          "size": "24 m²",
+          "capacity": "2 Misafir",
+          "view": "Doğa & Dağ Manzarası",
+          "bed": "Çift Kişilik Yatak",
+          "desc": "Klima, minibar, TV ve ferah duşakabin banyosuyla eksiksiz tatil konforu.",
+          "badge": "Ekonomik & Rahat"
+        }
+      ],
+      "rituals": [
+        { "time": "08:00 - 10:30", "title": "Açık Büfe Kahvaltı", "desc": "Havuz başında zengin peynir, reçel, zeytin çeşitleri ve sıcaklar." },
+        { "time": "11:00 - 17:00", "title": "Teras Havuzunda Güneşlenme", "desc": "Geniş şezlonglarda soğuk içecekler eşliğinde havuz serinliği." },
+        { "time": "19:00 - 22:00", "title": "Teras Barda Gün Batımı", "desc": "Sığliman koyunun kızıla boyanışını teras barda kokteyl eşliğinde izleyin." }
+      ],
+      "faq": [
+        { "q": "Kahvaltı saatleri nedir?", "a": "Açık büfe kahvaltımız her sabah 08:00 - 10:30 saatleri arasında servis edilir." },
+        { "q": "Evcil hayvan kabul ediliyor mu?", "a": "Tesis genelinde evcil hayvan kabul edilmemektedir." }
+      ]
+    },
+    {
+      "id": 14,
+      "slug": "hydas-pansiyon",
+      "name": "Hydas Pansiyon",
+      "tagline": "Antik Karia kenti Hydas'ın adını taşıyan, denize sıfır huzur iskelesi",
+      "concept": "+14 Yetişkin konsepti, özel ahşap iskele & balayı kahvaltısı",
+      "location": "Selimiye Koyu Sahil Yolu No:7, Marmaris",
+      "subLocation": "Antik Karia Kıyısı",
+      "seaDistance": "Denize sıfır / Özel iskeleli",
+      "targetAudience": "+14 Yetişkinler & Balayı Çiftleri",
+      "phone": "0532 777 66 55",
+      "rating": { "score": "4.7", "max": "5.0", "reviews": 95, "platform": "Google & Obilet" },
+      "theme": {
+        "primary": "#244b7a",
+        "secondary": "#b59353",
+        "dark": "#11161d",
+        "card": "rgba(19, 29, 43, 0.85)",
+        "accent": "#d0dfef",
+        "paletteName": "Carian Cobalt & Olive Gold"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/anfora-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/anfora-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/trakheia-bozburun/room.jpg",
+        "dining": "../../template-system/visual-assets/anfora-hotel/dining.jpg",
+        "video": "../../new-demos/moonlight/media/decor.mp4"
+      },
+      "highlights": [
+        "Doğrudan suya açılan geniş ahşap güneşlenme iskelesi",
+        "+14 yaş yetişkin kuralıyla garanti edilen sakin atmosfer",
+        "Balayı çiftlerine özel odaya kahvaltı ve karşılama ikramları",
+        "Kıyı terasında barbekü ve taze balık akşamları"
+      ],
+      "rooms": [
+        {
+          "title": "İskele Önü Balayı Süiti",
+          "size": "35 m²",
+          "capacity": "2 Yetişkin",
+          "view": "Doğrudan Deniz & İskele",
+          "bed": "King Size Yatak",
+          "desc": "Geniş deniz balkonu, özel tasarım banyo ve odaya servis kahvaltı ayrıcalığı.",
+          "badge": "Balayı Özel"
+        },
+        {
+          "title": "Hydas Taş Odası",
+          "size": "26 m²",
+          "capacity": "2 Yetişkin",
+          "view": "Deniz & Dağ",
+          "bed": "Queen Size Yatak",
+          "desc": "Taş işçiliği, deniz esintisine açılan çift kanatlı kapılar ve zarif konfor.",
+          "badge": "Tarihi Doku"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:00", "title": "İskelede Baş Başa Kahvaltı", "desc": "Suyun tam üzerinde, yöresel Karia lezzetleriyle zenginleştirilmiş kahvaltı." },
+        { "time": "11:30 - 18:00", "title": "Özel İskelede Güneş & Deniz", "desc": "Ahşap iskeleden merdivenle doğrudan akvaryum gibi denize iniş." },
+        { "time": "19:30 - 22:30", "title": "Kıyı Barbekü & Şarap", "desc": "Deniz kenarında ızgara balık kokusu ve mum ışığında samimi akşam yemeği." }
+      ],
+      "faq": [
+        { "q": "Çocuk kabul ediliyor mu?", "a": "Huzur konseptimiz gereği 14 yaş altı çocuk misafir kabul edilmemektedir." },
+        { "q": "Balayı çiftlerine özel sürpriz var mı?", "a": "Balayı misafirlerimize oda süslemesi, meyve sepeti ve odaya özel kahvaltı sunulmaktadır." }
+      ]
+    },
+    {
+      "id": 15,
+      "slug": "yamac-motel-selimiye",
+      "name": "Yamaç Motel Selimiye",
+      "tagline": "Yamacın yeşilliğinde 6 odalı butik sıcaklık, ev yemekleri ve deniz",
+      "concept": "6 odalı aile işletmesi, panoramik yamaç manzarası & ev mutfağı",
+      "location": "Selimiye Köyü Yamaç Mevkii No:3, Marmaris",
+      "subLocation": "Yamaç Eteği Bahçeleri",
+      "seaDistance": "Denize 40 metre (Plaja 1 dk)",
+      "targetAudience": "Aileler & Ev Sıcaklığı Arayanlar",
+      "phone": "0541 536 63 86",
+      "rating": { "score": "4.8", "max": "5.0", "reviews": 82, "platform": "Google & Obilet" },
+      "theme": {
+        "primary": "#a0593b",
+        "secondary": "#4b6647",
+        "dark": "#1b1712",
+        "card": "rgba(35, 27, 20, 0.8)",
+        "accent": "#f5e0d3",
+        "paletteName": "Mountain Terracotta & Pine Canopy"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/suna-pansiyon/hero.jpg",
+        "room1": "../../template-system/visual-assets/suna-pansiyon/room.jpg",
+        "room2": "../../template-system/visual-assets/hotel-melisa/room.jpg",
+        "dining": "../../template-system/visual-assets/suna-pansiyon/dining.jpg",
+        "video": "../../new-demos/anfora/media/decor.mp4"
+      },
+      "highlights": [
+        "Sadece 6 odadan oluşan samimi ve sakin tesis",
+        "Denize ve plaja yalnızca 40 metre yürüme mesafesi",
+        "Annemizin mutfağından çıkan enfes tencere ve ızgara yemekleri",
+        "Bebek ve çocuk dostu sıcak aile ortamı"
+      ],
+      "rooms": [
+        {
+          "title": "Panoramik Yamaç Teras Odası",
+          "size": "28 m²",
+          "capacity": "2-3 Misafir",
+          "view": "Selimiye Koyu Kuşbakışı",
+          "bed": "1 Çift + 1 Tek Kişilik Yatak",
+          "desc": "Geniş terasından koya ve zeytinliklere hakim, havadar ve huzurlu oda.",
+          "badge": "Kuşbakışı Manzara"
+        },
+        {
+          "title": "Bahçe İçi 6 Numaralı Oda",
+          "size": "24 m²",
+          "capacity": "2 Misafir",
+          "view": "Yamaç Bahçesi",
+          "bed": "Çift Kişilik Yatak",
+          "desc": "Yeşillikler içinde, klima, minibar, TV ve 24 saat sıcak su ile donatılmış oda.",
+          "badge": "Sessiz Dinlenme"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:00", "title": "Serpme Köy Kahvaltısı", "desc": "Köy yumurtası, sıcak bazlama, ev yapımı zeytinler ve domates-biber söğüş." },
+        { "time": "12:00 - 17:00", "title": "40 Metrede Plaj Keyfi", "desc": "Hemen 40 metre aşağıdaki plajda yüzün, acıkınca taze ev yemeği için yukarı çıkın." },
+        { "time": "19:00 - 22:00", "title": "Közde Izgara & Bahçe Akşamı", "desc": "Bahçede kurulan masalarda ızgara köfte, taze balık ve ev yapımı zeytinyağlılar." }
+      ],
+      "faq": [
+        { "q": "Bebekli aileler için uygun mu?", "a": "Evet, bebek yatağı ve mama sandalyesi temin edilir; bebek dostu bir işletmeyiz." },
+        { "q": "Denize ulaşım kolay mı?", "a": "Deniz ve plaj sadece 40 metre mesafededir, çok kısa ve düzgün bir patika ile inilir." }
+      ]
+    },
+    {
+      "id": 16,
+      "slug": "moka-butik-hotel",
+      "name": "Moka Butik Hotel",
+      "tagline": "Bük mevkiinde artizan kahve kokusu, şık tasarım ve yavaş tatil",
+      "concept": "Butik otel & artizan kahve / kokteyl barı",
+      "location": "Selimiye Bük Mevkii No:55, Marmaris",
+      "subLocation": "Bük Sahil Şeridi",
+      "seaDistance": "Denize 80 metre (Bük Plajı yanı)",
+      "targetAudience": "Genç Çiftler & Kahve/Tasarım Tutkunları",
+      "phone": "0532 051 75 94",
+      "rating": { "score": "4.7", "max": "5.0", "reviews": 69, "platform": "Google & Obilet" },
+      "theme": {
+        "primary": "#8d5b38",
+        "secondary": "#d9a05b",
+        "dark": "#181412",
+        "card": "rgba(34, 25, 20, 0.8)",
+        "accent": "#f5e4d3",
+        "paletteName": "Espresso Roast & Warm Caramel"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/moonlight-butik-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/moonlight-butik-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/valentina-boutique-hotel/room.jpg",
+        "dining": "../../template-system/visual-assets/moonlight-butik-hotel/dining.jpg",
+        "video": "../../new-demos/moonlight/media/decor.mp4"
+      },
+      "highlights": [
+        "Özel kavrum 3. nesil artizan kahve ve kokteyl barı",
+        "Modern İskandinav ve Ege harmanı şık oda tasarımları",
+        "Bük mevkiinin sakin ve berrak plajına 1 dakika yürüme",
+        "Akşamları özenle seçilmiş lo-fi & indie playlist dinletisi"
+      ],
+      "rooms": [
+        {
+          "title": "Moka Studio Deluxe Süit",
+          "size": "34 m²",
+          "capacity": "2 Misafir",
+          "view": "Bük Koyu & Bahçe",
+          "bed": "King Size Yatak",
+          "desc": "Espresso makinesi, şık oturma köşesi ve geniş yağmur duşlu banyo.",
+          "badge": "Tasarım Odaklı"
+        },
+        {
+          "title": "Standart Bük Odası",
+          "size": "26 m²",
+          "capacity": "2 Misafir",
+          "view": "Bahçe & Avlu",
+          "bed": "Queen Size Yatak",
+          "desc": "Sıcak ahşap detaylar, keten perdeler ve konforlu yatak altyapısı.",
+          "badge": "Sakin Konfor"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:30", "title": "Specialty Coffee & Ekşi Maya Kahvaltı", "desc": "V60 pour-over veya flat white eşliğinde artizan kruvasan ve Ege lezzetleri." },
+        { "time": "14:00 - 18:00", "title": "Bük Koyu'nda Deniz & Cold Brew", "desc": "Plajda yüzün, otelin bahçesinde buz gibi cold brew kahvenizi yudumlayın." },
+        { "time": "19:30 - 23:30", "title": "Moka Garden Signature Cocktails", "desc": "Botanikal şuruplarla hazırlanan imza kokteyller ve keyifli bahçe lounge'u." }
+      ],
+      "faq": [
+        { "q": "Kahve barı dışarıya açık mı?", "a": "Evet, Moka Coffee & Bar dışarıdan gelen misafirlere de açıktır." },
+        { "q": "Plaja uzaklık nedir?", "a": "Bük sahiline ve plaja sadece 80 metre mesafededir." }
+      ]
+    },
+    {
+      "id": 17,
+      "slug": "uzum-tatil-evi",
+      "name": "Üzüm Tatil Evi",
+      "tagline": "6 odalı butik bağ evi, özel plaj erişimi ve koyun en tatlı köşesi",
+      "concept": "6 odalı butik mülk, özel plaj erişimi & asma gölgesi",
+      "location": "Selimiye Bük / Sığliman Mevkii No:22, Marmaris",
+      "subLocation": "Bük & Sığliman Arası",
+      "seaDistance": "Denize sıfır / Özel plaj & şezlong alanı",
+      "targetAudience": "Butik Tatilciler & Çiftler",
+      "phone": "0530 799 68 48",
+      "rating": { "score": "4.8", "max": "5.0", "reviews": 90, "platform": "Google & Reseliva" },
+      "theme": {
+        "primary": "#6b375b",
+        "secondary": "#437365",
+        "dark": "#191217",
+        "card": "rgba(33, 22, 31, 0.8)",
+        "accent": "#ebdbe7",
+        "paletteName": "Grapevine Purple & Emerald Bay"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/anfora-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/anfora-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/hotel-melisa/room.jpg",
+        "dining": "../../template-system/visual-assets/anfora-hotel/dining.jpg",
+        "video": "../../new-demos/anfora/media/decor.mp4"
+      },
+      "highlights": [
+        "Sadece 6 odadan oluşan özel ve korunaklı konsept",
+        "Doğrudan denize açılan özel plaj ve şezlong kullanımı",
+        "Asma yapraklarının gölgesinde sahil barı ve dinlenme köşesi",
+        "Doğal ürünlerle hazırlanan zengin Ege köy kahvaltısı"
+      ],
+      "rooms": [
+        {
+          "title": "Üzüm Sahil Süiti",
+          "size": "35 m²",
+          "capacity": "2-3 Misafir",
+          "view": "Doğrudan Kumsal & Deniz",
+          "bed": "King Size Yatak",
+          "desc": "Kapısını açtığınızda doğrudan kumsala ulaşılan, taş banyolu lüks sahil odası.",
+          "badge": "Kumsala Sıfır"
+        },
+        {
+          "title": "Bağ Verandası Odası",
+          "size": "26 m²",
+          "capacity": "2 Misafir",
+          "view": "Asma Bahçesi",
+          "bed": "Queen Size Yatak",
+          "desc": "Asma çardağının gölgesinde, ahşap masa ve sandalyeleri olan huzur odası.",
+          "badge": "Gölge & Huzur"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:00", "title": "Asma Altında Köy Kahvaltısı", "desc": "Taze sıkılmış meyve suları, köy peynirleri ve bahçe domatesleriyle zengin masa." },
+        { "time": "12:00 - 17:30", "title": "Özel Plajda Şezlong & Deniz", "desc": "Kalabalıktan uzak özel plajda denizin ve güneşin keyfini sürün." },
+        { "time": "19:00 - 22:30", "title": "Sahil Barda Şarap & Sohbet", "desc": "Kıyıya vuran dalgaların eşliğinde yöresel şaraplar ve Ege mezeleri." }
+      ],
+      "faq": [
+        { "q": "Plajda şezlong ücreti var mı?", "a": "Otel misafirlerimize şezlong ve şemsiye kullanımı tamamen ücretsizdir." },
+        { "q": "Otel kapasitesi nedir?", "a": "Tesisimiz yalnızca 6 odadan oluşmakta olup yüksek gizlilik ve huzur sunar." }
+      ]
+    },
+    {
+      "id": 18,
+      "slug": "naxos-beach",
+      "name": "Naxos Beach Selimiye",
+      "tagline": "Selimiye merkezinde enerjik sahil kulübü, lüks odalar ve gurme lezzetler",
+      "concept": "Beach club & butik otel & gurme deniz mutfağı",
+      "location": "Selimiye Merkez Kordon Cad. No:16, Marmaris",
+      "subLocation": "Merkez Kordon Sahili",
+      "seaDistance": "Denize sıfır / Özel iskele & beach club",
+      "targetAudience": "Genç Profesyoneller & Trend Arayanlar",
+      "phone": "0531 271 88 48",
+      "rating": { "score": "4.7", "max": "5.0", "reviews": 210, "platform": "Google Hotels & Mudavim" },
+      "theme": {
+        "primary": "#1ba39c",
+        "secondary": "#f2b705",
+        "dark": "#0b1c22",
+        "card": "rgba(14, 38, 46, 0.85)",
+        "accent": "#d2f5f3",
+        "paletteName": "Greek Island Turquoise & Sunlit Gold"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/anfora-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/anfora-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/dinc-otel/room.jpg",
+        "dining": "../../template-system/visual-assets/anfora-hotel/dining.jpg",
+        "video": "../../new-demos/anfora/media/decor.mp4"
+      },
+      "highlights": [
+        "Selimiye'nin en popüler ahşap iskelesi ve konforlu sunbed locaları",
+        "Akşamüstü gün batımı DJ performansları ve imza kokteyller",
+        "Denize sıfır deniz mahsulleri restoranı ve gurme meze menüsü",
+        "Merkezi konum ile Selimiye gece hayatının tam kalbinde"
+      ],
+      "rooms": [
+        {
+          "title": "Naxos Beachfront VIP Süit",
+          "size": "40 m²",
+          "capacity": "2 Misafir",
+          "view": "Panoramik İskele & Deniz",
+          "bed": "King Size Yatak",
+          "desc": "Özel güneşlenme balkonu, tasarım banyo ve iskelede rezerve özel loca imkanı.",
+          "badge": "VIP Sahil"
+        },
+        {
+          "title": "Deluxe Kordon Odası",
+          "size": "28 m²",
+          "capacity": "2 Misafir",
+          "view": "Deniz & Kordon Manzarası",
+          "bed": "Queen Size Yatak",
+          "desc": "Turkuaz tonlarında ferah dekorasyon, yağmur duşu ve modern minibar.",
+          "badge": "Trend & Şık"
+        }
+      ],
+      "rituals": [
+        { "time": "09:00 - 11:30", "title": "İskelede Gurme Kahvaltı", "desc": "Avokadolu poşe yumurta, taze Ege peynirleri ve taze sıkılmış detox içecekleri." },
+        { "time": "15:00 - 19:30", "title": "Sunset Beats & Beach Lounge", "desc": "Güneş batarken hafif ritimler, soğuk kokteyller ve iskele enerjisi." },
+        { "time": "20:30 - 00:00", "title": "Kıyı Restoranında Gastronomi", "desc": "Taze karides güveç, levrek marine ve eşsiz deniz kenarı akşam yemeği." }
+      ],
+      "faq": [
+        { "q": "Otel misafirlerinin beach club girişi nasıl?", "a": "Otel misafirlerimize iskeledeki şezlong ve localar öncelikli ve ücretsiz olarak ayrılır." },
+        { "q": "Müzik yayını gece kaça kadar sürüyor?", "a": "Müzik yayını Selimiye'nin huzurunu korumak adına saat 23:30'da sona ermektedir." }
+      ]
+    },
+    {
+      "id": 19,
+      "slug": "selimiye-11-oda",
+      "name": "Selimiye 11 Oda",
+      "tagline": "Tamı tamına 11 özel oda, +12 yaş konsepti ve sessiz lüks",
+      "concept": "11 odalı mimari butik, +12 yaş kuralı & artizan kahvaltı",
+      "location": "Selimiye Merkez Mah. Okul Yolu No:11, Marmaris",
+      "subLocation": "Merkez Sakin Sokak",
+      "seaDistance": "Denize 90 metre (1 dk yürüyüş)",
+      "targetAudience": "+12 Yetişkinler & Minimalizm Sevenler",
+      "phone": "0533 888 77 66",
+      "rating": { "score": "4.9", "max": "5.0", "reviews": 115, "platform": "Google & Reseliva" },
+      "theme": {
+        "primary": "#5c626b",
+        "secondary": "#bfa068",
+        "dark": "#151618",
+        "card": "rgba(28, 30, 33, 0.85)",
+        "accent": "#e6e5e0",
+        "paletteName": "Minimalist Charcoal & Sand Travertine"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/sound-of-silence-suite/hero.jpg",
+        "room1": "../../template-system/visual-assets/sound-of-silence-suite/room.jpg",
+        "room2": "../../template-system/visual-assets/rosario-hotel/room.jpg",
+        "dining": "../../template-system/visual-assets/sound-of-silence-suite/dining.jpg",
+        "video": "../../new-demos/moonlight/media/decor.mp4"
+      },
+      "highlights": [
+        "Yalnızca 11 adet özel tasarlanmış butik oda",
+        "+12 yaş konsepti ile gürültüden arındırılmış dinginlik",
+        "Ham keten, masif ceviz ve mikro-beton detaylarla sessiz lüks",
+        "Bölgenin yerel üreticilerinden temin edilen artizan kahvaltı"
+      ],
+      "rooms": [
+        {
+          "title": "Oda 11 — Panoramik Balkonlu Çatı Süiti",
+          "size": "38 m²",
+          "capacity": "2 Misafir",
+          "view": "Selimiye Koyu ve Çam Dağları",
+          "bed": "King Size Yatak",
+          "desc": "En üst katta yer alan, çift cepheli balkonu ve özel jakuzisiyle tesisin imza odası.",
+          "badge": "İmza Oda"
+        },
+        {
+          "title": "Deluxe Avlu Odası",
+          "size": "28 m²",
+          "capacity": "2 Misafir",
+          "view": "Taş Avlu & Zeytinlik",
+          "bed": "King Size Yatak",
+          "desc": "Özel taş veranda alanı, keten bornozlar ve tasarım mermer lavabolar.",
+          "badge": "Sessiz Konfor"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:30", "title": "11 Oda Artizan Sofrası", "desc": "Karakovan balı, Datça bademi, taze keçi tulumu ve odun ateşinde pişmiş ekmekler." },
+        { "time": "14:00 - 17:30", "title": "Avlu Kütüphanesinde Okuma Molası", "desc": "Zeytin ağacı altında buzlu adaçayı ve kütüphaneden seçtiğiniz bir kitap." },
+        { "time": "20:00 - 23:00", "title": "Mum Işığı & Şarap Keyfi", "desc": "Özel aydınlatmalı taş avluda yerel şarap seçkisi ve huzurlu Selimiye rüzgarı." }
+      ],
+      "faq": [
+        { "q": "Çocuk politikası nasıldır?", "a": "Tesisimiz +12 yaş ve üzeri misafirlerimize hizmet vermektedir." },
+        { "q": "Toplam kaç oda bulunmaktadır?", "a": "Otelimizde adımız gibi tam 11 oda bulunmaktadır; kişiye özel hizmet verilir." }
+      ]
+    },
+    {
+      "id": 20,
+      "slug": "sigliman-glamping-beach",
+      "name": "Sığliman Glamping Beach",
+      "tagline": "Selimiye'nin en özel koyunda, deniz kenarında safari lüksü",
+      "concept": "Lüks glamping çadırları, özel plaj & yıldızlar altında konaklama",
+      "location": "Selimiye Sığliman Koyu En Uç Mevkii, Marmaris",
+      "subLocation": "Sığliman Tabiat Parkı Kıyısı",
+      "seaDistance": "Denize sıfır / Özel kumsal & plaj alanı",
+      "targetAudience": "Doğa Aşıkları, Çiftler & Bohem Lüks Arayanlar",
+      "phone": "0532 600 55 44",
+      "rating": { "score": "4.9", "max": "5.0", "reviews": 142, "platform": "Google & TatilimSensin" },
+      "theme": {
+        "primary": "#706b4b",
+        "secondary": "#286b6b",
+        "dark": "#161814",
+        "card": "rgba(26, 28, 22, 0.85)",
+        "accent": "#e7e9dc",
+        "paletteName": "Safari Canvas & Aegean Teal"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/trakheia-bozburun/hero.jpg",
+        "room1": "../../template-system/visual-assets/trakheia-bozburun/room.jpg",
+        "room2": "../../template-system/visual-assets/defne-lorina/room.jpg",
+        "dining": "../../template-system/visual-assets/trakheia-bozburun/dining.jpg",
+        "video": "../../new-demos/anfora/media/decor.mp4"
+      },
+      "highlights": [
+        "Denize sıfır konumda lüks safari glamping çadırları",
+        "Her çadırda klima, özel banyo-tuvalet ve konforlu king yatak",
+        "Sığliman'ın dalgasız berrak denizinde özel kumsal ve iskele",
+        "Akşamları plaj ateş çukuru ve yıldız gözlemi"
+      ],
+      "rooms": [
+        {
+          "title": "Sahil Safari Glamping Lodge",
+          "size": "36 m²",
+          "capacity": "2-3 Misafir",
+          "view": "Doğrudan Kumsal ve Deniz",
+          "bed": "King Size Yatak + Veranda Hamak",
+          "desc": "Özel ahşap verandası doğrudan kuma basan, klimalı ve özel lüks banyolu çadır süit.",
+          "badge": "Kumsala Sıfır Glamping"
+        },
+        {
+          "title": "Zeytinlik Safari Çadırı",
+          "size": "30 m²",
+          "capacity": "2 Misafir",
+          "view": "Zeytin Ağaçları & Deniz",
+          "bed": "Queen Size Yatak",
+          "desc": "Doğanın kalbinde, rustik ahşap mobilyalar ve açık hava duşu keyfi.",
+          "badge": "Eko-Lüks"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:00", "title": "Kumsalda Yalınayak Kahvaltı", "desc": "Ayaklarınız kuma değerken taze meyveler, omletler ve köy ekmekleri." },
+        { "time": "12:00 - 18:00", "title": "Sığliman'da Kano & Yüzme", "desc": "Ücretsiz kano ve paddleboard ile koyun bakir noktalarını keşfedin." },
+        { "time": "20:30 - Gece", "title": "Plajda Ateş Başı & Akustik", "desc": "Dalga sesleri eşliğinde ateş çukuru başında şarap ve yıldızlar." }
+      ],
+      "faq": [
+        { "q": "Çadırlarda klima ve özel banyo var mı?", "a": "Tüm glamping çadırlarımızda bağımsız klima, 24 saat sıcak su ve özel lüks banyo mevcuttur." },
+        { "q": "Kano ve deniz ekipmanları ücretli mi?", "a": "Kano ve paddleboard kullanımı konaklayan misafirlerimize ücretsizdir." }
+      ]
+    },
+    {
+      "id": 21,
+      "slug": "selimiye-sakli-bahce-hotel",
+      "name": "Selimiye Saklı Bahçe Hotel",
+      "tagline": "Sığliman'ın gizli vahasında 10 odalı aile sıcaklığı ve havuz keyfi",
+      "concept": "10 odalı gizli bahçe, yüzme havuzu & restoran terası",
+      "location": "Selimiye Sığliman Mah. No:64, Marmaris",
+      "subLocation": "Sığliman İç Vadi",
+      "seaDistance": "Denize 160 metre / Açık havuzlu",
+      "targetAudience": "Aileler & Doğa İçinde Huzur Arayanlar",
+      "phone": "0532 444 33 22",
+      "rating": { "score": "4.8", "max": "5.0", "reviews": 79, "platform": "Google & Obilet" },
+      "theme": {
+        "primary": "#385c46",
+        "secondary": "#b8336a",
+        "dark": "#121915",
+        "card": "rgba(22, 33, 25, 0.8)",
+        "accent": "#d7eadf",
+        "paletteName": "Secret Grove & Bougainvillea Pink"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/rosario-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/rosario-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/suna-pansiyon/room.jpg",
+        "dining": "../../template-system/visual-assets/rosario-hotel/dining.jpg",
+        "video": "../../new-demos/moonlight/media/decor.mp4"
+      },
+      "highlights": [
+        "Begonviller ve palmiyelerle saklanmış 10 odalı butik vaha",
+        "Geniş açık yüzme havuzu ve ferah güneşlenme terası",
+        "Deniz manzaralı çatı restoran terası ve ev yemekleri",
+        "24 saat ilgili ve samimi aile işletmesi hizmeti"
+      ],
+      "rooms": [
+        {
+          "title": "Havuz Manzaralı Teras Odası",
+          "size": "30 m²",
+          "capacity": "2-3 Misafir",
+          "view": "Havuz ve Saklı Bahçe",
+          "bed": "1 Çift + 1 Tek Kişilik Yatak",
+          "desc": "Geniş terasından havuzu ve yeşillikleri gören aydınlık köşe oda.",
+          "badge": "Bahçe Manzaralı"
+        },
+        {
+          "title": "Saklı Bahçe Standart Oda",
+          "size": "24 m²",
+          "capacity": "2 Misafir",
+          "view": "Begonvil Bahçesi",
+          "bed": "Queen Size Yatak",
+          "desc": "Çiçek kokularına açılan balkon, minibar, TV ve ferah banyo.",
+          "badge": "Sakin Dinlenme"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:00", "title": "Havuz Başı Serpme Kahvaltı", "desc": "Bahçe domatesleri, ev yapımı reçeller, pişi ve sıcacık çay." },
+        { "time": "12:00 - 17:00", "title": "Gölgede Havuz & Dinlenme", "desc": "Palmiyelerin gölgesinde şezlongda uzanın, dilediğinizde havuza atlayın." },
+        { "time": "19:30 - 22:30", "title": "Teras Restoranda Akşam Yemeği", "desc": "Teras manzarası eşliğinde günlük taze zeytinyağlılar ve ızgaralar." }
+      ],
+      "faq": [
+        { "q": "Plaja mesafe ne kadar?", "a": "Sığliman plajına yürüyerek yaklaşık 2-3 dakika (160 metre) mesafededir." },
+        { "q": "Otelde kaç oda var?", "a": "Otelimiz sadece 10 odalı olup kalabalıktan uzak ve sakindir." }
+      ]
+    },
+    {
+      "id": 22,
+      "slug": "zakkum-frida-pansiyon",
+      "name": "Zakkum Frida Pansiyon",
+      "tagline": "Zakkum çiçekleri, Frida'nın renkleri ve denize sıfır bohem bir dünya",
+      "concept": "Sanatçı ruhlu bohem pansiyon & özel plaj alanı",
+      "location": "Selimiye Sığliman Sokak No:18, Marmaris",
+      "subLocation": "Sığliman Koyu Kıyısı",
+      "seaDistance": "Denize sıfır / Ücretsiz özel plaj alanı",
+      "targetAudience": "Sanatseverler, Çiftler & Bohem Gezginler",
+      "phone": "0532 500 40 30",
+      "rating": { "score": "4.8", "max": "5.0", "reviews": 108, "platform": "Google & Otelz" },
+      "theme": {
+        "primary": "#b94668",
+        "secondary": "#2b5c8f",
+        "dark": "#1a1215",
+        "card": "rgba(36, 22, 28, 0.85)",
+        "accent": "#f7dbe4",
+        "paletteName": "Oleander Rose & Mediterranean Cobalt"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/valentina-boutique-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/valentina-boutique-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/anfora-hotel/room.jpg",
+        "dining": "../../template-system/visual-assets/valentina-boutique-hotel/dining.jpg",
+        "video": "../../new-demos/moonlight/media/decor.mp4"
+      },
+      "highlights": [
+        "Denize sıfır konum ve misafirlere özel ücretsiz plaj alanı",
+        "Şezlong, şemsiye, duş ve soyunma kabinleri fiyata dahil",
+        "Frida Kahlo dokunuşları, renkli duvar resimleri ve bohem enerji",
+        "Pembe zakkumlar altında unutulmaz gün batımları"
+      ],
+      "rooms": [
+        {
+          "title": "Frida Deniz Manzaralı Oda",
+          "size": "28 m²",
+          "capacity": "2 Misafir",
+          "view": "Doğrudan Sığliman Koyu",
+          "bed": "King Size Yatak",
+          "desc": "Renkli tekstiller, sanatsal detaylar ve doğrudan denize bakan geniş balkon.",
+          "badge": "Bohem Deniz"
+        },
+        {
+          "title": "Zakkumlu Bahçe Odası",
+          "size": "24 m²",
+          "capacity": "2 Misafir",
+          "view": "Zakkum Bahçesi",
+          "bed": "Queen Size Yatak",
+          "desc": "Pembe zakkum çiçeklerinin yanında, sakin ve ferah bir konaklama.",
+          "badge": "Çiçekli Avlu"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:00", "title": "Kıyıda Renkli Ege Kahvaltısı", "desc": "El yapımı reçeller, sıcacık pişiler ve zeytinyağlı taze mezeler." },
+        { "time": "11:30 - 18:00", "title": "Özel Plajda Şezlong & Deniz", "desc": "Kapıdan çıkıp doğrudan denize girin, ücretsiz şezlongunuzda dinlenin." },
+        { "time": "19:30 - 23:00", "title": "Zakkumlar Altında Şarap & Sohbet", "desc": "Dalga sesleri eşliğinde mum ışığında samimi sohbetler ve Ege tatları." }
+      ],
+      "faq": [
+        { "q": "Plaj şezlongları ücretli mi?", "a": "Otel misafirlerimize şezlong, şemsiye, duş ve kabinler tamamen ücretsizdir." },
+        { "q": "Denize mesafesi nedir?", "a": "Tesisimiz denize tam sıfır konumdadır." }
+      ]
+    },
+    {
+      "id": 23,
+      "slug": "coban-hotel-selimiye",
+      "name": "Çoban Hotel Selimiye",
+      "tagline": "Sığliman'ın en uç noktasında denize sıfır lezzet ve konaklama",
+      "concept": "Denize sıfır kıyı oteli, sahil barı & taze deniz mahsulleri",
+      "location": "Selimiye Sığliman Küme Evleri No:42, Marmaris",
+      "subLocation": "Sığliman Sahil Sonu",
+      "seaDistance": "Denize sıfır / Özel sahil şeridi",
+      "targetAudience": "Doğal Deniz & Balık Tutkunları",
+      "phone": "0533 300 20 10",
+      "rating": { "score": "4.5", "max": "5.0", "reviews": 120, "platform": "Google & Etstur" },
+      "theme": {
+        "primary": "#28536b",
+        "secondary": "#c29d62",
+        "dark": "#10171e",
+        "card": "rgba(20, 31, 41, 0.85)",
+        "accent": "#d3e2eb",
+        "paletteName": "Maritime Navy & Driftwood Gold"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/anfora-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/anfora-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/dinc-otel/room.jpg",
+        "dining": "../../template-system/visual-assets/anfora-hotel/dining.jpg",
+        "video": "../../new-demos/anfora/media/decor.mp4"
+      },
+      "highlights": [
+        "Sığliman'ın en sessiz ucunda denize sıfır konum",
+        "Kıyıya sıfır masa düzeniyle taze deniz ürünleri ve meze ziyafeti",
+        "Dalgasız, çarşaf gibi koyda yüzme imkanı",
+        "Geniş deniz manzaralı balkonlu odalar"
+      ],
+      "rooms": [
+        {
+          "title": "Ön Cephe Deniz Manzaralı Oda",
+          "size": "30 m²",
+          "capacity": "2 Misafir",
+          "view": "Kesintisiz Sığliman Koyu",
+          "bed": "King Size Yatak",
+          "desc": "Balkonundan tüm koyu kucaklayan, dalga sesleriyle uyunan ferah oda.",
+          "badge": "Ön Sıra Deniz"
+        },
+        {
+          "title": "Standart Kıyı Odası",
+          "size": "24 m²",
+          "capacity": "2 Misafir",
+          "view": "Kısmi Deniz & Yamaç",
+          "bed": "Queen Size Yatak",
+          "desc": "Klima, banyo ve minibar ile donatılmış sade ve temiz oda.",
+          "badge": "Sade & Rahat"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:00", "title": "Kıyıda Ege Kahvaltısı", "desc": "Suya sıfır masalarda serpme kahvaltı, peynir çeşitleri ve taze pişi." },
+        { "time": "12:00 - 18:00", "title": "Dalgasız Denizde Yüzme", "desc": "Sığliman'ın akvaryum berraklığındaki koyunda tüm gün yüzün." },
+        { "time": "19:30 - 23:00", "title": "Çoban Kıyı Masasında Balık & Meze", "desc": "Günlük taze deniz balıkları, ızgara kalamar ve Ege zeytinyağlıları." }
+      ],
+      "faq": [
+        { "q": "Denize sıfır mı?", "a": "Evet, tesisimiz Sığliman koyunda tam denize sıfır konumdadır." },
+        { "q": "Restoran hizmeti var mı?", "a": "Bünyemizdeki kıyı restoranında öğle ve akşam taze deniz ürünleri servisi sunulmaktadır." }
+      ]
+    },
+    {
+      "id": 24,
+      "slug": "kiraz-vela-selimiye",
+      "name": "Kiraz Vela Selimiye",
+      "tagline": "+16 Yetişkin huzuru, evcil hayvan dostu lüks ve yüzme havuzu",
+      "concept": "+16 Yetişkin oteli, açık havuz & pati dostu tatil",
+      "location": "Selimiye Hanımpınar Küme Evler No:30, Marmaris",
+      "subLocation": "Hanımpınar Bölgesi",
+      "seaDistance": "Denize 140 metre / Açık havuzlu",
+      "targetAudience": "+16 Yetişkinler & Evcil Hayvan Sahipleri",
+      "phone": "0532 200 10 90",
+      "rating": { "score": "4.8", "max": "5.0", "reviews": 94, "platform": "Google & TatilSepeti" },
+      "theme": {
+        "primary": "#8f2d48",
+        "secondary": "#525c68",
+        "dark": "#1a1014",
+        "card": "rgba(34, 20, 26, 0.85)",
+        "accent": "#f6dce3",
+        "paletteName": "Cherry Ruby & Slate Velvet"
+      },
+      "media": {
+        "hero": "../../template-system/visual-assets/rosario-hotel/hero.jpg",
+        "room1": "../../template-system/visual-assets/rosario-hotel/room.jpg",
+        "room2": "../../template-system/visual-assets/valentina-boutique-hotel/room.jpg",
+        "dining": "../../template-system/visual-assets/rosario-hotel/dining.jpg",
+        "video": "../../new-demos/moonlight/media/decor.mp4"
+      },
+      "highlights": [
+        "+16 yaş kuralı ile yetişkinlere özel dingin ve sessiz atmosfer",
+        "Açık yüzme havuzu ve şık şezlong dinlenme alanı",
+        "Evcil hayvan dostu politika — can dostunuzla konaklama imkanı",
+        "Hanımpınar mevkiinde merkeze yürüme mesafesinde sakin konum"
+      ],
+      "rooms": [
+        {
+          "title": "Havuz Başı Deluxe Süit",
+          "size": "36 m²",
+          "capacity": "2 Yetişkin",
+          "view": "Açık Havuz ve Dağ",
+          "bed": "King Size Yatak",
+          "desc": "Havuz terasına doğrudan açılan, jakuzili ve lüks banyolu özel süit.",
+          "badge": "Havuz Çıkışlı"
+        },
+        {
+          "title": "Pati Dostu Bahçe Odası",
+          "size": "28 m²",
+          "capacity": "2 Yetişkin",
+          "view": "Bahçe & Zeytinlik",
+          "bed": "Queen Size Yatak",
+          "desc": "Evcil dostunuzla rahatça kalabileceğiniz, taş zeminli ve özel bahçe çıkışlı oda.",
+          "badge": "Pati Dostu"
+        }
+      ],
+      "rituals": [
+        { "time": "08:30 - 11:30", "title": "Havuz Kenarında Gurme Kahvaltı", "desc": "Taze demlenmiş kahve, fırından sıcak çörekler ve yöresel Ege peynir tabağı." },
+        { "time": "13:00 - 17:30", "title": "Havuzda Yetişkin Huzuru", "desc": "+16 sakinliğinde kitap okuyun, havuzda yüzün ve dinlenin." },
+        { "time": "19:30 - 23:00", "title": "Kiraz Vela Akşamı", "desc": "Havuz başı ışıklandırmasında şarap kadehi ve hafif müzik eşliğinde dinlence." }
+      ],
+      "faq": [
+        { "q": "Evcil hayvan kabul ediliyor mu?", "a": "Evet, tesisimiz evcil hayvan dostudur; önceden bilgi verilmesi rica olunur." },
+        { "q": "Yaş sınırı nedir?", "a": "Tesisimiz +16 yaş yetişkin oteli olarak hizmet vermektedir." }
+      ]
+    }
+  ]
+}

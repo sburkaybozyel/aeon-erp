@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%" color="#d4af37">
+  <defs>
+    <linearGradient id="goldGrad-selimiye-11-oda" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#1f2421"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="currentColor">
+    
+      <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="0.8"/>
+      <!-- Roman Numeral XI -->
+      <text x="50" y="58" font-family="'Cinzel', 'Times New Roman', serif" font-size="28" font-weight="700" text-anchor="middle" fill="currentColor">XI</text>
+    
+  </g>
+</svg>
