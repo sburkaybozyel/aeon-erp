@@ -1291,8 +1291,8 @@ function generateV1Page(hotel, detail) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="./styles.css">
-  <script defer src="./app.js"></script>
+  <link rel="stylesheet" href="./styles.css?v=20260827">
+  <script defer src="./app.js?v=20260827"></script>
 </head>
 <body class="selimiye-v1-liquid" data-phone="${escapeHtml(cleanPhone)}" data-hotel="${escapeHtml(name)}">
   
