@@ -214,7 +214,7 @@ function generateShowcaseHTML(activeVersion) {
               </div>
               <div>
                 <h3 class="hotel-name">${h.name}</h3>
-                <small style="color:var(--gold-light); font-size:0.75rem;">#${i + 1} · Selimiye Koyu</small>
+                <small style="color:var(--gold-light); font-size:0.75rem;">${h.targetAudience || 'Selimiye Koyu'}</small>
               </div>
             </div>
             <p class="tagline">${h.tagline || 'Selimiye’nin en özel kıyısında butik konaklama deneyimi.'}</p>

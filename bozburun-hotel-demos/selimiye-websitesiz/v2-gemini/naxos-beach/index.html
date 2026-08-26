@@ -8,23 +8,20 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="./styles.css?v=1787779557879">
-  <script defer src="./app.js?v=1787779557879"></script>
+  <link rel="stylesheet" href="./styles.css?v=1787779746955">
+  <script defer src="./app.js?v=1787779746955"></script>
 </head>
 <body data-phone="05312718848" data-hotel="Naxos Beach Selimiye">
-
   
-  <div class="ambient-aurora-mesh" aria-hidden="true">
-    <div class="aurora-orb orb-1"></div>
-    <div class="aurora-orb orb-2"></div>
-    <div class="aurora-orb orb-3"></div>
-  </div>
+    <div class="ambient-aurora-mesh" aria-hidden="true">
+      <div class="aurora-orb orb-1"></div>
+      <div class="aurora-orb orb-2"></div>
+    </div>
 
-  <header class="v2-header" id="v2Header">
-    <div class="header-capsule">
-      <a href="#top" class="brand-link">
-        <div class="brand-disc">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
+    <header class="wf-header">
+      <div class="wf-header-capsule">
+        <a href="#top" class="brand-link">
+          <div class="brand-disc"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
   
   <defs>
     <!-- Rich Bullion Gold Gradient -->
@@ -84,227 +81,106 @@
         <text x="150" y="196" font-family="'Cinzel', Georgia, serif" font-size="22" font-weight="700" fill="url(#goldLinear)" text-anchor="middle" letter-spacing="6">NAXOS</text>
         <text x="150" y="215" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#f9e8af" text-anchor="middle" letter-spacing="4">BEACH RESORT</text>
       
-</svg>
-        </div>
-        <div class="brand-text-col">
+</svg></div>
           <span class="brand-title">NAXOS BEACH SELIMIYE</span>
-          <span class="brand-sub">SELİMİYE · MARMARİS</span>
-        </div>
-      </a>
-
-      <nav class="header-nav">
-        <a href="#suites" class="nav-item">Süitler</a>
-        <a href="#rituals" class="nav-item">Koy Ritüelleri</a>
-        <a href="#gastronomy" class="nav-item">Gastronomi</a>
-        <a href="#concierge" class="nav-item">VIP Danışma</a>
-      </nav>
-
-      <div class="header-actions">
-        <div class="live-pill">
-          <span class="pulse-dot"></span>
-          <span>☀️ 28°C Selimiye</span>
-        </div>
-        <button class="btn-cta-gold" data-book>
-          <span>Rezervasyon</span>
-          <i>↗</i>
-        </button>
+        </a>
+        <nav class="header-nav">
+          <a href="#suites" class="nav-item">Süitler</a>
+          <a href="#rituals" class="nav-item">Koy Ritmi</a>
+          <a href="#concierge" class="nav-item">VIP Danışma</a>
+        </nav>
+        <button class="btn-cta-gold" data-book><span>Rezervasyon Yap ↗</span></button>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main id="top">
-    
-    <!-- ARCHETYPE: WATERFRONT LUXURY -->
-    <section class="hero-waterfront">
-      <div class="container-v2">
-        <div class="hero-wf-grid">
-          <div data-reveal>
-            <div class="eyebrow-chip">
-              <span class="pulse-dot"></span>
-              <span>DENIZE SIFIR / ÖZEL ISKELE &AMP; BEACH CLUB</span>
+    <main id="top">
+      <section class="hero-waterfront">
+        <div class="container-v2">
+          <div class="hero-wf-grid">
+            <div>
+              <div class="eyebrow-chip">✦ DENIZE SIFIR / ÖZEL ISKELE &AMP; BEACH CLUB</div>
+              <h1 class="hero-wf-h1">Naxos Beach Selimiye</h1>
+              <p style="font-size:1.15rem; color:#cbd5e1; margin-bottom:2.5rem; line-height:1.8;">Selimiye merkezinde enerjik sahil kulübü, lüks odalar ve gurme lezzetler — Beach club &amp; butik otel &amp; gurme deniz mutfağı.</p>
+              <div class="hero-wf-dock">
+                <form class="wf-dock-grid" onsubmit="return false;">
+                  <input type="date" id="heroCheckin" required>
+                  <input type="date" id="heroCheckout" required>
+                  <select id="heroGuests"><option value="2 Yetişkin">2 Yetişkin</option><option value="1 Yetişkin">1 Yetişkin</option><option value="3+ Misafir">3+ Misafir</option></select>
+                  <button type="button" class="btn-cta-gold" id="heroSubmitBtn"><span>Müsaitlik Al →</span></button>
+                </form>
+              </div>
             </div>
-            <h1 class="hero-wf-h1">
-              Akışkan Camın Işığında,<br>
-              <em style="font-family:var(--font-serif); font-style:italic; color:var(--accent-light);">Selimiye merkezinde enerjik sahil kulübü, lüks odalar ve gurme lezzetler</em>
-            </h1>
-            <p class="section-sub" style="margin-bottom:2.5rem;">
-              Naxos Beach Selimiye; Selimiye’nin kristal turkuaz suları üzerinde, beach club &amp; butik otel &amp; gurme deniz mutfağı anlayışıyla tasarlanmış seçkin bir Ege inzivası sunar.
-            </p>
-
-            <div class="hero-wf-dock">
-              <form class="wf-dock-grid" onsubmit="return false;">
-                <div class="form-cell">
-                  <label>GİRİŞ</label>
-                  <input type="date" id="heroCheckin">
-                </div>
-                <div class="form-cell">
-                  <label>ÇIKIŞ</label>
-                  <input type="date" id="heroCheckout">
-                </div>
-                <div class="form-cell">
-                  <label>MİSAFİR</label>
-                  <select id="heroGuests">
-                    <option value="2 Yetişkin">2 Yetişkin</option>
-                    <option value="1 Yetişkin">1 Yetişkin</option>
-                    <option value="3+ Yetişkin">3+ Yetişkin</option>
-                  </select>
-                </div>
-                <button type="button" class="btn-cta-gold" id="heroSubmitBtn" style="height:48px;">
-                  <span>Müsaitlik Al →</span>
-                </button>
-              </form>
-            </div>
-          </div>
-
-          <div data-reveal>
-            <div class="stage-main-card">
+            <div class="stage-card">
               <img src="./media/hero.jpg" alt="Naxos Beach Selimiye">
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- SUITES -->
-    <section class="v2-section" id="suites" style="background: rgba(0,0,0,0.3);">
-      <div class="container-v2">
-        <div class="section-center-mast" data-reveal>
-          <div class="eyebrow-chip">PANORAMİK KONAKLAMA</div>
-          <h2 class="section-h2">Koleksiyon Süitleri</h2>
-          <p class="section-sub">Doğal kireçtaşı, keten tekstiller ve Ege koyunu kucaklayan geniş özel teraslar.</p>
-        </div>
-
-        <div class="suites-panoramic-stack">
-          
-            <article class="suite-panoramic-card " data-reveal>
-              <div class="suite-photo-side">
-                <img src="./media/suite.jpg" alt="Naxos Beachfront VIP Süit">
-              </div>
-              <div class="suite-details-side">
-                <div>
-                  <span style="font-size:0.75rem; color:var(--accent-primary); letter-spacing:0.2em; font-weight:800; display:block; margin-bottom:0.5rem;">REZİDANS N° 01</span>
-                  <h3 style="font-family:var(--font-heading); font-size:1.9rem; color:#fff; margin-bottom:1rem;">Naxos Beachfront VIP Süit</h3>
-                  <p style="color:#94a3b8; font-size:0.96rem; line-height:1.8; margin-bottom:2rem;">Özel güneşlenme balkonu, tasarım banyo ve iskelede rezerve özel loca imkanı.</p>
-                  
-                  <div class="suite-specs-3box">
-                    <div><span style="font-size:0.7rem; color:#64748b; text-transform:uppercase; font-weight:800; display:block;">ALAN</span><strong style="color:#fff;">40 m²</strong></div>
-                    <div><span style="font-size:0.7rem; color:#64748b; text-transform:uppercase; font-weight:800; display:block;">MANZARA</span><strong style="color:#fff;">Panoramik İskele &amp; Deniz</strong></div>
-                    <div><span style="font-size:0.7rem; color:#64748b; text-transform:uppercase; font-weight:800; display:block;">YATAK</span><strong style="color:#fff;">King Size Yatak</strong></div>
+      <section class="v2-section" id="suites" style="background: rgba(0,0,0,0.35);">
+        <div class="container-v2">
+          <div class="section-center">
+            <div class="eyebrow-chip">PANORAMİK ODALAR</div>
+            <h2 class="section-h2">Koleksiyon Süitleri</h2>
+          </div>
+          <div class="suites-stack">
+            
+              <article class="suite-card ">
+                <div class="suite-img"><img src="./media/suite.jpg" alt="Naxos Beachfront VIP Süit"></div>
+                <div class="suite-info">
+                  <div>
+                    <span style="color:var(--accent-primary); font-size:0.76rem; letter-spacing:0.2em; font-weight:800; display:block; margin-bottom:0.6rem;">REZİDANS N° 01</span>
+                    <h3 style="font-family:var(--font-heading); font-size:1.85rem; margin-bottom:1rem;">Naxos Beachfront VIP Süit</h3>
+                    <p style="color:#94a3b8; font-size:0.96rem; line-height:1.8; margin-bottom:2rem;">Özel güneşlenme balkonu, tasarım banyo ve iskelede rezerve özel loca imkanı.</p>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-glass); padding-top:1.5rem;">
+                    <span style="color:var(--accent-light); font-weight:700;">40 m² · Panoramik İskele &amp; Deniz</span>
+                    <button class="btn-cta-gold" data-suite-name="Naxos Beachfront VIP Süit"><span>Rezerve Et ↗</span></button>
                   </div>
                 </div>
-
-                <div class="suite-action-strip">
-                  <span style="color:var(--accent-light); font-size:0.84rem; font-weight:700;">✦ En İyi Fiyat Garantisi</span>
-                  <button class="btn-cta-gold" data-suite-name="Naxos Beachfront VIP Süit">
-                    <span>Rezerve Et ↗</span>
-                  </button>
-                </div>
-              </div>
-            </article>
-          
-            <article class="suite-panoramic-card reverse" data-reveal>
-              <div class="suite-photo-side">
-                <img src="./media/room.jpg" alt="Deluxe Kordon Odası">
-              </div>
-              <div class="suite-details-side">
-                <div>
-                  <span style="font-size:0.75rem; color:var(--accent-primary); letter-spacing:0.2em; font-weight:800; display:block; margin-bottom:0.5rem;">REZİDANS N° 02</span>
-                  <h3 style="font-family:var(--font-heading); font-size:1.9rem; color:#fff; margin-bottom:1rem;">Deluxe Kordon Odası</h3>
-                  <p style="color:#94a3b8; font-size:0.96rem; line-height:1.8; margin-bottom:2rem;">Turkuaz tonlarında ferah dekorasyon, yağmur duşu ve modern minibar.</p>
-                  
-                  <div class="suite-specs-3box">
-                    <div><span style="font-size:0.7rem; color:#64748b; text-transform:uppercase; font-weight:800; display:block;">ALAN</span><strong style="color:#fff;">28 m²</strong></div>
-                    <div><span style="font-size:0.7rem; color:#64748b; text-transform:uppercase; font-weight:800; display:block;">MANZARA</span><strong style="color:#fff;">Deniz &amp; Kordon Manzarası</strong></div>
-                    <div><span style="font-size:0.7rem; color:#64748b; text-transform:uppercase; font-weight:800; display:block;">YATAK</span><strong style="color:#fff;">Queen Size Yatak</strong></div>
+              </article>
+            
+              <article class="suite-card reverse">
+                <div class="suite-img"><img src="./media/room.jpg" alt="Deluxe Kordon Odası"></div>
+                <div class="suite-info">
+                  <div>
+                    <span style="color:var(--accent-primary); font-size:0.76rem; letter-spacing:0.2em; font-weight:800; display:block; margin-bottom:0.6rem;">REZİDANS N° 02</span>
+                    <h3 style="font-family:var(--font-heading); font-size:1.85rem; margin-bottom:1rem;">Deluxe Kordon Odası</h3>
+                    <p style="color:#94a3b8; font-size:0.96rem; line-height:1.8; margin-bottom:2rem;">Turkuaz tonlarında ferah dekorasyon, yağmur duşu ve modern minibar.</p>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-glass); padding-top:1.5rem;">
+                    <span style="color:var(--accent-light); font-weight:700;">28 m² · Deniz &amp; Kordon Manzarası</span>
+                    <button class="btn-cta-gold" data-suite-name="Deluxe Kordon Odası"><span>Rezerve Et ↗</span></button>
                   </div>
                 </div>
-
-                <div class="suite-action-strip">
-                  <span style="color:var(--accent-light); font-size:0.84rem; font-weight:700;">✦ En İyi Fiyat Garantisi</span>
-                  <button class="btn-cta-gold" data-suite-name="Deluxe Kordon Odası">
-                    <span>Rezerve Et ↗</span>
-                  </button>
-                </div>
-              </div>
-            </article>
-          
-        </div>
-      </div>
-    </section>
-
-    <!-- RITUALS -->
-    <section class="v2-section" id="rituals">
-      <div class="container-v2">
-        <div class="section-center-mast" data-reveal>
-          <div class="eyebrow-chip">24 SAAT SELİMİYE</div>
-          <h2 class="section-h2">Koyda Zamanın Akışı</h2>
-        </div>
-        <div class="rituals-3deck">
-          
-            <div class="ritual-card" data-reveal>
-              <span style="color:var(--accent-primary); font-size:0.78rem; font-weight:800; display:block; margin-bottom:0.8rem;">09:00 - 11:30</span>
-              <h4 style="font-family:var(--font-heading); font-size:1.4rem; color:#fff; margin-bottom:0.8rem;">İskelede Gurme Kahvaltı</h4>
-              <p style="color:#94a3b8; font-size:0.94rem;">Avokadolu poşe yumurta, taze Ege peynirleri ve taze sıkılmış detox içecekleri.</p>
-            </div>
-          
-            <div class="ritual-card" data-reveal>
-              <span style="color:var(--accent-primary); font-size:0.78rem; font-weight:800; display:block; margin-bottom:0.8rem;">15:00 - 19:30</span>
-              <h4 style="font-family:var(--font-heading); font-size:1.4rem; color:#fff; margin-bottom:0.8rem;">Sunset Beats &amp; Beach Lounge</h4>
-              <p style="color:#94a3b8; font-size:0.94rem;">Güneş batarken hafif ritimler, soğuk kokteyller ve iskele enerjisi.</p>
-            </div>
-          
-            <div class="ritual-card" data-reveal>
-              <span style="color:var(--accent-primary); font-size:0.78rem; font-weight:800; display:block; margin-bottom:0.8rem;">20:30 - 00:00</span>
-              <h4 style="font-family:var(--font-heading); font-size:1.4rem; color:#fff; margin-bottom:0.8rem;">Kıyı Restoranında Gastronomi</h4>
-              <p style="color:#94a3b8; font-size:0.94rem;">Taze karides güveç, levrek marine ve eşsiz deniz kenarı akşam yemeği.</p>
-            </div>
-          
-        </div>
-      </div>
-    </section>
-
-    <!-- GASTRONOMY -->
-    <section class="v2-section" id="gastronomy" style="background: rgba(0,0,0,0.3);">
-      <div class="container-v2">
-        <div class="gastronomy-split">
-          <div class="degustation-panel" data-reveal>
-            <div class="eyebrow-chip">TOPRAKTAN & DENİZDEN</div>
-            <h3 style="font-family:var(--font-heading); font-size:1.8rem; color:#fff; margin-bottom:1.5rem;">Tadım Sofrası & Kıyı Masası</h3>
-            <p style="color:#94a3b8; line-height:1.8; margin-bottom:1.5rem;">
-              Yerel Selimiye zeytinyağları, sabah toplanan Ege otları ve günlük taze balık avıyla hazırlanan gün batımı ziyafeti.
-            </p>
-          </div>
-          <div style="border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-accent);" data-reveal>
-            <video autoplay muted loop playsinline poster="./media/dining.jpg" style="width:100%; height:440px; object-fit:cover; display:block;">
-              <source src="./media/decor.mp4" type="video/mp4">
-            </video>
+              </article>
+            
           </div>
         </div>
-      </div>
-    </section>
+      </section>
     
+  
     <!-- VIP CONCIERGE -->
     <section class="v2-section" id="concierge">
       <div class="container-v2">
-        <div class="vip-deck" data-reveal>
+        <div class="vip-deck">
           <div class="vip-grid">
             <div>
-              <div class="eyebrow-chip">VIP CANLI DANIŞMA</div>
-              <h2 class="section-h2">Doğrudan<br><em style="font-family:var(--font-serif); font-style:italic; color:var(--accent-light);">Rezervasyon Terminali</em></h2>
-              <p class="section-sub" style="margin-bottom:2rem;">
-                Tarihlerinizi iletin; Naxos Beach Selimiye ekibi doğrudan en avantajlı fiyat teklifini WhatsApp üzerinden anında paylaşsın.
+              <h2 style="font-family:var(--font-heading); font-size:2.4rem; margin-bottom:1.2rem;">Doğrudan Rezervasyon</h2>
+              <p style="color:#94a3b8; font-size:0.96rem; line-height:1.8; margin-bottom:2rem;">
+                Tarihlerinizi ve misafir sayınızı iletin; Naxos Beach Selimiye ekibi doğrudan en avantajlı fiyat teklifini WhatsApp üzerinden anında paylaşsın.
               </p>
               <div style="display:flex; flex-direction:column; gap:1.2rem;">
-                <div><strong style="color:var(--accent-primary); font-size:0.78rem; text-transform:uppercase;">Konum</strong><p>Selimiye Merkez Kordon Cad. No:16, Marmaris</p></div>
-                <div><strong style="color:var(--accent-primary); font-size:0.78rem; text-transform:uppercase;">Resepsiyon</strong><p><a href="tel:05312718848" style="color:#fff; text-decoration:none;">0531 271 88 48</a></p></div>
-                <div><strong style="color:var(--accent-primary); font-size:0.78rem; text-transform:uppercase;">WhatsApp Canlı</strong><p><a href="https://wa.me/05312718848?text=Merhaba%20Naxos%20Beach%20Selimiye,%20rezervasyon%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" style="color:var(--accent-primary); font-weight:700;">+90 Selimiye VIP Concierge ↗</a></p></div>
+                <div><strong style="color:var(--accent-primary); font-size:0.75rem; text-transform:uppercase;">Konum</strong><p>Selimiye Merkez Kordon Cad. No:16, Marmaris</p></div>
+                <div><strong style="color:var(--accent-primary); font-size:0.75rem; text-transform:uppercase;">Resepsiyon</strong><p><a href="tel:05312718848" style="color:inherit; text-decoration:none;">0531 271 88 48</a></p></div>
+                <div><strong style="color:var(--accent-primary); font-size:0.75rem; text-transform:uppercase;">WhatsApp Canlı</strong><p><a href="https://wa.me/05312718848?text=Merhaba%20Naxos%20Beach%20Selimiye,%20rezervasyon%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" style="color:var(--accent-primary); font-weight:700;">+90 Selimiye VIP Concierge ↗</a></p></div>
               </div>
             </div>
 
-            <div class="vip-form-box">
-              <h3 style="font-family:var(--font-heading); color:#fff; font-size:1.4rem; margin-bottom:1.5rem;">Müsaitlik Talebi Gönder</h3>
+            <div class="vip-form">
+              <h3 style="font-family:var(--font-heading); font-size:1.4rem; margin-bottom:1.5rem;">Müsaitlik Talebi Gönder</h3>
               <form id="v2ContactForm" onsubmit="return false;">
-                <div class="form-duo">
+                <div class="form-row">
                   <div class="form-cell">
                     <label>Adınız Soyadınız *</label>
                     <input type="text" id="v2Name" placeholder="Adınız Soyadınız" required>
@@ -314,7 +190,7 @@
                     <input type="tel" id="v2Phone" placeholder="05XX XXX XX XX" required>
                   </div>
                 </div>
-                <div class="form-duo">
+                <div class="form-row">
                   <div class="form-cell">
                     <label>Giriş Tarihi *</label>
                     <input type="date" id="v2Checkin" required>
@@ -324,7 +200,7 @@
                     <input type="date" id="v2Checkout" required>
                   </div>
                 </div>
-                <div class="form-duo">
+                <div class="form-row">
                   <div class="form-cell">
                     <label>Oda Tercihi</label>
                     <select id="v2Suite">
@@ -337,8 +213,7 @@
                     <select id="v2Guests">
                       <option value="2 Yetişkin">2 Yetişkin</option>
                       <option value="1 Yetişkin">1 Yetişkin</option>
-                      <option value="3 Yetişkin">3 Yetişkin</option>
-                      <option value="4+ Yetişkin">4+ Yetişkin</option>
+                      <option value="3+ Misafir">3+ Misafir</option>
                     </select>
                   </div>
                 </div>
@@ -346,7 +221,7 @@
                   <label>Özel İstekler</label>
                   <textarea id="v2Notes" rows="3" placeholder="Örn: Balayı ikramı, tekne transferi..."></textarea>
                 </div>
-                <button type="button" class="btn-cta-gold" id="v2SubmitBtn" style="width:100%; justify-content:center; height:50px;">
+                <button type="button" class="btn-cta-gold btn-glamp-cta btn-stone-cta btn-maritime-cta" id="v2SubmitBtn" style="width:100%; justify-content:center; height:50px;">
                   <span>Talebi İlet & Müsaitlik Al ↗</span>
                 </button>
               </form>
@@ -356,36 +231,28 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="v2-footer">
       <div class="container-v2">
-        <div class="footer-3col">
+        <div class="footer-grid">
           <div>
-            <div style="font-family:var(--font-heading); font-size:1.4rem; color:#fff; margin-bottom:0.8rem;">NAXOS BEACH SELIMIYE</div>
+            <div style="font-family:var(--font-heading); font-size:1.4rem; margin-bottom:0.8rem;">NAXOS BEACH SELIMIYE</div>
             <p style="color:#94a3b8; font-size:0.92rem; line-height:1.75; margin-bottom:1rem;">Selimiye merkezinde enerjik sahil kulübü, lüks odalar ve gurme lezzetler</p>
             <small style="color:#64748b;">Selimiye Merkez Kordon Cad. No:16, Marmaris</small>
           </div>
-          <div class="footer-col">
-            <strong>Hızlı Gezinme</strong>
-            <a href="#suites">Koleksiyon Süitleri</a>
-            <a href="#rituals">Koy Ritüelleri</a>
-            <a href="#gastronomy">Gastronomi</a>
-            <a href="#concierge">VIP Rezervasyon</a>
+          <div style="display:flex; flex-direction:column; gap:0.75rem;">
+            <strong style="color:var(--accent-primary); font-size:0.8rem; text-transform:uppercase;">Gezinme</strong>
+            <a href="#suites" style="color:inherit; text-decoration:none;">Koleksiyon Süitleri</a>
+            <a href="#rituals" style="color:inherit; text-decoration:none;">Koy Ritüelleri</a>
+            <a href="#concierge" style="color:inherit; text-decoration:none;">VIP Danışma</a>
           </div>
-          <div class="footer-col">
-            <strong>İletişim Hattı</strong>
-            <a href="tel:05312718848">📞 0531 271 88 48</a>
-            <a href="https://wa.me/05312718848" target="_blank">💬 WhatsApp Canlı Hattı</a>
-            <span style="color:#64748b; font-size:0.82rem; margin-top:0.5rem;">Selimiye Koyu · Marmaris</span>
+          <div style="display:flex; flex-direction:column; gap:0.75rem;">
+            <strong style="color:var(--accent-primary); font-size:0.8rem; text-transform:uppercase;">İletişim</strong>
+            <a href="tel:05312718848" style="color:inherit; text-decoration:none;">📞 0531 271 88 48</a>
+            <a href="https://wa.me/05312718848" target="_blank" style="color:inherit; text-decoration:none;">💬 WhatsApp Canlı Hattı</a>
           </div>
-        </div>
-        <div class="footer-bot">
-          <span>© 2026 Naxos Beach Selimiye. Tüm Hakları Saklıdır.</span>
-          <span>Aeon Luxury Portfolio</span>
         </div>
       </div>
     </footer>
   </main>
-
 </body>
 </html>
