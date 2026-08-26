@@ -1,66 +1,64 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
-    
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  
   <defs>
-    <!-- Bullion Gold Linear Gradient -->
-    <linearGradient id="l_gold3D" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fff8db"/>
-      <stop offset="15%" stop-color="#ffe699"/>
-      <stop offset="35%" stop-color="#d4af37"/>
-      <stop offset="60%" stop-color="#9a7322"/>
-      <stop offset="85%" stop-color="#eac66f"/>
-      <stop offset="100%" stop-color="#735010"/>
-    </linearGradient>
-    
-    <!-- Specular Platinum Gold Glow -->
-    <linearGradient id="l_goldSheen" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#805b18"/>
-      <stop offset="30%" stop-color="#fdf3d1"/>
-      <stop offset="70%" stop-color="#c59f42"/>
-      <stop offset="100%" stop-color="#543c0f"/>
+    <!-- Rich Bullion Gold Gradient -->
+    <linearGradient id="goldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff0b8"/>
+      <stop offset="20%" stop-color="#e5c158"/>
+      <stop offset="45%" stop-color="#c99726"/>
+      <stop offset="70%" stop-color="#8a6111"/>
+      <stop offset="90%" stop-color="#d8a834"/>
+      <stop offset="100%" stop-color="#fdf2c6"/>
     </linearGradient>
 
-    <!-- Deep Metallic Shadow Filter -->
-    <filter id="l_emboss" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.6"/>
-    </filter>
+    <!-- Ring Specular Gradient -->
+    <linearGradient id="goldRadial" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9a6e18"/>
+      <stop offset="35%" stop-color="#fff2c2"/>
+      <stop offset="70%" stop-color="#c59424"/>
+      <stop offset="100%" stop-color="#734f0c"/>
+    </linearGradient>
 
-    <!-- Radial Dark Backdrop Glow -->
-    <radialGradient id="l_darkGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#141f2e"/>
-      <stop offset="70%" stop-color="#070c13"/>
-      <stop offset="100%" stop-color="#030508"/>
+    <!-- Midnight Obsidian Backdrop -->
+    <radialGradient id="darkBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#152232"/>
+      <stop offset="65%" stop-color="#09101a"/>
+      <stop offset="100%" stop-color="#04070c"/>
     </radialGradient>
 
-    <radialGradient id="l_lightGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="70%" stop-color="#faf7f0"/>
-      <stop offset="100%" stop-color="#f0ebe0"/>
+    <!-- Deep Emerald Backdrop for V2 -->
+    <radialGradient id="emeraldBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1b4634"/>
+      <stop offset="65%" stop-color="#0c251b"/>
+      <stop offset="100%" stop-color="#05140e"/>
     </radialGradient>
   </defs>
-  
-    
-    <circle cx="150" cy="150" r="146" fill="url(#l_lightGlow)"/>
-    <circle cx="150" cy="150" r="142" fill="none" stroke="url(#l_gold3D)" stroke-width="2.5"/>
-    <circle cx="150" cy="150" r="134" fill="none" stroke="url(#l_goldSheen)" stroke-width="1" stroke-dasharray="3 3" opacity="0.9"/>
-    <circle cx="150" cy="150" r="128" fill="none" stroke="url(#l_gold3D)" stroke-width="1.5"/>
 
-    <!-- 4 Royal Jewels -->
-    <circle cx="150" cy="16" r="3.5" fill="url(#l_gold3D)"/>
-    <circle cx="150" cy="284" r="3.5" fill="url(#l_gold3D)"/>
-    <circle cx="16" cy="150" r="3.5" fill="url(#l_gold3D)"/>
-    <circle cx="284" cy="150" r="3.5" fill="url(#l_gold3D)"/>
   
-    
-        <!-- DANTEL: Royal Filigree Mandala Rosette -->
-        <g transform="translate(150, 112)" filter="url(#l_emboss)">
-          <circle cx="0" cy="0" r="42" fill="none" stroke="url(#l_gold3D)" stroke-width="1.8"/>
-          <circle cx="0" cy="-20" r="16" fill="none" stroke="url(#l_goldSheen)" stroke-width="1.2"/>
-          <circle cx="0" cy="20" r="16" fill="none" stroke="url(#l_goldSheen)" stroke-width="1.2"/>
-          <circle cx="-20" cy="0" r="16" fill="none" stroke="url(#l_goldSheen)" stroke-width="1.2"/>
-          <circle cx="20" cy="0" r="16" fill="none" stroke="url(#l_goldSheen)" stroke-width="1.2"/>
-          <circle cx="0" cy="0" r="7" fill="url(#l_gold3D)"/>
+    <!-- Solid Dark Backdrop Medallion -->
+    <circle cx="150" cy="150" r="146" fill="url(#emeraldBg)"/>
+    <circle cx="150" cy="150" r="140" fill="none" stroke="url(#goldLinear)" stroke-width="3"/>
+    <circle cx="150" cy="150" r="132" fill="none" stroke="url(#goldRadial)" stroke-width="1.2" stroke-dasharray="3 3"/>
+    <circle cx="150" cy="150" r="125" fill="none" stroke="url(#goldLinear)" stroke-width="1.5"/>
+
+    <!-- 4 Cardinal Gold Points -->
+    <polygon points="150,11 154,19 146,19" fill="url(#goldLinear)"/>
+    <polygon points="150,289 154,281 146,281" fill="url(#goldLinear)"/>
+    <polygon points="11,150 19,154 19,146" fill="url(#goldLinear)"/>
+    <polygon points="289,150 281,154 281,146" fill="url(#goldLinear)"/>
+  
+  
+        <!-- DANTEL: Filigree Mandala Rosette -->
+        <g transform="translate(150, 110)">
+          <circle cx="0" cy="0" r="42" fill="none" stroke="url(#goldLinear)" stroke-width="2"/>
+          <circle cx="0" cy="-20" r="16" fill="none" stroke="url(#goldRadial)" stroke-width="1.5"/>
+          <circle cx="0" cy="20" r="16" fill="none" stroke="url(#goldRadial)" stroke-width="1.5"/>
+          <circle cx="-20" cy="0" r="16" fill="none" stroke="url(#goldRadial)" stroke-width="1.5"/>
+          <circle cx="20" cy="0" r="16" fill="none" stroke="url(#goldRadial)" stroke-width="1.5"/>
+          <circle cx="0" cy="0" r="7" fill="url(#goldLinear)"/>
         </g>
-        <text x="150" y="196" font-family="'Cinzel', serif" font-size="20" font-weight="700" fill="url(#l_gold3D)" text-anchor="middle" letter-spacing="5" filter="url(#l_emboss)">DANTEL</text>
-        <text x="150" y="214" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#143527" text-anchor="middle" letter-spacing="4">MAISON & DINING</text>
+        <text x="150" y="196" font-family="'Cinzel', Georgia, serif" font-size="20" font-weight="700" fill="url(#goldLinear)" text-anchor="middle" letter-spacing="5">DANTEL</text>
+        <text x="150" y="215" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#f9e8af" text-anchor="middle" letter-spacing="4">MAISON & DINING</text>
       
-  </svg>
+</svg>

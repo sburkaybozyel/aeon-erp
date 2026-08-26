@@ -1,64 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
-    
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  
   <defs>
-    <!-- Bullion Gold Linear Gradient -->
-    <linearGradient id="d_gold3D" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fff8db"/>
-      <stop offset="15%" stop-color="#ffe699"/>
-      <stop offset="35%" stop-color="#d4af37"/>
-      <stop offset="60%" stop-color="#9a7322"/>
-      <stop offset="85%" stop-color="#eac66f"/>
-      <stop offset="100%" stop-color="#735010"/>
-    </linearGradient>
-    
-    <!-- Specular Platinum Gold Glow -->
-    <linearGradient id="d_goldSheen" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#805b18"/>
-      <stop offset="30%" stop-color="#fdf3d1"/>
-      <stop offset="70%" stop-color="#c59f42"/>
-      <stop offset="100%" stop-color="#543c0f"/>
+    <!-- Rich Bullion Gold Gradient -->
+    <linearGradient id="goldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff0b8"/>
+      <stop offset="20%" stop-color="#e5c158"/>
+      <stop offset="45%" stop-color="#c99726"/>
+      <stop offset="70%" stop-color="#8a6111"/>
+      <stop offset="90%" stop-color="#d8a834"/>
+      <stop offset="100%" stop-color="#fdf2c6"/>
     </linearGradient>
 
-    <!-- Deep Metallic Shadow Filter -->
-    <filter id="d_emboss" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.6"/>
-    </filter>
+    <!-- Ring Specular Gradient -->
+    <linearGradient id="goldRadial" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9a6e18"/>
+      <stop offset="35%" stop-color="#fff2c2"/>
+      <stop offset="70%" stop-color="#c59424"/>
+      <stop offset="100%" stop-color="#734f0c"/>
+    </linearGradient>
 
-    <!-- Radial Dark Backdrop Glow -->
-    <radialGradient id="d_darkGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#141f2e"/>
-      <stop offset="70%" stop-color="#070c13"/>
-      <stop offset="100%" stop-color="#030508"/>
+    <!-- Midnight Obsidian Backdrop -->
+    <radialGradient id="darkBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#152232"/>
+      <stop offset="65%" stop-color="#09101a"/>
+      <stop offset="100%" stop-color="#04070c"/>
     </radialGradient>
 
-    <radialGradient id="d_lightGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="70%" stop-color="#faf7f0"/>
-      <stop offset="100%" stop-color="#f0ebe0"/>
+    <!-- Deep Emerald Backdrop for V2 -->
+    <radialGradient id="emeraldBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1b4634"/>
+      <stop offset="65%" stop-color="#0c251b"/>
+      <stop offset="100%" stop-color="#05140e"/>
     </radialGradient>
   </defs>
-  
-    
-    <circle cx="150" cy="150" r="146" fill="url(#d_darkGlow)"/>
-    <circle cx="150" cy="150" r="142" fill="none" stroke="url(#d_gold3D)" stroke-width="2.5"/>
-    <circle cx="150" cy="150" r="134" fill="none" stroke="url(#d_goldSheen)" stroke-width="1" stroke-dasharray="3 3" opacity="0.9"/>
-    <circle cx="150" cy="150" r="128" fill="none" stroke="url(#d_gold3D)" stroke-width="1.5"/>
 
-    <!-- 4 Royal Jewels -->
-    <circle cx="150" cy="16" r="3.5" fill="url(#d_gold3D)"/>
-    <circle cx="150" cy="284" r="3.5" fill="url(#d_gold3D)"/>
-    <circle cx="16" cy="150" r="3.5" fill="url(#d_gold3D)"/>
-    <circle cx="284" cy="150" r="3.5" fill="url(#d_gold3D)"/>
   
-    
-        <!-- NAXOS: Portara Cycladic Marble Gateway -->
-        <g transform="translate(150, 112)" filter="url(#d_emboss)">
-          <rect x="-26" y="-38" width="52" height="64" fill="none" stroke="url(#d_gold3D)" stroke-width="3.5"/>
-          <rect x="-32" y="-42" width="64" height="9" fill="url(#d_gold3D)"/>
-          <circle cx="0" cy="-6" r="16" fill="none" stroke="url(#d_goldSheen)" stroke-width="1.8"/>
-          <path d="M-20 14 C-8 8 8 20 20 14" fill="none" stroke="url(#d_gold3D)" stroke-width="2"/>
+    <!-- Solid Dark Backdrop Medallion -->
+    <circle cx="150" cy="150" r="146" fill="url(#darkBg)"/>
+    <circle cx="150" cy="150" r="140" fill="none" stroke="url(#goldLinear)" stroke-width="3"/>
+    <circle cx="150" cy="150" r="132" fill="none" stroke="url(#goldRadial)" stroke-width="1.2" stroke-dasharray="3 3"/>
+    <circle cx="150" cy="150" r="125" fill="none" stroke="url(#goldLinear)" stroke-width="1.5"/>
+
+    <!-- 4 Cardinal Gold Points -->
+    <polygon points="150,11 154,19 146,19" fill="url(#goldLinear)"/>
+    <polygon points="150,289 154,281 146,281" fill="url(#goldLinear)"/>
+    <polygon points="11,150 19,154 19,146" fill="url(#goldLinear)"/>
+    <polygon points="289,150 281,154 281,146" fill="url(#goldLinear)"/>
+  
+  
+        <!-- NAXOS: Portara Cycladic Gateway -->
+        <g transform="translate(150, 110)">
+          <rect x="-26" y="-38" width="52" height="64" fill="none" stroke="url(#goldLinear)" stroke-width="4"/>
+          <rect x="-32" y="-42" width="64" height="10" fill="url(#goldLinear)"/>
+          <circle cx="0" cy="-6" r="16" fill="none" stroke="url(#goldRadial)" stroke-width="2"/>
+          <path d="M-20 14 C-8 8 8 20 20 14" fill="none" stroke="url(#goldLinear)" stroke-width="2.5"/>
         </g>
-        <text x="150" y="196" font-family="'Cinzel', serif" font-size="22" font-weight="700" fill="url(#d_gold3D)" text-anchor="middle" letter-spacing="6" filter="url(#d_emboss)">NAXOS</text>
-        <text x="150" y="214" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#fbf1ce" text-anchor="middle" letter-spacing="4">BEACH RESORT</text>
+        <text x="150" y="196" font-family="'Cinzel', Georgia, serif" font-size="22" font-weight="700" fill="url(#goldLinear)" text-anchor="middle" letter-spacing="6">NAXOS</text>
+        <text x="150" y="215" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#f9e8af" text-anchor="middle" letter-spacing="4">BEACH RESORT</text>
       
-  </svg>
+</svg>

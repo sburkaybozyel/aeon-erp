@@ -100,19 +100,26 @@ body.v2-editorial-gazette {
   text-decoration: none;
 }
 .brand-logo-emblem {
-  width: 72px;
-  height: 72px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
-  border: 1.5px solid var(--border-gold);
-  padding: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 0.75rem;
-  background: #ffffff;
-  box-shadow: 0 8px 25px rgba(20, 53, 39, 0.12);
+  box-shadow: 0 10px 30px rgba(20, 53, 39, 0.16);
   transition: var(--transition);
+}
+.brand-logo-emblem img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 .brand-logo-emblem:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 30px rgba(20, 53, 39, 0.2);
+  box-shadow: 0 14px 35px rgba(20, 53, 39, 0.25);
 }
 .brand-gazette-title {
   font-family: var(--font-display);
