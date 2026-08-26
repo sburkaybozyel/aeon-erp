@@ -2,25 +2,22 @@
 <html lang="tr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="description" content="Dut Selimiye — Selimiye Koyu'nda Yetişkin (+14) dinginliği &amp; özel ahşap iskele. +14 Yetişkinler &amp; Dinginlik Arayanlar.">
-  <title>Dut Selimiye — Selimiye | Quiet Luxury (V2)</title>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dut Selimiye — Selimiye Koyu'nda Yetişkin (+14) dinginliği &amp; özel ahşap iskele.">
+  <title>Dut Selimiye — Selimiye</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="./styles.css?v=1787781116381">
-  <script defer src="./app.js?v=1787781116381"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=1787781549015">
+  <script defer src="./app.js?v=1787781549015"></script>
 </head>
 <body data-phone="05363547262" data-hotel="Dut Selimiye">
 
-  <!-- FLOATING VISIONOS GLASS NAVIGATION -->
-  <header class="luxury-header">
-    <div class="luxury-nav-capsule">
-      <a href="#top" class="brand-link">
-        <div class="brand-disc">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
+<!-- ─── MINIMAL NAV ──────────────────────────────────────────────────────── -->
+<nav class="site-nav" id="siteNav">
+  <a href="#top" class="nav-brand">
+    <div class="nav-logo-disc">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
   
   <defs>
     <!-- Rich Bullion Gold Gradient -->
@@ -82,242 +79,286 @@
         <text x="150" y="215" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#f9e8af" text-anchor="middle" letter-spacing="4">SELİMİYE · 1984</text>
       
 </svg>
-        </div>
-        <div>
-          <span class="brand-name">Dut Selimiye</span>
-          <span class="brand-tag">SELİMİYE · MARMARİS</span>
-        </div>
-      </a>
-
-      <nav class="nav-links">
-        <a href="#suites">Süitler</a>
-        <a href="#rituals">Koy Ritmi</a>
-        <a href="#concierge">VIP Danışma</a>
-      </nav>
-
-      <button class="btn-gold-action" data-book>
-        <span>Müsaitlik Al ↗</span>
-      </button>
     </div>
-  </header>
+    <span class="nav-brand-name">Dut Selimiye</span>
+  </a>
 
-  <main id="top">
-    <!-- FULL-BLEED CINEMATIC HERO -->
-    <section class="hero-quiet-luxury">
-      <div class="container-luxury">
-        <div class="hero-editorial-center">
-          <div class="hero-kicker-pill">✦ DENIZE SIFIR / ÖZEL AHŞAP ISKELE</div>
-          <h1 class="hero-title-monument">
-            Dut Selimiye,<br>
-            <em>Asırlık dutların gölgesinde, denizin tam kıyısında</em>
-          </h1>
-          <p class="hero-lead-text">
-            Yetişkin (+14) dinginliği &amp; özel ahşap iskele. Selimiye'nin sakin koyunda, günün temposundan uzaklaşarak berrak sularda dinlenin.
-          </p>
+  <div class="nav-links-right">
+    <a href="#suites" class="nav-link-item">Süitler</a>
+    <a href="#rituals" class="nav-link-item">Ritüeller</a>
+    <a href="#location" class="nav-link-item">Konum</a>
+    <a href="#booking" class="nav-cta-text" data-book>Rezervasyon ↗</a>
+  </div>
+</nav>
+
+<main id="top">
+
+<!-- ─── FULL-SCREEN HERO ─────────────────────────────────────────────────── -->
+<section class="hero-immersive">
+  <div class="hero-bg-image" id="heroBg">
+    <img src="./media/hero.jpg" alt="Dut Selimiye" id="heroImg">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Denize sıfır / Özel ahşap iskele · Selimiye, Marmaris</span>
+    <h1 class="hero-title">
+      Dut Selimiye,<br>
+      <em>Asırlık dutların gölgesinde, denizin tam kıyısında</em>
+    </h1>
+    <div class="hero-bottom-strip">
+      <p class="hero-tagline">Yetişkin (+14) dinginliği &amp; özel ahşap iskele</p>
+      <div class="hero-scroll-cue">
+        <span class="scroll-line"></span>
+        <span>Aşağı Kaydır</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BOOKING STRIP ────────────────────────────────────────────────────── -->
+<div class="book-strip" id="bookStrip">
+  <div class="book-strip-cell">
+    <span class="book-strip-label">Giriş Tarihi</span>
+    <input type="date" id="checkin" aria-label="Giriş Tarihi">
+  </div>
+  <div class="book-strip-cell">
+    <span class="book-strip-label">Çıkış Tarihi</span>
+    <input type="date" id="checkout" aria-label="Çıkış Tarihi">
+  </div>
+  <div class="book-strip-cell">
+    <span class="book-strip-label">Misafir</span>
+    <select id="guests" aria-label="Misafir Sayısı">
+      <option value="2 Yetişkin">2 Yetişkin</option>
+      <option value="1 Yetişkin">1 Yetişkin</option>
+      <option value="3+ Yetişkin">3+ Yetişkin</option>
+    </select>
+  </div>
+  <div class="book-strip-action">
+    <button class="book-strip-btn" id="bookStripBtn">
+      <span>Müsaitlik Al</span>
+      <span class="book-btn-arrow">→</span>
+    </button>
+  </div>
+</div>
+
+<!-- ─── INTRO EDITORIAL ──────────────────────────────────────────────────── -->
+<section class="intro-editorial">
+  <div class="intro-left">
+    <p class="section-number">01 — Hakkımızda</p>
+    <h2 class="intro-headline">
+      Selimiye'nin<br>
+      <em>en sakin köşesi</em>
+    </h2>
+    <p class="intro-body">
+      Yetişkin (+14) dinginliği &amp; özel ahşap iskele. Aşırılıktan kaçıp sadeliğin içinde derinleşen, koyun berrak suyuyla gökyüzünün eridiği o kıyı hattında bulacaksınız bizi.
+    </p>
+    <a href="#booking" class="text-link-gold" data-book>Rezervasyon Talebi ↗</a>
+  </div>
+  <div class="intro-right">
+    <img src="./media/dining.jpg" alt="Dut Selimiye Yemek & Atmosfer">
+  </div>
+</section>
+
+<!-- ─── SUITES ───────────────────────────────────────────────────────────── -->
+<section id="suites">
+  
+  <article class="suite-editorial-row">
+    <div class="suite-visual">
+      <img src="./media/suite.jpg" alt="Dut Ağacı Önü İskele Süiti">
+    </div>
+    <div class="suite-text-panel">
+      <span class="suite-row-num">02 — Özel İskeleli</span>
+      <h2 class="suite-title">Dut Ağacı Önü İskele Süiti</h2>
+      <p class="suite-desc">Ahşap verandası doğrudan iskeleye bakan, tavan vantilatörlü ve el dokuması keten tekstilli süit.</p>
+      <div class="suite-specs-row">
+        <div class="suite-spec">
+          <span class="suite-spec-label">Alan</span>
+          <span class="suite-spec-value">38 m²</span>
         </div>
-
-        <!-- Floating Glass Dock -->
-        <div class="floating-glass-dock">
-          <form class="dock-form-row" onsubmit="return false;">
-            <div class="dock-cell">
-              <label>GİRİŞ TARİHİ</label>
-              <input type="date" id="heroCheckin" required>
-            </div>
-            <div class="dock-cell">
-              <label>ÇIKIŞ TARİHİ</label>
-              <input type="date" id="heroCheckout" required>
-            </div>
-            <div class="dock-cell">
-              <label>MİSAFİR</label>
-              <select id="heroGuests">
-                <option value="2 Yetişkin">2 Yetişkin</option>
-                <option value="1 Yetişkin">1 Yetişkin</option>
-                <option value="3+ Yetişkin">3+ Yetişkin / Aile</option>
-              </select>
-            </div>
-            <button type="button" class="btn-gold-action" id="heroSubmitBtn" style="height:52px;">
-              <span>Müsaitlik Gör →</span>
-            </button>
-          </form>
+        <div class="suite-spec">
+          <span class="suite-spec-label">Manzara</span>
+          <span class="suite-spec-value">Panoramik Deniz &amp; İskele</span>
+        </div>
+        <div class="suite-spec">
+          <span class="suite-spec-label">Yatak</span>
+          <span class="suite-spec-value">King Size Yatak</span>
         </div>
       </div>
-    </section>
-
-    <!-- SUITES: 3D PANORAMIC LOOKBOOK -->
-    <section class="luxury-section" id="suites">
-      <div class="container-luxury">
-        <div class="section-masthead">
-          <div class="hero-kicker-pill">PANORAMİK KOLEKSİYON</div>
-          <h2>Koleksiyon Süitleri</h2>
-          <p style="color:#94a3b8; font-size:1.15rem;">Doğal kireçtaşı dokuları, keten kumaşlar ve kesintisiz Ege manzarası.</p>
+      <a href="#booking" class="btn-outline-light" data-suite-name="Dut Ağacı Önü İskele Süiti">Bu Odayı Seç ↗</a>
+    </div>
+  </article>
+  
+  <article class="suite-editorial-row">
+    <div class="suite-visual">
+      <img src="./media/room.jpg" alt="Zeytinlik Bahçe Odası">
+    </div>
+    <div class="suite-text-panel">
+      <span class="suite-row-num">03 — Doğa Odaklı</span>
+      <h2 class="suite-title">Zeytinlik Bahçe Odası</h2>
+      <p class="suite-desc">Dut ve zeytin ağaçlarının fısıltısıyla uyanacağınız, taş zeminli serin oda.</p>
+      <div class="suite-specs-row">
+        <div class="suite-spec">
+          <span class="suite-spec-label">Alan</span>
+          <span class="suite-spec-value">26 m²</span>
         </div>
-
-        <div class="suites-lookbook-grid">
-          
-            <article class="suite-card-liquid ">
-              <div class="suite-visual-frame">
-                <img src="./media/suite.jpg" alt="Dut Ağacı Önü İskele Süiti">
-              </div>
-              <div class="suite-details-frame">
-                <div>
-                  <span style="color:var(--primary); font-size:0.75rem; letter-spacing:0.2em; font-weight:800; text-transform:uppercase; display:block; margin-bottom:0.6rem;">SÜİT 01</span>
-                  <h3>Dut Ağacı Önü İskele Süiti</h3>
-                  <p>Ahşap verandası doğrudan iskeleye bakan, tavan vantilatörlü ve el dokuması keten tekstilli süit.</p>
-                </div>
-                <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-glass); padding-top:1.5rem;">
-                  <span style="color:#fff3cf; font-weight:700;">38 m² · Panoramik Deniz &amp; İskele</span>
-                  <button class="btn-gold-action" data-suite-name="Dut Ağacı Önü İskele Süiti"><span>Rezerve Et ↗</span></button>
-                </div>
-              </div>
-            </article>
-          
-            <article class="suite-card-liquid reverse">
-              <div class="suite-visual-frame">
-                <img src="./media/room.jpg" alt="Zeytinlik Bahçe Odası">
-              </div>
-              <div class="suite-details-frame">
-                <div>
-                  <span style="color:var(--primary); font-size:0.75rem; letter-spacing:0.2em; font-weight:800; text-transform:uppercase; display:block; margin-bottom:0.6rem;">SÜİT 02</span>
-                  <h3>Zeytinlik Bahçe Odası</h3>
-                  <p>Dut ve zeytin ağaçlarının fısıltısıyla uyanacağınız, taş zeminli serin oda.</p>
-                </div>
-                <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-glass); padding-top:1.5rem;">
-                  <span style="color:#fff3cf; font-weight:700;">26 m² · Bahçe &amp; Dutluk Manzarası</span>
-                  <button class="btn-gold-action" data-suite-name="Zeytinlik Bahçe Odası"><span>Rezerve Et ↗</span></button>
-                </div>
-              </div>
-            </article>
-          
+        <div class="suite-spec">
+          <span class="suite-spec-label">Manzara</span>
+          <span class="suite-spec-value">Bahçe &amp; Dutluk Manzarası</span>
+        </div>
+        <div class="suite-spec">
+          <span class="suite-spec-label">Yatak</span>
+          <span class="suite-spec-value">Queen Size Yatak</span>
         </div>
       </div>
-    </section>
+      <a href="#booking" class="btn-outline-light" data-suite-name="Zeytinlik Bahçe Odası">Bu Odayı Seç ↗</a>
+    </div>
+  </article>
+  
+</section>
 
-    <!-- RITUALS -->
-    <section class="luxury-section" id="rituals" style="background: rgba(3, 7, 18, 0.7);">
-      <div class="container-luxury">
-        <div class="section-masthead">
-          <div class="hero-kicker-pill">24 SAAT SELİMİYE</div>
-          <h2>Koyda Günün Akışı</h2>
-        </div>
-        <div class="rituals-grid-3col">
-          
-            <div class="ritual-card-glass">
-              <span style="color:var(--primary); font-size:0.78rem; font-weight:800; letter-spacing:0.12em; display:block; margin-bottom:0.8rem;">08:00 - 10:30</span>
-              <h4>Dut Gölgesinde Kahvaltı</h4>
-              <p style="color:#94a3b8; font-size:0.96rem; line-height:1.75;">Gölgede hafif rüzgar eşliğinde köy yumurtası, karadut reçeli ve taze pişi ikramı.</p>
-            </div>
-          
-            <div class="ritual-card-glass">
-              <span style="color:var(--primary); font-size:0.78rem; font-weight:800; letter-spacing:0.12em; display:block; margin-bottom:0.8rem;">11:00 - 18:00</span>
-              <h4>İskeleden Maviye Dalış</h4>
-              <p style="color:#94a3b8; font-size:0.96rem; line-height:1.75;">Özel iskelede şezlongunuza uzanıp Selimiye&#039;nin dalgasız berrak denizinde yüzün.</p>
-            </div>
-          
-            <div class="ritual-card-glass">
-              <span style="color:var(--primary); font-size:0.78rem; font-weight:800; letter-spacing:0.12em; display:block; margin-bottom:0.8rem;">19:00 - 22:30</span>
-              <h4>Kıyı Sofrası &amp; Meze</h4>
-              <p style="color:#94a3b8; font-size:0.96rem; line-height:1.75;">Dalga sesleri ayaklarınızın altındayken zeytinyağlılar ve taze balık deneyimi.</p>
-            </div>
-          
-        </div>
+<!-- ─── RITUALS ──────────────────────────────────────────────────────────── -->
+<section class="rituals-section" id="rituals">
+  <div class="rituals-header">
+    <h2 class="rituals-header-title">
+      Koyda<br>
+      <em>bir gün</em>
+    </h2>
+    <p class="rituals-header-body">
+      Selimiye'de zaman farklı akar. Sabahın berraklığından gece yıldızlarına, bu takvim size bir rehber değil, bir davet sunuyor.
+    </p>
+  </div>
+  <div class="rituals-list">
+    
+    <div class="ritual-item">
+      <span class="ritual-time-stamp">08:00 - 10:30</span>
+      <span class="ritual-name">Dut Gölgesinde Kahvaltı</span>
+      <p class="ritual-desc">Gölgede hafif rüzgar eşliğinde köy yumurtası, karadut reçeli ve taze pişi ikramı.</p>
+    </div>
+    
+    <div class="ritual-item">
+      <span class="ritual-time-stamp">11:00 - 18:00</span>
+      <span class="ritual-name">İskeleden Maviye Dalış</span>
+      <p class="ritual-desc">Özel iskelede şezlongunuza uzanıp Selimiye&#039;nin dalgasız berrak denizinde yüzün.</p>
+    </div>
+    
+    <div class="ritual-item">
+      <span class="ritual-time-stamp">19:00 - 22:30</span>
+      <span class="ritual-name">Kıyı Sofrası &amp; Meze</span>
+      <p class="ritual-desc">Dalga sesleri ayaklarınızın altındayken zeytinyağlılar ve taze balık deneyimi.</p>
+    </div>
+    
+  </div>
+</section>
+
+<!-- ─── LOCATION ─────────────────────────────────────────────────────────── -->
+<section class="location-split" id="location">
+  <div class="location-map-side">
+    <img src="./media/room.jpg" alt="Selimiye Koyu" style="filter: saturate(0.6);">
+  </div>
+  <div class="location-info-side">
+    <p class="section-number">04 — Bize Ulaşın</p>
+    <h2>Dut Selimiye</h2>
+    <div class="location-detail-list">
+      <div class="location-detail-item">
+        <label>Adres</label>
+        <span>Buruncuk Küme Evler No:69, 48700 Marmaris/Muğla</span>
       </div>
-    </section>
-
-    <!-- VIP CONCIERGE -->
-    <section class="luxury-section" id="concierge">
-      <div class="container-luxury">
-        <div class="vip-deck-terminal">
-          <div class="vip-grid-split">
-            <div>
-              <div class="hero-kicker-pill">DOĞRUDAN REZERVASYON</div>
-              <h2>Dut Selimiye</h2>
-              <p style="color:#94a3b8; font-size:1.05rem; line-height:1.85; margin-bottom:2rem;">
-                Tarihlerinizi iletin; en avantajlı doğrudan fiyat teklifini WhatsApp üzerinden anında paylaşalım.
-              </p>
-              <div style="display:flex; flex-direction:column; gap:1.25rem;">
-                <div><strong style="color:var(--primary); font-size:0.75rem; text-transform:uppercase;">Açık Adres</strong><p style="color:#fff;">Buruncuk Küme Evler No:69, 48700 Marmaris/Muğla</p></div>
-                <div><strong style="color:var(--primary); font-size:0.75rem; text-transform:uppercase;">Resepsiyon</strong><p><a href="tel:05363547262" style="color:#fff; text-decoration:none;">0536 354 72 62</a></p></div>
-                <div><strong style="color:var(--primary); font-size:0.75rem; text-transform:uppercase;">WhatsApp Canlı</strong><p><a href="https://wa.me/05363547262?text=Merhaba%20Dut%20Selimiye,%20rezervasyon%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" style="color:var(--primary); font-weight:700;">+90 Selimiye VIP Concierge ↗</a></p></div>
-              </div>
-            </div>
-
-            <div class="vip-form-box">
-              <h3 style="font-family:var(--font-heading); font-size:1.4rem; color:#fff; margin-bottom:1.5rem;">Müsaitlik Talebi Gönder</h3>
-              <form id="v2ContactForm" onsubmit="return false;">
-                <div class="form-duo-inputs">
-                  <div class="form-input-unit">
-                    <label>Adınız Soyadınız *</label>
-                    <input type="text" id="v2Name" placeholder="Adınız Soyadınız" required>
-                  </div>
-                  <div class="form-input-unit">
-                    <label>Telefon *</label>
-                    <input type="tel" id="v2Phone" placeholder="05XX XXX XX XX" required>
-                  </div>
-                </div>
-                <div class="form-duo-inputs">
-                  <div class="form-input-unit">
-                    <label>Giriş Tarihi *</label>
-                    <input type="date" id="v2Checkin" required>
-                  </div>
-                  <div class="form-input-unit">
-                    <label>Çıkış Tarihi *</label>
-                    <input type="date" id="v2Checkout" required>
-                  </div>
-                </div>
-                <div class="form-duo-inputs">
-                  <div class="form-input-unit">
-                    <label>Oda Tercihi</label>
-                    <select id="v2Suite">
-                      <option value="Tüm Odalar">Tüm Odaları Göster</option>
-                      <option value="Dut Ağacı Önü İskele Süiti">Dut Ağacı Önü İskele Süiti</option><option value="Zeytinlik Bahçe Odası">Zeytinlik Bahçe Odası</option>
-                    </select>
-                  </div>
-                  <div class="form-input-unit">
-                    <label>Misafir</label>
-                    <select id="v2Guests">
-                      <option value="2 Yetişkin">2 Yetişkin</option>
-                      <option value="1 Yetişkin">1 Yetişkin</option>
-                      <option value="3+ Yetişkin">3+ Yetişkin</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-input-unit" style="margin-bottom:1.5rem;">
-                  <label>Özel İstekler</label>
-                  <textarea id="v2Notes" rows="3" placeholder="Örn: Balayı ikramı, tekne transferi..."></textarea>
-                </div>
-                <button type="button" class="btn-gold-action" id="v2SubmitBtn" style="width:100%; justify-content:center; height:50px;">
-                  <span>Talebi İlet & Müsaitlik Al ↗</span>
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
+      <div class="location-detail-item">
+        <label>Telefon</label>
+        <a href="tel:05363547262">0536 354 72 62</a>
       </div>
-    </section>
-  </main>
+      <div class="location-detail-item">
+        <label>WhatsApp</label>
+        <a href="https://wa.me/05363547262?text=Merhaba%20Dut%20Selimiye,%20bilgi%20almak%20istiyorum." target="_blank">Mesaj Gönder ↗</a>
+      </div>
+      <div class="location-detail-item">
+        <label>Hedef Kitle</label>
+        <span>+14 Yetişkinler &amp; Dinginlik Arayanlar</span>
+      </div>
+    </div>
+    <a href="#booking" class="text-link-gold" style="color: var(--gold); border-color: var(--gold); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;" data-book>Rezervasyon Talebi ↗</a>
+  </div>
+</section>
 
-  <footer class="luxury-footer">
-    <div class="container-luxury">
-      <div class="footer-grid-3col">
-        <div>
-          <div style="font-family:var(--font-heading); font-size:1.4rem; color:#fff; margin-bottom:0.8rem;">Dut Selimiye</div>
-          <p style="color:#94a3b8; font-size:0.92rem; line-height:1.75; margin-bottom:1rem;">Asırlık dutların gölgesinde, denizin tam kıyısında</p>
-          <small style="color:#64748b;">Buruncuk Küme Evler No:69, 48700 Marmaris/Muğla</small>
+<!-- ─── BOOKING FORM ──────────────────────────────────────────────────────── -->
+<section class="booking-section" id="booking">
+  <div class="booking-inner">
+    <div class="booking-left-head">
+      <p class="section-number" style="color: rgba(255,255,255,0.3); margin-bottom: 2rem;">05 — Rezervasyon</p>
+      <h2>Yerinizi<br><em>ayırtın</em></h2>
+      <p>Tarihlerinizi bırakın; Dut Selimiye ekibi en avantajlı doğrudan fiyatla size dönüş yapsın.</p>
+      <div class="booking-contacts">
+        <div class="contact-item">
+          <label>Resepsiyon</label>
+          <a href="tel:05363547262">0536 354 72 62</a>
         </div>
-        <div style="display:flex; flex-direction:column; gap:0.75rem;">
-          <strong style="color:var(--primary); font-size:0.8rem; text-transform:uppercase;">Gezinme</strong>
-          <a href="#suites" style="color:#94a3b8; text-decoration:none;">Koleksiyon Süitleri</a>
-          <a href="#rituals" style="color:#94a3b8; text-decoration:none;">Koy Ritüelleri</a>
-          <a href="#concierge" style="color:#94a3b8; text-decoration:none;">VIP Danışma</a>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:0.75rem;">
-          <strong style="color:var(--primary); font-size:0.8rem; text-transform:uppercase;">İletişim</strong>
-          <a href="tel:05363547262" style="color:#94a3b8; text-decoration:none;">📞 0536 354 72 62</a>
-          <a href="https://wa.me/05363547262" target="_blank" style="color:#94a3b8; text-decoration:none;">💬 WhatsApp Canlı Hattı</a>
+        <div class="contact-item">
+          <label>WhatsApp Canlı Danışma</label>
+          <a href="https://wa.me/05363547262" target="_blank">Hemen Yazın ↗</a>
         </div>
       </div>
     </div>
-  </footer>
+
+    <form class="booking-form" id="bookingForm" onsubmit="return false;">
+      <div class="booking-form-row">
+        <div class="form-field-bare">
+          <label>Adınız Soyadınız *</label>
+          <input type="text" id="v2Name" placeholder="Adınız Soyadınız" required>
+        </div>
+        <div class="form-field-bare">
+          <label>Telefon Numarası *</label>
+          <input type="tel" id="v2Phone" placeholder="05XX XXX XX XX" required>
+        </div>
+      </div>
+      <div class="booking-form-row">
+        <div class="form-field-bare">
+          <label>Giriş Tarihi *</label>
+          <input type="date" id="v2Checkin" required>
+        </div>
+        <div class="form-field-bare">
+          <label>Çıkış Tarihi *</label>
+          <input type="date" id="v2Checkout" required>
+        </div>
+      </div>
+      <div class="booking-form-row">
+        <div class="form-field-bare">
+          <label>Oda Tercihi</label>
+          <select id="v2Suite">
+            <option value="Tüm Odalar">Tüm Odaları Göster</option>
+            <option value="Dut Ağacı Önü İskele Süiti">Dut Ağacı Önü İskele Süiti</option><option value="Zeytinlik Bahçe Odası">Zeytinlik Bahçe Odası</option>
+          </select>
+        </div>
+        <div class="form-field-bare">
+          <label>Misafir Sayısı</label>
+          <select id="v2Guests">
+            <option value="2 Yetişkin">2 Yetişkin</option>
+            <option value="1 Yetişkin">1 Yetişkin</option>
+            <option value="3+ Yetişkin">3+ Yetişkin / Aile</option>
+          </select>
+        </div>
+      </div>
+      <div class="booking-form-row single">
+        <div class="form-field-bare">
+          <label>Özel İstekleriniz</label>
+          <textarea id="v2Notes" placeholder="Balayı karşılaması, tekne transferi, geç giriş..."></textarea>
+        </div>
+      </div>
+      <div class="form-submit-row">
+        <button type="button" class="btn-submit-editorial" id="v2SubmitBtn">
+          Talebi Gönder ↗
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <span class="footer-hotel-name">Dut Selimiye</span>
+  <span class="footer-location">Selimiye Koyu · Marmaris / Muğla · 2026</span>
+</footer>
 
 </body>
 </html>
