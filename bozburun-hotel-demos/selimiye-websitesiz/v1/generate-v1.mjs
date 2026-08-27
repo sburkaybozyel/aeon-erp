@@ -8,888 +8,781 @@ const parent = path.resolve(here, '..');
 
 const researchV2 = JSON.parse(fs.readFileSync(path.join(parent, 'hotel-research-v2.json'), 'utf8'));
 const detailedResearch = JSON.parse(fs.readFileSync(path.join(parent, 'hotel-research-detail.json'), 'utf8'));
-const detailBySlug = new Map(detailedResearch.hotels.map((item) => [item.slug, item]));
-const outputRoot = here;
+const detailBySlug = new Map(detailedResearch.hotels.map((h) => [h.slug, h]));
 
 const escapeHtml = (v = '') =>
-  String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  String(v).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-// ─────────────────────────────────────────────────────────────────────────────
-// MEDITERRANEAN LIGHT — V1 CSS
-// Inspired by: Mykonos boutique hotels · Santorini villas · Turkish coastal pensions
-// LIGHT background · warm sand · terracotta · olive · zero dark glass · zero emojis
-// ─────────────────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// V1 CSS — COASTAL MAGAZINE LAYOUT
+// Structure is COMPLETELY different from V2's dark editorial.
+// Opening = split-thirds (no hero), pullquote, full-bleed room strips,
+// viewport-chapter experiences, horizontal gallery, centered form.
+// ════════════════════════════════════════════════════════════════════════════
 function generateV1CSS(hotel) {
   const theme = hotel.theme || {};
-  const accent = theme.primary || '#c0674a'; // terracotta default
-  const accentDark = theme.dark || '#2c1a12';
+  const terra = theme.primary || '#b5714a';
+  const ink   = theme.dark    || '#1c1209';
 
-  return `/* ==========================================================================
-   ${hotel.name.toUpperCase()} — MEDITERRANEAN LIGHT V1
-   Style: Mykonos Boutique · Akdeniz Kıyı · Açık & Sıcak
-   Zero glass, zero dark, zero emojis.
-   ========================================================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+  return `
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap');
 
 :root {
-  --sun: #ffffff;
-  --sand: #f7f3ee;
-  --linen: #ede8df;
-  --dune: #d4c9bb;
-  --clay: #a8907e;
-  --terra: ${accent};
-  --terra-dark: color-mix(in srgb, ${accent} 75%, #1a0a00);
-  --olive: #6b7a5a;
-  --sea: #2e6b8a;
-  --ink: ${accentDark};
-  --ink-soft: color-mix(in srgb, ${accentDark} 60%, #fff);
-  --ink-muted: color-mix(in srgb, ${accentDark} 35%, #fff);
-
-  --f-display: 'DM Serif Display', 'Cormorant Garamond', Georgia, serif;
-  --f-body: 'Lato', system-ui, sans-serif;
-
-  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --terra:  ${terra};
+  --terra2: color-mix(in srgb,${terra} 70%,#000);
+  --ink:    ${ink};
+  --sand:   #f5f0e8;
+  --cream:  #ece6db;
+  --stone:  #c8bfb2;
+  --mist:   rgba(28,18,9,0.45);
+  --f-d: 'DM Serif Display', Georgia, serif;
+  --f-s: 'Instrument Sans', system-ui, sans-serif;
+  --ease: cubic-bezier(.22,1,.36,1);
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth;background:var(--sand)}
+body{font-family:var(--f-s);background:var(--sand);color:var(--ink);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:pointer;font-family:inherit}
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px; scroll-behavior: smooth; background: var(--sun); }
-body { font-family: var(--f-body); background: var(--sun); color: var(--ink); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-img { display: block; width: 100%; height: 100%; object-fit: cover; }
-a { text-decoration: none; color: inherit; }
-button { border: none; background: none; cursor: pointer; font-family: inherit; }
-
-/* ─── NAV ──────────────────────────────────────────────────────────────────── */
+/* ── FLOATING MINIMAL NAV ─────────────────────────────────────────────────── */
 .v1-nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 1.5rem 3rem;
+  z-index: 200;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(247,243,238,0.88);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--dune);
-  transition: background 0.4s;
+  padding: 1.25rem 2rem;
+  background: rgba(245,240,232,0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(200,191,178,0.5);
 }
-.v1-nav.transparent {
-  background: rgba(247,243,238,0);
-  border-bottom-color: transparent;
-  backdrop-filter: none;
-}
-.nav-logo-wrap {
+.nav-brand {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.75rem;
 }
-.nav-logo-circle {
-  width: 40px; height: 40px;
+.nav-logo-disc {
+  width: 36px; height: 36px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
-  border: 1px solid var(--dune);
+  border: 1px solid var(--stone);
 }
-.nav-logo-circle svg { width: 100%; height: 100%; display: block; }
-.nav-hotel-name {
-  font-family: var(--f-display);
-  font-size: 1rem;
+.nav-logo-disc svg { width:100%;height:100%;display:block }
+.nav-name {
+  font-family: var(--f-d);
+  font-size: 0.95rem;
   color: var(--ink);
-  letter-spacing: 0.04em;
 }
-.nav-menu {
+.nav-right {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2rem;
 }
-.nav-menu a {
-  font-size: 0.72rem;
-  font-weight: 700;
+.nav-link {
+  font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--ink-soft);
-  transition: color 0.25s;
+  color: var(--mist);
+  transition: color .25s;
 }
-.nav-menu a:hover { color: var(--terra); }
-.nav-book-btn {
-  font-size: 0.72rem;
-  font-weight: 700;
+.nav-link:hover { color: var(--terra) }
+.nav-cta {
+  font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--sun);
+  color: var(--sand);
   background: var(--terra);
-  padding: 0.65rem 1.5rem;
-  transition: background 0.25s;
+  padding: 0.6rem 1.4rem;
+  transition: background .25s;
 }
-.nav-book-btn:hover { background: var(--terra-dark); }
+.nav-cta:hover { background: var(--terra2) }
 
-/* ─── HERO ─────────────────────────────────────────────────────────────────── */
-.v1-hero {
-  position: relative;
+/* ── SPLIT-THIRDS OPENING — NOT A HERO ────────────────────────────────────── */
+.opening {
+  display: grid;
+  grid-template-columns: 6rem 1fr 22rem;
   height: 100vh;
-  min-height: 650px;
-  overflow: hidden;
+  min-height: 680px;
+  padding-top: 64px; /* nav height */
+}
+.opening-spine {
+  background: var(--terra);
   display: flex;
   align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 2.5rem;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
 }
-.v1-hero-img {
-  position: absolute;
-  inset: 0;
+.spine-text {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  transform: rotate(180deg);
+  white-space: nowrap;
 }
-.v1-hero-img img {
+.opening-image {
+  position: relative;
+  overflow: hidden;
+}
+.opening-image img { position:absolute;inset:0;width:100%;height:100%;object-fit:cover }
+.opening-image-overlay {
+  position:absolute;inset:0;
+  background: linear-gradient(to right, rgba(0,0,0,0.18) 0%, transparent 60%);
+}
+.opening-panel {
+  background: var(--sand);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 3rem 2.5rem 4rem;
+  border-left: 1px solid var(--stone);
+  overflow: hidden;
+}
+.opening-eyebrow {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 1.25rem;
+  display: block;
+}
+.opening-hotel-name {
+  font-family: var(--f-d);
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  line-height: 1.08;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+  overflow-wrap: break-word;
+}
+.opening-tagline {
+  font-family: var(--f-d);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--mist);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  overflow-wrap: break-word;
+}
+/* Inline booking widget */
+.opening-widget {
+  border: 1px solid var(--stone);
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+}
+.widget-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--stone);
+}
+.widget-row:last-child { border-bottom: none }
+.widget-field {
+  padding: 1rem 1.25rem;
+  border-right: 1px solid var(--stone);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+.widget-field:last-child { border-right: none }
+.widget-field.full { grid-column: 1 / -1; border-right: none }
+.widget-field label {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+.widget-field input,
+.widget-field select {
+  font-family: var(--f-d);
+  font-size: 0.9rem;
+  color: var(--ink);
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  min-width: 0;
+}
+.widget-submit {
+  width: 100%;
+  padding: 1.1rem;
+  background: var(--ink);
+  color: var(--sand);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  font-family: var(--f-s);
+  transition: background .25s;
+}
+.widget-submit:hover { background: var(--terra) }
+
+/* ── PULLQUOTE ──────────────────────────────────────────────────────────────── */
+.pullquote {
+  background: var(--cream);
+  padding: 7rem 12vw;
+  text-align: center;
+  border-top: 1px solid var(--stone);
+  border-bottom: 1px solid var(--stone);
+}
+.pullquote-text {
+  font-family: var(--f-d);
+  font-style: italic;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  line-height: 1.35;
+  color: var(--ink);
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+.pullquote-attr {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+/* ── ROOMS: FULL-WIDTH OVERLAY STRIPS ─────────────────────────────────────── */
+.rooms-section {
+  padding: 0;
+}
+.rooms-section-head {
+  padding: 5rem 5rem 3rem;
+  border-bottom: 1px solid var(--stone);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--sand);
+}
+.rooms-section-head h2 {
+  font-family: var(--f-d);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  color: var(--ink);
+  line-height: 1.08;
+}
+.rooms-section-head p {
+  font-size: 0.95rem;
+  color: var(--mist);
+  max-width: 340px;
+  line-height: 1.75;
+}
+/* Each room = full-width image with text panel overlaid on the right */
+.room-strip {
+  position: relative;
+  height: 70vh;
+  min-height: 480px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.room-strip-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 8s ease-out;
-  transform: scale(1.05);
+  transition: transform 6s ease;
 }
-.v1-hero-img img.loaded { transform: scale(1); }
-.v1-hero-vignette {
+.room-strip:hover .room-strip-img { transform: scale(1.04) }
+.room-strip-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    160deg,
-    transparent 30%,
-    rgba(247,243,238,0.06) 60%,
-    rgba(247,243,238,0.75) 90%,
-    rgba(247,243,238,1) 100%
-  );
+  background: linear-gradient(to right, rgba(28,18,9,0.08) 0%, rgba(28,18,9,0.6) 55%, rgba(28,18,9,0.88) 100%);
 }
-.v1-hero-content {
-  position: relative;
-  z-index: 2;
-  padding: 0 5rem 5rem;
-  max-width: 800px;
+.room-strip:nth-child(even) .room-strip-overlay {
+  background: linear-gradient(to left, rgba(28,18,9,0.08) 0%, rgba(28,18,9,0.6) 55%, rgba(28,18,9,0.88) 100%);
 }
-.v1-hero-pill {
-  display: inline-block;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--terra);
-  background: rgba(255,255,255,0.9);
-  border: 1px solid color-mix(in srgb, var(--terra) 30%, transparent);
-  padding: 0.35rem 1rem;
-  margin-bottom: 1.5rem;
+.room-strip-text {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 46%;
+  padding: 3rem 4rem;
+  color: #fff;
 }
-.v1-hero-title {
-  font-family: var(--f-display);
-  font-size: clamp(3rem, 6vw, 5.5rem);
-  font-weight: 400;
-  line-height: 1.05;
-  color: var(--ink);
-  margin-bottom: 1.5rem;
-  overflow-wrap: break-word;
-  word-break: break-word;
+.room-strip:nth-child(even) .room-strip-text {
+  right: auto;
+  left: 0;
 }
-.v1-hero-sub {
-  font-family: var(--f-display);
-  font-style: italic;
-  font-size: 1.2rem;
-  color: var(--ink-soft);
-  margin-bottom: 2.5rem;
-  max-width: 520px;
-  line-height: 1.6;
-}
-.v1-hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-.btn-primary {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--sun);
-  background: var(--terra);
-  padding: 1rem 2.5rem;
-  transition: all 0.3s var(--ease);
-  display: inline-block;
-}
-.btn-primary:hover {
-  background: var(--terra-dark);
-  transform: translateY(-2px);
-}
-.btn-ghost {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink);
-  border-bottom: 1.5px solid var(--clay);
-  padding-bottom: 2px;
-  transition: border-color 0.25s;
-}
-.btn-ghost:hover { border-color: var(--terra); color: var(--terra); }
-
-/* ─── BOOKING STRIP ─────────────────────────────────────────────────────────── */
-.v1-book-bar {
-  background: var(--linen);
-  border-top: 1px solid var(--dune);
-  border-bottom: 1px solid var(--dune);
-  display: grid;
-  grid-template-columns: repeat(3,1fr) auto;
-}
-.book-bar-cell {
-  padding: 1.75rem 2rem;
-  border-right: 1px solid var(--dune);
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-.book-bar-cell:last-child { border-right: none; }
-.book-bar-label {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--clay);
-}
-.book-bar-cell input,
-.book-bar-cell select {
-  font-family: var(--f-display);
-  font-size: 1rem;
-  color: var(--ink);
-  background: none;
-  border: none;
-  outline: none;
-  width: 100%;
-  min-width: 0;
-}
-.book-bar-cell select { cursor: pointer; }
-.book-bar-action {
-  padding: 1.75rem 2.5rem;
-  background: var(--terra);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.book-bar-cta {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--sun);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  transition: gap 0.3s;
-}
-.book-bar-cta:hover { gap: 1.25rem; }
-
-/* ─── STORY SECTION ─────────────────────────────────────────────────────────── */
-.v1-story {
-  display: grid;
-  grid-template-columns: 5fr 4fr;
-  gap: 0;
-  min-height: 65vh;
-}
-.story-text-side {
-  padding: 8rem 5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: var(--sand);
-}
-.story-label {
-  font-size: 0.62rem;
-  font-weight: 700;
+.room-strip-badge {
+  font-size: 0.6rem;
+  font-weight: 600;
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--terra);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(181,113,74,0.5);
+  padding: 0.3rem 0.8rem;
+  display: inline-block;
+  margin-bottom: 1.25rem;
+}
+.room-strip-name {
+  font-family: var(--f-d);
+  font-size: clamp(1.5rem, 2.5vw, 2.4rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  overflow-wrap: break-word;
+}
+.room-strip-desc {
+  font-size: 0.93rem;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.7;
   margin-bottom: 2rem;
-  display: block;
+  max-width: 360px;
 }
-.story-heading {
-  font-family: var(--f-display);
-  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
-  line-height: 1.18;
-  color: var(--ink);
-  margin-bottom: 2rem;
-}
-.story-heading em { font-style: italic; }
-.story-body {
-  font-size: 1rem;
-  line-height: 1.85;
-  color: var(--ink-soft);
-  max-width: 440px;
-  margin-bottom: 2.5rem;
-}
-.story-signature {
+.room-strip-specs {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--dune);
-}
-.sig-line { width: 32px; height: 1px; background: var(--clay); }
-.sig-text {
-  font-family: var(--f-display);
-  font-style: italic;
-  font-size: 0.95rem;
-  color: var(--clay);
-}
-.story-visual-side {
-  position: relative;
-  overflow: hidden;
-  min-height: 500px;
-}
-
-/* ─── ROOMS ─────────────────────────────────────────────────────────────────── */
-.v1-rooms {
-  background: var(--sun);
-  padding: 8rem 5rem;
-}
-.rooms-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 4rem;
-  padding-bottom: 2.5rem;
-  border-bottom: 1px solid var(--dune);
+  gap: 2.5rem;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  margin-bottom: 1.75rem;
 }
-.rooms-header-left h2 {
-  font-family: var(--f-display);
-  font-size: clamp(2.4rem, 4vw, 3.5rem);
+.rs-spec { display:flex;flex-direction:column;gap:.2rem }
+.rs-label { font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4) }
+.rs-value { font-family:var(--f-d);font-size:.95rem;color:#fff }
+.room-strip-btn {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  padding-bottom: 2px;
+  transition: border-color .25s,color .25s;
+  display: inline-block;
+  cursor: pointer;
+}
+.room-strip-btn:hover { color: var(--terra); border-color: var(--terra) }
+
+/* ── EXPERIENCE CHAPTERS ──────────────────────────────────────────────────── */
+.experiences-head {
+  background: var(--sand);
+  padding: 5rem 5rem 3rem;
+  border-top: 1px solid var(--stone);
+  border-bottom: 1px solid var(--stone);
+}
+.experiences-head h2 {
+  font-family: var(--f-d);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
   color: var(--ink);
-  line-height: 1.1;
-  margin-top: 0.75rem;
 }
-.rooms-header-right {
-  font-size: 0.95rem;
-  color: var(--ink-soft);
-  max-width: 320px;
-  line-height: 1.75;
-}
-.rooms-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-.room-row {
+.exp-chapter {
   display: grid;
-  grid-template-columns: 2fr 3fr;
-  min-height: 420px;
-  border-top: 1px solid var(--dune);
+  grid-template-columns: 1fr 1fr;
+  min-height: 55vh;
+  border-bottom: 1px solid var(--stone);
 }
-.room-row:last-child { border-bottom: 1px solid var(--dune); }
-.room-row:nth-child(even) { direction: rtl; }
-.room-row:nth-child(even) > * { direction: ltr; }
-.room-visual {
+.exp-chapter:nth-child(even) { direction: rtl }
+.exp-chapter:nth-child(even) > * { direction: ltr }
+.exp-chapter-visual {
   position: relative;
   overflow: hidden;
+  min-height: 400px;
 }
-.room-info {
-  padding: 4rem 4.5rem;
+.exp-chapter-visual img { position:absolute;inset:0;width:100%;height:100%;object-fit:cover }
+.exp-chapter-text {
+  background: var(--cream);
+  padding: 6rem 4.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: var(--sand);
 }
-.room-badge {
+.exp-big-num {
+  font-family: var(--f-d);
+  font-size: 6rem;
+  line-height: 1;
+  color: var(--stone);
+  margin-bottom: 1rem;
+  display: block;
+}
+.exp-chapter-time {
   font-size: 0.62rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--terra);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   display: block;
 }
-.room-name {
-  font-family: var(--f-display);
-  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+.exp-chapter-title {
+  font-family: var(--f-d);
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
   color: var(--ink);
   line-height: 1.2;
   margin-bottom: 1.25rem;
-  overflow-wrap: break-word;
 }
-.room-desc {
+.exp-chapter-desc {
   font-size: 0.97rem;
-  color: var(--ink-soft);
+  color: var(--mist);
   line-height: 1.8;
-  margin-bottom: 2rem;
-  max-width: 420px;
-}
-.room-specs {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-bottom: 2.5rem;
-  padding: 1.5rem 0;
-  border-top: 1px solid var(--dune);
-  border-bottom: 1px solid var(--dune);
-}
-.spec-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-.spec-label {
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--clay);
-}
-.spec-value {
-  font-family: var(--f-display);
-  font-size: 1rem;
-  color: var(--ink);
+  max-width: 400px;
 }
 
-/* ─── EXPERIENCES ──────────────────────────────────────────────────────────── */
-.v1-experiences {
-  background: var(--linen);
-  padding: 8rem 5rem;
-}
-.exp-header {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 4rem;
-  margin-bottom: 5rem;
-  padding-bottom: 3rem;
-  border-bottom: 1px solid var(--dune);
-  align-items: end;
-}
-.exp-header h2 {
-  font-family: var(--f-display);
-  font-size: clamp(2.4rem, 4vw, 3.5rem);
-  color: var(--ink);
-  line-height: 1.1;
-}
-.exp-header p {
-  font-size: 1rem;
-  color: var(--ink-soft);
-  line-height: 1.8;
-  max-width: 460px;
-  align-self: flex-end;
-}
-.exp-list {
+/* ── HORIZONTAL GALLERY STRIP ─────────────────────────────────────────────── */
+.gallery-strip {
   display: flex;
-  flex-direction: column;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-top: 1px solid var(--stone);
+  border-bottom: 1px solid var(--stone);
+  cursor: grab;
 }
-.exp-item {
-  display: grid;
-  grid-template-columns: 160px 1fr 1.2fr;
-  gap: 3rem;
-  padding: 2.5rem 0;
-  border-bottom: 1px solid var(--dune);
-  align-items: start;
-}
-.exp-item:first-child { border-top: 1px solid var(--dune); }
-.exp-num {
-  font-family: var(--f-display);
-  font-size: 2rem;
-  color: var(--dune);
-  line-height: 1;
-}
-.exp-title {
-  font-family: var(--f-display);
-  font-size: 1.4rem;
-  color: var(--ink);
-  line-height: 1.25;
-}
-.exp-desc {
-  font-size: 0.95rem;
-  color: var(--ink-soft);
-  line-height: 1.75;
-}
-
-/* ─── CONTACT ──────────────────────────────────────────────────────────────── */
-.v1-contact {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 60vh;
-}
-.contact-visual {
+.gallery-strip::-webkit-scrollbar { display: none }
+.gallery-strip:active { cursor: grabbing }
+.gallery-img {
+  flex: 0 0 auto;
+  width: 38vw;
+  height: 52vh;
+  min-height: 320px;
   position: relative;
   overflow: hidden;
-  min-height: 500px;
+  border-right: 1px solid var(--stone);
 }
-.contact-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.contact-panel {
+.gallery-img img { position:absolute;inset:0;width:100%;height:100%;object-fit:cover }
+
+/* ── CENTERED CONTACT FORM ────────────────────────────────────────────────── */
+.v1-contact {
   background: var(--sand);
-  padding: 7rem 5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: 8rem 2rem;
+  border-top: 1px solid var(--stone);
 }
-.contact-panel h2 {
-  font-family: var(--f-display);
-  font-size: clamp(2rem, 3.5vw, 3rem);
+.contact-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.contact-eyebrow {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 1rem;
+  display: block;
+}
+.contact-headline {
+  font-family: var(--f-d);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
   color: var(--ink);
-  line-height: 1.15;
+  line-height: 1.08;
   margin-bottom: 0.75rem;
-  margin-top: 1rem;
 }
-.contact-tagline {
-  font-family: var(--f-display);
+.contact-sub {
+  font-family: var(--f-d);
   font-style: italic;
   font-size: 1rem;
-  color: var(--clay);
+  color: var(--mist);
   margin-bottom: 3rem;
 }
-.contact-info-list {
+.contact-meta {
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
+  flex-wrap: wrap;
   margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--stone);
 }
-.ci-item label {
-  display: block;
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--clay);
-  margin-bottom: 0.4rem;
-}
-.ci-item span, .ci-item a {
-  font-family: var(--f-display);
-  font-size: 1.15rem;
-  color: var(--ink);
-}
-.ci-item a { color: var(--terra); }
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border: 1px solid var(--dune);
-}
-.cf-row {
+.cm-item { display:flex;flex-direction:column;gap:.3rem }
+.cm-label { font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--stone) }
+.cm-val { font-family:var(--f-d);font-size:1.05rem;color:var(--ink) }
+.cm-val a { color:var(--terra) }
+
+/* Form: no border box, just lines */
+.v1-form { display:flex;flex-direction:column;gap:0 }
+.v1-form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-bottom: 1px solid var(--dune);
+  border-bottom: 1px solid var(--stone);
 }
-.cf-row.single { grid-template-columns: 1fr; }
-.cf-field {
-  padding: 1.5rem 1.75rem;
-  border-right: 1px solid var(--dune);
+.v1-form-row.single { grid-template-columns: 1fr }
+.v1-field {
+  padding: 1.25rem 0;
+  border-right: 1px solid var(--stone);
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: .35rem;
+  padding-right: 1.5rem;
   min-width: 0;
 }
-.cf-field:last-child { border-right: none; }
-.cf-row.single .cf-field { border-right: none; }
-.cf-field label {
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--clay);
+.v1-field:last-child { border-right:none;padding-right:0;padding-left:1.5rem }
+.v1-form-row.single .v1-field { border-right:none;padding-left:0;padding-right:0 }
+.v1-field label {
+  font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--stone)
 }
-.cf-field input,
-.cf-field select,
-.cf-field textarea {
-  font-family: var(--f-display);
-  font-size: 1rem;
-  color: var(--ink);
-  background: none;
-  border: none;
-  outline: none;
-  width: 100%;
-  min-width: 0;
-  padding: 0;
+.v1-field input,.v1-field select,.v1-field textarea {
+  font-family:var(--f-d);font-size:1rem;color:var(--ink);
+  background:none;border:none;outline:none;width:100%;min-width:0;padding:0
 }
-.cf-field textarea { resize: none; height: 70px; }
-.cf-field select option { background: var(--sand); }
-.cf-submit-row {
-  padding: 0;
+.v1-field textarea { resize:none;height:72px }
+.v1-field select option { background:var(--sand) }
+.v1-submit-row { padding-top:2rem }
+.v1-submit-btn {
+  background:var(--terra);
+  color:var(--sand);
+  font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  padding:1.1rem 3rem;
+  border:none;cursor:pointer;
+  font-family:var(--f-s);
+  transition:background .25s;
 }
-.cf-submit-btn {
-  width: 100%;
-  padding: 1.25rem;
-  background: var(--terra);
-  color: var(--sun);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  font-family: var(--f-body);
-  transition: background 0.25s;
-}
-.cf-submit-btn:hover { background: var(--terra-dark); }
+.v1-submit-btn:hover { background:var(--terra2) }
 
-/* ─── FOOTER ────────────────────────────────────────────────────────────────── */
+/* ── FOOTER ──────────────────────────────────────────────────────────────────── */
 .v1-footer {
-  background: var(--linen);
-  border-top: 1px solid var(--dune);
-  padding: 3rem 5rem;
+  background: var(--cream);
+  border-top: 1px solid var(--stone);
+  padding: 2.5rem 5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
 }
-.footer-name {
-  font-family: var(--f-display);
-  font-size: 1rem;
-  color: var(--clay);
-  letter-spacing: 0.06em;
-}
-.footer-loc {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--clay);
-}
+.v1-footer-name { font-family:var(--f-d);font-size:1rem;color:var(--mist) }
+.v1-footer-loc { font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--stone) }
 
-/* ─── RESPONSIVE ────────────────────────────────────────────────────────────── */
-@media (max-width: 1024px) {
-  .v1-nav { padding: 1.25rem 2rem; }
-  .nav-menu a { display: none; }
-  .v1-hero-content { padding: 0 2rem 4rem; }
-  .v1-book-bar { grid-template-columns: 1fr 1fr; }
-  .book-bar-action { grid-column: 1 / -1; justify-content: flex-start; }
-  .v1-story { grid-template-columns: 1fr; }
-  .story-text-side { padding: 5rem 2.5rem; }
-  .story-visual-side { min-height: 400px; }
-  .v1-rooms { padding: 6rem 2.5rem; }
-  .room-row { grid-template-columns: 1fr; min-height: auto; direction: ltr !important; }
-  .room-visual { min-height: 320px; }
-  .room-info { padding: 3rem 2.5rem; }
-  .v1-experiences { padding: 6rem 2.5rem; }
-  .exp-header { grid-template-columns: 1fr; gap: 2rem; }
-  .exp-item { grid-template-columns: 60px 1fr; gap: 1.5rem; }
-  .exp-desc { grid-column: 2; }
-  .v1-contact { grid-template-columns: 1fr; }
-  .contact-visual { min-height: 350px; }
-  .contact-panel { padding: 5rem 2.5rem; }
-  .rooms-header { flex-direction: column; align-items: flex-start; }
-  .v1-footer { padding: 2.5rem 2rem; }
+/* ── RESPONSIVE ──────────────────────────────────────────────────────────────── */
+@media(max-width:1100px){
+  .opening { grid-template-columns: 4rem 1fr 18rem }
 }
-
-@media (max-width: 640px) {
-  .v1-book-bar { grid-template-columns: 1fr; }
-  .book-bar-cell { border-right: none; border-bottom: 1px solid var(--dune); }
-  .book-bar-action { border-bottom: none; }
-  .v1-hero-title { font-size: clamp(2.2rem, 9vw, 3.2rem); }
-  .cf-row { grid-template-columns: 1fr; }
-  .cf-field { border-right: none; }
-  .room-specs { gap: 1rem; }
-  .exp-item { grid-template-columns: 1fr; }
-  .exp-num { font-size: 1.4rem; }
+@media(max-width:900px){
+  .opening { grid-template-columns: 1fr; height: auto; min-height: auto }
+  .opening-spine { display: none }
+  .opening-image { height: 55vw; min-height: 280px }
+  .opening-panel { padding: 2.5rem 1.5rem 3rem; border-left: none; border-top: 1px solid var(--stone) }
+  .room-strip { height: auto; min-height: 600px }
+  .room-strip-overlay { background: linear-gradient(to top, rgba(28,18,9,0.92) 0%, rgba(28,18,9,0.3) 55%, transparent 100%) !important }
+  .room-strip-text { position: static; transform: none; width: 100%; padding: 2rem 1.5rem; background: rgba(28,18,9,0.88); color:#fff }
+  .exp-chapter { grid-template-columns: 1fr; direction: ltr !important }
+  .exp-chapter:nth-child(even) > * { direction: ltr }
+  .exp-chapter-visual { min-height: 280px }
+  .exp-chapter-text { padding: 3.5rem 2rem }
+  .exp-big-num { font-size: 4rem }
+  .gallery-img { width: 70vw; height: 42vh }
+  .v1-contact { padding: 5rem 1.5rem }
+  .pullquote { padding: 4.5rem 8vw }
+  .nav-link { display: none }
+  .rooms-section-head { padding: 4rem 2rem 2.5rem }
+  .experiences-head { padding: 4rem 2rem 2.5rem }
+  .v1-footer { padding: 2rem 2rem }
+}
+@media(max-width:600px){
+  .widget-row { grid-template-columns: 1fr }
+  .widget-field { border-right: none; border-bottom: 1px solid var(--stone) }
+  .v1-form-row { grid-template-columns: 1fr }
+  .v1-field { border-right: none; padding-left: 0 !important; padding-right: 0 !important }
+  .contact-meta { gap: 1.5rem }
+  .room-strip-specs { gap: 1.5rem }
+  .gallery-img { width: 85vw }
 }
 `;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// MEDITERRANEAN LIGHT — V1 HTML
-// ─────────────────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// V1 HTML — COASTAL MAGAZINE
+// ════════════════════════════════════════════════════════════════════════════
 function generateV1HTML(hotel, detail) {
-  const name = hotel.name;
-  const slug = hotel.slug;
-  const phone = detail?.phone || hotel.phone || '0252 456 23 40';
-  const cleanPhone = phone.replace(/\D/g, '') || '902524562340';
-  const address = detail?.address || hotel.location || 'Selimiye Koyu, Marmaris / Muğla';
-  const tagline = hotel.tagline || 'Koyun sessizliğinde, kıyının tam önünde';
-  const concept = hotel.concept || 'Kıyı dinginliği ve lüks butik konaklama';
-  const audience = hotel.targetAudience || 'Seçkin misafirler ve çiftler';
-  const seaDist = hotel.seaDistance || 'Denize sıfır';
+  const name      = hotel.name;
+  const slug      = hotel.slug;
+  const phone     = detail?.phone || hotel.phone || '0252 456 23 40';
+  const cleanPh   = phone.replace(/\D/g,'') || '902524562340';
+  const address   = detail?.address || hotel.location || 'Selimiye Koyu, Marmaris';
+  const tagline   = hotel.tagline  || 'Koyun sessizliğinde, kıyının tam önünde';
+  const concept   = hotel.concept  || 'Akdeniz kıyısında butik konaklama';
+  const seaDist   = hotel.seaDistance || 'Denize sıfır';
 
-  const rooms = (hotel.rooms?.length) ? hotel.rooms : [
-    { title: 'Deniz Manzaralı Taş Süit', size: '36 m²', view: 'Panoramik Deniz', bed: 'King Size', desc: 'Geniş verandası ve doğal taş dokusuyla sakin bir konaklama deneyimi.', badge: 'Öne Çıkan Süit' },
-    { title: 'Botanik Bahçe Odası', size: '28 m²', view: 'Bahçe & Zeytinlik', bed: 'Queen Size', desc: 'Begonviller ve zeytin ağaçlarıyla çevrili, serin ve ferah bir köşe.', badge: 'Doğa Odası' }
+  const rooms = hotel.rooms?.length ? hotel.rooms : [
+    { title:'Deniz Manzaralı Taş Süit',  size:'36 m²', view:'Panoramik Deniz', bed:'King Size', desc:'Geniş verandası ve taş mimarisiyle sakin bir kıyı deneyimi.', badge:'İmza Süit' },
+    { title:'Botanik Bahçe Odası',        size:'28 m²', view:'Zeytinlik', bed:'Queen Size', desc:'Begonviller ve zeytin ağaçlarıyla çevrili ferah bir köşe.', badge:'Doğa Odası' }
   ];
 
-  const rituals = (hotel.rituals?.length) ? hotel.rituals : [
-    { time: '08:30', title: 'Yavaş Sabah Kahvaltısı', desc: 'Yerel Selimiye zeytinleri ve ev yapımı reçellerle güne acele etmeden başlayın.' },
-    { time: '14:00', title: 'Koy Yüzüşü & Dinlenme', desc: 'Kristal berraklığındaki koy sularında yüzün, gölgede kitabınızı okuyun.' },
-    { time: '19:30', title: 'Gün Batımı Yemeği', desc: 'Taze Ege mezeleri eşliğinde gökyüzü kızıla bürünürken baş başa bir akşam.' }
+  const rituals = hotel.rituals?.length ? hotel.rituals : [
+    { time:'08:30 — 11:00', title:'Yavaş Sabah Kahvaltısı', desc:'Yerel zeytinler ve ev yapımı reçellerle güne acele etmeden başlayın.' },
+    { time:'14:00 — 17:30', title:'Koy Yüzüşü', desc:'Kristal koy sularında yüzün, gölgede dinlenin.' },
+    { time:'19:30 — 23:00', title:'Gün Batımı Yemeği', desc:'Taze Ege mezeleriyle gökyüzü kızıla bürünürken baş başa bir akşam.' }
   ];
 
   return `<!doctype html>
 <html lang="tr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="${escapeHtml(name)} — Selimiye'de ${escapeHtml(concept)}.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="${escapeHtml(name)} — ${escapeHtml(concept)}">
   <title>${escapeHtml(name)} — Selimiye</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css?v=${Date.now()}">
   <script defer src="./app.js?v=${Date.now()}"></script>
 </head>
-<body data-phone="${escapeHtml(cleanPhone)}" data-hotel="${escapeHtml(name)}">
+<body data-phone="${escapeHtml(cleanPh)}" data-hotel="${escapeHtml(name)}">
 
 <!-- NAV -->
 <nav class="v1-nav" id="v1Nav">
-  <a href="#top" class="nav-logo-wrap">
-    <div class="nav-logo-circle">
-      ${getLuxuryEmblem(slug, name, true)}
-    </div>
-    <span class="nav-hotel-name">${escapeHtml(name)}</span>
+  <a href="#top" class="nav-brand">
+    <div class="nav-logo-disc">${getLuxuryEmblem(slug, name, true)}</div>
+    <span class="nav-name">${escapeHtml(name)}</span>
   </a>
-  <div class="nav-menu">
-    <a href="#rooms">Odalar</a>
-    <a href="#experiences">Deneyimler</a>
-    <a href="#contact">İletişim</a>
-    <a href="#contact" class="nav-book-btn" data-book>Rezervasyon</a>
+  <div class="nav-right">
+    <a href="#rooms" class="nav-link">Odalar</a>
+    <a href="#experiences" class="nav-link">Deneyimler</a>
+    <a href="#contact" class="nav-link">İletişim</a>
+    <a href="#contact" class="nav-cta" data-book>Rezervasyon</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="v1-hero" id="top">
-  <div class="v1-hero-img">
+<!-- ── SPLIT-THIRDS OPENING (no hero) ──────────────────────────────────────── -->
+<section class="opening" id="top">
+  <div class="opening-spine">
+    <span class="spine-text">Selimiye · Marmaris · ${new Date().getFullYear()}</span>
+  </div>
+  <div class="opening-image">
     <img src="./media/hero.jpg" alt="${escapeHtml(name)}" id="heroImg">
+    <div class="opening-image-overlay"></div>
   </div>
-  <div class="v1-hero-vignette"></div>
-  <div class="v1-hero-content">
-    <span class="v1-hero-pill">${escapeHtml(seaDist)} · Selimiye, Marmaris</span>
-    <h1 class="v1-hero-title">${escapeHtml(name)}</h1>
-    <p class="v1-hero-sub">${escapeHtml(tagline)}</p>
-    <div class="v1-hero-actions">
-      <a href="#contact" class="btn-primary" data-book>Rezervasyon Talebi</a>
-      <a href="#rooms" class="btn-ghost">Odaları Keşfet</a>
-    </div>
-  </div>
-</section>
-
-<!-- BOOKING STRIP -->
-<div class="v1-book-bar" id="bookBar">
-  <div class="book-bar-cell">
-    <span class="book-bar-label">Giriş Tarihi</span>
-    <input type="date" id="v1Checkin" aria-label="Giriş">
-  </div>
-  <div class="book-bar-cell">
-    <span class="book-bar-label">Çıkış Tarihi</span>
-    <input type="date" id="v1Checkout" aria-label="Çıkış">
-  </div>
-  <div class="book-bar-cell">
-    <span class="book-bar-label">Misafir</span>
-    <select id="v1Guests" aria-label="Misafir">
-      <option>2 Yetişkin</option>
-      <option>1 Yetişkin</option>
-      <option>3+ Yetişkin</option>
-    </select>
-  </div>
-  <div class="book-bar-action">
-    <button class="book-bar-cta" id="bookBarBtn">
-      <span>Müsaitlik Sorgula</span>
-      <span>→</span>
-    </button>
-  </div>
-</div>
-
-<!-- STORY -->
-<section class="v1-story">
-  <div class="story-text-side">
-    <span class="story-label">Hakkımızda</span>
-    <h2 class="story-heading">Selimiye'nin<br><em>en sıcak köşesi</em></h2>
-    <p class="story-body">${escapeHtml(concept)}. Kalabalıktan kaçıp Akdeniz'in berrak sularında dinginlik arayan misafirlerimizi, taş mimarisi ve yeşil bahçesiyle karşılıyoruz.</p>
-    <div class="story-signature">
-      <span class="sig-line"></span>
-      <span class="sig-text">${escapeHtml(audience)}</span>
-    </div>
-  </div>
-  <div class="story-visual-side">
-    <img src="./media/dining.jpg" alt="${escapeHtml(name)} atmosfer">
-  </div>
-</section>
-
-<!-- ROOMS -->
-<section class="v1-rooms" id="rooms">
-  <div class="rooms-header">
-    <div class="rooms-header-left">
-      <span class="story-label">Konaklamanız</span>
-      <h2>Odalar &amp;<br>Süitler</h2>
-    </div>
-    <p class="rooms-header-right">Her oda, Selimiye koyunun sessizliğini ve Akdeniz'in sıcaklığını içinize taşıyacak biçimde tasarlandı.</p>
-  </div>
-  <div class="rooms-list">
-    ${rooms.map((r, i) => `
-    <div class="room-row">
-      <div class="room-visual">
-        <img src="${i === 0 ? './media/suite.jpg' : './media/room.jpg'}" alt="${escapeHtml(r.title)}">
-      </div>
-      <div class="room-info">
-        <span class="room-badge">${escapeHtml(r.badge || 'Süit')}</span>
-        <h3 class="room-name">${escapeHtml(r.title)}</h3>
-        <p class="room-desc">${escapeHtml(r.desc)}</p>
-        <div class="room-specs">
-          <div class="spec-item"><span class="spec-label">Alan</span><span class="spec-value">${escapeHtml(r.size)}</span></div>
-          <div class="spec-item"><span class="spec-label">Manzara</span><span class="spec-value">${escapeHtml(r.view)}</span></div>
-          <div class="spec-item"><span class="spec-label">Yatak</span><span class="spec-value">${escapeHtml(r.bed)}</span></div>
+  <div class="opening-panel">
+    <span class="opening-eyebrow">${escapeHtml(seaDist)}</span>
+    <h1 class="opening-hotel-name">${escapeHtml(name)}</h1>
+    <p class="opening-tagline">${escapeHtml(tagline)}</p>
+    <!-- Inline booking widget inside the panel -->
+    <div class="opening-widget">
+      <div class="widget-row">
+        <div class="widget-field">
+          <label>Giriş</label>
+          <input type="date" id="wCheckin" aria-label="Giriş tarihi">
         </div>
-        <a href="#contact" class="btn-ghost" data-suite="${escapeHtml(r.title)}">Bu Odayı Seç</a>
-      </div>
-    </div>
-    `).join('')}
-  </div>
-</section>
-
-<!-- EXPERIENCES -->
-<section class="v1-experiences" id="experiences">
-  <div class="exp-header">
-    <h2>Selimiye'de<br><em>Bir Gün</em></h2>
-    <p>Zaman burada farklı akar. Sabah kahvaltısından gece yıldızlarına uzanan bu takvim, size bir rehber değil bir davet sunuyor.</p>
-  </div>
-  <div class="exp-list">
-    ${rituals.map((r, i) => `
-    <div class="exp-item">
-      <span class="exp-num">0${i + 1}</span>
-      <span class="exp-title">${escapeHtml(r.title)}</span>
-      <p class="exp-desc">${escapeHtml(r.desc)}</p>
-    </div>
-    `).join('')}
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="v1-contact" id="contact">
-  <div class="contact-visual">
-    <img src="./media/room.jpg" alt="Selimiye Koyu">
-  </div>
-  <div class="contact-panel">
-    <span class="story-label">Rezervasyon</span>
-    <h2>${escapeHtml(name)}</h2>
-    <p class="contact-tagline">Yerinizi bugün ayırtın.</p>
-    <div class="contact-info-list">
-      <div class="ci-item"><label>Adres</label><span>${escapeHtml(address)}</span></div>
-      <div class="ci-item"><label>Telefon</label><a href="tel:${escapeHtml(cleanPhone)}">${escapeHtml(phone)}</a></div>
-      <div class="ci-item"><label>WhatsApp</label><a href="https://wa.me/${escapeHtml(cleanPhone)}" target="_blank">Hemen Yaz</a></div>
-    </div>
-    <form class="contact-form" id="v1Form" onsubmit="return false;">
-      <div class="cf-row">
-        <div class="cf-field"><label>Ad Soyad *</label><input type="text" id="cfName" placeholder="Adınız" required></div>
-        <div class="cf-field"><label>Telefon *</label><input type="tel" id="cfPhone" placeholder="05XX XXX XX XX" required></div>
-      </div>
-      <div class="cf-row">
-        <div class="cf-field"><label>Giriş *</label><input type="date" id="cfCheckin"></div>
-        <div class="cf-field"><label>Çıkış *</label><input type="date" id="cfCheckout"></div>
-      </div>
-      <div class="cf-row">
-        <div class="cf-field"><label>Oda Tercihi</label>
-          <select id="cfSuite">
-            <option>Tüm Odalar</option>
-            ${rooms.map(r => `<option value="${escapeHtml(r.title)}">${escapeHtml(r.title)}</option>`).join('')}
-          </select>
+        <div class="widget-field">
+          <label>Çıkış</label>
+          <input type="date" id="wCheckout" aria-label="Çıkış tarihi">
         </div>
-        <div class="cf-field"><label>Misafir</label>
-          <select id="cfGuests">
+      </div>
+      <div class="widget-row">
+        <div class="widget-field full">
+          <label>Misafir</label>
+          <select id="wGuests" aria-label="Misafir sayısı">
             <option>2 Yetişkin</option>
             <option>1 Yetişkin</option>
             <option>3+ Yetişkin</option>
           </select>
         </div>
       </div>
-      <div class="cf-row single">
-        <div class="cf-field"><label>Özel Notunuz</label><textarea id="cfNotes" placeholder="Balayı, özel karşılama, geç giriş..."></textarea></div>
+      <button class="widget-submit" id="widgetBtn">Müsaitlik Sorgula</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── PULLQUOTE ──────────────────────────────────────────────────────────── -->
+<div class="pullquote">
+  <p class="pullquote-text">"${escapeHtml(concept)}"</p>
+  <span class="pullquote-attr">Selimiye Koyu · Marmaris</span>
+</div>
+
+<!-- ── ROOMS: FULL-WIDTH STRIPS ──────────────────────────────────────────── -->
+<section id="rooms">
+  <div class="rooms-section-head">
+    <h2>Odalar &amp;<br><em style="font-style:italic">Süitler</em></h2>
+    <p>Her oda, Selimiye koyunun sessizliğini ve Akdeniz'in sıcaklığını içinize taşıyacak biçimde tasarlandı.</p>
+  </div>
+  ${rooms.map((r, i) => `
+  <div class="room-strip">
+    <img class="room-strip-img" src="${i === 0 ? './media/suite.jpg' : './media/room.jpg'}" alt="${escapeHtml(r.title)}">
+    <div class="room-strip-overlay"></div>
+    <div class="room-strip-text">
+      <span class="room-strip-badge">${escapeHtml(r.badge || 'Süit')}</span>
+      <h2 class="room-strip-name">${escapeHtml(r.title)}</h2>
+      <p class="room-strip-desc">${escapeHtml(r.desc)}</p>
+      <div class="room-strip-specs">
+        <div class="rs-spec"><span class="rs-label">Alan</span><span class="rs-value">${escapeHtml(r.size)}</span></div>
+        <div class="rs-spec"><span class="rs-label">Manzara</span><span class="rs-value">${escapeHtml(r.view)}</span></div>
+        <div class="rs-spec"><span class="rs-label">Yatak</span><span class="rs-value">${escapeHtml(r.bed)}</span></div>
       </div>
-      <div class="cf-submit-row">
-        <button type="button" class="cf-submit-btn" id="cfSubmit">WhatsApp ile Gönder</button>
+      <span class="room-strip-btn" data-suite="${escapeHtml(r.title)}">Bu Odayı Seç →</span>
+    </div>
+  </div>
+  `).join('')}
+</section>
+
+<!-- ── EXPERIENCE CHAPTERS ────────────────────────────────────────────────── -->
+<section id="experiences">
+  <div class="experiences-head">
+    <h2>Selimiye'de<br><em style="font-style:italic">Bir Gün</em></h2>
+  </div>
+  ${rituals.map((r, i) => `
+  <div class="exp-chapter">
+    <div class="exp-chapter-visual">
+      <img src="${['./media/hero.jpg','./media/dining.jpg','./media/room.jpg'][i % 3]}" alt="${escapeHtml(r.title)}">
+    </div>
+    <div class="exp-chapter-text">
+      <span class="exp-big-num">0${i + 1}</span>
+      <span class="exp-chapter-time">${escapeHtml(r.time)}</span>
+      <h3 class="exp-chapter-title">${escapeHtml(r.title)}</h3>
+      <p class="exp-chapter-desc">${escapeHtml(r.desc)}</p>
+    </div>
+  </div>
+  `).join('')}
+</section>
+
+<!-- ── HORIZONTAL GALLERY STRIP ───────────────────────────────────────────── -->
+<div class="gallery-strip" id="galleryStrip">
+  <div class="gallery-img"><img src="./media/hero.jpg"   alt="Konum"></div>
+  <div class="gallery-img"><img src="./media/suite.jpg"  alt="Süit"></div>
+  <div class="gallery-img"><img src="./media/dining.jpg" alt="Yemek"></div>
+  <div class="gallery-img"><img src="./media/room.jpg"   alt="Oda"></div>
+  <div class="gallery-img"><img src="./media/hero.jpg"   alt="Koy"></div>
+</div>
+
+<!-- ── CENTERED CONTACT FORM ──────────────────────────────────────────────── -->
+<section class="v1-contact" id="contact">
+  <div class="contact-inner">
+    <span class="contact-eyebrow">Rezervasyon Talebi</span>
+    <h2 class="contact-headline">${escapeHtml(name)}</h2>
+    <p class="contact-sub">Yerinizi bugün ayırtın, ekibimiz size dönüş yapsın.</p>
+    <div class="contact-meta">
+      <div class="cm-item"><span class="cm-label">Adres</span><span class="cm-val">${escapeHtml(address)}</span></div>
+      <div class="cm-item"><span class="cm-label">Telefon</span><span class="cm-val"><a href="tel:${escapeHtml(cleanPh)}">${escapeHtml(phone)}</a></span></div>
+      <div class="cm-item"><span class="cm-label">WhatsApp</span><span class="cm-val"><a href="https://wa.me/${escapeHtml(cleanPh)}" target="_blank">Hemen Yaz</a></span></div>
+    </div>
+    <form class="v1-form" id="v1Form" onsubmit="return false;">
+      <div class="v1-form-row">
+        <div class="v1-field"><label>Ad Soyad *</label><input type="text" id="fName" placeholder="Adınız" required></div>
+        <div class="v1-field"><label>Telefon *</label><input type="tel" id="fPhone" placeholder="05XX XXX XX XX" required></div>
+      </div>
+      <div class="v1-form-row">
+        <div class="v1-field"><label>Giriş *</label><input type="date" id="fCheckin"></div>
+        <div class="v1-field"><label>Çıkış *</label><input type="date" id="fCheckout"></div>
+      </div>
+      <div class="v1-form-row">
+        <div class="v1-field"><label>Oda Tercihi</label>
+          <select id="fSuite">
+            <option>Tüm Odalar</option>
+            ${rooms.map(r=>`<option value="${escapeHtml(r.title)}">${escapeHtml(r.title)}</option>`).join('')}
+          </select>
+        </div>
+        <div class="v1-field"><label>Misafir</label>
+          <select id="fGuests"><option>2 Yetişkin</option><option>1 Yetişkin</option><option>3+ Yetişkin</option></select>
+        </div>
+      </div>
+      <div class="v1-form-row single">
+        <div class="v1-field"><label>Özel Not</label><textarea id="fNotes" placeholder="Balayı, özel karşılama, geç giriş..."></textarea></div>
+      </div>
+      <div class="v1-submit-row">
+        <button type="button" class="v1-submit-btn" id="fSubmit">WhatsApp ile Gönder</button>
       </div>
     </form>
   </div>
@@ -897,8 +790,8 @@ function generateV1HTML(hotel, detail) {
 
 <!-- FOOTER -->
 <footer class="v1-footer">
-  <span class="footer-name">${escapeHtml(name)}</span>
-  <span class="footer-loc">Selimiye Koyu · Marmaris / Muğla · ${new Date().getFullYear()}</span>
+  <span class="v1-footer-name">${escapeHtml(name)}</span>
+  <span class="v1-footer-loc">Selimiye Koyu · Marmaris / Muğla · ${new Date().getFullYear()}</span>
 </footer>
 
 </body>
@@ -907,90 +800,69 @@ function generateV1HTML(hotel, detail) {
 
 function generateV1JS() {
   return `document.addEventListener('DOMContentLoaded', () => {
-  // Nav transparency on hero
-  const nav = document.getElementById('v1Nav');
-  const heroSection = document.querySelector('.v1-hero');
-  if (nav && heroSection) {
-    nav.classList.add('transparent');
-    const obs = new IntersectionObserver(([e]) => {
-      nav.classList.toggle('transparent', e.isIntersecting);
-    }, { threshold: 0.1 });
-    obs.observe(heroSection);
-  }
-
-  // Hero img load animation
+  // Hero img load
   const heroImg = document.getElementById('heroImg');
   if (heroImg) {
     heroImg.addEventListener('load', () => heroImg.classList.add('loaded'));
     if (heroImg.complete) heroImg.classList.add('loaded');
   }
 
-  // Book bar → form
-  const bookBarBtn = document.getElementById('bookBarBtn');
-  if (bookBarBtn) {
-    bookBarBtn.addEventListener('click', () => {
-      const checkin = document.getElementById('v1Checkin')?.value || '';
-      const checkout = document.getElementById('v1Checkout')?.value || '';
-      const guests = document.getElementById('v1Guests')?.value || '2 Yetişkin';
-      const cfCheckin = document.getElementById('cfCheckin');
-      const cfCheckout = document.getElementById('cfCheckout');
-      const cfGuests = document.getElementById('cfGuests');
-      if (cfCheckin && checkin) cfCheckin.value = checkin;
-      if (cfCheckout && checkout) cfCheckout.value = checkout;
-      if (cfGuests) cfGuests.value = guests;
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
+  // Widget → form
+  const fill = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
-  // Suite select buttons
+  document.getElementById('widgetBtn')?.addEventListener('click', () => {
+    fill('fCheckin',  document.getElementById('wCheckin')?.value);
+    fill('fCheckout', document.getElementById('wCheckout')?.value);
+    fill('fGuests',   document.getElementById('wGuests')?.value);
+    scrollTo('contact');
+  });
+
+  // Suite buttons
   document.querySelectorAll('[data-suite]').forEach(el => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      const suite = e.currentTarget.getAttribute('data-suite');
-      const sel = document.getElementById('cfSuite');
-      if (sel && suite) sel.value = suite;
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    el.addEventListener('click', () => {
+      fill('fSuite', el.getAttribute('data-suite'));
+      scrollTo('contact');
     });
   });
 
-  // Any [data-book] link scrolls to contact
+  // Nav book links
   document.querySelectorAll('[data-book]').forEach(el => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-    });
+    el.addEventListener('click', (e) => { e.preventDefault(); scrollTo('contact'); });
   });
 
-  // WhatsApp form submit
-  const submitBtn = document.getElementById('cfSubmit');
-  if (submitBtn) {
-    submitBtn.addEventListener('click', () => {
-      const hotel = document.body.getAttribute('data-hotel') || 'Otel';
-      const phone = document.body.getAttribute('data-phone') || '902524562340';
-      const name = document.getElementById('cfName')?.value.trim();
-      const userPhone = document.getElementById('cfPhone')?.value.trim();
-      const checkin = document.getElementById('cfCheckin')?.value || '';
-      const checkout = document.getElementById('cfCheckout')?.value || '';
-      const suite = document.getElementById('cfSuite')?.value || 'Standart';
-      const guests = document.getElementById('cfGuests')?.value || '2 Yetişkin';
-      const notes = document.getElementById('cfNotes')?.value.trim() || '';
-
-      if (!name || !userPhone) {
-        alert('Lütfen adınızı ve telefonunuzu girin.');
-        return;
-      }
-
-      const msg = encodeURIComponent(
-        \`Merhaba \${hotel} Ekibi,\\n\\n\` +
-        \`Ad: \${name} | Tel: \${userPhone}\\n\` +
-        \`Giriş: \${checkin || 'Belirtilmedi'} | Çıkış: \${checkout || 'Belirtilmedi'}\\n\` +
-        \`Oda: \${suite} (\${guests})\` +
-        (notes ? \`\\nNot: \${notes}\` : '') +
-        \`\\n\\nMüsaitlik bilgisi alabilir miyim?\`
-      );
-      window.open(\`https://wa.me/\${phone}?text=\${msg}\`, '_blank');
-    });
+  // Horizontal gallery drag scroll
+  const gallery = document.getElementById('galleryStrip');
+  if (gallery) {
+    let isDown = false, startX, scrollLeft;
+    gallery.addEventListener('mousedown',  e => { isDown = true; startX = e.pageX - gallery.offsetLeft; scrollLeft = gallery.scrollLeft; });
+    gallery.addEventListener('mouseleave', () => isDown = false);
+    gallery.addEventListener('mouseup',    () => isDown = false);
+    gallery.addEventListener('mousemove',  e => { if (!isDown) return; e.preventDefault(); gallery.scrollLeft = scrollLeft - (e.pageX - gallery.offsetLeft - startX); });
   }
+
+  // WhatsApp submit
+  document.getElementById('fSubmit')?.addEventListener('click', () => {
+    const hotel = document.body.getAttribute('data-hotel') || 'Otel';
+    const phone = document.body.getAttribute('data-phone') || '902524562340';
+    const name  = document.getElementById('fName')?.value.trim();
+    const uPh   = document.getElementById('fPhone')?.value.trim();
+    const ci    = document.getElementById('fCheckin')?.value  || '';
+    const co    = document.getElementById('fCheckout')?.value || '';
+    const suite = document.getElementById('fSuite')?.value    || 'Standart';
+    const gst   = document.getElementById('fGuests')?.value   || '2 Yetişkin';
+    const note  = document.getElementById('fNotes')?.value.trim() || '';
+    if (!name || !uPh) { alert('Lütfen adınızı ve telefonunuzu girin.'); return; }
+    const msg = encodeURIComponent(
+      \`Merhaba \${hotel},\\n\` +
+      \`Ad: \${name} | Tel: \${uPh}\\n\` +
+      \`Giriş: \${ci||'?'} | Çıkış: \${co||'?'}\\n\` +
+      \`Oda: \${suite} (\${gst})\` +
+      (note ? \`\\nNot: \${note}\` : '') +
+      \`\\n\\nMüsaitlik bilgisi alabilir miyim?\`
+    );
+    window.open(\`https://wa.me/\${phone}?text=\${msg}\`, '_blank');
+  });
 });
 `;
 }
@@ -999,29 +871,23 @@ function syncMedia(hotel, hotelDir) {
   const mediaDir = path.join(hotelDir, 'media');
   if (!fs.existsSync(mediaDir)) fs.mkdirSync(mediaDir, { recursive: true });
   const m = hotel.media || {};
-  const resolve = (p) => p ? path.resolve(parent, p) : null;
-  const copy = (src, dest) => { if (src && fs.existsSync(src)) fs.copyFileSync(src, dest); };
-  copy(resolve(m.hero), path.join(mediaDir, 'hero.jpg'));
-  copy(resolve(m.room1), path.join(mediaDir, 'suite.jpg'));
-  copy(resolve(m.room2), path.join(mediaDir, 'room.jpg'));
-  copy(resolve(m.dining), path.join(mediaDir, 'dining.jpg'));
+  const res = (p) => p ? path.resolve(parent, p) : null;
+  const cp  = (src, dst) => { if (src && fs.existsSync(src)) fs.copyFileSync(src, dst); };
+  cp(res(m.hero),   path.join(mediaDir, 'hero.jpg'));
+  cp(res(m.room1),  path.join(mediaDir, 'suite.jpg'));
+  cp(res(m.room2),  path.join(mediaDir, 'room.jpg'));
+  cp(res(m.dining), path.join(mediaDir, 'dining.jpg'));
 }
 
-// ─── BUILD ALL V1 ────────────────────────────────────────────────────────────
-console.log('🌊 Building V1 sites — MEDITERRANEAN LIGHT (Mykonos boutique style)...');
+// ── BUILD ─────────────────────────────────────────────────────────────────────
+console.log('🌊 V1 — COASTAL MAGAZINE (split-thirds opening, room strips, chapter experiences, drag gallery)...');
 const js = generateV1JS();
-
 for (const hotel of researchV2.hotels) {
-  const slug = hotel.slug;
-  const detail = detailBySlug.get(slug);
-  const hotelDir = path.join(outputRoot, slug);
+  const hotelDir = path.join(here, hotel.slug);
   if (!fs.existsSync(hotelDir)) fs.mkdirSync(hotelDir, { recursive: true });
-
   syncMedia(hotel, hotelDir);
-
   fs.writeFileSync(path.join(hotelDir, 'styles.css'), generateV1CSS(hotel), 'utf8');
-  fs.writeFileSync(path.join(hotelDir, 'index.html'), generateV1HTML(hotel, detail), 'utf8');
+  fs.writeFileSync(path.join(hotelDir, 'index.html'), generateV1HTML(hotel, detailBySlug.get(hotel.slug)), 'utf8');
   fs.writeFileSync(path.join(hotelDir, 'app.js'), js, 'utf8');
 }
-
-console.log(`✅ V1 done — ${researchV2.hotels.length} sites rebuilt with Mediterranean Light architecture.`);
+console.log(`✅ V1 done — ${researchV2.hotels.length} Coastal Magazine sites built.`);

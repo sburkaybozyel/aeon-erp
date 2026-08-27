@@ -1,86 +1,65 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Nav transparency on hero
-  const nav = document.getElementById('v1Nav');
-  const heroSection = document.querySelector('.v1-hero');
-  if (nav && heroSection) {
-    nav.classList.add('transparent');
-    const obs = new IntersectionObserver(([e]) => {
-      nav.classList.toggle('transparent', e.isIntersecting);
-    }, { threshold: 0.1 });
-    obs.observe(heroSection);
-  }
-
-  // Hero img load animation
+  // Hero img load
   const heroImg = document.getElementById('heroImg');
   if (heroImg) {
     heroImg.addEventListener('load', () => heroImg.classList.add('loaded'));
     if (heroImg.complete) heroImg.classList.add('loaded');
   }
 
-  // Book bar → form
-  const bookBarBtn = document.getElementById('bookBarBtn');
-  if (bookBarBtn) {
-    bookBarBtn.addEventListener('click', () => {
-      const checkin = document.getElementById('v1Checkin')?.value || '';
-      const checkout = document.getElementById('v1Checkout')?.value || '';
-      const guests = document.getElementById('v1Guests')?.value || '2 Yetişkin';
-      const cfCheckin = document.getElementById('cfCheckin');
-      const cfCheckout = document.getElementById('cfCheckout');
-      const cfGuests = document.getElementById('cfGuests');
-      if (cfCheckin && checkin) cfCheckin.value = checkin;
-      if (cfCheckout && checkout) cfCheckout.value = checkout;
-      if (cfGuests) cfGuests.value = guests;
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
+  // Widget → form
+  const fill = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
-  // Suite select buttons
+  document.getElementById('widgetBtn')?.addEventListener('click', () => {
+    fill('fCheckin',  document.getElementById('wCheckin')?.value);
+    fill('fCheckout', document.getElementById('wCheckout')?.value);
+    fill('fGuests',   document.getElementById('wGuests')?.value);
+    scrollTo('contact');
+  });
+
+  // Suite buttons
   document.querySelectorAll('[data-suite]').forEach(el => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      const suite = e.currentTarget.getAttribute('data-suite');
-      const sel = document.getElementById('cfSuite');
-      if (sel && suite) sel.value = suite;
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    el.addEventListener('click', () => {
+      fill('fSuite', el.getAttribute('data-suite'));
+      scrollTo('contact');
     });
   });
 
-  // Any [data-book] link scrolls to contact
+  // Nav book links
   document.querySelectorAll('[data-book]').forEach(el => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-    });
+    el.addEventListener('click', (e) => { e.preventDefault(); scrollTo('contact'); });
   });
 
-  // WhatsApp form submit
-  const submitBtn = document.getElementById('cfSubmit');
-  if (submitBtn) {
-    submitBtn.addEventListener('click', () => {
-      const hotel = document.body.getAttribute('data-hotel') || 'Otel';
-      const phone = document.body.getAttribute('data-phone') || '902524562340';
-      const name = document.getElementById('cfName')?.value.trim();
-      const userPhone = document.getElementById('cfPhone')?.value.trim();
-      const checkin = document.getElementById('cfCheckin')?.value || '';
-      const checkout = document.getElementById('cfCheckout')?.value || '';
-      const suite = document.getElementById('cfSuite')?.value || 'Standart';
-      const guests = document.getElementById('cfGuests')?.value || '2 Yetişkin';
-      const notes = document.getElementById('cfNotes')?.value.trim() || '';
-
-      if (!name || !userPhone) {
-        alert('Lütfen adınızı ve telefonunuzu girin.');
-        return;
-      }
-
-      const msg = encodeURIComponent(
-        `Merhaba ${hotel} Ekibi,\n\n` +
-        `Ad: ${name} | Tel: ${userPhone}\n` +
-        `Giriş: ${checkin || 'Belirtilmedi'} | Çıkış: ${checkout || 'Belirtilmedi'}\n` +
-        `Oda: ${suite} (${guests})` +
-        (notes ? `\nNot: ${notes}` : '') +
-        `\n\nMüsaitlik bilgisi alabilir miyim?`
-      );
-      window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
-    });
+  // Horizontal gallery drag scroll
+  const gallery = document.getElementById('galleryStrip');
+  if (gallery) {
+    let isDown = false, startX, scrollLeft;
+    gallery.addEventListener('mousedown',  e => { isDown = true; startX = e.pageX - gallery.offsetLeft; scrollLeft = gallery.scrollLeft; });
+    gallery.addEventListener('mouseleave', () => isDown = false);
+    gallery.addEventListener('mouseup',    () => isDown = false);
+    gallery.addEventListener('mousemove',  e => { if (!isDown) return; e.preventDefault(); gallery.scrollLeft = scrollLeft - (e.pageX - gallery.offsetLeft - startX); });
   }
+
+  // WhatsApp submit
+  document.getElementById('fSubmit')?.addEventListener('click', () => {
+    const hotel = document.body.getAttribute('data-hotel') || 'Otel';
+    const phone = document.body.getAttribute('data-phone') || '902524562340';
+    const name  = document.getElementById('fName')?.value.trim();
+    const uPh   = document.getElementById('fPhone')?.value.trim();
+    const ci    = document.getElementById('fCheckin')?.value  || '';
+    const co    = document.getElementById('fCheckout')?.value || '';
+    const suite = document.getElementById('fSuite')?.value    || 'Standart';
+    const gst   = document.getElementById('fGuests')?.value   || '2 Yetişkin';
+    const note  = document.getElementById('fNotes')?.value.trim() || '';
+    if (!name || !uPh) { alert('Lütfen adınızı ve telefonunuzu girin.'); return; }
+    const msg = encodeURIComponent(
+      `Merhaba ${hotel},\n` +
+      `Ad: ${name} | Tel: ${uPh}\n` +
+      `Giriş: ${ci||'?'} | Çıkış: ${co||'?'}\n` +
+      `Oda: ${suite} (${gst})` +
+      (note ? `\nNot: ${note}` : '') +
+      `\n\nMüsaitlik bilgisi alabilir miyim?`
+    );
+    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+  });
 });

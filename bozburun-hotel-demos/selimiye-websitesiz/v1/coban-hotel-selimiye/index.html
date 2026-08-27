@@ -2,22 +2,21 @@
 <html lang="tr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Çoban Hotel Selimiye — Selimiye'de Denize sıfır kıyı oteli, sahil barı &amp; taze deniz mahsulleri.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Çoban Hotel Selimiye — Denize sıfır kıyı oteli, sahil barı &amp; taze deniz mahsulleri">
   <title>Çoban Hotel Selimiye — Selimiye</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=1787791476220">
-  <script defer src="./app.js?v=1787791476220"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=1787791755873">
+  <script defer src="./app.js?v=1787791755873"></script>
 </head>
 <body data-phone="0542290915302524464039" data-hotel="Çoban Hotel Selimiye">
 
 <!-- NAV -->
 <nav class="v1-nav" id="v1Nav">
-  <a href="#top" class="nav-logo-wrap">
-    <div class="nav-logo-circle">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
+  <a href="#top" class="nav-brand">
+    <div class="nav-logo-disc"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
   
   <defs>
     <!-- Rich Bullion Gold Gradient -->
@@ -76,197 +75,193 @@
         <text x="150" y="196" font-family="'Cinzel', Georgia, serif" font-size="22" font-weight="700" fill="url(#goldLinear)" text-anchor="middle" letter-spacing="6">ÇOBAN</text>
         <text x="150" y="215" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#f9e8af" text-anchor="middle" letter-spacing="4">HOTEL SELİMİYE</text>
       
-</svg>
-    </div>
-    <span class="nav-hotel-name">Çoban Hotel Selimiye</span>
+</svg></div>
+    <span class="nav-name">Çoban Hotel Selimiye</span>
   </a>
-  <div class="nav-menu">
-    <a href="#rooms">Odalar</a>
-    <a href="#experiences">Deneyimler</a>
-    <a href="#contact">İletişim</a>
-    <a href="#contact" class="nav-book-btn" data-book>Rezervasyon</a>
+  <div class="nav-right">
+    <a href="#rooms" class="nav-link">Odalar</a>
+    <a href="#experiences" class="nav-link">Deneyimler</a>
+    <a href="#contact" class="nav-link">İletişim</a>
+    <a href="#contact" class="nav-cta" data-book>Rezervasyon</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="v1-hero" id="top">
-  <div class="v1-hero-img">
+<!-- ── SPLIT-THIRDS OPENING (no hero) ──────────────────────────────────────── -->
+<section class="opening" id="top">
+  <div class="opening-spine">
+    <span class="spine-text">Selimiye · Marmaris · 2026</span>
+  </div>
+  <div class="opening-image">
     <img src="./media/hero.jpg" alt="Çoban Hotel Selimiye" id="heroImg">
+    <div class="opening-image-overlay"></div>
   </div>
-  <div class="v1-hero-vignette"></div>
-  <div class="v1-hero-content">
-    <span class="v1-hero-pill">Denize sıfır / Özel sahil şeridi · Selimiye, Marmaris</span>
-    <h1 class="v1-hero-title">Çoban Hotel Selimiye</h1>
-    <p class="v1-hero-sub">Sığliman&#39;ın en uç noktasında denize sıfır lezzet ve konaklama</p>
-    <div class="v1-hero-actions">
-      <a href="#contact" class="btn-primary" data-book>Rezervasyon Talebi</a>
-      <a href="#rooms" class="btn-ghost">Odaları Keşfet</a>
-    </div>
-  </div>
-</section>
-
-<!-- BOOKING STRIP -->
-<div class="v1-book-bar" id="bookBar">
-  <div class="book-bar-cell">
-    <span class="book-bar-label">Giriş Tarihi</span>
-    <input type="date" id="v1Checkin" aria-label="Giriş">
-  </div>
-  <div class="book-bar-cell">
-    <span class="book-bar-label">Çıkış Tarihi</span>
-    <input type="date" id="v1Checkout" aria-label="Çıkış">
-  </div>
-  <div class="book-bar-cell">
-    <span class="book-bar-label">Misafir</span>
-    <select id="v1Guests" aria-label="Misafir">
-      <option>2 Yetişkin</option>
-      <option>1 Yetişkin</option>
-      <option>3+ Yetişkin</option>
-    </select>
-  </div>
-  <div class="book-bar-action">
-    <button class="book-bar-cta" id="bookBarBtn">
-      <span>Müsaitlik Sorgula</span>
-      <span>→</span>
-    </button>
-  </div>
-</div>
-
-<!-- STORY -->
-<section class="v1-story">
-  <div class="story-text-side">
-    <span class="story-label">Hakkımızda</span>
-    <h2 class="story-heading">Selimiye'nin<br><em>en sıcak köşesi</em></h2>
-    <p class="story-body">Denize sıfır kıyı oteli, sahil barı &amp; taze deniz mahsulleri. Kalabalıktan kaçıp Akdeniz'in berrak sularında dinginlik arayan misafirlerimizi, taş mimarisi ve yeşil bahçesiyle karşılıyoruz.</p>
-    <div class="story-signature">
-      <span class="sig-line"></span>
-      <span class="sig-text">Doğal Deniz &amp; Balık Tutkunları</span>
-    </div>
-  </div>
-  <div class="story-visual-side">
-    <img src="./media/dining.jpg" alt="Çoban Hotel Selimiye atmosfer">
-  </div>
-</section>
-
-<!-- ROOMS -->
-<section class="v1-rooms" id="rooms">
-  <div class="rooms-header">
-    <div class="rooms-header-left">
-      <span class="story-label">Konaklamanız</span>
-      <h2>Odalar &amp;<br>Süitler</h2>
-    </div>
-    <p class="rooms-header-right">Her oda, Selimiye koyunun sessizliğini ve Akdeniz'in sıcaklığını içinize taşıyacak biçimde tasarlandı.</p>
-  </div>
-  <div class="rooms-list">
-    
-    <div class="room-row">
-      <div class="room-visual">
-        <img src="./media/suite.jpg" alt="Ön Cephe Deniz Manzaralı Oda">
-      </div>
-      <div class="room-info">
-        <span class="room-badge">Ön Sıra Deniz</span>
-        <h3 class="room-name">Ön Cephe Deniz Manzaralı Oda</h3>
-        <p class="room-desc">Balkonundan tüm koyu kucaklayan, dalga sesleriyle uyunan ferah oda.</p>
-        <div class="room-specs">
-          <div class="spec-item"><span class="spec-label">Alan</span><span class="spec-value">30 m²</span></div>
-          <div class="spec-item"><span class="spec-label">Manzara</span><span class="spec-value">Kesintisiz Sığliman Koyu</span></div>
-          <div class="spec-item"><span class="spec-label">Yatak</span><span class="spec-value">King Size Yatak</span></div>
+  <div class="opening-panel">
+    <span class="opening-eyebrow">Denize sıfır / Özel sahil şeridi</span>
+    <h1 class="opening-hotel-name">Çoban Hotel Selimiye</h1>
+    <p class="opening-tagline">Sığliman&#39;ın en uç noktasında denize sıfır lezzet ve konaklama</p>
+    <!-- Inline booking widget inside the panel -->
+    <div class="opening-widget">
+      <div class="widget-row">
+        <div class="widget-field">
+          <label>Giriş</label>
+          <input type="date" id="wCheckin" aria-label="Giriş tarihi">
         </div>
-        <a href="#contact" class="btn-ghost" data-suite="Ön Cephe Deniz Manzaralı Oda">Bu Odayı Seç</a>
-      </div>
-    </div>
-    
-    <div class="room-row">
-      <div class="room-visual">
-        <img src="./media/room.jpg" alt="Standart Kıyı Odası">
-      </div>
-      <div class="room-info">
-        <span class="room-badge">Sade &amp; Rahat</span>
-        <h3 class="room-name">Standart Kıyı Odası</h3>
-        <p class="room-desc">Klima, banyo ve minibar ile donatılmış sade ve temiz oda.</p>
-        <div class="room-specs">
-          <div class="spec-item"><span class="spec-label">Alan</span><span class="spec-value">24 m²</span></div>
-          <div class="spec-item"><span class="spec-label">Manzara</span><span class="spec-value">Kısmi Deniz &amp; Yamaç</span></div>
-          <div class="spec-item"><span class="spec-label">Yatak</span><span class="spec-value">Queen Size Yatak</span></div>
+        <div class="widget-field">
+          <label>Çıkış</label>
+          <input type="date" id="wCheckout" aria-label="Çıkış tarihi">
         </div>
-        <a href="#contact" class="btn-ghost" data-suite="Standart Kıyı Odası">Bu Odayı Seç</a>
       </div>
-    </div>
-    
-  </div>
-</section>
-
-<!-- EXPERIENCES -->
-<section class="v1-experiences" id="experiences">
-  <div class="exp-header">
-    <h2>Selimiye'de<br><em>Bir Gün</em></h2>
-    <p>Zaman burada farklı akar. Sabah kahvaltısından gece yıldızlarına uzanan bu takvim, size bir rehber değil bir davet sunuyor.</p>
-  </div>
-  <div class="exp-list">
-    
-    <div class="exp-item">
-      <span class="exp-num">01</span>
-      <span class="exp-title">Kıyıda Ege Kahvaltısı</span>
-      <p class="exp-desc">Suya sıfır masalarda serpme kahvaltı, peynir çeşitleri ve taze pişi.</p>
-    </div>
-    
-    <div class="exp-item">
-      <span class="exp-num">02</span>
-      <span class="exp-title">Dalgasız Denizde Yüzme</span>
-      <p class="exp-desc">Sığliman&#39;ın akvaryum berraklığındaki koyunda tüm gün yüzün.</p>
-    </div>
-    
-    <div class="exp-item">
-      <span class="exp-num">03</span>
-      <span class="exp-title">Çoban Kıyı Masasında Balık &amp; Meze</span>
-      <p class="exp-desc">Günlük taze deniz balıkları, ızgara kalamar ve Ege zeytinyağlıları.</p>
-    </div>
-    
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="v1-contact" id="contact">
-  <div class="contact-visual">
-    <img src="./media/room.jpg" alt="Selimiye Koyu">
-  </div>
-  <div class="contact-panel">
-    <span class="story-label">Rezervasyon</span>
-    <h2>Çoban Hotel Selimiye</h2>
-    <p class="contact-tagline">Yerinizi bugün ayırtın.</p>
-    <div class="contact-info-list">
-      <div class="ci-item"><label>Adres</label><span>Sığlıman Mah. No:16, Selimiye, 48700 Marmaris/Muğla</span></div>
-      <div class="ci-item"><label>Telefon</label><a href="tel:0542290915302524464039">0542 290 91 53 Google; eski dizinde 0252 446 40 39</a></div>
-      <div class="ci-item"><label>WhatsApp</label><a href="https://wa.me/0542290915302524464039" target="_blank">Hemen Yaz</a></div>
-    </div>
-    <form class="contact-form" id="v1Form" onsubmit="return false;">
-      <div class="cf-row">
-        <div class="cf-field"><label>Ad Soyad *</label><input type="text" id="cfName" placeholder="Adınız" required></div>
-        <div class="cf-field"><label>Telefon *</label><input type="tel" id="cfPhone" placeholder="05XX XXX XX XX" required></div>
-      </div>
-      <div class="cf-row">
-        <div class="cf-field"><label>Giriş *</label><input type="date" id="cfCheckin"></div>
-        <div class="cf-field"><label>Çıkış *</label><input type="date" id="cfCheckout"></div>
-      </div>
-      <div class="cf-row">
-        <div class="cf-field"><label>Oda Tercihi</label>
-          <select id="cfSuite">
-            <option>Tüm Odalar</option>
-            <option value="Ön Cephe Deniz Manzaralı Oda">Ön Cephe Deniz Manzaralı Oda</option><option value="Standart Kıyı Odası">Standart Kıyı Odası</option>
-          </select>
-        </div>
-        <div class="cf-field"><label>Misafir</label>
-          <select id="cfGuests">
+      <div class="widget-row">
+        <div class="widget-field full">
+          <label>Misafir</label>
+          <select id="wGuests" aria-label="Misafir sayısı">
             <option>2 Yetişkin</option>
             <option>1 Yetişkin</option>
             <option>3+ Yetişkin</option>
           </select>
         </div>
       </div>
-      <div class="cf-row single">
-        <div class="cf-field"><label>Özel Notunuz</label><textarea id="cfNotes" placeholder="Balayı, özel karşılama, geç giriş..."></textarea></div>
+      <button class="widget-submit" id="widgetBtn">Müsaitlik Sorgula</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── PULLQUOTE ──────────────────────────────────────────────────────────── -->
+<div class="pullquote">
+  <p class="pullquote-text">"Denize sıfır kıyı oteli, sahil barı &amp; taze deniz mahsulleri"</p>
+  <span class="pullquote-attr">Selimiye Koyu · Marmaris</span>
+</div>
+
+<!-- ── ROOMS: FULL-WIDTH STRIPS ──────────────────────────────────────────── -->
+<section id="rooms">
+  <div class="rooms-section-head">
+    <h2>Odalar &amp;<br><em style="font-style:italic">Süitler</em></h2>
+    <p>Her oda, Selimiye koyunun sessizliğini ve Akdeniz'in sıcaklığını içinize taşıyacak biçimde tasarlandı.</p>
+  </div>
+  
+  <div class="room-strip">
+    <img class="room-strip-img" src="./media/suite.jpg" alt="Ön Cephe Deniz Manzaralı Oda">
+    <div class="room-strip-overlay"></div>
+    <div class="room-strip-text">
+      <span class="room-strip-badge">Ön Sıra Deniz</span>
+      <h2 class="room-strip-name">Ön Cephe Deniz Manzaralı Oda</h2>
+      <p class="room-strip-desc">Balkonundan tüm koyu kucaklayan, dalga sesleriyle uyunan ferah oda.</p>
+      <div class="room-strip-specs">
+        <div class="rs-spec"><span class="rs-label">Alan</span><span class="rs-value">30 m²</span></div>
+        <div class="rs-spec"><span class="rs-label">Manzara</span><span class="rs-value">Kesintisiz Sığliman Koyu</span></div>
+        <div class="rs-spec"><span class="rs-label">Yatak</span><span class="rs-value">King Size Yatak</span></div>
       </div>
-      <div class="cf-submit-row">
-        <button type="button" class="cf-submit-btn" id="cfSubmit">WhatsApp ile Gönder</button>
+      <span class="room-strip-btn" data-suite="Ön Cephe Deniz Manzaralı Oda">Bu Odayı Seç →</span>
+    </div>
+  </div>
+  
+  <div class="room-strip">
+    <img class="room-strip-img" src="./media/room.jpg" alt="Standart Kıyı Odası">
+    <div class="room-strip-overlay"></div>
+    <div class="room-strip-text">
+      <span class="room-strip-badge">Sade &amp; Rahat</span>
+      <h2 class="room-strip-name">Standart Kıyı Odası</h2>
+      <p class="room-strip-desc">Klima, banyo ve minibar ile donatılmış sade ve temiz oda.</p>
+      <div class="room-strip-specs">
+        <div class="rs-spec"><span class="rs-label">Alan</span><span class="rs-value">24 m²</span></div>
+        <div class="rs-spec"><span class="rs-label">Manzara</span><span class="rs-value">Kısmi Deniz &amp; Yamaç</span></div>
+        <div class="rs-spec"><span class="rs-label">Yatak</span><span class="rs-value">Queen Size Yatak</span></div>
+      </div>
+      <span class="room-strip-btn" data-suite="Standart Kıyı Odası">Bu Odayı Seç →</span>
+    </div>
+  </div>
+  
+</section>
+
+<!-- ── EXPERIENCE CHAPTERS ────────────────────────────────────────────────── -->
+<section id="experiences">
+  <div class="experiences-head">
+    <h2>Selimiye'de<br><em style="font-style:italic">Bir Gün</em></h2>
+  </div>
+  
+  <div class="exp-chapter">
+    <div class="exp-chapter-visual">
+      <img src="./media/hero.jpg" alt="Kıyıda Ege Kahvaltısı">
+    </div>
+    <div class="exp-chapter-text">
+      <span class="exp-big-num">01</span>
+      <span class="exp-chapter-time">08:30 - 11:00</span>
+      <h3 class="exp-chapter-title">Kıyıda Ege Kahvaltısı</h3>
+      <p class="exp-chapter-desc">Suya sıfır masalarda serpme kahvaltı, peynir çeşitleri ve taze pişi.</p>
+    </div>
+  </div>
+  
+  <div class="exp-chapter">
+    <div class="exp-chapter-visual">
+      <img src="./media/dining.jpg" alt="Dalgasız Denizde Yüzme">
+    </div>
+    <div class="exp-chapter-text">
+      <span class="exp-big-num">02</span>
+      <span class="exp-chapter-time">12:00 - 18:00</span>
+      <h3 class="exp-chapter-title">Dalgasız Denizde Yüzme</h3>
+      <p class="exp-chapter-desc">Sığliman&#39;ın akvaryum berraklığındaki koyunda tüm gün yüzün.</p>
+    </div>
+  </div>
+  
+  <div class="exp-chapter">
+    <div class="exp-chapter-visual">
+      <img src="./media/room.jpg" alt="Çoban Kıyı Masasında Balık &amp; Meze">
+    </div>
+    <div class="exp-chapter-text">
+      <span class="exp-big-num">03</span>
+      <span class="exp-chapter-time">19:30 - 23:00</span>
+      <h3 class="exp-chapter-title">Çoban Kıyı Masasında Balık &amp; Meze</h3>
+      <p class="exp-chapter-desc">Günlük taze deniz balıkları, ızgara kalamar ve Ege zeytinyağlıları.</p>
+    </div>
+  </div>
+  
+</section>
+
+<!-- ── HORIZONTAL GALLERY STRIP ───────────────────────────────────────────── -->
+<div class="gallery-strip" id="galleryStrip">
+  <div class="gallery-img"><img src="./media/hero.jpg"   alt="Konum"></div>
+  <div class="gallery-img"><img src="./media/suite.jpg"  alt="Süit"></div>
+  <div class="gallery-img"><img src="./media/dining.jpg" alt="Yemek"></div>
+  <div class="gallery-img"><img src="./media/room.jpg"   alt="Oda"></div>
+  <div class="gallery-img"><img src="./media/hero.jpg"   alt="Koy"></div>
+</div>
+
+<!-- ── CENTERED CONTACT FORM ──────────────────────────────────────────────── -->
+<section class="v1-contact" id="contact">
+  <div class="contact-inner">
+    <span class="contact-eyebrow">Rezervasyon Talebi</span>
+    <h2 class="contact-headline">Çoban Hotel Selimiye</h2>
+    <p class="contact-sub">Yerinizi bugün ayırtın, ekibimiz size dönüş yapsın.</p>
+    <div class="contact-meta">
+      <div class="cm-item"><span class="cm-label">Adres</span><span class="cm-val">Sığlıman Mah. No:16, Selimiye, 48700 Marmaris/Muğla</span></div>
+      <div class="cm-item"><span class="cm-label">Telefon</span><span class="cm-val"><a href="tel:0542290915302524464039">0542 290 91 53 Google; eski dizinde 0252 446 40 39</a></span></div>
+      <div class="cm-item"><span class="cm-label">WhatsApp</span><span class="cm-val"><a href="https://wa.me/0542290915302524464039" target="_blank">Hemen Yaz</a></span></div>
+    </div>
+    <form class="v1-form" id="v1Form" onsubmit="return false;">
+      <div class="v1-form-row">
+        <div class="v1-field"><label>Ad Soyad *</label><input type="text" id="fName" placeholder="Adınız" required></div>
+        <div class="v1-field"><label>Telefon *</label><input type="tel" id="fPhone" placeholder="05XX XXX XX XX" required></div>
+      </div>
+      <div class="v1-form-row">
+        <div class="v1-field"><label>Giriş *</label><input type="date" id="fCheckin"></div>
+        <div class="v1-field"><label>Çıkış *</label><input type="date" id="fCheckout"></div>
+      </div>
+      <div class="v1-form-row">
+        <div class="v1-field"><label>Oda Tercihi</label>
+          <select id="fSuite">
+            <option>Tüm Odalar</option>
+            <option value="Ön Cephe Deniz Manzaralı Oda">Ön Cephe Deniz Manzaralı Oda</option><option value="Standart Kıyı Odası">Standart Kıyı Odası</option>
+          </select>
+        </div>
+        <div class="v1-field"><label>Misafir</label>
+          <select id="fGuests"><option>2 Yetişkin</option><option>1 Yetişkin</option><option>3+ Yetişkin</option></select>
+        </div>
+      </div>
+      <div class="v1-form-row single">
+        <div class="v1-field"><label>Özel Not</label><textarea id="fNotes" placeholder="Balayı, özel karşılama, geç giriş..."></textarea></div>
+      </div>
+      <div class="v1-submit-row">
+        <button type="button" class="v1-submit-btn" id="fSubmit">WhatsApp ile Gönder</button>
       </div>
     </form>
   </div>
@@ -274,8 +269,8 @@
 
 <!-- FOOTER -->
 <footer class="v1-footer">
-  <span class="footer-name">Çoban Hotel Selimiye</span>
-  <span class="footer-loc">Selimiye Koyu · Marmaris / Muğla · 2026</span>
+  <span class="v1-footer-name">Çoban Hotel Selimiye</span>
+  <span class="v1-footer-loc">Selimiye Koyu · Marmaris / Muğla · 2026</span>
 </footer>
 
 </body>
