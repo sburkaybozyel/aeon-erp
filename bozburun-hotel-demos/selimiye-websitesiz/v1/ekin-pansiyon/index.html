@@ -2,28 +2,22 @@
 <html lang="tr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="description" content="Ekin Pansiyon Selimiye — Selimiye Koyu'nda Geleneksel pansiyon kültürü &amp; narenciye bahçesi. Özel iskele, taş mimari ve Ege konukseverliği.">
-  <title>Ekin Pansiyon Selimiye — Selimiye | Obsidian Gold Liquid Glass (V1)</title>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ekin Pansiyon Selimiye — Selimiye'de Geleneksel pansiyon kültürü &amp; narenciye bahçesi.">
+  <title>Ekin Pansiyon Selimiye — Selimiye</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="./styles.css?v=20260827">
-  <script defer src="./app.js?v=20260827"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=1787791476209">
+  <script defer src="./app.js?v=1787791476209"></script>
 </head>
-<body class="selimiye-v1-liquid" data-phone="05325554433" data-hotel="Ekin Pansiyon Selimiye">
-  
-  <div class="ambient-glow glow-1" aria-hidden="true"></div>
-  <div class="ambient-glow glow-2" aria-hidden="true"></div>
+<body data-phone="05325554433" data-hotel="Ekin Pansiyon Selimiye">
 
-  <!-- Header -->
-  <header class="v1-header" id="v1Header">
-    <div class="header-island">
-      <a href="#top" class="brand-link" aria-label="Ekin Pansiyon Selimiye Ana Sayfa">
-        <div class="brand-logo-frame">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
+<!-- NAV -->
+<nav class="v1-nav" id="v1Nav">
+  <a href="#top" class="nav-logo-wrap">
+    <div class="nav-logo-circle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
   
   <defs>
     <!-- Rich Bullion Gold Gradient -->
@@ -87,790 +81,206 @@
         <text x="150" y="215" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#f9e8af" text-anchor="middle" letter-spacing="4">SELİMİYE</text>
       
 </svg>
-        </div>
-        <div class="brand-names">
-          <span class="brand-main-title">EKIN PANSIYON SELIMIYE</span>
-          <span class="brand-sub-title">SELİMİYE · MARMARİS</span>
-        </div>
-      </a>
+    </div>
+    <span class="nav-hotel-name">Ekin Pansiyon Selimiye</span>
+  </a>
+  <div class="nav-menu">
+    <a href="#rooms">Odalar</a>
+    <a href="#experiences">Deneyimler</a>
+    <a href="#contact">İletişim</a>
+    <a href="#contact" class="nav-book-btn" data-book>Rezervasyon</a>
+  </div>
+</nav>
 
-      <nav class="v1-nav">
-        <a href="#about" class="nav-link">Felsefe</a>
-        <a href="#suites" class="nav-link">Süitler & Odalar</a>
-        <a href="#rituals" class="nav-link">Günün Ritmi</a>
-        <a href="#gastronomy" class="nav-link">Gastronomi</a>
-        <a href="#coves" class="nav-link">Koylar Rehberi</a>
-        <a href="#experiences" class="nav-link">Deneyimler</a>
-        <a href="#contact" class="nav-link">İletişim</a>
-      </nav>
+<!-- HERO -->
+<section class="v1-hero" id="top">
+  <div class="v1-hero-img">
+    <img src="./media/hero.jpg" alt="Ekin Pansiyon Selimiye" id="heroImg">
+  </div>
+  <div class="v1-hero-vignette"></div>
+  <div class="v1-hero-content">
+    <span class="v1-hero-pill">Denize 15 metre (Birkaç adım) · Selimiye, Marmaris</span>
+    <h1 class="v1-hero-title">Ekin Pansiyon Selimiye</h1>
+    <p class="v1-hero-sub">Denize 15 adım mesafede, Selimiye&#39;nin köklü konukseverliği</p>
+    <div class="v1-hero-actions">
+      <a href="#contact" class="btn-primary" data-book>Rezervasyon Talebi</a>
+      <a href="#rooms" class="btn-ghost">Odaları Keşfet</a>
+    </div>
+  </div>
+</section>
 
-      <div class="header-actions">
-        <div class="currency-dock hide-mobile">
-          <select id="currencySelect">
-            <option value="TRY">₺ TRY</option>
-            <option value="EUR">€ EUR</option>
-            <option value="USD">$ USD</option>
-            <option value="GBP">£ GBP</option>
+<!-- BOOKING STRIP -->
+<div class="v1-book-bar" id="bookBar">
+  <div class="book-bar-cell">
+    <span class="book-bar-label">Giriş Tarihi</span>
+    <input type="date" id="v1Checkin" aria-label="Giriş">
+  </div>
+  <div class="book-bar-cell">
+    <span class="book-bar-label">Çıkış Tarihi</span>
+    <input type="date" id="v1Checkout" aria-label="Çıkış">
+  </div>
+  <div class="book-bar-cell">
+    <span class="book-bar-label">Misafir</span>
+    <select id="v1Guests" aria-label="Misafir">
+      <option>2 Yetişkin</option>
+      <option>1 Yetişkin</option>
+      <option>3+ Yetişkin</option>
+    </select>
+  </div>
+  <div class="book-bar-action">
+    <button class="book-bar-cta" id="bookBarBtn">
+      <span>Müsaitlik Sorgula</span>
+      <span>→</span>
+    </button>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="v1-story">
+  <div class="story-text-side">
+    <span class="story-label">Hakkımızda</span>
+    <h2 class="story-heading">Selimiye'nin<br><em>en sıcak köşesi</em></h2>
+    <p class="story-body">Geleneksel pansiyon kültürü &amp; narenciye bahçesi. Kalabalıktan kaçıp Akdeniz'in berrak sularında dinginlik arayan misafirlerimizi, taş mimarisi ve yeşil bahçesiyle karşılıyoruz.</p>
+    <div class="story-signature">
+      <span class="sig-line"></span>
+      <span class="sig-text">Samimiyet &amp; Köy Ruhu Arayanlar</span>
+    </div>
+  </div>
+  <div class="story-visual-side">
+    <img src="./media/dining.jpg" alt="Ekin Pansiyon Selimiye atmosfer">
+  </div>
+</section>
+
+<!-- ROOMS -->
+<section class="v1-rooms" id="rooms">
+  <div class="rooms-header">
+    <div class="rooms-header-left">
+      <span class="story-label">Konaklamanız</span>
+      <h2>Odalar &amp;<br>Süitler</h2>
+    </div>
+    <p class="rooms-header-right">Her oda, Selimiye koyunun sessizliğini ve Akdeniz'in sıcaklığını içinize taşıyacak biçimde tasarlandı.</p>
+  </div>
+  <div class="rooms-list">
+    
+    <div class="room-row">
+      <div class="room-visual">
+        <img src="./media/suite.jpg" alt="Deniz Gören Balkonlu Oda">
+      </div>
+      <div class="room-info">
+        <span class="room-badge">Misafir Favorisi</span>
+        <h3 class="room-name">Deniz Gören Balkonlu Oda</h3>
+        <p class="room-desc">Mavi panjurlu pencerelerinden deniz kokusunun dolduğu, balkonlu samimi oda.</p>
+        <div class="room-specs">
+          <div class="spec-item"><span class="spec-label">Alan</span><span class="spec-value">26 m²</span></div>
+          <div class="spec-item"><span class="spec-label">Manzara</span><span class="spec-value">Kısmi Deniz &amp; Bahçe</span></div>
+          <div class="spec-item"><span class="spec-label">Yatak</span><span class="spec-value">1 Çift + 1 Tek Kişilik Yatak</span></div>
+        </div>
+        <a href="#contact" class="btn-ghost" data-suite="Deniz Gören Balkonlu Oda">Bu Odayı Seç</a>
+      </div>
+    </div>
+    
+    <div class="room-row">
+      <div class="room-visual">
+        <img src="./media/room.jpg" alt="Narenciye Bahçesi Odası">
+      </div>
+      <div class="room-info">
+        <span class="room-badge">Huzurlu Dinlenme</span>
+        <h3 class="room-name">Narenciye Bahçesi Odası</h3>
+        <p class="room-desc">Portakal ağaçlarının yanında, taş zeminli ve pırıl pırıl temizlikte oda.</p>
+        <div class="room-specs">
+          <div class="spec-item"><span class="spec-label">Alan</span><span class="spec-value">22 m²</span></div>
+          <div class="spec-item"><span class="spec-label">Manzara</span><span class="spec-value">Bahçe İçi</span></div>
+          <div class="spec-item"><span class="spec-label">Yatak</span><span class="spec-value">Çift Kişilik Yatak</span></div>
+        </div>
+        <a href="#contact" class="btn-ghost" data-suite="Narenciye Bahçesi Odası">Bu Odayı Seç</a>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section class="v1-experiences" id="experiences">
+  <div class="exp-header">
+    <h2>Selimiye'de<br><em>Bir Gün</em></h2>
+    <p>Zaman burada farklı akar. Sabah kahvaltısından gece yıldızlarına uzanan bu takvim, size bir rehber değil bir davet sunuyor.</p>
+  </div>
+  <div class="exp-list">
+    
+    <div class="exp-item">
+      <span class="exp-num">01</span>
+      <span class="exp-title">Ünlü Ev Yapımı Kahvaltı</span>
+      <p class="exp-desc">Teyzemizin ellerinden sıcak pişi, bahçe zeytinleri ve ödüllü reçeller.</p>
+    </div>
+    
+    <div class="exp-item">
+      <span class="exp-num">02</span>
+      <span class="exp-title">15 Adımda Deniz</span>
+      <p class="exp-desc">Kapıdan çıkıp 15 adımda serin sulara bırakın kendinizi.</p>
+    </div>
+    
+    <div class="exp-item">
+      <span class="exp-num">03</span>
+      <span class="exp-title">Bahçede Sohbet &amp; Çay</span>
+      <p class="exp-desc">Akşam serinliğinde bahçe masalarında komşuluk ve tatil anıları.</p>
+    </div>
+    
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="v1-contact" id="contact">
+  <div class="contact-visual">
+    <img src="./media/room.jpg" alt="Selimiye Koyu">
+  </div>
+  <div class="contact-panel">
+    <span class="story-label">Rezervasyon</span>
+    <h2>Ekin Pansiyon Selimiye</h2>
+    <p class="contact-tagline">Yerinizi bugün ayırtın.</p>
+    <div class="contact-info-list">
+      <div class="ci-item"><label>Adres</label><span>Selimiye, Marmaris; Etstur harita kodu P35Q+4V</span></div>
+      <div class="ci-item"><label>Telefon</label><a href="tel:05325554433">0532 555 44 33</a></div>
+      <div class="ci-item"><label>WhatsApp</label><a href="https://wa.me/05325554433" target="_blank">Hemen Yaz</a></div>
+    </div>
+    <form class="contact-form" id="v1Form" onsubmit="return false;">
+      <div class="cf-row">
+        <div class="cf-field"><label>Ad Soyad *</label><input type="text" id="cfName" placeholder="Adınız" required></div>
+        <div class="cf-field"><label>Telefon *</label><input type="tel" id="cfPhone" placeholder="05XX XXX XX XX" required></div>
+      </div>
+      <div class="cf-row">
+        <div class="cf-field"><label>Giriş *</label><input type="date" id="cfCheckin"></div>
+        <div class="cf-field"><label>Çıkış *</label><input type="date" id="cfCheckout"></div>
+      </div>
+      <div class="cf-row">
+        <div class="cf-field"><label>Oda Tercihi</label>
+          <select id="cfSuite">
+            <option>Tüm Odalar</option>
+            <option value="Deniz Gören Balkonlu Oda">Deniz Gören Balkonlu Oda</option><option value="Narenciye Bahçesi Odası">Narenciye Bahçesi Odası</option>
           </select>
         </div>
-        <a href="tel:05325554433" class="btn-phone-direct hide-mobile" title="Resepsiyon">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span>0532 555 44 33</span>
-        </a>
-        <button class="btn-gold-cta" data-book>
-          <span>Rezervasyon Talebi</span>
-          <i>↗</i>
-        </button>
-        <button class="mobile-toggle-btn" id="mobileMenuToggle" aria-label="Menüyü Aç">
-          <span></span><span></span><span></span>
-        </button>
+        <div class="cf-field"><label>Misafir</label>
+          <select id="cfGuests">
+            <option>2 Yetişkin</option>
+            <option>1 Yetişkin</option>
+            <option>3+ Yetişkin</option>
+          </select>
+        </div>
       </div>
-    </div>
-  </header>
-
-  <!-- Mobile Drawer -->
-  <div class="mobile-drawer" id="mobileDrawer">
-    <div class="drawer-panel">
-      <div class="drawer-header">
-        <span class="drawer-title">EKIN PANSIYON SELIMIYE</span>
-        <button class="drawer-close-btn" id="drawerClose">✕</button>
+      <div class="cf-row single">
+        <div class="cf-field"><label>Özel Notunuz</label><textarea id="cfNotes" placeholder="Balayı, özel karşılama, geç giriş..."></textarea></div>
       </div>
-      <nav class="drawer-nav">
-        <a href="#about" class="drawer-link">01. Felsefe & Taş Mimari</a>
-        <a href="#suites" class="drawer-link">02. Süitler & Odalar</a>
-        <a href="#rituals" class="drawer-link">03. Günün Ritmi</a>
-        <a href="#gastronomy" class="drawer-link">04. Gastronomi & İskele</a>
-        <a href="#coves" class="drawer-link">05. Selimiye & Saklı Koylar</a>
-        <a href="#experiences" class="drawer-link">06. Özel Aktiviteler</a>
-        <a href="#contact" class="drawer-link">07. İletişim</a>
-      </nav>
-      <div class="drawer-footer">
-        <button class="btn-gold-cta w-full" data-book>Online Rezervasyon Yap ↗</button>
-        <a href="https://wa.me/05325554433?text=Merhaba%20Ekin%20Pansiyon%20Selimiye,%20m%C3%BCsaitlik%20bilgisi%20almak%20istiyorum." target="_blank" class="btn-wa-pill w-full">WhatsApp Canlı Danışma 💬</a>
+      <div class="cf-submit-row">
+        <button type="button" class="cf-submit-btn" id="cfSubmit">WhatsApp ile Gönder</button>
       </div>
-    </div>
+    </form>
   </div>
+</section>
 
-  <main id="top">
-    
-    <!-- HERO SECTION -->
-    <section class="hero-v1">
-      <div class="hero-bg-wrap">
-        <img src="./media/hero.jpg" alt="Ekin Pansiyon Selimiye Selimiye Panoraması" class="hero-bg-img">
-        <div class="hero-overlay"></div>
-      </div>
-
-      <div class="container hero-content">
-        <div class="hero-pill-badge" data-reveal>
-          <span class="badge-dot"></span>
-          <span>SELİMİYE KOYU · MARMARİS</span>
-          <span class="badge-tag">ÖZEL İSKELE & DİNGİNLİK</span>
-        </div>
-
-        <h1 class="hero-title" data-reveal>
-          Zamanın Ağırlaştığı,<br>
-          <em class="serif-highlight">Denize 15 adım mesafede, Selimiye&#39;nin köklü konukseverliği</em>
-        </h1>
-
-        <p class="hero-lead" data-reveal>
-          Ekin Pansiyon Selimiye; Selimiye’nin kristal turkuaz sularında, asırlık zeytin ağaçları ve begonvillerle sarılı taş mimarisiyle ruhu dinlendiren seçkin bir Ege inzivası sunar.
-        </p>
-
-        <!-- Booking Dock -->
-        <div class="liquid-booking-dock" data-reveal>
-          <form class="dock-form" onsubmit="return false;">
-            <div class="dock-input-group">
-              <div class="input-label-row">
-                <span>📅</span>
-                <label for="heroCheckin">GİRİŞ TARİHİ</label>
-              </div>
-              <input type="date" id="heroCheckin" class="dock-input" required>
-            </div>
-
-            <div class="dock-input-group">
-              <div class="input-label-row">
-                <span>📅</span>
-                <label for="heroCheckout">ÇIKIŞ TARİHİ</label>
-              </div>
-              <input type="date" id="heroCheckout" class="dock-input" required>
-            </div>
-
-            <div class="dock-input-group">
-              <div class="input-label-row">
-                <span>👥</span>
-                <label for="heroGuests">MİSAFİR SAYISI</label>
-              </div>
-              <select id="heroGuests" class="dock-select">
-                <option value="2 Yetişkin">2 Yetişkin</option>
-                <option value="1 Yetişkin">1 Yetişkin</option>
-                <option value="3 Yetişkin">3 Yetişkin</option>
-                <option value="4+ Yetişkin">4+ Yetişkin / Aile</option>
-              </select>
-            </div>
-
-            <div class="dock-input-group">
-              <div class="input-label-row">
-                <span>✨</span>
-                <label for="heroSuite">ODA SEÇİMİ</label>
-              </div>
-              <select id="heroSuite" class="dock-select">
-                <option value="all">Tüm Odaları Göster</option>
-                <option value="Deniz Gören Balkonlu Oda">Deniz Gören Balkonlu Oda</option><option value="Narenciye Bahçesi Odası">Narenciye Bahçesi Odası</option>
-              </select>
-            </div>
-
-            <div class="dock-action-group">
-              <button type="button" class="btn-dock-submit" id="heroSubmitBtn">
-                <span>Müsaitlik & Fiyat Gör</span>
-                <i>→</i>
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <!-- Strip Highlights -->
-        <div class="hero-strip-grid" data-reveal>
-          <div class="hero-strip-card">
-            <span class="strip-icon">⚓</span>
-            <div class="strip-text">
-              <strong>Özel İskele & Plaj</strong>
-              <small>Tekne bağlama & berrak koy suyu</small>
-            </div>
-          </div>
-          <div class="hero-strip-card">
-            <span class="strip-icon">🌿</span>
-            <div class="strip-text">
-              <strong>Doğal Taş & Avlu</strong>
-              <small>Begonvil ve zeytin gölgeleri</small>
-            </div>
-          </div>
-          <div class="hero-strip-card">
-            <span class="strip-icon">🍳</span>
-            <div class="strip-text">
-              <strong>Organik Ege Sofrası</strong>
-              <small>Köy balı, zeytin & günlük deniz mahsulleri</small>
-            </div>
-          </div>
-          <div class="hero-strip-card">
-            <span class="strip-icon">⛵</span>
-            <div class="strip-text">
-              <strong>Özel Tekne & Ada Turları</strong>
-              <small>Kamelya Adası & Dişlice Koyu rotası</small>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- STORY & PHILOSOPHY -->
-    <section class="v1-section" id="about">
-      <div class="container">
-        <div class="story-grid">
-          <div class="story-left" data-reveal>
-            <div class="section-eyebrow-pill">
-              <span class="eyebrow-dot"></span>
-              <span>HİKAYEMİZ & FELSEFEMİZ</span>
-            </div>
-            <h2 class="section-title">
-              Sessizliğin Kıyısında,<br>
-              <em class="serif-highlight">Kendinizi Dinleyeceğiniz Bir Sığınak.</em>
-            </h2>
-            <div class="glass-card story-glass-card">
-              <p class="story-lead">
-                Ekin Pansiyon Selimiye, Selimiye Koyu’nun dingin atmosferinde, Ege’nin yavaşlayan ritmini doğal taş ve ahşap dokularla buluşturuyor.
-              </p>
-              <p class="story-body">
-                Kalabalıktan uzakta, yalnızca dalga sesleri ve zeytin ağaçlarının fısıltısıyla başlayan sabahlar; gün boyu iskelede denizle iç içe devam edip, akşam yerel lezzetlerle donatılmış bir kıyı masasında noktalanır.
-              </p>
-              <div class="story-pillars">
-                <div class="pillar-item">
-                  <span class="pillar-num">01</span>
-                  <div>
-                    <strong>Sınırlı Sayıda Butik Oda:</strong>
-                    <span>Mahremiyet ve kişiselleştirilmiş sıcak Ege konukseverliği.</span>
-                  </div>
-                </div>
-                <div class="pillar-item">
-                  <span class="pillar-num">02</span>
-                  <div>
-                    <strong>Kıyıya Açılan İskele:</strong>
-                    <span>Doğrudan denize girilebilen berrak ve korunaklı koy platformu.</span>
-                  </div>
-                </div>
-                <div class="pillar-item">
-                  <span class="pillar-num">03</span>
-            <div class="story-mosaic" data-reveal>
-            <div class="mosaic-main-card">
-              <img src="./media/room.jpg" alt="Ekin Pansiyon Selimiye Yaşam Alanı">
-              <div class="mosaic-glass-badge">
-                <div class="badge-live-tag">✦ SELİMİYE KIYISI</div>
-                <strong>Ekin Pansiyon Selimiye</strong>
-                <small>Selimiye, Marmaris; Etstur harita kodu P35Q+4V</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SUITES & ROOMS -->
-    <section class="v1-section bg-v1-dark" id="suites">
-      <div class="container">
-        <div class="section-center-head" data-reveal>
-          <div class="section-eyebrow-pill">
-            <span class="eyebrow-dot"></span>
-            <span>KONAKLAMA SEÇENEKLERİ</span>
-            <span class="eyebrow-dot"></span>
-          </div>
-          <h2 class="section-title">
-            Huzurla Tasarlanmış<br>
-            <em class="serif-highlight">Seçkin Odalar & Süitler</em>
-          </h2>
-          <p class="section-subtitle">
-            Doğal taş mimari, pamuklu keten kumaşlar ve Selimiye’nin hafif esintisini içeri alan geniş pencereler.
-          </p>
-        </div>
-
-        <div class="suites-glass-grid">
-          
-            <article class="suite-card" data-reveal>
-              <div class="suite-visual">
-                <img src="./media/suite_hd.jpg" alt="Deniz Gören Balkonlu Oda">
-                <span class="suite-tag">Misafir Favorisi</span>
-                <div class="suite-specs-bar">
-                  <span>📐 26 m²</span>
-                  <span>🌊 Kısmi Deniz &amp; Bahçe</span>
-                  <span>🛏️ 1 Çift + 1 Tek Kişilik Yatak</span>
-                </div>
-              </div>
-              <div class="suite-body">
-                <h3 class="suite-name">Deniz Gören Balkonlu Oda</h3>
-                <p class="suite-desc">Mavi panjurlu pencerelerinden deniz kokusunun dolduğu, balkonlu samimi oda.</p>
-                <div class="suite-amenities">
-                  <span>✦ Özel Balkon/Veranda</span>
-                  <span>✦ Yağmur Duşu</span>
-                  <span>✦ Sessiz İklimlendirme</span>
-                  <span>✦ Organik Buklet</span>
-                  <span>✦ Yüksek Hızlı Wi-Fi</span>
-                </div>
-                <div class="suite-footer">
-                  <button class="btn-suite-reserve" data-suite-name="Deniz Gören Balkonlu Oda">
-                    <span>Rezerve Et</span> <i>↗</i>
-                  </button>
-                </div>
-              </div>
-            </article>
-          
-            <article class="suite-card" data-reveal>
-              <div class="suite-visual">
-                <img src="./media/room.jpg" alt="Narenciye Bahçesi Odası">
-                <span class="suite-tag">Huzurlu Dinlenme</span>
-                <div class="suite-specs-bar">
-                  <span>📐 22 m²</span>
-                  <span>🌊 Bahçe İçi</span>
-                  <span>🛏️ Çift Kişilik Yatak</span>
-                </div>
-              </div>
-              <div class="suite-body">
-                <h3 class="suite-name">Narenciye Bahçesi Odası</h3>
-                <p class="suite-desc">Portakal ağaçlarının yanında, taş zeminli ve pırıl pırıl temizlikte oda.</p>
-                <div class="suite-amenities">
-                  <span>✦ Özel Balkon/Veranda</span>
-                  <span>✦ Yağmur Duşu</span>
-                  <span>✦ Sessiz İklimlendirme</span>
-                  <span>✦ Organik Buklet</span>
-                  <span>✦ Yüksek Hızlı Wi-Fi</span>
-                </div>
-                <div class="suite-footer">
-                  <button class="btn-suite-reserve" data-suite-name="Narenciye Bahçesi Odası">
-                    <span>Rezerve Et</span> <i>↗</i>
-                  </button>
-                </div>
-              </div>
-            </article>
-          
-        </div>
-      </div>
-    </section>
-
-    <!-- GÜNÜN RİTMİ (RITUALS) -->
-    <section class="v1-section" id="rituals">
-      <div class="container">
-        <div class="section-center-head" data-reveal>
-          <div class="section-eyebrow-pill"><span class="eyebrow-dot"></span><span>GÜNÜN RİTMİ</span><span class="eyebrow-dot"></span></div>
-          <h2 class="section-title">Selimiye’de Zamanın Akışı</h2>
-          <p class="section-subtitle">Acele etmeden, her saatin tadını çıkararak yaşanan bir tatil deneyimi.</p>
-        </div>
-        <div class="rituals-deck">
-          
-            <div class="ritual-card" data-reveal>
-              <span class="ritual-time">08:00 - 10:30</span>
-              <h4>Ünlü Ev Yapımı Kahvaltı</h4>
-              <p>Teyzemizin ellerinden sıcak pişi, bahçe zeytinleri ve ödüllü reçeller.</p>
-            </div>
-          
-            <div class="ritual-card" data-reveal>
-              <span class="ritual-time">11:00 - 17:00</span>
-              <h4>15 Adımda Deniz</h4>
-              <p>Kapıdan çıkıp 15 adımda serin sulara bırakın kendinizi.</p>
-            </div>
-          
-            <div class="ritual-card" data-reveal>
-              <span class="ritual-time">19:00 - 22:00</span>
-              <h4>Bahçede Sohbet &amp; Çay</h4>
-              <p>Akşam serinliğinde bahçe masalarında komşuluk ve tatil anıları.</p>
-            </div>
-          
-        </div>
-      </div>
-    </section>
-
-    <!-- GASTRONOMY -->
-    <section class="v1-section bg-v1-dark" id="gastronomy">
-      <div class="container">
-        <div class="gastro-grid">
-          <div class="gastro-text" data-reveal>
-            <div class="section-eyebrow-pill">
-              <span class="eyebrow-dot"></span>
-              <span>BAHÇEDEN KIYIYA GASTRONOMİ</span>
-            </div>
-            <h2 class="section-title">
-              Toprağın Bereketi,<br>
-              <em class="serif-highlight">Denizin Tazeliğiyle Sofrada.</em>
-            </h2>
-            <div class="gastro-stack">
-              <div class="glass-card gastro-item">
-                <span class="g-icon">🫒</span>
-                <div class="g-body">
-                  <h4>Geleneksel Serpme Ege Kahvaltısı</h4>
-                  <p>Yerel Selimiye zeytinleri, kekikli keçi peynirleri, ev yapımı incir ve turunç reçelleri, sıcacık taş fırın ekmekleri ile iskelede uzayan sabahlar.</p>
-                </div>
-              </div>
-              <div class="glass-card gastro-item">
-                <span class="g-icon">🦞</span>
-                <div class="g-body">
-                  <h4>Gün Batımı Kıyı Masası & Günlük Av</h4>
-                  <p>Bozburunlu balıkçıların taze lahoz ve çipuraları, taş baskı erken hasat zeytinyağı ile hazırlanan mevsim mezeleri eşliğinde sunulur.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="gastro-media" data-reveal>
-            <div class="gastro-video-box">
-              <video autoplay muted loop playsinline preload="metadata" poster="./media/dining.jpg">
-                <source src="./media/decor.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SELİMİYE DESTINATION & COVES -->
-    <section class="v1-section" id="coves">
-      <div class="container">
-        <div class="section-center-head" data-reveal>
-          <div class="section-eyebrow-pill">
-            <span class="eyebrow-dot"></span>
-            <span>DESTİNASYON & SAKLI KOYLAR</span>
-            <span class="eyebrow-dot"></span>
-          </div>
-          <h2 class="section-title">
-            Selimiye’nin Büyüleyici Coğrafyası
-          </h2>
-          <p class="section-subtitle">
-            Durgun bir gölü andıran korunaklı koylar, tarihi Kamelya Adası ve kristal turkuaz sular.
-          </p>
-        </div>
-
-        <div class="dest-grid-3">
-          <div class="dest-card" data-reveal>
-            <div class="dest-img-box">
-              <img src="./media/jetty_hd.jpg" alt="Sığliman Koyu">
-              <span class="dest-pill">Sığliman Koyu</span>
-            </div>
-            <div class="dest-body">
-              <h3>Sığliman & Kıyı Yolu</h3>
-              <p>Selimiye’nin en sakin koylarından Sığliman, çarşaf gibi denizi ve sığ sularıyla huzurlu yüzme molaları sunar.</p>
-            </div>
-          </div>
-
-          <div class="dest-card" data-reveal>
-            <div class="dest-img-box">
-              <img src="./media/boat-arrival.jpg" alt="Kamelya Adası">
-              <span class="dest-pill">Tarihi Miras</span>
-            </div>
-            <div class="dest-body">
-              <h3>Kamelya & Dişlice Adası</h3>
-              <p>Tekneyle 15 dakikada ulaşılabilen antik manastır kalıntıları ve volkanik kaya oluşumlarıyla ünlü Dişlice Koyu.</p>
-            </div>
-          </div>
-
-          <div class="dest-card" data-reveal>
-            <div class="dest-img-box">
-              <img src="./media/terrace-view.jpg" alt="Karia Yolu">
-              <span class="dest-pill">Doğa Yürüyüşü</span>
-            </div>
-            <div class="dest-body">
-              <h3>Antik Karia Yolu Parkuru</h3>
-              <p>Selimiye’den başlayan patikalar eşliğinde adaçayı kokulu tepelerden panoramik Ege manzarası.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>           <div class="dest-img-box">
-              <img src="../_shared/media/terrace-view.jpg" alt="Karia Yolu">
-              <span class="dest-pill">Doğa Yürüyüşü</span>
-            </div>
-            <div class="dest-body">
-              <h3>Antik Karia Yolu Parkuru</h3>
-              <p>Selimiye’den başlayan patikalar eşliğinde adaçayı kokulu tepelerden panoramik Ege manzarası.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXPERIENCES -->
-    <section class="v1-section bg-v1-dark" id="experiences">
-      <div class="container">
-        <div class="section-center-head" data-reveal>
-          <div class="section-eyebrow-pill">
-            <span class="eyebrow-dot"></span>
-            <span>KÜRATÖRLÜ DENEYİMLER</span>
-            <span class="eyebrow-dot"></span>
-          </div>
-          <h2 class="section-title">
-            Unutulmaz Selimiye Hatıraları
-          </h2>
-        </div>
-
-        <div class="exp-grid-6">
-          <div class="glass-card exp-card" data-reveal>
-            <div class="exp-top"><span class="exp-num">01</span><span style="font-size:2rem;">⛵</span></div>
-            <h3>Özel Gulet ile Saklı Koylar Turu</h3>
-            <p>Otel iskelesinden hareketle Bencik, Kameriye ve Aşk Adası’na gün boyu özel mavi tur.</p>
-            <div>
-              <button class="btn-exp-link" data-exp-title="Özel Gulet Turu">Bilgi Al ↗</button>
-            </div>
-          </div>
-
-          <div class="glass-card exp-card" data-reveal>
-            <div class="exp-top"><span class="exp-num">02</span><span style="font-size:2rem;">🧘</span></div>
-            <h3>İskelede Gün Doğumu Yogası</h3>
-            <p>Sabahın erken saatlerinde sakin deniz üzerinde zihni dinlendiren nefes ve esneme seansı.</p>
-            <div>
-              <button class="btn-exp-link" data-exp-title="Gün Doğumu Yogası">Bilgi Al ↗</button>
-            </div>
-          </div>
-
-          <div class="glass-card exp-card" data-reveal>
-            <div class="exp-top"><span class="exp-num">03</span><span style="font-size:2rem;">🫒</span></div>
-            <h3>Zeytinyağı & Şarap Tadımı</h3>
-            <p>Bozburun Yarımadası’nın asırlık ağaçlarından elde edilen soğuk sıkım erken hasat zeytinyağları.</p>
-            <div>
-              <button class="btn-exp-link" data-exp-title="Zeytinyağı Tadımı">Bilgi Al ↗</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- AMENITIES -->
-    <section class="v1-section" id="amenities">
-      <div class="container">
-        <div class="glass-card amenities-card" data-reveal>
-          <div class="section-center-head">
-            <div class="section-eyebrow-pill"><span class="eyebrow-dot"></span><span>AYRICALIKLAR</span></div>
-            <h2 class="section-title">Konforunuz İçin Her Detay</h2>
-          </div>
-          <div class="amenities-grid">
-            <div class="am-item">
-              <h4>⚓ Özel İskele & Bağlama</h4>
-              <p>Denizden gelen misafirler için güvenli tonoz ve yanaşma desteği.</p>
-            </div>
-            <div class="am-item">
-              <h4>🛎️ Kişisel Concierge</h4>
-              <p>Tekne kiralama, restoran rezervasyonu ve VIP transfer koordinasyonu.</p>
-            </div>
-            <div class="am-item">
-              <h4>🌿 Botanik Avlu</h4>
-              <p>Asırlık zeytin ağaçları ve begonviller altında dinlenme köşeleri.</p>
-            </div>
-            <div class="am-item">
-              <h4>📶 Hızlı Wi-Fi 6</h4>
-              <p>Tüm odalarda ve iskelede kesintisiz yüksek hızlı internet.</p>
-            </div>
-            <div class="am-item">
-              <h4>🚗 Otopark Alanı</h4>
-              <p>Tesis misafirlerine özel güvenli otopark imkanı.</p>
-            </div>
-            <div class="am-item">
-              <h4>🧴 Organik Buklet</h4>
-              <p>Doğal zeytinyağlı bakım ürünleri ve yastık seçenekleri.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT & RESERVATION HUB -->
-    <section class="v1-section bg-v1-dark" id="contact">
-      <div class="container">
-        <div class="glass-card hub-layout" data-reveal>
-          <div class="hub-left">
-            <div class="hub-brand-badge">
-              <div style="width:36px; height:36px; border-radius:50%; overflow:hidden;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
-  
-  <defs>
-    <!-- Rich Bullion Gold Gradient -->
-    <linearGradient id="goldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fff0b8"/>
-      <stop offset="20%" stop-color="#e5c158"/>
-      <stop offset="45%" stop-color="#c99726"/>
-      <stop offset="70%" stop-color="#8a6111"/>
-      <stop offset="90%" stop-color="#d8a834"/>
-      <stop offset="100%" stop-color="#fdf2c6"/>
-    </linearGradient>
-
-    <!-- Ring Specular Gradient -->
-    <linearGradient id="goldRadial" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#9a6e18"/>
-      <stop offset="35%" stop-color="#fff2c2"/>
-      <stop offset="70%" stop-color="#c59424"/>
-      <stop offset="100%" stop-color="#734f0c"/>
-    </linearGradient>
-
-    <!-- Midnight Obsidian Backdrop -->
-    <radialGradient id="darkBg" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#152232"/>
-      <stop offset="65%" stop-color="#09101a"/>
-      <stop offset="100%" stop-color="#04070c"/>
-    </radialGradient>
-
-    <!-- Deep Emerald Backdrop for V2 -->
-    <radialGradient id="emeraldBg" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#1b4634"/>
-      <stop offset="65%" stop-color="#0c251b"/>
-      <stop offset="100%" stop-color="#05140e"/>
-    </radialGradient>
-  </defs>
-
-  
-    <!-- Solid Dark Backdrop Medallion -->
-    <circle cx="150" cy="150" r="146" fill="url(#darkBg)"/>
-    <circle cx="150" cy="150" r="140" fill="none" stroke="url(#goldLinear)" stroke-width="3"/>
-    <circle cx="150" cy="150" r="132" fill="none" stroke="url(#goldRadial)" stroke-width="1.2" stroke-dasharray="3 3"/>
-    <circle cx="150" cy="150" r="125" fill="none" stroke="url(#goldLinear)" stroke-width="1.5"/>
-
-    <!-- 4 Cardinal Gold Points -->
-    <polygon points="150,11 154,19 146,19" fill="url(#goldLinear)"/>
-    <polygon points="150,289 154,281 146,281" fill="url(#goldLinear)"/>
-    <polygon points="11,150 19,154 19,146" fill="url(#goldLinear)"/>
-    <polygon points="289,150 281,154 281,146" fill="url(#goldLinear)"/>
-  
-  
-        <!-- EKIN: Imperial Golden Wheat & Solar Discs -->
-        <g transform="translate(150, 110)">
-          <path d="M0 -44 L0 32" stroke="url(#goldLinear)" stroke-width="3"/>
-          <ellipse cx="-9" cy="-30" rx="7" ry="3.5" transform="rotate(-30 -9 -30)" fill="url(#goldLinear)"/>
-          <ellipse cx="9" cy="-30" rx="7" ry="3.5" transform="rotate(30 9 -30)" fill="url(#goldLinear)"/>
-          <ellipse cx="-11" cy="-14" rx="8" ry="4" transform="rotate(-30 -11 -14)" fill="url(#goldLinear)"/>
-          <ellipse cx="11" cy="-14" rx="8" ry="4" transform="rotate(30 11 -14)" fill="url(#goldLinear)"/>
-          <ellipse cx="-11" cy="2" rx="8" ry="4" transform="rotate(-30 -11 2)" fill="url(#goldLinear)"/>
-          <ellipse cx="11" cy="2" rx="8" ry="4" transform="rotate(30 11 2)" fill="url(#goldLinear)"/>
-        </g>
-        <text x="150" y="196" font-family="'Cinzel', Georgia, serif" font-size="22" font-weight="700" fill="url(#goldLinear)" text-anchor="middle" letter-spacing="6">EKİN</text>
-        <text x="150" y="215" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#f9e8af" text-anchor="middle" letter-spacing="4">SELİMİYE</text>
-      
-</svg>
-              </div>
-              <div>
-                <strong>EKIN PANSIYON SELIMIYE</strong>
-                <small>SELİMİYE / MARMARİS</small>
-              </div>
-            </div>
-            <h2 class="hub-title">Sakin Bir Mola İçin<br><em class="serif-highlight">Bize Ulaşın.</em></h2>
-            <p class="story-body">Tarihlerinizi iletin, en avantajlı doğrudan rezervasyon teklifiyle anında dönüş yapalım.</p>
-            
-            <div class="hub-contacts">
-              <div class="h-item">
-                <span>📍</span>
-                <div>
-                  <strong>KONUM</strong>
-                  <span>Selimiye, Marmaris; Etstur harita kodu P35Q+4V</span>
-                </div>
-              </div>
-              <div class="h-item">
-                <span>📞</span>
-                <div>
-                  <strong>TELEFON & REZERVASYON</strong>
-                  <a href="tel:05325554433">0532 555 44 33</a>
-                </div>
-              </div>
-              <div class="h-item">
-                <span>💬</span>
-                <div>
-                  <strong>WHATSAPP DANIŞMA</strong>
-                  <a href="https://wa.me/05325554433" target="_blank">+90 Selimiye Concierge</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hub-right">
-            <div class="form-box">
-              <div class="form-header">
-                <span class="badge-tag">HIZLI MÜSAİTLİK</span>
-                <h3>Doğrudan Rezervasyon Talebi</h3>
-                <p>En uygun fiyat garantisi ve doğrudan otel iletişimi.</p>
-              </div>
-
-              <form class="real-form" onsubmit="return false;">
-                <div class="form-row-2">
-                  <div class="f-field">
-                    <label>Ad Soyad</label>
-                    <input type="text" id="contactName" placeholder="Adınız ve Soyadınız" required>
-                  </div>
-                  <div class="f-field">
-                    <label>Telefon / WhatsApp</label>
-                    <input type="tel" id="contactPhone" placeholder="05XX XXX XX XX" required>
-                  </div>
-                </div>
-
-                <div class="form-row-2">
-                  <div class="f-field">
-                    <label>Giriş Tarihi</label>
-                    <input type="date" id="contactCheckin" required>
-                  </div>
-                  <div class="f-field">
-                    <label>Çıkış Tarihi</label>
-                    <input type="date" id="contactCheckout" required>
-                  </div>
-                </div>
-
-                <div class="form-row-2">
-                  <div class="f-field">
-                    <label>Oda Tercihi</label>
-                    <select id="contactSuite">
-                      <option value="Tüm Koleksiyon">Tüm Odalar</option>
-                      <option value="Deniz Gören Balkonlu Oda">Deniz Gören Balkonlu Oda</option><option value="Narenciye Bahçesi Odası">Narenciye Bahçesi Odası</option>
-                    </select>
-                  </div>
-                  <div class="f-field">
-                    <label>Misafir Sayısı</label>
-                    <select id="contactGuests">
-                      <option value="2 Yetişkin">2 Yetişkin</option>
-                      <option value="1 Yetişkin">1 Yetişkin</option>
-                      <option value="3 Yetişkin">3 Yetişkin</option>
-                      <option value="4+ Yetişkin">4+ Yetişkin / Aile</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="f-field">
-                  <label>Özel İstek veya Notunuz (Opsiyonel)</label>
-                  <textarea id="contactNotes" rows="3" placeholder="Örn: Balayı karşılaması, tekne transferi, vegan kahvaltı..."></textarea>
-                </div>
-
-                <button type="button" class="btn-gold-submit" id="contactSubmitBtn">
-                  <span>Rezervasyon Talebini Gönder</span> <i>→</i>
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="v1-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <div class="footer-logo-row">
-            <img src="./media/logo.svg" alt="Ekin Pansiyon Selimiye" class="footer-avatar">
-            <span>EKIN PANSIYON SELIMIYE</span>
-          </div>
-          <p>Denize 15 adım mesafede, Selimiye&#39;nin köklü konukseverliği</p>
-        </div>
-        <div class="footer-col">
-          <strong>Hızlı Bağlantılar</strong>
-          <a href="#about">Felsefe</a>
-          <a href="#suites">Odalar & Süitler</a>
-          <a href="#gastronomy">Gastronomi</a>
-          <a href="#experiences">Aktiviteler</a>
-        </div>
-        <div class="footer-col">
-          <strong>Selimiye Rehberi</strong>
-          <a href="#coves">Sığliman Koyu</a>
-          <a href="#coves">Kamelya Adası</a>
-          <a href="#coves">Karia Yolu</a>
-          <a href="#contact">Ulaşım</a>
-        </div>
-        <div class="footer-col">
-          <strong>İletişim</strong>
-          <p>Selimiye, Marmaris; Etstur harita kodu P35Q+4V</p>
-          <a href="tel:05325554433">0532 555 44 33</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2026 Ekin Pansiyon Selimiye. Tüm Hakları Saklıdır.</p>
-        <span>Powered by AEON Luxury Hospitality Engine</span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Modal -->
-  <div class="modal-backdrop" id="bookingModal">
-    <div class="modal-window">
-      <button class="modal-close" id="modalCloseBtn">✕</button>
-      <div class="modal-head">
-        <span class="section-eyebrow-pill">✦ DOĞRUDAN REZERVASYON</span>
-        <h3 id="modalTitleText">Ekin Pansiyon Selimiye Rezervasyon</h3>
-      </div>
-      <form class="real-form" id="modalBookingForm">
-        <div class="f-field">
-          <label>Seçilen Oda / Deneyim</label>
-          <input type="text" id="modalSuiteChoice" readonly>
-        </div>
-        <div class="form-row-2">
-          <div class="f-field">
-            <label>Giriş Tarihi</label>
-            <input type="date" id="mCheckin" required>
-          </div>
-          <div class="f-field">
-            <label>Çıkış Tarihi</label>
-            <input type="date" id="mCheckout" required>
-          </div>
-        </div>
-        <div class="form-row-2">
-          <div class="f-field">
-            <label>Misafir Sayısı</label>
-            <select id="mGuests">
-              <option value="2 Yetişkin">2 Yetişkin</option>
-              <option value="1 Yetişkin">1 Yetişkin</option>
-              <option value="3 Yetişkin">3 Yetişkin</option>
-              <option value="4+ Yetişkin">4+ Yetişkin</option>
-            </select>
-          </div>
-          <div class="f-field">
-            <label>Telefon / WhatsApp *</label>
-            <input type="tel" id="mPhone" placeholder="+90 5xx xxx xx xx" required>
-          </div>
-        </div>
-        <div class="f-field">
-          <label>Notlar</label>
-          <input type="text" id="mNotes" placeholder="Özel istekleriniz...">
-        </div>
-        <button type="submit" class="btn-gold-cta w-full">WhatsApp ile Gönder ↗</button>
-      </form>
-    </div>
-  </div>
+<!-- FOOTER -->
+<footer class="v1-footer">
+  <span class="footer-name">Ekin Pansiyon Selimiye</span>
+  <span class="footer-loc">Selimiye Koyu · Marmaris / Muğla · 2026</span>
+</footer>
 
 </body>
 </html>
