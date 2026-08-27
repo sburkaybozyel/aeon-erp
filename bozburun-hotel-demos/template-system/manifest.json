@@ -1,0 +1,249 @@
+{
+  "generatedAt": "2026-08-19T16:48:03.937Z",
+  "templates": {
+    "v1": "templates/v1",
+    "v2": "templates/v2"
+  },
+  "sites": [
+    {
+      "hotel": "Anfora Hotel",
+      "slug": "anfora-hotel",
+      "version": "v1",
+      "directory": "generated-sites/anfora-hotel-v1",
+      "repository": "bozburun-anfora-hotel-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-anfora-hotel-v1/"
+    },
+    {
+      "hotel": "Anfora Hotel",
+      "slug": "anfora-hotel",
+      "version": "v2",
+      "directory": "generated-sites/anfora-hotel-v2",
+      "repository": "bozburun-anfora-hotel-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-anfora-hotel-v2/"
+    },
+    {
+      "hotel": "Buena Vista Apartments",
+      "slug": "buena-vista-hotel",
+      "version": "v1",
+      "directory": "generated-sites/buena-vista-hotel-v1",
+      "repository": "bozburun-buena-vista-hotel-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-buena-vista-hotel-v1/"
+    },
+    {
+      "hotel": "Buena Vista Apartments",
+      "slug": "buena-vista-hotel",
+      "version": "v2",
+      "directory": "generated-sites/buena-vista-hotel-v2",
+      "repository": "bozburun-buena-vista-hotel-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-buena-vista-hotel-v2/"
+    },
+    {
+      "hotel": "Defne Lorina",
+      "slug": "defne-lorina",
+      "version": "v1",
+      "directory": "generated-sites/defne-lorina-v1",
+      "repository": "bozburun-defne-lorina-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-defne-lorina-v1/"
+    },
+    {
+      "hotel": "Defne Lorina",
+      "slug": "defne-lorina",
+      "version": "v2",
+      "directory": "generated-sites/defne-lorina-v2",
+      "repository": "bozburun-defne-lorina-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-defne-lorina-v2/"
+    },
+    {
+      "hotel": "Hotel Melisa",
+      "slug": "hotel-melisa",
+      "version": "v1",
+      "directory": "generated-sites/hotel-melisa-v1",
+      "repository": "bozburun-hotel-melisa-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-hotel-melisa-v1/"
+    },
+    {
+      "hotel": "Hotel Melisa",
+      "slug": "hotel-melisa",
+      "version": "v2",
+      "directory": "generated-sites/hotel-melisa-v2",
+      "repository": "bozburun-hotel-melisa-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-hotel-melisa-v2/"
+    },
+    {
+      "hotel": "Mete Otel",
+      "slug": "mete-otel-bozburun",
+      "version": "v1",
+      "directory": "generated-sites/mete-otel-bozburun-v1",
+      "repository": "bozburun-mete-otel-bozburun-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-mete-otel-bozburun-v1/"
+    },
+    {
+      "hotel": "Mete Otel",
+      "slug": "mete-otel-bozburun",
+      "version": "v2",
+      "directory": "generated-sites/mete-otel-bozburun-v2",
+      "repository": "bozburun-mete-otel-bozburun-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-mete-otel-bozburun-v2/"
+    },
+    {
+      "hotel": "Metto Bozburun",
+      "slug": "metto-bozburun",
+      "version": "v1",
+      "directory": "generated-sites/metto-bozburun-v1",
+      "repository": "bozburun-metto-bozburun-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-metto-bozburun-v1/"
+    },
+    {
+      "hotel": "Metto Bozburun",
+      "slug": "metto-bozburun",
+      "version": "v2",
+      "directory": "generated-sites/metto-bozburun-v2",
+      "repository": "bozburun-metto-bozburun-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-metto-bozburun-v2/"
+    },
+    {
+      "hotel": "Moonlight Boutique Hotel",
+      "slug": "moonlight-butik-hotel",
+      "version": "v1",
+      "directory": "generated-sites/moonlight-butik-hotel-v1",
+      "repository": "bozburun-moonlight-butik-hotel-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-moonlight-butik-hotel-v1/"
+    },
+    {
+      "hotel": "Moonlight Boutique Hotel",
+      "slug": "moonlight-butik-hotel",
+      "version": "v2",
+      "directory": "generated-sites/moonlight-butik-hotel-v2",
+      "repository": "bozburun-moonlight-butik-hotel-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-moonlight-butik-hotel-v2/"
+    },
+    {
+      "hotel": "Özgür Apart",
+      "slug": "ozgur-otel-bozburun",
+      "version": "v1",
+      "directory": "generated-sites/ozgur-otel-bozburun-v1",
+      "repository": "bozburun-ozgur-otel-bozburun-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-ozgur-otel-bozburun-v1/"
+    },
+    {
+      "hotel": "Özgür Apart",
+      "slug": "ozgur-otel-bozburun",
+      "version": "v2",
+      "directory": "generated-sites/ozgur-otel-bozburun-v2",
+      "repository": "bozburun-ozgur-otel-bozburun-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-ozgur-otel-bozburun-v2/"
+    },
+    {
+      "hotel": "Rosario Hotel",
+      "slug": "rosario-hotel",
+      "version": "v1",
+      "directory": "generated-sites/rosario-hotel-v1",
+      "repository": "bozburun-rosario-hotel-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-rosario-hotel-v1/"
+    },
+    {
+      "hotel": "Rosario Hotel",
+      "slug": "rosario-hotel",
+      "version": "v2",
+      "directory": "generated-sites/rosario-hotel-v2",
+      "repository": "bozburun-rosario-hotel-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-rosario-hotel-v2/"
+    },
+    {
+      "hotel": "Sound of Silence Suite",
+      "slug": "sound-of-silence-suite",
+      "version": "v1",
+      "directory": "generated-sites/sound-of-silence-suite-v1",
+      "repository": "bozburun-sound-of-silence-suite-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-sound-of-silence-suite-v1/"
+    },
+    {
+      "hotel": "Sound of Silence Suite",
+      "slug": "sound-of-silence-suite",
+      "version": "v2",
+      "directory": "generated-sites/sound-of-silence-suite-v2",
+      "repository": "bozburun-sound-of-silence-suite-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-sound-of-silence-suite-v2/"
+    },
+    {
+      "hotel": "Trakheia Bozburun",
+      "slug": "trakheia-bozburun",
+      "version": "v1",
+      "directory": "generated-sites/trakheia-bozburun-v1",
+      "repository": "bozburun-trakheia-bozburun-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-trakheia-bozburun-v1/"
+    },
+    {
+      "hotel": "Trakheia Bozburun",
+      "slug": "trakheia-bozburun",
+      "version": "v2",
+      "directory": "generated-sites/trakheia-bozburun-v2",
+      "repository": "bozburun-trakheia-bozburun-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-trakheia-bozburun-v2/"
+    },
+    {
+      "hotel": "Valentina Boutique Hotel",
+      "slug": "valentina-boutique-hotel",
+      "version": "v1",
+      "directory": "generated-sites/valentina-boutique-hotel-v1",
+      "repository": "bozburun-valentina-boutique-hotel-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-valentina-boutique-hotel-v1/"
+    },
+    {
+      "hotel": "Valentina Boutique Hotel",
+      "slug": "valentina-boutique-hotel",
+      "version": "v2",
+      "directory": "generated-sites/valentina-boutique-hotel-v2",
+      "repository": "bozburun-valentina-boutique-hotel-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-valentina-boutique-hotel-v2/"
+    },
+    {
+      "hotel": "Yağız Apart Otel",
+      "slug": "yagiz-apart-otel",
+      "version": "v1",
+      "directory": "generated-sites/yagiz-apart-otel-v1",
+      "repository": "bozburun-yagiz-apart-otel-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-yagiz-apart-otel-v1/"
+    },
+    {
+      "hotel": "Yağız Apart Otel",
+      "slug": "yagiz-apart-otel",
+      "version": "v2",
+      "directory": "generated-sites/yagiz-apart-otel-v2",
+      "repository": "bozburun-yagiz-apart-otel-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-yagiz-apart-otel-v2/"
+    },
+    {
+      "hotel": "Yılmaz Kaptan Otel",
+      "slug": "yilmaz-kaptan-otel",
+      "version": "v1",
+      "directory": "generated-sites/yilmaz-kaptan-otel-v1",
+      "repository": "bozburun-yilmaz-kaptan-otel-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-yilmaz-kaptan-otel-v1/"
+    },
+    {
+      "hotel": "Yılmaz Kaptan Otel",
+      "slug": "yilmaz-kaptan-otel",
+      "version": "v2",
+      "directory": "generated-sites/yilmaz-kaptan-otel-v2",
+      "repository": "bozburun-yilmaz-kaptan-otel-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-yilmaz-kaptan-otel-v2/"
+    },
+    {
+      "hotel": "Şirin Haus",
+      "slug": "sirin-haus",
+      "version": "v1",
+      "directory": "generated-sites/sirin-haus-v1",
+      "repository": "bozburun-sirin-haus-v1",
+      "pages": "https://sburkaybozyel.github.io/bozburun-sirin-haus-v1/"
+    },
+    {
+      "hotel": "Şirin Haus",
+      "slug": "sirin-haus",
+      "version": "v2",
+      "directory": "generated-sites/sirin-haus-v2",
+      "repository": "bozburun-sirin-haus-v2",
+      "pages": "https://sburkaybozyel.github.io/bozburun-sirin-haus-v2/"
+    }
+  ]
+}

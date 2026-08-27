@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="{{name}} — {{lead}}">
+  <title>{{name}} — Bozburun</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./app.js"></script>
+  <noscript><style>[data-reveal]{opacity:1!important;transform:none!important}.loader{display:none!important}</style></noscript>
+</head>
+<body class="edition-v2">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="loader" aria-hidden="true"><img src="./media/logo.jpg" alt="{{name}}"></div>
+
+  <header class="topbar" data-header>
+    <a class="brand-lockup" href="#top" aria-label="{{name}} ana sayfa"><span class="brand-orbit"><img src="./media/logo.jpg" alt="{{name}} logo" loading="eager"></span><span><b>{{name}}</b><small>{{siteDescriptor}}</small></span></a>
+    <nav><a href="#rooms">Oda</a><a href="#experience">Deneyim</a><a href="#table">Sofra</a><a href="#contact">İletişim & Konum</a></nav>
+    <div class="topbar-right"><span class="open-state"><i></i> Müsaitlik sor</span><button class="magnetic" data-book>Yerinizi ayır <b>↗</b></button></div>
+  </header>
+
+  <main id="top">
+    <section class="arrival" id="place">
+      <div class="arrival-media" data-parallax><img src="./media/hero.jpg" alt="{{name}} Bozburun manzarası"><div class="arrival-gradient"></div><span class="arrival-location">{{address}}</span></div>
+      <div class="arrival-shell"><div class="arrival-title"><p class="eyebrow" data-reveal>{{eyebrow}}</p><h1 data-reveal>{{heroTitle1}}<br><strong>{{heroTitle2}}</strong></h1><p data-reveal>{{heroLead}}</p><a class="outline-link" href="#rooms" data-reveal>{{room}}’ı gör <b>↓</b></a></div><aside class="reserve-card" data-reveal><div class="reserve-card-top"><span>{{siteDescriptor}}</span><b>01—06</b></div><div class="reserve-row"><small>GİRİŞ</small><strong>Uygun tarihiniz</strong></div><div class="reserve-row"><small>ÇIKIŞ</small><strong>Size özel dönüş</strong></div><div class="reserve-row"><small>ODA</small><strong>{{room}}</strong></div><button class="card-button magnetic" data-book>{{name}} için sor <b>↗</b></button></aside></div>
+      <div class="scroll-cue" aria-hidden="true"><i></i>AŞAĞI KAYDIRIN</div>
+    </section>
+
+    <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>{{name}} — {{siteDescriptor}} — {{locationLine}} — {{diningTitle}} — {{name}} — {{siteDescriptor}} — {{locationLine}} — {{diningTitle}} — </span><span>{{name}} — {{siteDescriptor}} — {{locationLine}} — {{diningTitle}} — {{name}} — {{siteDescriptor}} — {{locationLine}} — {{diningTitle}} — </span></div></div>
+
+    <section class="signal-row" aria-label="{{name}} bilgileri"><div data-reveal><span>01</span><b>{{locationLine}}</b><small>{{address}}</small></div><div data-reveal><span>02</span><b>{{room}}</b><small>{{detailStay}}</small></div><div data-reveal><span>03</span><b>{{diningTitle}}</b><small>{{detailDining}}</small></div><div class="signal-contact" data-reveal><small>{{siteDescriptor}}</small><a href="{{phoneHref}}">{{phone}}</a></div></section>
+
+    <section class="stay-board" id="rooms">
+      <div class="board-intro" data-reveal><p class="eyebrow">{{siteDescriptor}}</p><h2>{{storyTitle1}}<br><em>{{storyTitle2}}</em></h2><p>{{story}}</p><div class="board-index"><span>{{room}} / 01</span><span>{{locationLine}}</span></div></div>
+      <div class="board-image" data-reveal data-parallax-soft><img src="./media/room.jpg" alt="{{name}} {{room}}"><span class="image-pin">{{room}}</span></div>
+      <div class="board-spec" data-reveal><p class="eyebrow">{{detailStay}}</p><h3>{{room}}</h3><p>{{roomText}}</p><ul><li><span>01</span> {{feature1}}</li><li><span>02</span> {{feature2}}</li><li><span>03</span> {{feature3}}</li></ul><button class="plain-button magnetic" data-book>{{room}} için sor <b>↗</b></button></div>
+    </section>
+
+    <section class="experience-grid" id="experience">
+      <div class="experience-card experience-image" data-reveal><img src="./media/dining.jpg" alt="{{name}} ortak alanı"><span class="card-tag">{{locationLine}}</span><div class="image-copy"><p class="eyebrow">{{experienceEyebrow}}</p><h2>{{experienceTitle1}}<br><em>{{experienceTitle2}}</em></h2></div></div>
+      <div class="experience-card experience-copy" data-reveal><p class="eyebrow">{{siteDescriptor}}</p><h2>{{title1}}<br><em>{{title2}}</em></h2><p>{{storySupport}}</p><div class="route-list"><span><b>09:00</b> {{route1}}</span><span><b>13:00</b> {{route2}}</span><span><b>19:00</b> {{route3}}</span></div><a class="outline-link" href="#table">{{diningTitle}} <b>↘</b></a></div>
+    </section>
+
+    <section class="table-module" id="table"><div class="table-label" data-reveal><span>03</span><span>{{detailDining}}</span></div><div class="table-copy" data-reveal><p class="eyebrow">{{experienceEyebrow}}</p><h2>{{diningTitle}}</h2><p>{{diningText}}</p><button class="plain-button magnetic" data-book>{{name}} için sor <b>↗</b></button></div><div class="table-texture" data-reveal><video autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="./media/decor.mp4" type="video/mp4"></video></div></section>
+
+    <section class="hotel-contact-hub" id="contact" data-reveal>
+      <div class="contact-hub-header">
+        <div class="contact-hub-badge">
+          <span class="contact-hub-logo-wrap"><img src="./media/logo.jpg" alt="{{name}} logo" class="contact-hub-logo" loading="lazy"></span>
+          <div>
+            <p class="eyebrow">İLETİŞİM & KONUM</p>
+            <h2>{{name}}</h2>
+            <small>{{siteDescriptor}} · BOZBURUN</small>
+          </div>
+        </div>
+        <div class="contact-hub-intro">
+          <p>{{storySupport}}</p>
+          <div class="contact-hub-quick-actions">
+            <a href="{{phoneHref}}" class="btn-contact-action btn-phone">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>{{phone}}</span>
+            </a>
+            <a href="{{whatsappHref}}" target="_blank" rel="noopener noreferrer" class="btn-contact-action btn-whatsapp">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              <span>WhatsApp</span>
+            </a>
+            <button class="btn-contact-action btn-book magnetic" data-book>
+              <span>Rezervasyon Talebi</span> <b>↗</b>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-hub-grid">
+        <div class="contact-hub-card contact-info-card">
+          <div class="card-item">
+            <span class="card-item-label">AÇIK ADRES</span>
+            <strong class="card-item-value">{{address}}</strong>
+            <span class="card-item-sub">{{locationNote}}</span>
+          </div>
+          <div class="card-item">
+            <span class="card-item-label">TELEFON & DOĞRUDAN İLETİŞİM</span>
+            <div class="card-item-phones">
+              <a href="{{phoneHref}}" class="phone-link"><b>Tel:</b> {{phone}}</a>
+              <a href="{{whatsappHref}}" target="_blank" rel="noopener noreferrer" class="wa-link"><b>WhatsApp:</b> {{whatsapp}}</a>
+            </div>
+          </div>
+          <div class="card-item-row">
+            <div class="card-item-half">
+              <span class="card-item-label">GİRİŞ (CHECK-IN)</span>
+              <strong>{{checkin}}</strong>
+            </div>
+            <div class="card-item-half">
+              <span class="card-item-label">ÇIKIŞ (CHECK-OUT)</span>
+              <strong>{{checkout}}</strong>
+            </div>
+          </div>
+          <div class="card-item">
+            <span class="card-item-label">ULAŞIM, İSKELE & OTOPARK</span>
+            <p class="card-item-desc">{{transport}}</p>
+          </div>
+          <div class="card-item-actions">
+            <a href="{{mapsDirectUrl}}" target="_blank" rel="noopener noreferrer" class="btn-maps-direct">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+              <span>Google Haritalarda Aç & Yol Tarifi Al</span> <b>↗</b>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-hub-card contact-map-card">
+          <div class="map-wrapper">
+            <iframe 
+              src="{{mapsEmbedUrl}}" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="{{name}} Google Harita Konumu">
+            </iframe>
+            <div class="map-floating-badge">
+              <span><b>{{name}}</b> · Bozburun</span>
+              <a href="{{mapsDirectUrl}}" target="_blank" rel="noopener noreferrer">Haritada Aç ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><span class="footer-seal"><img src="./media/logo.jpg" alt="{{name}} logo" loading="lazy"></span><span>© 2026 {{name}}</span><span>{{footerLine}}</span><a href="#top">Başa dön ↑</a></footer>
+
+  <dialog id="booking"><form method="dialog"><button class="close" aria-label="Kapat">×</button><p class="eyebrow">{{name}}</p><h2>{{bookingTitle1}}<br><em>{{bookingTitle2}}</em></h2><p>{{bookingText}}</p><label>Adınız<input required name="name" placeholder="Ad Soyad"></label><label>E-posta<input required type="email" name="email" placeholder="siz@ornek.com"></label><div class="dates"><label>Giriş<input type="date" name="in"></label><label>Çıkış<input type="date" name="out"></label></div><button class="card-button" value="send">Talep gönder <b>↗</b></button><small>Demo formu · İşletme onayından sonra gerçek iletişim akışı bağlanır.</small></form></dialog>
+</body>
+</html>
