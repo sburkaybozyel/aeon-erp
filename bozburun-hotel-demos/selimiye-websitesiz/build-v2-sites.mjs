@@ -184,12 +184,14 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 }
 .hero-title {
   font-family: var(--f-serif);
-  font-size: clamp(3.8rem, 8vw, 7.5rem);
+  font-size: clamp(2.8rem, 6vw, 6rem);
   font-weight: 300;
-  line-height: 1.0;
+  line-height: 1.05;
   color: var(--white);
-  max-width: 900px;
+  max-width: 820px;
   margin-bottom: 2rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .hero-title em {
   font-style: italic;
@@ -200,14 +202,16 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   align-items: flex-end;
   justify-content: space-between;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 .hero-tagline {
   font-family: var(--f-serif);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-style: italic;
   color: rgba(255,255,255,0.8);
-  max-width: 420px;
-  line-height: 1.6;
+  max-width: 500px;
+  line-height: 1.65;
+  overflow-wrap: break-word;
 }
 .hero-scroll-cue {
   display: flex;
@@ -770,12 +774,9 @@ function generateEditorialHTML(hotel, detail) {
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <span class="hero-eyebrow">${escapeHtml(seaDist)} · Selimiye, Marmaris</span>
-    <h1 class="hero-title">
-      ${escapeHtml(name)},<br>
-      <em>${escapeHtml(tagline)}</em>
-    </h1>
+    <h1 class="hero-title">${escapeHtml(name)}</h1>
     <div class="hero-bottom-strip">
-      <p class="hero-tagline">${escapeHtml(concept)}</p>
+      <p class="hero-tagline"><em>${escapeHtml(tagline)}</em></p>
       <div class="hero-scroll-cue">
         <span class="scroll-line"></span>
         <span>Aşağı Kaydır</span>
